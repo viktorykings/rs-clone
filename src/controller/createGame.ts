@@ -8,7 +8,8 @@ import createDeckFirst from './createDeckFirst';
 function createGame(players: IPlayer [] = []): IGame {
   const settings: ISettings = { countPlayer: players.length, level: 'easy' };
 
-  const deskDeck: ICard [] = createDeckFirst(players.length);
+  const { deskDeck, playersDeck } = createDeckFirst(players);
+
   const reboundDeck: ICard [] = [];
 
   const showCards: ICard [] = [];
@@ -24,7 +25,7 @@ function createGame(players: IPlayer [] = []): IGame {
 
   return {
     settings,
-    players: [...players],
+    players: playersDeck,
     deskDeck,
     reboundDeck,
     showCards,
