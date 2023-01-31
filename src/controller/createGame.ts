@@ -3,11 +3,12 @@ import ISettings from '../interface/ISettings';
 import ICard from '../interface/ICard';
 import IPlayer from '../interface/IPlayer';
 import TStateGame from '../interface/IStateGame';
+import createDeckFirst from './createDeckFirst';
 
 function createGame(players: IPlayer [] = []): IGame {
   const settings: ISettings = { countPlayer: players.length, level: 'easy' };
 
-  const deskDeck: ICard [] = [];
+  const deskDeck: ICard [] = createDeckFirst(players.length);
   const reboundDeck: ICard [] = [];
 
   const showCards: ICard [] = [];
@@ -23,7 +24,7 @@ function createGame(players: IPlayer [] = []): IGame {
 
   return {
     settings,
-    players,
+    players: [...players],
     deskDeck,
     reboundDeck,
     showCards,
