@@ -5,9 +5,52 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.desk{
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./assets/desk.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.other-players,
+.main-player{
+  display: flex;
+  justify-content: space-between;
+  height: 150px;
+  flex-shrink: 0;
+}
+.game{
+  display: flex;
+  flex-grow: 1;
+}
+.player{
+  height: 150px;
+  width: 150px;
+  img{
+    background-color: green;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    display: inline-block;
+  }
+}
+.main-player{
+
+  .main-player-cards{
+    display: flex;
+    p{
+      height: 90px;
+      width: 60px;
+      background-color: red;
+      margin: 5px;
+    }
+  }
+
 }
