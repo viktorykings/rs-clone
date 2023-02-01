@@ -1,7 +1,7 @@
 import IGame from '../../interface/IGame';
 import addHistory from './subevent/addHistory';
 
-function endMove(game: IGame) {
+function endMove(game: IGame): IGame {
   const myGame = { ...game };
   const indexPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTern);
   if (myGame.players[indexPl].countTakeCard === 0) {
@@ -27,6 +27,8 @@ function endMove(game: IGame) {
 
     addHistory(myGame, 'endMove', [], false);
   }
+
+  return myGame;
 }
 
 export default endMove;
