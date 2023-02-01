@@ -2,11 +2,17 @@ import React from 'react';
 
 export interface IPlayerProps {
   name: string;
-  level: string;
   isBot: boolean;
+  level: string;
+  deletePlayer: (name: string) => void;
 }
 
-export default function PlayerSettings({ name, level, isBot }: IPlayerProps) {
+export default function PlayerSettings({
+  name,
+  isBot,
+  level,
+  deletePlayer,
+}: IPlayerProps) {
   return (
     <li className="list-item">
       <div className="player">
@@ -20,7 +26,11 @@ export default function PlayerSettings({ name, level, isBot }: IPlayerProps) {
           <span className="visually-hidden">{name}</span>
         </button>
         {isBot && (
-          <button type="button" className="btn">
+          <button
+            type="button"
+            className="btn"
+            onClick={() => deletePlayer(name)}
+          >
             Delete
             <span className="visually-hidden">{name}</span>
           </button>
