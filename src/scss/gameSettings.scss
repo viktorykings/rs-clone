@@ -1,0 +1,25 @@
+.settings {
+  background-color: darkcyan;
+  padding: 20px;
+  width: 60%;
+  margin: 0 auto;
+}
+.list {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1em;
+  border: 1px solid #ccc;
+  .player {
+    width: 100%;
+    height: auto;
+  }
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #ccc;
+    color: white;
+  }
+}
+.list-head {
+  display: flex;
+  justify-content: space-around;
+}
