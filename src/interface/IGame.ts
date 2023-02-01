@@ -1,4 +1,5 @@
 import ICard from './ICard';
+import IHistory from './IHistory';
 import IPlayer from './IPlayer';
 import ISettings from './ISettings';
 import TStateGame from './IStateGame';
@@ -14,6 +15,7 @@ interface IGame {
     stateGame: TStateGame,
     timeLeft: number,
     message: string,
+    history: IHistory []
   }
 }
 
