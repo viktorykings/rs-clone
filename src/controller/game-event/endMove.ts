@@ -16,8 +16,10 @@ function endMove(game: IGame) {
 
     addHistory(myGame, 'endMove', [], true);
 
-    const indPl = (indexPl + 1 === myGame.players.length ? 0 : indexPl + 1);
-    myGame.gameState.playerTern = myGame.players[indPl].name;
+    const acPl = myGame.players.filter((pl) => pl.active);
+    const indAcPl = acPl.findIndex((pl) => pl.name === myGame.gameState.playerTern);
+    const indPl = (indAcPl + 1 === acPl.length ? 0 : indAcPl + 1);
+    myGame.gameState.playerTern = acPl[indPl].name;
   } else {
     myGame.players[indexPl].buttons.finishMove = false;
     const mes = `${myGame.players[indexPl].name} нужно взять ${myGame.players[indexPl].countTakeCard} карту/ы.`;
