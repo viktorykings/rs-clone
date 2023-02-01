@@ -7,15 +7,6 @@ function createDeckFirst(players: IPlayer []): ICardPlayers {
   const deskDeck: ICard[] = [];
   const playersDeck = [...players];
   let id = 0;
-  for (let i = 0; i < playersDeck.length - 1; i += 1) {
-    deskDeck.push(createCard(id, 0, i));
-    id += 1;
-  }
-
-  for (let i = 0; i < 6 - playersDeck.length; i += 1) {
-    deskDeck.push(createCard(id, 1, i));
-    id += 1;
-  }
 
   for (let i = 0; i < playersDeck.length; i += 1) {
     playersDeck[i].deck.push(createCard(id, 1, i));
@@ -42,8 +33,17 @@ function createDeckFirst(players: IPlayer []): ICardPlayers {
   }
 
   deskDeck.sort(() => Math.random() - 0.5);
+  playersDeck.map((player) => player.deck.push(...deskDeck.splice(0, 4)));
 
-  playersDeck.map((player) => player.deck.push(...deskDeck.splice(0, 7)));
+  for (let i = 0; i < playersDeck.length - 1; i += 1) {
+    deskDeck.push(createCard(id, 0, i));
+    id += 1;
+  }
+  for (let i = 0; i < 6 - playersDeck.length; i += 1) {
+    deskDeck.push(createCard(id, 1, i));
+    id += 1;
+  }
+  deskDeck.sort(() => Math.random() - 0.5);
 
   return { deskDeck, playersDeck };
 }
