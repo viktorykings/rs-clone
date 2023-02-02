@@ -16,12 +16,12 @@ function App(): JSX.Element {
   const { reboundDeck } = game;
   const { showCards } = game;
   const { gameState } = game;
-  // console.log('player1', game.players[0].deck);
+  // console.log('player1', game.players[0].active);
   // console.log('player2', game.players[1].deck);
   // console.log('player2', game.players[2].deck);
   // console.log('desk', game.deskDeck);
   // // console.log('desk', game.playersDeck);
-  // console.log('showcards', game.showCards);
+  console.log('showcards', game.gameState.playerTern);
   // console.log(game);
   return (
     <div className="App">

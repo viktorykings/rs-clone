@@ -44,6 +44,7 @@ body {
 .player{
   height: 150px;
   width: 150px;
+
   img{
     background-color: green;
     border-radius: 50%;
@@ -52,6 +53,10 @@ body {
     display: inline-block;
   }
 }
+  .activePlayer{
+    border: 1px solid yellow;
+  }
+
 .main-player{
 
   .main-player-cards{
@@ -63,8 +68,9 @@ body {
       transition: all 0.5s ease-in-out 0s;
       border: none;
       outline: none;
+      box-sizing: border-box;
     }
-    .activeCard{
+    img:hover{
       transform: translateY(-10px);
       border: 2px solid #fbff12;
       box-shadow: 0 0 10px #fbff12;

@@ -23,12 +23,12 @@ function createDeckFirst(players: IPlayer []): ICardPlayers {
     deskDeck.push(createCard(id + 1, 4, i));
     deskDeck.push(createCard(id + 2, 5, i));
     deskDeck.push(createCard(id + 3, 6, i));
-    deskDeck.push(createCard(id + 1, 7, i));
-    deskDeck.push(createCard(id + 2, 8, i));
-    deskDeck.push(createCard(id + 3, 9, i));
-    deskDeck.push(createCard(id + 4, 10, i));
-    deskDeck.push(createCard(id + 5, 11, i));
-    deskDeck.push(createCard(id + 6, 12, i));
+    deskDeck.push(createCard(id + 4, 7, i));
+    deskDeck.push(createCard(id + 5, 8, i));
+    deskDeck.push(createCard(id + 6, 9, i));
+    deskDeck.push(createCard(id + 7, 10, i));
+    deskDeck.push(createCard(id + 8, 11, i));
+    deskDeck.push(createCard(id + 9, 12, i));
     id += 10;
   }
 

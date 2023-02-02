@@ -19,7 +19,7 @@ function endMove(game: IGame): IGame {
 
     addHistory(myGame, 'endMove', [], true);
 
-    myGame.gameState.playerTern = findNextActivePlayer.name;
+    myGame.gameState.playerTern = findNextActivePlayer(myGame).name;
   } else {
     myGame.players[indexPl].buttons.finishMove = false;
     const mes = `${myGame.players[indexPl].name} нужно взять ${myGame.players[indexPl].countTakeCard} карту/ы.`;

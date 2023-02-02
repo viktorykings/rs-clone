@@ -12,7 +12,9 @@ const emptyCardsPlace = 'cards/empty.png';
 export default function DeskPage({
   deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
 }: Setter): JSX.Element {
-  const [currentCard, setCurrentCard] = useState(1);
+  const [currentCard, setCurrentCard] = useState(-1);
+  const [activePlayer, setActivePlayer] = useState(gameState.playerTern);
+  console.log(activePlayer);
   const game = {
     deskDeck,
     settings,
@@ -24,9 +26,10 @@ export default function DeskPage({
   return (
     <main className="desk">
       <div className="other-players">
-        {players.map((el) => <Player key={el.name} name={el.name} />)}
+        {players.slice(1, players.length).map((el) => <Player key={el.name} name={el.name} className={activePlayer === el.name ? 'activePlayer' : ''} />)}
       </div>
       <div className="game">
+        <p>{game.gameState.message}</p>
         <div className="deck">
           <img
             src={cardBack}
@@ -56,10 +59,19 @@ export default function DeskPage({
         </div>
       </div>
       <div className="main-player">
-        <Player name="main" />
+        <Player name="main" className={activePlayer === 'player1' ? 'activePlayer' : ''} />
         <div className="control-buttons">
           <button type="button" onClick={() => setGame(makeMove(game, currentCard))}>move</button>
-          <button type="button" onClick={() => setGame(endMove(game))}>end</button>
+          <button
+            type="button"
+            onClick={() => {
+              setGame(endMove(game));
+              setActivePlayer(endMove(game).gameState.playerTern);
+            }}
+            disabled={!game.players[0].buttons.finishMove}
+          >
+            end
+          </button>
         </div>
         <div className="main-player-cards">
           {players[0].deck.map((el) => (
