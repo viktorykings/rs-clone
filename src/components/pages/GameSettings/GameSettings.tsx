@@ -49,11 +49,10 @@ export default function GameSettings() {
 
   // Add New PLayer
   function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     if (players.length >= 5) {
       return;
     }
-    console.log(players);
-    e.preventDefault();
     const newPlayer: IPlayerSettings = {
       name: `${name}`,
       level: 'easy',
