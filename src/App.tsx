@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import DeskPage from './components/pages/DeskPage';
 import createGame from './controller/createGame';
 import createPlayer from './controller/createPlayer';
 
 function App(): JSX.Element {
-  const player = createPlayer('player1');
+  const player = createPlayer('player1', false);
   const player1 = createPlayer('и');
   const player2 = createPlayer('л');
-  const game = createGame([player, player1, player2]);
+  const [game, setGame] = useState(createGame([player, player1, player2]));
+  // const game = createGame([player, player1, player2]);
   const { deskDeck } = game;
   const { settings } = game;
   const { players } = game;
@@ -31,6 +32,7 @@ function App(): JSX.Element {
         reboundDeck={reboundDeck}
         showCards={showCards}
         gameState={gameState}
+        setGame={setGame}
       />
     </div>
   );

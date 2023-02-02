@@ -7,12 +7,14 @@ import IGame from '../../interface/IGame';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
+interface Setter {
+  setGame: (value: IGame) => void;
+}
 
 export default function DeskPage({
   deskDeck, settings, players, reboundDeck, showCards, gameState,
-}: IGame): JSX.Element {
+}: IGame, { setGame }: Setter): JSX.Element {
   const [currentCard, setCurrentCard] = useState(1);
-  // const deck = game.deskDeck;
   const game = {
     deskDeck,
     settings,
@@ -30,7 +32,16 @@ export default function DeskPage({
         <div className="deck">
           <img src={cardBack} alt="deck" />
           <p>Left X cards!</p>
-          <button type="button" onMouseDown={() => { takeCardDeskDeck(game); console.log(game.players[0].deck); }}>Take card!</button>
+          <button
+            type="button"
+            onMouseDown={() => {
+              const newCard = takeCardDeskDeck(game);
+              console.log(game.players[0].deck);
+              setGame(newCard);
+            }}
+          >
+            Take card!
+          </button>
         </div>
         <div className="play-cards">
           <img src={emptyCardsPlace} alt="card" />
@@ -52,8 +63,12 @@ export default function DeskPage({
               src={el.link}
               alt={el.name}
               key={el.id}
-              className={currentCard === el.id ? 'active' : ''}
-              onMouseDown={() => { makeMove.bind(null, game, el.id); setCurrentCard(el.id); }}
+              onMouseDown={() => {
+                makeMove.bind(null, game, el.id);
+                setCurrentCard(el.id);
+                console.log(currentCard, el.id);
+              }}
+              className={currentCard === el.id ? 'activeCard' : ''}
             />
           ))}
         </div>

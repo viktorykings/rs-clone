@@ -25,6 +25,7 @@ function takeCardDeskDeck(game: IGame): IGame {
 
     addHistory(myGame, 'takeCardDeskDeck', [], false);
   }
+  console.log(myGame);
   return myGame;
 }
 
