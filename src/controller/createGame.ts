@@ -21,6 +21,7 @@ function createGame(players: IPlayer [] = []): IGame {
     stateGame,
     timeLeft: 30,
     message: '',
+    history: [],
   };
 
   return {

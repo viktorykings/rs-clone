@@ -4,6 +4,7 @@ import TLevel from './TLevel';
 interface IPlayer {
   name: string,
   link: string,
+  active: boolean,
   isBot: boolean,
   levelBot: null | TLevel,
   countTakeCard: number,
