@@ -32,21 +32,27 @@ export default function GameSettings() {
     },
   ];
 
-  const [name, setName] = useState('New Player');
+  const [name, setName] = useState('Enter Player Name...');
   const [players, setPlayers] = useState(DATA);
 
   const deletePlayer = useCallback(
     (namePLayer: string) => {
-      console.log(namePLayer);
-      const remainingPLayers = players.filter(
-        (player) => namePLayer !== player.name,
-      );
-      setPlayers(remainingPLayers);
+      if (players.length > 2) {
+        const remainingPLayers = players.filter(
+          (player) => namePLayer !== player.name,
+        );
+        setPlayers(remainingPLayers);
+      }
     },
     [players],
   );
 
+  // Add New PLayer
   function handleSubmit(e: React.FormEvent) {
+    if (players.length >= 5) {
+      return;
+    }
+    console.log(players);
     e.preventDefault();
     const newPlayer: IPlayerSettings = {
       name: `${name}`,
