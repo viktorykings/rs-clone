@@ -2,10 +2,11 @@ import ICard from '../interface/ICard';
 import ICardPlayers from '../interface/ICardPlayers';
 import IPlayer from '../interface/IPlayer';
 import createCard from './createCard';
+import startStateDeck from './statePlayerDeck/startStateDeck';
 
 function createDeckFirst(players: IPlayer []): ICardPlayers {
   const deskDeck: ICard[] = [];
-  const playersDeck = [...players];
+  let playersDeck = [...players];
   let id = 0;
 
   for (let i = 0; i < playersDeck.length; i += 1) {
@@ -33,7 +34,7 @@ function createDeckFirst(players: IPlayer []): ICardPlayers {
   }
 
   deskDeck.sort(() => Math.random() - 0.5);
-  playersDeck.map((player) => player.deck.push(...deskDeck.splice(0, 4)));
+  playersDeck.map((player) => player.deck.push(...deskDeck.splice(0, 6)));
 
   for (let i = 0; i < playersDeck.length - 1; i += 1) {
     deskDeck.push(createCard(id, 0, i));
@@ -44,7 +45,9 @@ function createDeckFirst(players: IPlayer []): ICardPlayers {
     id += 1;
   }
   deskDeck.sort(() => Math.random() - 0.5);
-
+  console.log(playersDeck);
+  playersDeck = playersDeck.map((pl) => startStateDeck(pl));
+  console.log(playersDeck);
   return { deskDeck, playersDeck };
 }
 

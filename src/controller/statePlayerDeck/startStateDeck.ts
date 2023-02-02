@@ -4,8 +4,8 @@ function startStateDeck(player: IPlayer): IPlayer {
   const myPl = { ...player };
   const deckCats = player.deck.filter((card) => card.type >= 8 && card.type <= 12);
   deckCats.sort((a, b) => a.type - b.type);
-  let ind2 = 0;
-  let ind3 = 0;
+  let ind2 = -1;
+  let ind3 = -1;
   let type = 0;
   myPl.combos.doubleCats = [];
   myPl.combos.tripleCats = [];
@@ -16,20 +16,21 @@ function startStateDeck(player: IPlayer): IPlayer {
       if (myPl.combos.tripleCats[ind3].length <= 2) myPl.combos.tripleCats[ind3].push(deckCats[i]);
     }
     if (type !== deckCats[i].type) {
-      if (myPl.combos.doubleCats[ind2].length !== 2) {
+      if (myPl.combos.doubleCats.length > 0 && myPl.combos.doubleCats[ind2].length !== 2) {
         myPl.combos.doubleCats.splice(ind2, 1);
       } else {
         ind2 += 1;
       }
-      if (myPl.combos.tripleCats[ind3].length !== 3) {
+      if (myPl.combos.tripleCats.length > 0 && myPl.combos.tripleCats[ind3].length !== 3) {
         myPl.combos.tripleCats.splice(ind3, 1);
       } else {
         ind3 += 1;
       }
       type = deckCats[i].type;
-      myPl.combos.doubleCats[ind2].push(deckCats[i]);
-      myPl.combos.tripleCats[ind3].push(deckCats[i]);
-      myPl.combos.tripleCats[0].push(deckCats[i]);
+      myPl.combos.doubleCats.push([deckCats[i]]);
+      myPl.combos.tripleCats.push([deckCats[i]]);
+      if (myPl.combos.fiveCats.length > 0) myPl.combos.fiveCats[0].push(deckCats[i]);
+      else myPl.combos.fiveCats.push([deckCats[i]]);
     }
   }
 
