@@ -28,7 +28,18 @@ body {
 }
 .game{
   display: flex;
+  justify-content: space-between;
   flex-grow: 1;
+  height: 240px;
+  .deck,
+  .play-cards,
+  .rebound-deck{
+    img{
+      height: 240px;
+      border-radius: 5px;
+    }
+  }
+
 }
 .player{
   height: 150px;
@@ -46,10 +57,9 @@ body {
   .main-player-cards{
     display: flex;
     img{
-      // height: 200px;
       width: 120px;
-      // background-color: red;
       margin: 5px;
+      border-radius: 5px;
     }
   }
 

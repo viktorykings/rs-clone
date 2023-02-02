@@ -1,7 +1,8 @@
 import React from 'react';
 
 interface Iplayer {
-  name: string
+  name: string,
+  // url?:string
 }
 
 export default function Player({ name }: Iplayer): JSX.Element {
@@ -9,7 +10,6 @@ export default function Player({ name }: Iplayer): JSX.Element {
     <div className="player">
       <p>{name}</p>
       <img src="" alt="player1" />
-      <div className="player-cards">cards</div>
     </div>
   );
 }

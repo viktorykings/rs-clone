@@ -8,6 +8,9 @@ import createGame from '../../controller/createGame';
 // import card1 from '../../assets/cards/neutralize1.png';
 import createPlayer from '../../controller/createPlayer';
 
+const cardBack = 'cards/back.png';
+const emptyCardsPlace = 'cards/empty.png';
+
 export default function DeskPage(): JSX.Element {
   const player = createPlayer('a');
   const player1 = createPlayer('и');
@@ -26,11 +29,14 @@ export default function DeskPage(): JSX.Element {
       </div>
       <div className="game">
         <div className="deck">
-          <img src="" alt="deck" />
+          <img src={cardBack} alt="deck" />
           <p>Left X cards!</p>
         </div>
         <div className="play-cards">
-          <img src="" alt="card" />
+          <img src={emptyCardsPlace} alt="card" />
+        </div>
+        <div className="rebound-deck">
+          <img src={emptyCardsPlace} alt="card" />
         </div>
       </div>
       <div className="main-player">
