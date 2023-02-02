@@ -3,17 +3,14 @@ import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
 import endMove from '../../controller/game-event/endMove';
 import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
-import IGame from '../../interface/IGame';
+import { Setter } from '../../interface/IGame';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
-interface Setter {
-  setGame: (value: IGame) => void;
-}
 
 export default function DeskPage({
   deskDeck, settings, players, reboundDeck, showCards, gameState,
-}: IGame, { setGame }: Setter): JSX.Element {
+}: Setter): JSX.Element {
   const [currentCard, setCurrentCard] = useState(1);
   const game = {
     deskDeck,
@@ -35,16 +32,19 @@ export default function DeskPage({
           <button
             type="button"
             onMouseDown={() => {
-              const newCard = takeCardDeskDeck(game);
+              takeCardDeskDeck(game);
               console.log(game.players[0].deck);
-              setGame(newCard);
             }}
           >
             Take card!
           </button>
         </div>
         <div className="play-cards">
-          <img src={emptyCardsPlace} alt="card" />
+          {// eslint-disable-next-line no-restricted-globals
+          showCards.length
+            ? <img src={emptyCardsPlace} alt="card" />
+            : <img src={showCards[length - 1].link} alt="card" />
+          }
         </div>
         <div className="rebound-deck">
           <img src={emptyCardsPlace} alt="card" />

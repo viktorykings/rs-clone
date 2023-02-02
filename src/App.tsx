@@ -22,7 +22,7 @@ function App(): JSX.Element {
   // console.log('desk', game.deskDeck);
   // // console.log('desk', game.playersDeck);
   // console.log('showcards', game.showCards);
-  console.log(game);
+  // console.log(game);
   return (
     <div className="App">
       <DeskPage

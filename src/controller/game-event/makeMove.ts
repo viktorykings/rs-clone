@@ -11,6 +11,7 @@ function makeMove(game: IGame, idCard: number): IGame {
   const inPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTern);
   if (myGame.gameState.stateGame === 'tern') {
     const myCard = game.players[inPl].deck.find((cr) => cr.id === idCard);
+    console.log('card', myCard);
     if (myCard !== undefined) {
       const cartType = myCard.type;
       switch (cartType) {
