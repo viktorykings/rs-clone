@@ -34,6 +34,7 @@ export default function GameSettings() {
 
   const [name, setName] = useState('Enter Player Name...');
   const [players, setPlayers] = useState(DATA);
+  const [level, setLevel] = useState('easy');
 
   const deletePlayer = useCallback(
     (namePLayer: string) => {
@@ -55,12 +56,16 @@ export default function GameSettings() {
     }
     const newPlayer: IPlayerSettings = {
       name: `${name}`,
-      level: 'easy',
+      level: `${level}`,
       link: '',
       isBot: true,
     };
     setPlayers([...players, newPlayer]);
   }
+
+  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLevel(e.target.value);
+  };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
@@ -89,7 +94,7 @@ export default function GameSettings() {
           value={name}
           onChange={handleChange}
         />
-        <select value="">
+        <select value={level} onChange={handleChangeSelect}>
           <option value="Easy">Easy</option>
           <option value="Normal">Normal</option>
           <option value="Hard">Hard</option>
