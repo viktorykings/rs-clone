@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
@@ -9,7 +10,7 @@ const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
 
 export default function DeskPage({
-  deskDeck, settings, players, reboundDeck, showCards, gameState,
+  deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
 }: Setter): JSX.Element {
   const [currentCard, setCurrentCard] = useState(1);
   const game = {
@@ -27,9 +28,13 @@ export default function DeskPage({
       </div>
       <div className="game">
         <div className="deck">
-          <img src={cardBack} alt="deck" />
+          <img
+            src={cardBack}
+            alt="deck"
+            onMouseDown={() => { setGame(takeCardDeskDeck.bind(null, game)); }}
+          />
           <p>Left X cards!</p>
-          <button
+          {/* <button
             type="button"
             onMouseDown={() => {
               takeCardDeskDeck(game);
@@ -37,13 +42,13 @@ export default function DeskPage({
             }}
           >
             Take card!
-          </button>
+          </button> */}
         </div>
         <div className="play-cards">
           {// eslint-disable-next-line no-restricted-globals
-          showCards.length
+          showCards.length === 0
             ? <img src={emptyCardsPlace} alt="card" />
-            : <img src={showCards[length - 1].link} alt="card" />
+            : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} />)
           }
         </div>
         <div className="rebound-deck">
@@ -53,8 +58,8 @@ export default function DeskPage({
       <div className="main-player">
         <Player name="main" />
         <div className="control-buttons">
-          <button type="button" onClick={() => makeMove(game, currentCard)}>move</button>
-          <button type="button" onClick={() => endMove(game)}>end</button>
+          <button type="button" onClick={() => setGame(makeMove(game, currentCard))}>move</button>
+          <button type="button" onClick={() => setGame(endMove(game))}>end</button>
         </div>
         <div className="main-player-cards">
           {players[0].deck.map((el) => (
@@ -64,7 +69,7 @@ export default function DeskPage({
               alt={el.name}
               key={el.id}
               onMouseDown={() => {
-                makeMove.bind(null, game, el.id);
+                setGame(makeMove.bind(null, game, el.id));
                 setCurrentCard(el.id);
                 console.log(currentCard, el.id);
               }}
