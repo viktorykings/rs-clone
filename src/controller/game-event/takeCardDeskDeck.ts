@@ -17,7 +17,7 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.showCards.push(...card);
       myGame.gameState.message = `${myGame.players[iPl].name} вытянул 'Взрывного котенка'.`;
       // eslint-disable-next-line no-param-reassign
-      myGame.players[iPl].deck.map((el) => { el.enabled = false; return el; });
+      myGame.players[iPl].deck.map((el) => { el.enabled = el.type === 1; return el; });
       addHistory(myGame, 'takeCardDeskDeck', card, true);
     }
   } else {
