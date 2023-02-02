@@ -56,6 +56,8 @@ function startStateDeck(player: IPlayer): IPlayer {
     myPl.buttons.comboEnabled = true;
     myPl.buttons.fiveEnabled = true;
   }
+  // eslint-disable-next-line no-param-reassign
+  myPl.deck.map((card) => { card.enabled = card.type >= 3 && card.type <= 7; return card; });
   return myPl;
 }
 
