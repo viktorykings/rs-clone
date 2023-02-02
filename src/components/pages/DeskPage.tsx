@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
 import Player from './Players';
-import createGame from '../../controller/createGame';
-import createPlayer from '../../controller/createPlayer';
 import makeMove from '../../controller/game-event/makeMove';
+import endMove from '../../controller/game-event/endMove';
+import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
+import IGame from '../../interface/IGame';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
 
-export default function DeskPage(): JSX.Element {
-  const player = createPlayer('a');
-  const player1 = createPlayer('и');
-  const player2 = createPlayer('л');
-  const game = createGame([player, player1, player2]);
+export default function DeskPage({
+  deskDeck, settings, players, reboundDeck, showCards, gameState,
+}: IGame): JSX.Element {
   const [currentCard, setCurrentCard] = useState(1);
   // const deck = game.deskDeck;
-  console.log('player1', game.players[0].deck);
-  console.log('player2', game.players[1].deck);
-  console.log('player2', game.players[2].deck);
-  console.log('desk', game.deskDeck);
-  // console.log('desk', game.playersDeck);
-  console.log('showcards', game.showCards);
+  const game = {
+    deskDeck,
+    settings,
+    players,
+    reboundDeck,
+    showCards,
+    gameState,
+  };
   return (
     <main className="desk">
       <div className="other-players">
-        {game.players.map((el) => <Player key={el.name} name={el.name} />)}
+        {players.map((el) => <Player key={el.name} name={el.name} />)}
       </div>
       <div className="game">
         <div className="deck">
           <img src={cardBack} alt="deck" />
           <p>Left X cards!</p>
+          <button type="button" onMouseDown={() => { takeCardDeskDeck(game); console.log(game.players[0].deck); }}>Take card!</button>
         </div>
         <div className="play-cards">
           <img src={emptyCardsPlace} alt="card" />
@@ -39,16 +41,19 @@ export default function DeskPage(): JSX.Element {
       </div>
       <div className="main-player">
         <Player name="main" />
-        <button type="button" onClick={() => makeMove(game, currentCard)}>move</button>
+        <div className="control-buttons">
+          <button type="button" onClick={() => makeMove(game, currentCard)}>move</button>
+          <button type="button" onClick={() => endMove(game)}>end</button>
+        </div>
         <div className="main-player-cards">
-          {game.players[0].deck.map((el) => (
+          {players[0].deck.map((el) => (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <img
               src={el.link}
               alt={el.name}
               key={el.id}
-              className={currentCard === el.id ? 'activeCard' : ''}
-              onMouseDown={() => setCurrentCard(el.id)}
+              className={currentCard === el.id ? 'active' : ''}
+              onMouseDown={() => { makeMove.bind(null, game, el.id); setCurrentCard(el.id); }}
             />
           ))}
         </div>
