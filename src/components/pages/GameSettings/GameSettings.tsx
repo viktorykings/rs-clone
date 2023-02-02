@@ -1,24 +1,38 @@
 import React, { useState, useCallback } from 'react';
 import PlayerSettings from './PlayerSettings';
+import createPlayer from '../../../controller/createPlayer';
+import IPlayer from '../../../interface/IPlayer';
 
-interface IPlayer {
+interface IPlayerSettings {
   name: string;
-  level: string;
   isBot: boolean;
+  link: string;
+  level: string;
 }
 
 export default function GameSettings() {
-  // function deletePlayer(name: string) {
-  //   console.log(name);
-  // }
-
-  const DATA: IPlayer[] = [
-    { name: 'Main Player', isBot: false, level: 'easy' },
-    { name: 'Player 1', isBot: true, level: 'easy' },
-    { name: 'Player 2', isBot: true, level: 'hard' },
+  const DATA: IPlayerSettings[] = [
+    {
+      name: 'Main Player',
+      isBot: false,
+      link: '',
+      level: 'easy',
+    },
+    {
+      name: 'Player 1',
+      isBot: true,
+      link: '',
+      level: 'easy',
+    },
+    {
+      name: 'Player 2',
+      isBot: true,
+      link: '',
+      level: 'hard',
+    },
   ];
 
-  const [name, setName] = useState('use hook');
+  const [name, setName] = useState('New Player');
   const [players, setPlayers] = useState(DATA);
 
   const deletePlayer = useCallback(
@@ -34,12 +48,26 @@ export default function GameSettings() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const newPlayer: IPlayer = { name: `${name}`, level: 'easy', isBot: true };
+    const newPlayer: IPlayerSettings = {
+      name: `${name}`,
+      level: 'easy',
+      link: '',
+      isBot: true,
+    };
     setPlayers([...players, newPlayer]);
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
+  }
+
+  function createPlayers(items: IPlayerSettings[]): void {
+    const result = items.reduce((acc: IPlayer[], cur) => {
+      const [n, isB, lnk, lvl] = [...Object.values(cur)];
+      acc.push(createPlayer(n, isB, lnk, lvl));
+      return acc;
+    }, []);
+    console.log(result);
   }
 
   return (
@@ -80,7 +108,7 @@ export default function GameSettings() {
       <button
         type="button"
         className="btn"
-        onClick={() => console.log(players)}
+        onClick={() => createPlayers(players)}
       >
         Done
       </button>
