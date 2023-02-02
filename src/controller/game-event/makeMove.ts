@@ -27,6 +27,7 @@ function makeMove(game: IGame, idCard: number): IGame {
   if (myGame.gameState.stateGame === 'endTern') {
     myGame = endMove(myGame);
   }
+  console.log(myGame);
   return myGame;
 }
 

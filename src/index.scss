@@ -61,6 +61,11 @@ body {
       margin: 5px;
       border-radius: 5px;
     }
+    .activeCard{
+      transform: translateY(-10px);
+      border: 2px solid #fbff12;
+      box-shadow: 0 0 10px #fbff12;
+    }
   }
 
 }
