@@ -48,6 +48,21 @@ export default function GameSettings() {
     [players],
   );
 
+  const editNamePLayer = useCallback(
+    (newName: string, namePlayer: string) => {
+      const editedPlayers = players.map((player) => {
+        console.log(namePlayer === player.name);
+        if (namePlayer === player.name) {
+          return { ...player, name: newName };
+        }
+        return player;
+      });
+
+      setPlayers(editedPlayers);
+    },
+    [players],
+  );
+
   // Add New PLayer
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -112,6 +127,7 @@ export default function GameSettings() {
             key={player.name}
             isBot={player.isBot}
             deletePlayer={deletePlayer}
+            editPlayer={editNamePLayer}
           />
         ))}
       </ul>
