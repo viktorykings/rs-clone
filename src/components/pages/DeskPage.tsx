@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React/* , { useState } */ from 'react';
 import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
 import endMove from '../../controller/game-event/endMove';
@@ -12,7 +12,7 @@ const emptyCardsPlace = 'cards/empty.png';
 export default function DeskPage({
   deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
 }: Setter): JSX.Element {
-  const [currentCard, setCurrentCard] = useState(-1);
+  // const [currentCard, setCurrentCard] = useState(-1);
   // const [activePlayer, setActivePlayer] = useState(gameState.playerTurn);
   // console.log(activePlayer);
   const game = {
@@ -62,7 +62,8 @@ export default function DeskPage({
       <div className="main-player">
         <Player name="main" className={gameState.playerTurn/* activePlayer */ === 'player1' ? 'activePlayer' : ''} />
         <div className="control-buttons">
-          <button type="button" onClick={() => setGame(makeMove(game, currentCard))}>move</button>
+          {/* <button type="button" onClick={
+            () => setGame(makeMove(game, currentCard))}>move</button> */}
           <button
             type="button"
             onClick={() => {
@@ -83,10 +84,10 @@ export default function DeskPage({
               key={el.id}
               onMouseDown={() => {
                 setGame(makeMove.bind(null, game, el.id));
-                setCurrentCard(el.id);
-                console.log(currentCard, el.id);
+                // setCurrentCard(el.id);
+                // console.log(currentCard, el.id);
               }}
-              className={currentCard === el.id ? 'activeCard' : ''}
+              // className={currentCard === el.id ? 'activeCard' : ''}
             />
           ))}
         </div>

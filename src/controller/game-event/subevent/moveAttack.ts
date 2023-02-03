@@ -10,6 +10,7 @@ function moveAttack(game: IGame, myCard: ICard, inPl: number): IGame {
     const nextPl = findNextActivePlayer(myGame);
     nextPl.countTakeCard += 1;
     myGame.players[inPl].countTakeCard = 0;
+    myGame.players[inPl].buttons.finishMove = true;
 
     myGame.showCards.push(...myGame.players[inPl].deck.splice(indCard, 1));
     myGame.gameState.message = `${myGame.players[inPl].name} походил картой 'Атака'`;
