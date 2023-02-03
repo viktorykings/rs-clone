@@ -21,7 +21,7 @@ function App(): JSX.Element {
   // console.log('player2', game.players[2].deck);
   // console.log('desk', game.deskDeck);
   // // console.log('desk', game.playersDeck);
-  console.log('showcards', game.gameState.playerTern);
+  console.log('showcards', game.gameState.playerTurn);
   // console.log(game);
   return (
     <div className="App">

@@ -11,15 +11,15 @@ interface IGame {
   reboundDeck: ICard [],
   showCards: ICard[],
   gameState: {
-    playerTern: string,
+    playerTurn: string,
     stateGame: TStateGame,
     timeLeft: number,
     message: string,
     history: IHistory []
   }
 }
- export interface Setter extends IGame {
+export interface Setter extends IGame {
   setGame: React.Dispatch<React.SetStateAction<IGame>>;
- }
+}
 
 export default IGame;

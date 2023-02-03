@@ -8,7 +8,7 @@ import endMove from './endMove';
 
 function makeMove(game: IGame, idCard: number): IGame {
   let myGame = { ...game };
-  const inPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTern);
+  const inPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTurn);
   if (myGame.gameState.stateGame === 'tern') {
     const myCard = game.players[inPl].deck.find((cr) => cr.id === idCard);
     console.log('card', myCard);

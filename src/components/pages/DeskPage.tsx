@@ -13,7 +13,7 @@ export default function DeskPage({
   deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
 }: Setter): JSX.Element {
   const [currentCard, setCurrentCard] = useState(-1);
-  const [activePlayer, setActivePlayer] = useState(gameState.playerTern);
+  const [activePlayer, setActivePlayer] = useState(gameState.playerTurn);
   console.log(activePlayer);
   const game = {
     deskDeck,
@@ -66,7 +66,7 @@ export default function DeskPage({
             type="button"
             onClick={() => {
               setGame(endMove(game));
-              setActivePlayer(endMove(game).gameState.playerTern);
+              setActivePlayer(endMove(game).gameState.playerTurn);
             }}
             disabled={!game.players[0].buttons.finishMove}
           >

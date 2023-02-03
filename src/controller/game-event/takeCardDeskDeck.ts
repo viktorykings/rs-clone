@@ -3,7 +3,7 @@ import addHistory from './subevent/addHistory';
 
 function takeCardDeskDeck(game: IGame): IGame {
   const myGame = { ...game };
-  const iPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTern);
+  const iPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTurn);
   if (myGame.players[iPl].countTakeCard > 0) {
     const card = myGame.deskDeck.splice(-1, 1);
     myGame.players[iPl].countTakeCard -= 1;

@@ -17,7 +17,7 @@ function createGame(players: IPlayer [] = []): IGame {
   const stateGame: TStateGame = 'tern';
 
   const gameState = {
-    playerTern: 'player1',
+    playerTurn: 'player1',
     stateGame,
     timeLeft: 30,
     message: '',

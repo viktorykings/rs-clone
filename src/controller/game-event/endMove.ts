@@ -4,7 +4,7 @@ import findNextActivePlayer from './subevent/findNextActivePlayer';
 
 function endMove(game: IGame): IGame {
   const myGame = { ...game };
-  const indexPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTern);
+  const indexPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTurn);
   if (myGame.players[indexPl].countTakeCard === 0) {
     // все что показываем в сброс
     if (myGame.showCards.length !== 0) myGame.reboundDeck.push(...myGame.showCards.splice(0));
@@ -19,7 +19,7 @@ function endMove(game: IGame): IGame {
 
     addHistory(myGame, 'endMove', [], true);
 
-    myGame.gameState.playerTern = findNextActivePlayer(myGame).name;
+    myGame.gameState.playerTurn = findNextActivePlayer(myGame).name;
   } else {
     myGame.players[indexPl].buttons.finishMove = false;
     const mes = `${myGame.players[indexPl].name} нужно взять ${myGame.players[indexPl].countTakeCard} карту/ы.`;
