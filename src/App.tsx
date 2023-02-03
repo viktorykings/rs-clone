@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import DeskPage from './components/pages/DeskPage';
 import createGame from './controller/createGame';
 import createPlayer from './controller/createPlayer';
+import mainGameLoop from './controller/game-loop/mainGameLoop';
 
 function App(): JSX.Element {
   const player = createPlayer('player1', false);
@@ -21,8 +22,10 @@ function App(): JSX.Element {
   // console.log('player2', game.players[2].deck);
   // console.log('desk', game.deskDeck);
   // // console.log('desk', game.playersDeck);
-  console.log('showcards', game.gameState.playerTurn);
+  // console.log('showcards', game.gameState.playerTurn);
   // console.log(game);
+  console.log('call--------');
+  useEffect(() => mainGameLoop(game, setGame), [game]);
   return (
     <div className="App">
       <DeskPage

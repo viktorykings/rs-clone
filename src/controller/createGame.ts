@@ -23,6 +23,7 @@ function createGame(players: IPlayer [] = []): IGame {
     playerTurn: 'player1',
     stateGame,
     functionState,
+    timerId: null,
     timeLeft: 30,
     message: '',
     history: [],
