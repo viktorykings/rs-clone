@@ -6,7 +6,7 @@ export interface IPlayerProps {
   isBot: boolean;
   level: string;
   deletePlayer: (name: string) => void;
-  editPlayer: (newName: string, name: string) => void;
+  editPlayer: (newName: string, name: string, level: string) => void;
 }
 
 export default function PlayerSettings({
@@ -18,23 +18,28 @@ export default function PlayerSettings({
 }: IPlayerProps) {
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState('');
+  const [newLevel, setNewLevel] = useState('easy');
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNewName(e.target.value);
   }
 
   function handleSubmitEdit(e: React.FormEvent) {
     e.preventDefault();
-    editPlayer(newName, name);
+    editPlayer(newName, name, level);
     setNewName('');
     setEditing(false);
   }
+
+  const handleEditSelcet = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setNewLevel(e.target.value);
+  };
 
   const editingTemplate = (
     <form className="form" onSubmit={handleSubmitEdit}>
       <div className="form-group">
         <label htmlFor={name} className="player-label">
-          New name for
-          {name}
+          {`New name for ${name}`}
         </label>
         <input
           value={newName}
@@ -43,6 +48,11 @@ export default function PlayerSettings({
           type="text"
           placeholder={name}
         />
+        <select value={newLevel} onChange={handleEditSelcet}>
+          <option value="Easy">Easy</option>
+          <option value="Normal">Normal</option>
+          <option value="Hard">Hard</option>
+        </select>
       </div>
       <div className="btn-group">
         <button

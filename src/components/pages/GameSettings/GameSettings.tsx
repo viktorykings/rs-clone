@@ -7,7 +7,7 @@ interface IPlayerSettings {
   name: string;
   isBot: boolean;
   link: string;
-  level: string;
+  levelBot: string;
 }
 
 export default function GameSettings() {
@@ -16,19 +16,19 @@ export default function GameSettings() {
       name: 'Main Player',
       isBot: false,
       link: '',
-      level: 'easy',
+      levelBot: 'hard',
     },
     {
       name: 'Player 1',
       isBot: true,
       link: '',
-      level: 'easy',
+      levelBot: 'easy',
     },
     {
       name: 'Player 2',
       isBot: true,
       link: '',
-      level: 'hard',
+      levelBot: 'hard',
     },
   ];
 
@@ -49,11 +49,11 @@ export default function GameSettings() {
   );
 
   const editNamePLayer = useCallback(
-    (newName: string, namePlayer: string) => {
+    (newName: string, namePlayer: string, newLevel: string) => {
       const editedPlayers = players.map((player) => {
         console.log(namePlayer === player.name);
         if (namePlayer === player.name) {
-          return { ...player, name: newName };
+          return { ...player, name: newName, levelBot: newLevel };
         }
         return player;
       });
@@ -71,7 +71,7 @@ export default function GameSettings() {
     }
     const newPlayer: IPlayerSettings = {
       name: `${name}`,
-      level: `${level}`,
+      levelBot: `${level}`,
       link: '',
       isBot: true,
     };
@@ -123,7 +123,7 @@ export default function GameSettings() {
         {players.map((player) => (
           <PlayerSettings
             name={player.name}
-            level={player.level}
+            level={player.levelBot}
             key={player.name}
             isBot={player.isBot}
             deletePlayer={deletePlayer}
