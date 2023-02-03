@@ -2,6 +2,7 @@ import IGame from '../../interface/IGame';
 import addHistory from './subevent/addHistory';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import findNextActivePlayer from './subevent/findNextActivePlayer';
+import getPause from '../game-loop/subevent/getPause';
 
 function endMove(game: IGame): IGame {
   const myGame = { ...game };
@@ -21,8 +22,13 @@ function endMove(game: IGame): IGame {
     addHistory(myGame, 'endMove', [], true);
 
     myGame.gameState.playerTurn = findNextActivePlayer(myGame).name;
+    console.log('next player', myGame.gameState.playerTurn);
     const nIndPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
     myGame.gameState.functionState = myGame.players[nIndPl].isBot ? 'waitBotTurn' : 'waitPlayerTurn';
+    myGame.gameState.timeNeed = getPause(
+      myGame.gameState.functionState,
+      myGame.players[nIndPl].countTakeCard,
+    );
   } else {
     myGame.players[indexPl].buttons.finishMove = false;
     const mes = `${myGame.players[indexPl].name} нужно взять ${myGame.players[indexPl].countTakeCard} карту/ы.`;

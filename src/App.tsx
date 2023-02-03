@@ -26,6 +26,7 @@ function App(): JSX.Element {
   // console.log(game);
   console.log('call--------');
   useEffect(() => mainGameLoop(game, setGame), [game]);
+  // mainGameLoop(game, setGame);
   return (
     <div className="App">
       <DeskPage

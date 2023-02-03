@@ -16,16 +16,14 @@ function mainGameLoop(
   const myGame = { ...game };
   const funcState = setFunctionState === '' ? myGame.gameState.functionState : setFunctionState;
 
-  if (funcState === 'waitPlayerTurn') {
-    myGame.gameState.functionState = 'waitPlayerTurn';
+  if (funcState === 'waitPlayerTurn' || funcState === 'waitBotTurn') {
+    myGame.gameState.functionState = funcState;
     myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     if (myGame.gameState.timeNeed < 1) {
       myGame.gameState.timeLeft = timerLeft === 0 ? 30 : timerLeft;
     }
     myGame.gameState.timerId = setInterval(() => { waitPlayerTurn(myGame, setGame); }, 1000);
   }
-
-  // setGame(myGame);
 }
 
 export default mainGameLoop;

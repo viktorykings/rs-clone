@@ -14,7 +14,6 @@ export default function DeskPage({
 }: Setter): JSX.Element {
   // const [currentCard, setCurrentCard] = useState(-1);
   // const [activePlayer, setActivePlayer] = useState(gameState.playerTurn);
-  // console.log(activePlayer);
   const game = {
     deskDeck,
     settings,
@@ -62,8 +61,14 @@ export default function DeskPage({
       <div className="main-player">
         <Player name="main" className={gameState.playerTurn/* activePlayer */ === 'player1' ? 'activePlayer' : ''} />
         <div className="control-buttons">
-          {/* <button type="button" onClick={
-            () => setGame(makeMove(game, currentCard))}>move</button> */}
+          <button
+            type="button"
+            onClick={() => {
+              if (gameState.timerId !== null) clearInterval(gameState.timerId);
+            }}
+          >
+            Stop
+          </button>
           <button
             type="button"
             onClick={() => {
