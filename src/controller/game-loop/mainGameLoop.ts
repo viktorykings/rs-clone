@@ -18,7 +18,10 @@ function mainGameLoop(
 
   if (funcState === 'waitPlayerTurn') {
     myGame.gameState.functionState = 'waitPlayerTurn';
-    myGame.gameState.timeLeft = timerLeft === 0 ? 10 : timerLeft;
+    myGame.gameState.timeLeft = myGame.gameState.timeNeed;
+    if (myGame.gameState.timeNeed < 1) {
+      myGame.gameState.timeLeft = timerLeft === 0 ? 30 : timerLeft;
+    }
     myGame.gameState.timerId = setInterval(() => { waitPlayerTurn(myGame, setGame); }, 1000);
   }
 

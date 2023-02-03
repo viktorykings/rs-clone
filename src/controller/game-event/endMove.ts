@@ -21,6 +21,8 @@ function endMove(game: IGame): IGame {
     addHistory(myGame, 'endMove', [], true);
 
     myGame.gameState.playerTurn = findNextActivePlayer(myGame).name;
+    const nIndPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+    myGame.gameState.functionState = myGame.players[nIndPl].isBot ? 'waitBotTurn' : 'waitPlayerTurn';
   } else {
     myGame.players[indexPl].buttons.finishMove = false;
     const mes = `${myGame.players[indexPl].name} нужно взять ${myGame.players[indexPl].countTakeCard} карту/ы.`;

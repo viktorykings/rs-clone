@@ -30,7 +30,7 @@ export default function DeskPage({
         {players.slice(1, players.length).map((el) => <Player key={el.name} name={el.name} className={gameState.playerTurn /* activePlayer */ === el.name ? 'activePlayer' : ''} />)}
       </div>
       <div className="game">
-        <p>{game.gameState.message}</p>
+        <p className="game-message">{game.gameState.message}</p>
         <div className="deck">
           <img
             src={cardBack}
