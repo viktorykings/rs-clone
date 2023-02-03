@@ -45,9 +45,9 @@ function createDeckFirst(players: IPlayer []): ICardPlayers {
     id += 1;
   }
   deskDeck.sort(() => Math.random() - 0.5);
-  console.log(playersDeck);
+
   playersDeck = playersDeck.map((pl) => startStateDeck(pl));
-  console.log(playersDeck);
+
   return { deskDeck, playersDeck };
 }
 
