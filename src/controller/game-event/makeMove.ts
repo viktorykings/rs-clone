@@ -5,10 +5,11 @@ import moveFavor from './subevent/moveFavor';
 import moveMix from './subevent/moveMix';
 import moveLook from './subevent/moveLook';
 import endMove from './endMove';
+import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 
 function makeMove(game: IGame, idCard: number): IGame {
   let myGame = { ...game };
-  const inPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTurn);
+  const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   if (myGame.gameState.stateGame === 'tern') {
     const myCard = game.players[inPl].deck.find((cr) => cr.id === idCard);
     console.log('card', myCard);

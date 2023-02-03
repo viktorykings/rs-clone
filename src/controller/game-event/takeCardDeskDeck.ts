@@ -1,9 +1,10 @@
 import IGame from '../../interface/IGame';
 import addHistory from './subevent/addHistory';
+import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 
 function takeCardDeskDeck(game: IGame): IGame {
   const myGame = { ...game };
-  const iPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTurn);
+  const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   if (myGame.players[iPl].countTakeCard > 0) {
     const card = myGame.deskDeck.splice(-1, 1);
     myGame.players[iPl].countTakeCard -= 1;

@@ -1,10 +1,11 @@
 import IGame from '../../interface/IGame';
 import addHistory from './subevent/addHistory';
+import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import findNextActivePlayer from './subevent/findNextActivePlayer';
 
 function endMove(game: IGame): IGame {
   const myGame = { ...game };
-  const indexPl = myGame.players.findIndex((pl) => pl.name === myGame.gameState.playerTurn);
+  const indexPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   if (myGame.players[indexPl].countTakeCard === 0) {
     // все что показываем в сброс
     if (myGame.showCards.length !== 0) myGame.reboundDeck.push(...myGame.showCards.splice(0));
