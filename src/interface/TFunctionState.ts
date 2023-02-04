@@ -1,3 +1,3 @@
-type TFunctionState = 'waitPlayerTurn' | 'waitBotTurn' | 'waitAnserTurn' | '';
+type TFunctionState = 'waitPlayerTurn' | 'waitAnserTurn' | '';
 
 export default TFunctionState;

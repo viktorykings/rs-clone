@@ -24,9 +24,9 @@ function endMove(game: IGame): IGame {
     myGame.gameState.playerTurn = findNextActivePlayer(myGame).name;
     console.log('next player', myGame.gameState.playerTurn);
     const nIndPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
-    myGame.gameState.functionState = myGame.players[nIndPl].isBot ? 'waitBotTurn' : 'waitPlayerTurn';
+    myGame.gameState.functionState = 'waitPlayerTurn';
     myGame.gameState.timeNeed = getPause(
-      myGame.gameState.functionState,
+      myGame.players[nIndPl].isBot,
       myGame.players[nIndPl].countTakeCard,
     );
   } else {

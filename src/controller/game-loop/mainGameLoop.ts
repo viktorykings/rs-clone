@@ -16,7 +16,7 @@ function mainGameLoop(
   const myGame = { ...game };
   const funcState = setFunctionState === '' ? myGame.gameState.functionState : setFunctionState;
 
-  if (funcState === 'waitPlayerTurn' || funcState === 'waitBotTurn') {
+  if (funcState === 'waitPlayerTurn') {
     myGame.gameState.functionState = funcState;
     myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     if (myGame.gameState.timeNeed < 1) {

@@ -7,10 +7,10 @@ function waitPlayerTurn(game: IGame, setGame: React.Dispatch<React.SetStateActio
   console.log(game.gameState.timeLeft);
 
   let myGame = { ...game };
+  const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
 
   if (myGame.gameState.timeLeft <= 1) {
     if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
-    const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
     if (myGame.players[inPl].countTakeCard > 0) {
       myGame = takeCardDeskDeck(myGame);
       setGame(myGame);
@@ -24,7 +24,7 @@ function waitPlayerTurn(game: IGame, setGame: React.Dispatch<React.SetStateActio
     }
   }
 
-  if (myGame.gameState.timeLeft === 7 && myGame.gameState.functionState === 'waitBotTurn') {
+  if (myGame.gameState.timeLeft === 7 && myGame.players[inPl].isBot) {
     // вызов функции хода бота
     console.log('Bot do move');
   }

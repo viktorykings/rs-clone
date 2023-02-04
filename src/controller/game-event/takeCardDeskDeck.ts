@@ -14,7 +14,7 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.players[iPl].buttons.finishMove = myGame.players[iPl].countTakeCard === 0;
       myGame.gameState.message = `${myGame.players[iPl].name} взял 1 карту.`;
       myGame.gameState.timeNeed = getPause(
-        myGame.gameState.functionState,
+        myGame.players[iPl].isBot,
         myGame.players[iPl].countTakeCard,
       );
       addHistory(myGame, 'takeCardDeskDeck', card, true);

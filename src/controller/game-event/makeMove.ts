@@ -4,15 +4,15 @@ import moveSkip from './subevent/moveSkip';
 import moveFavor from './subevent/moveFavor';
 import moveMix from './subevent/moveMix';
 import moveLook from './subevent/moveLook';
-import endMove from './endMove';
+// import endMove from './endMove';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 
 function makeMove(game: IGame, idCard: number): IGame {
-  let myGame = { ...game };
+  const myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
-  if (myGame.gameState.stateGame === 'tern') {
+  if (myGame.gameState.functionState === 'waitPlayerTurn') {
     const myCard = game.players[inPl].deck.find((cr) => cr.id === idCard);
-    console.log('card', myCard);
+    // console.log('card', myCard);
     if (myCard !== undefined) {
       const cartType = myCard.type;
       switch (cartType) {
@@ -26,9 +26,9 @@ function makeMove(game: IGame, idCard: number): IGame {
     }
   }
 
-  if (myGame.gameState.stateGame === 'endTern') {
+  /* if (myGame.gameState.stateGame === 'endTern') {
     myGame = endMove(myGame);
-  }
+  } */
   console.log(myGame);
   return myGame;
 }

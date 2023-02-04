@@ -1,9 +1,6 @@
-import TFunctionState from '../../../interface/TFunctionState';
-
-function getPause(functionState: TFunctionState, countTakeCard: number): number {
+function getPause(isBot: boolean, countTakeCard: number): number {
   // pause for player
-  let time = 11;
-  if (functionState === 'waitBotTurn') time = 10;
+  const time = isBot ? 10 : 12;
   return countTakeCard > 0 ? time : 5;
 }
 
