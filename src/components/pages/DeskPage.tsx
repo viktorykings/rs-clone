@@ -62,7 +62,9 @@ export default function DeskPage({
           }
         </div>
         <div className="rebound-deck">
+          <button type="button" className="rebound-deck-controls">{'<'}</button>
           <img src={emptyCardsPlace} alt="card" />
+          <button type="button" className="rebound-deck-controls">{'>'}</button>
         </div>
       </div>
       <div className="main-player">
