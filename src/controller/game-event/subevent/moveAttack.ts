@@ -14,7 +14,7 @@ function moveAttack(game: IGame, myCard: ICard, inPl: number): IGame {
 
     myGame.showCards.push(...myGame.players[inPl].deck.splice(indCard, 1));
     myGame.gameState.message = `${myGame.players[inPl].name} походил картой 'Атака'`;
-    // myGame.gameState.stateGame = 'endTern';
+    myGame.gameState.functionState = 'waitEndMove';
     addHistory(myGame, 'moveAttack', [myCard], true);
   } else {
     addHistory(myGame, 'moveAttack', [myCard], false);

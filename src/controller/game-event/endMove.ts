@@ -7,7 +7,7 @@ import getPause from '../game-loop/subevent/getPause';
 function endMove(game: IGame): IGame {
   const myGame = { ...game };
   const indexPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
-  if (myGame.players[indexPl].countTakeCard === 0) {
+  if (myGame.players[indexPl].countTakeCard === 0 && myGame.gameState.functionState === 'waitEndMove') {
     // все что показываем в сброс
     if (myGame.showCards.length !== 0) myGame.reboundDeck.push(...myGame.showCards.splice(0));
     myGame.gameState.stateGame = 'tern';

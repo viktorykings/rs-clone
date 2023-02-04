@@ -17,6 +17,7 @@ function takeCardDeskDeck(game: IGame): IGame {
         myGame.players[iPl].isBot,
         myGame.players[iPl].countTakeCard,
       );
+      myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
       addHistory(myGame, 'takeCardDeskDeck', card, true);
     } else {
       myGame.gameState.stateGame = 'explosion';

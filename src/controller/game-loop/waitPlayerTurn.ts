@@ -1,5 +1,4 @@
 import IGame from '../../interface/IGame';
-import endMove from '../game-event/endMove';
 import findIndexPlayerTern from '../game-event/subevent/findIndexPlayerTern';
 import takeCardDeskDeck from '../game-event/takeCardDeskDeck';
 
@@ -16,15 +15,11 @@ function waitPlayerTurn(game: IGame, setGame: React.Dispatch<React.SetStateActio
       setGame(myGame);
       return;
     }
-
-    if (myGame.players[inPl].countTakeCard === 0) {
-      myGame = endMove(myGame);
-      setGame(myGame);
-      return;
-    }
   }
 
-  if (myGame.gameState.timeLeft === 7 && myGame.players[inPl].isBot) {
+  if (myGame.gameState.functionState === 'waitPlayerTurn'
+    && myGame.gameState.timeLeft === 7
+    && myGame.players[inPl].isBot) {
     // вызов функции хода бота
     console.log('Bot do move');
   }
