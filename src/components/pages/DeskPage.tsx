@@ -68,7 +68,6 @@ export default function DeskPage({
       <div className="main-player">
         <Player name="main" className={activePlayer === 'player1' ? 'activePlayer' : ''} />
         <div className="control-buttons">
-          <button type="button" onClick={() => setGame(makeMove(game, currentCard))}>move</button>
           <button
             type="button"
             onClick={() => {
@@ -79,6 +78,9 @@ export default function DeskPage({
           >
             end
           </button>
+          <button type="button">2x Combo</button>
+          <button type="button">3x Combo</button>
+          <button type="button">5x Combo</button>
         </div>
         <div className="main-player-cards">
           {players[0].deck.map((el) => (

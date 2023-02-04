@@ -112,16 +112,17 @@ body {
     display: inline-block;
   }
 }
-  .activePlayer{
-    border: 1px solid yellow;
-    animation-name: makeMove;
-    animation-duration: 5s;
-  }
 
 .main-player{
+  .control-buttons{
+    display: flex;
+    flex-direction: column;
+  }
 
   .main-player-cards{
     display: flex;
+    flex-direction: row-reverse;
+    // flex-wrap: wrap;
     img{
       width: 120px;
       margin: 5px;
@@ -130,53 +131,14 @@ body {
       border: none;
       outline: none;
       box-sizing: border-box;
-    }
-    .scaleCard {
-      img:hover{
-        // transform: translateY(-50px);
-        transform: scale(2) translateY(-50px);
-        border: 2px solid #fbff12;
-        box-shadow: 0 0 10px #fbff12;
-      }
+      cursor: pointer;
     }
     .scaleCard:hover{
       transform: scale(2) translateY(-80px);
       border: 2px solid #fbff12;
       box-shadow: 0 0 10px #fbff12;
     }
-    .activeCard{
-      animation: fade 3s ease forwards;
-    }
   }
 
 }
 
-@keyframes makeMove {
-  0% {
-    top: 0;
-  }
-  50% {
-    top: 30px;
-    left: 20px;
-  }
-  50% {
-    top: 10px;
-  }
-  100% {
-    top: 0;
-  }
-}
-@keyframes eye {
-  90% { transform: none; }   
-  95% { transform: scaleY(0.1); }
- }
-@keyframes fade {
-  from {
-    opacity: 1;
-    visibility: visible;
-  }
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
