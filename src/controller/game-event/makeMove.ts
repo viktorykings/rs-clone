@@ -1,35 +1,34 @@
 import IGame from '../../interface/IGame';
-import moveAttack from './subevent/moveAttack';
-import moveSkip from './subevent/moveSkip';
-import moveFavor from './subevent/moveFavor';
-import moveMix from './subevent/moveMix';
-import moveLook from './subevent/moveLook';
-// import endMove from './endMove';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
+import cardType from '../../const/cardType';
+import findNextActivePlayer from './subevent/findNextActivePlayer';
+import { botWaitAnswer, playerWaitTurn } from '../../const/gameVariable';
 
 function makeMove(game: IGame, idCard: number): IGame {
+  // console.log('make move');
   const myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
-  if (myGame.gameState.functionState === 'waitPlayerTurn') {
-    const myCard = game.players[inPl].deck.find((cr) => cr.id === idCard);
-    // console.log('card', myCard);
-    if (myCard !== undefined) {
-      const cartType = myCard.type;
-      switch (cartType) {
-        case 3: return moveAttack(game, myCard, inPl);
-        case 4: moveSkip(game); break;
-        case 5: moveFavor(game); break;
-        case 6: moveMix(game); break;
-        case 7: moveLook(game); break;
-        default: break;
+  if (myGame.gameState.stateGame === 'tern') {
+    const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
+    if (indCard !== -1) {
+      const typeTern = myGame.players[inPl].deck[indCard].type;
+      if (typeTern > 2 && typeTern <= 7) {
+        const plName = myGame.players[inPl].name;
+        myGame.gameState.typeTern = typeTern;
+        myGame.showCards = myGame.players[inPl].deck.splice(indCard, 1);
+        myGame.gameState.message = `${plName} походил картой ${cardType[typeTern].name}`;
+        myGame.gameState.functionState = 'waitAnserTurn';
+        myGame.gameState.playerWaitAnswer = plName;
+        const nextPl = findNextActivePlayer(myGame);
+        myGame.gameState.playerTurn = nextPl.name;
+        myGame.gameState.timeNeed = nextPl.isBot ? botWaitAnswer : playerWaitTurn;
       }
     }
   }
-
   /* if (myGame.gameState.stateGame === 'endTern') {
     myGame = endMove(myGame);
   } */
-  console.log(myGame);
+  // console.log(myGame);
   return myGame;
 }
 

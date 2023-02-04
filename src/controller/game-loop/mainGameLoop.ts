@@ -1,5 +1,6 @@
 import IGame from '../../interface/IGame';
 import TFunctionState from '../../interface/TFunctionState';
+import waitAnserTurn from './waitAnsweTern';
 import waitEndMove from './waitEndMove';
 // eslint-disable-next-line import/no-cycle
 import waitPlayerTurn from './waitPlayerTurn';
@@ -10,8 +11,8 @@ function mainGameLoop(
   setFunctionState: TFunctionState = '',
   timerLeft = 0,
 ): void {
-  console.log('call');
-  console.log(setFunctionState);
+  console.log('call main loop');
+  // console.log(setFunctionState);
   console.log(game.gameState.functionState);
   if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
   const myGame = { ...game };
@@ -30,6 +31,10 @@ function mainGameLoop(
 
   if (funcState === 'waitEndMove') {
     myGame.gameState.timerId = setInterval(() => { waitEndMove(myGame, setGame); }, 1000);
+  }
+
+  if (funcState === 'waitAnserTurn') {
+    myGame.gameState.timerId = setInterval(() => { waitAnserTurn(myGame, setGame); }, 1000);
   }
 }
 

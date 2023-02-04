@@ -14,6 +14,7 @@ export default function DeskPage({
 }: Setter): JSX.Element {
   // const [currentCard, setCurrentCard] = useState(-1);
   // const [activePlayer, setActivePlayer] = useState(gameState.playerTurn);
+  // console.log('----DeckPage---');
   const game = {
     deskDeck,
     settings,
@@ -88,7 +89,7 @@ export default function DeskPage({
               alt={el.name}
               key={el.id}
               onMouseDown={() => {
-                setGame(makeMove.bind(null, game, el.id));
+                setGame(makeMove(game, el.id));
                 // setCurrentCard(el.id);
                 // console.log(currentCard, el.id);
               }}
