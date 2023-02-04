@@ -6,18 +6,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  width: 1280px;
+  height: auto;
+  margin: 0 auto;
+  background-color: #75210c;
 }
 
 .desk{
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-image: url(./assets/desk.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 50px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .other-players,
 .main-player{
@@ -31,15 +36,69 @@ body {
   justify-content: space-between;
   flex-grow: 1;
   height: 240px;
+
+  .game-info{
+    height: 120px;
+    width: 180px;
+    .game-info-cat{
+      img{
+        display: inline-block;
+        height: 160px;
+        width: 160px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+    }
+    .game-info-messages{
+      background-color: #fff;
+      height: 80px;
+      width: 120px;
+      border-radius: 20px;
+      position: relative;
+      text-align: center;
+    }
+    .game-info-messages:before{
+      content: ' ';
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 10px;
+      top: -25px;
+      border: 15px solid;
+      border-color: transparent #fff #fff transparent;
+    }
+    .game-info-timer{
+      background-color: #fff;
+      border-radius: 10px;
+      width: 30px;
+    }
+  }
+
   .deck,
   .play-cards,
   .rebound-deck{
     img{
+      // width: 240px;
       height: 240px;
       border-radius: 5px;
     }
-  }
 
+  }
+  .play-cards-place{
+    width: 160px;
+    height: 240px;
+    border-radius: 5px;
+    border: 1px dashed #fff;
+      img{
+        position: relative;
+         animation: eye 3s ease-in-out infinite;}
+
+  }
+  .rebound-deck{
+    height: 240px;
+    width: 140px;
+    transform: rotate(45deg) translateX(10%) translateY(-50%);
+  }
 }
 .player{
   height: 150px;
@@ -55,6 +114,8 @@ body {
 }
   .activePlayer{
     border: 1px solid yellow;
+    animation-name: makeMove;
+    animation-duration: 5s;
   }
 
 .main-player{
@@ -70,11 +131,52 @@ body {
       outline: none;
       box-sizing: border-box;
     }
-    img:hover{
-      transform: translateY(-10px);
+    .scaleCard {
+      img:hover{
+        // transform: translateY(-50px);
+        transform: scale(2) translateY(-50px);
+        border: 2px solid #fbff12;
+        box-shadow: 0 0 10px #fbff12;
+      }
+    }
+    .scaleCard:hover{
+      transform: scale(2) translateY(-80px);
       border: 2px solid #fbff12;
       box-shadow: 0 0 10px #fbff12;
     }
+    .activeCard{
+      animation: fade 3s ease forwards;
+    }
   }
 
+}
+
+@keyframes makeMove {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 30px;
+    left: 20px;
+  }
+  50% {
+    top: 10px;
+  }
+  100% {
+    top: 0;
+  }
+}
+@keyframes eye {
+  90% { transform: none; }   
+  95% { transform: scaleY(0.1); }
+ }
+@keyframes fade {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
