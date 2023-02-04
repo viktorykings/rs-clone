@@ -16,6 +16,7 @@ export default function DeskPage({
 }: Setter): JSX.Element {
   const [currentCard, setCurrentCard] = useState(-1);
   const [activePlayer, setActivePlayer] = useState(gameState.playerTern);
+  const [activeRebound, setActiveRebound] = useState(false);
   console.log(activePlayer);
   const game = {
     deskDeck,
@@ -61,9 +62,9 @@ export default function DeskPage({
             : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animate__animated animate__backInUp" />)
           }
         </div>
-        <div className="rebound-deck">
+        <div className={activeRebound ? 'rebound-deck-active' : 'rebound-deck'}>
           <button type="button" className="rebound-deck-controls">{'<'}</button>
-          <img src={emptyCardsPlace} alt="card" />
+          <img src={emptyCardsPlace} alt="card" onMouseDown={() => setActiveRebound(!activeRebound)} />
           <button type="button" className="rebound-deck-controls">{'>'}</button>
         </div>
       </div>
