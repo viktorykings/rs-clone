@@ -1,40 +1,55 @@
 import IGame from '../../interface/IGame';
-import TFunctionState from '../../interface/TFunctionState';
+import findIndexPlayerTern from '../game-event/subevent/findIndexPlayerTern';
 import waitAnserTurn from './waitAnsweTern';
 import waitEndMove from './waitEndMove';
-// eslint-disable-next-line import/no-cycle
 import waitPlayerTurn from './waitPlayerTurn';
 
 function mainGameLoop(
   game: IGame,
   setGame: React.Dispatch<React.SetStateAction<IGame>>,
-  setFunctionState: TFunctionState = '',
-  timerLeft = 0,
 ): void {
-  console.log('call main loop');
-  // console.log(setFunctionState);
-  console.log(game.gameState.functionState);
-  if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
+  console.log(game.gameState.timeLeft);
   const myGame = { ...game };
-  const funcState = setFunctionState === '' ? myGame.gameState.functionState : setFunctionState;
+  const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  const funcState = myGame.gameState.functionState;
+  if (myGame.gameState.timeLeft <= 1) {
+    if (myGame.gameState.timerId !== null) {
+      clearInterval(myGame.gameState.timerId);
+      myGame.gameState.timerId = null;
+    }
 
-  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
+    if (funcState === 'waitPlayerTurn' || funcState === 'waitTakeCardDeskDeck') {
+      waitPlayerTurn(myGame, setGame);
+      return;
+    }
 
-  if (myGame.gameState.timeNeed < 1) {
-    myGame.gameState.timeLeft = timerLeft === 0 ? 30 : timerLeft;
+    if (funcState === 'waitEndMove') {
+      waitEndMove(myGame, setGame);
+      return;
+    }
+
+    if (funcState === 'waitAnserTurn') {
+      waitAnserTurn(myGame, setGame);
+      return;
+    }
   }
 
-  if (funcState === 'waitPlayerTurn' || funcState === 'waitTakeCardDeskDeck') {
-    // myGame.gameState.functionState = funcState;
-    myGame.gameState.timerId = setInterval(() => { waitPlayerTurn(myGame, setGame); }, 1000);
+  if (myGame.gameState.functionState === 'waitAnserTurn'
+    && myGame.gameState.timeLeft === 4
+    && myGame.players[inPl].isBot) {
+    // вызов функции хода бота
+    console.log('Bot maybe do move NOT');
   }
 
-  if (funcState === 'waitEndMove') {
-    myGame.gameState.timerId = setInterval(() => { waitEndMove(myGame, setGame); }, 1000);
+  if (myGame.gameState.functionState === 'waitPlayerTurn'
+    && myGame.gameState.timeLeft === 7
+    && myGame.players[inPl].isBot) {
+    // вызов функции хода бота
+    console.log('Bot do move');
   }
 
-  if (funcState === 'waitAnserTurn') {
-    myGame.gameState.timerId = setInterval(() => { waitAnserTurn(myGame, setGame); }, 1000);
+  if (myGame.gameState.timeLeft > 1) {
+    myGame.gameState.timeLeft -= 1;
   }
 }
 

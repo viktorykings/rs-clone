@@ -3,7 +3,7 @@ import './App.scss';
 import DeskPage from './components/pages/DeskPage';
 import createGame from './controller/createGame';
 import createPlayer from './controller/createPlayer';
-import mainGameLoop from './controller/game-loop/mainGameLoop';
+import gameLoop from './controller/game-loop/gameLoop';
 
 function App(): JSX.Element {
   const player = createPlayer('player1', false);
@@ -25,7 +25,7 @@ function App(): JSX.Element {
   // console.log('showcards', game.gameState.playerTurn);
   // console.log(game);
   // console.log('----App--------');
-  useEffect(() => mainGameLoop(game, setGame), [game]);
+  useEffect(() => gameLoop(game, setGame), [game]);
   // mainGameLoop(game, setGame);
   return (
     <div className="App">
