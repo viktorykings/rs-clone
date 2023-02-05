@@ -144,6 +144,17 @@ body {
   .control-buttons{
     display: flex;
     flex-direction: column;
+    .combo-visible{
+      opacity: 1;
+
+    }
+    .combo-hidden{
+      opacity: 0;
+    }
+  }
+
+  .control-buttons .combo-visible button:hover ~ .main-player-cards{
+    background-color: #fff;
   }
 
   .main-player-cards{
@@ -164,6 +175,10 @@ body {
       transform: scale(2) translateY(-80px);
       border: 2px solid $highlights;
       box-shadow: 0 0 10px $highlights;
+    }
+    .comboActive{
+      transform: translateY(-40px);
+      border: 2px solid $highlights;
     }
   }
 
