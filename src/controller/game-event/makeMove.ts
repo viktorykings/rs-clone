@@ -8,7 +8,11 @@ function makeMove(game: IGame, idCard: number): IGame {
   // console.log('make move');
   const myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
-  if (myGame.gameState.stateGame === 'tern') {
+  if (myGame.gameState.stateGame === 'tern'
+    || myGame.gameState.stateGame === 'doubleCombo'
+    || myGame.gameState.stateGame === 'tripleCombo'
+    || myGame.gameState.stateGame === 'fiveCombo'
+  ) {
     const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
     if (indCard !== -1) {
       const typeTern = myGame.players[inPl].deck[indCard].type;

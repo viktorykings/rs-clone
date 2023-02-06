@@ -77,10 +77,10 @@ export default function DeskPage({
     }
   };
   const usedTripleCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTurn);
+    const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
-      pl = clickTripleCombo(pl);
-      game.players[0] = pl;
+      clickTripleCombo(pl);
+      // game.players[0] = pl;
       game.gameState.stateGame = 'tripleCombo';
       console.log('---combo---');
       console.log(game);
@@ -88,10 +88,10 @@ export default function DeskPage({
     }
   };
   const usedFiveCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTurn);
+    const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
-      pl = clickFiveCombo(pl);
-      game.players[0] = pl;
+      clickFiveCombo(pl);
+      // game.players[0] = pl;
       game.gameState.stateGame = 'fiveCombo';
       console.log('---combo---');
       console.log(game);
