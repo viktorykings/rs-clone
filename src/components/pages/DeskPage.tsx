@@ -9,6 +9,7 @@ import infoCat from '../../assets/info-cat.png';
 // import startStateDeck from '../../controller/statePlayerDeck/startStateDeck';
 import IPlayer from '../../interface/IPlayer';
 // import ICard from '../../interface/ICard';
+import clearNameCombo from '../../controller/statePlayerDeck/clearNameCombo';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -29,13 +30,7 @@ export default function DeskPage({
   // ] = useState(-1);
   // const [activePlayer, setActivePlayer] = useState(game.gameState.playerTern);
   const [activeRebound, setActiveRebound] = useState(false);
-  function clearNameCombo(player: IPlayer): void {
-    player.deck.map((el) => {
-      // eslint-disable-next-line no-param-reassign
-      el.nameCombo = String('');
-      return null;
-    });
-  }
+
   function clickDoubleCombo(player: IPlayer): IPlayer {
     clearNameCombo(player);
     player.combos.doubleCats.map((cr, ind) => cr.map((el) => {
