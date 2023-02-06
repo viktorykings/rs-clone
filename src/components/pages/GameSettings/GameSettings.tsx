@@ -12,6 +12,7 @@ import av4 from '../../../assets/avCats/av4.png';
 import av5 from '../../../assets/avCats/av5.png';
 import av6 from '../../../assets/avCats/av6.png';
 import av7 from '../../../assets/avCats/av7.png';
+import ModalBot from './ModalBot';
 
 interface IBotSettings {
   name: string;
@@ -22,12 +23,12 @@ interface IBotSettings {
 
 export default function GameSettings() {
   const botsNames = [
-    'bot 1',
-    'bot 2',
-    'bot 3',
-    'bot 4',
-    'bot 5',
-    'bot 6',
+    'Diablo Gato',
+    'Puss in Boots',
+    'Пушистый донжуан',
+    'Чупакабра',
+    'Игривый дваждылюб',
+    'Рыжий убийца',
     'bot 7',
     'bot 8',
     'bot 9',
@@ -130,10 +131,6 @@ export default function GameSettings() {
   //   setLevel(e.target.value);
   // };
 
-  // function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-  //   setName(e.target.value);
-  // }
-
   function createBots(items: IBotSettings[]): void {
     const result = items.reduce((acc: IPlayer[], cur) => {
       const [n, isB, lnk, lvl] = [...Object.values(cur)];
@@ -145,12 +142,14 @@ export default function GameSettings() {
 
   return (
     <div className="settings">
+      <ModalBot title="Choose level" />
       <h1>Game Settings</h1>
 
       <div className="wrap-players">
         <div className="bot-settings">
           <form onSubmit={handleSubmit}>
             <h2>Add Bot</h2>
+
             <div className="add-bot">
               {/* <input
                 type="text"
@@ -167,7 +166,7 @@ export default function GameSettings() {
                 <option value="Hard">Hard</option>
               </select> */}
               <button type="submit" className="btn">
-                Add
+                Add a kitten
               </button>
             </div>
           </form>
