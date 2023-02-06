@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React, {
+  useCallback, useMemo, useState,
+} from 'react';
 import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
 import endMove from '../../controller/game-event/endMove';
 import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
-import { Setter } from '../../interface/IGame';
+import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
-// import startStateDeck from '../../controller/statePlayerDeck/startStateDeck';
 import IPlayer from '../../interface/IPlayer';
-// import ICard from '../../interface/ICard';
-import clearNameCombo from '../../controller/statePlayerDeck/clearNameCombo';
+// import clearNameCombo from '../../controller/statePlayerDeck/clearNameCombo';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -18,34 +18,36 @@ const emptyCardsPlace = 'cards/empty.png';
 export default function DeskPage({
   deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
 }: Setter): JSX.Element {
-  const game = {
+  const game = useMemo((): IGame => ({
     deskDeck,
     settings,
     players,
     reboundDeck,
     showCards,
     gameState,
-  };
-  // const [currentCard,
-  // ] = useState(-1);
-  // const [activePlayer, setActivePlayer] = useState(game.gameState.playerTern);
+  }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
+  // const [decks, setDecks] = useState(game.players[0].deck);
+  const [playerState, setPlayerState] = useState(game.players);
   const [activeRebound, setActiveRebound] = useState(false);
-  // const [ourPlayers, setOurPlayers] = useState(players);
-  const [ourMessage, setOurMessage] = useState(game.gameState.message);
-  // const [ourTimeLeft, setOurTimeLeft] = useState(20);
-  if (ourMessage !== game.gameState.message) setOurMessage(game.gameState.message);
-  // setOurTimeLeft(game.gameState.timeLeft);
-
-  function clickDoubleCombo(player: IPlayer): IPlayer {
+  const clearNameCombo = useCallback((player: IPlayer): void => {
+    player.deck.map((el) => {
+      // eslint-disable-next-line no-param-reassign
+      el.nameCombo = String('');
+      return null;
+    });
+  }, []);
+  const clickDoubleCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
     player.combos.doubleCats.map((cr, ind) => cr.map((el) => {
+    // player.combos.doubleCats.map((cr, ind) => cr.map((el) => {
       // eslint-disable-next-line no-param-reassign
       el.nameCombo = String(ind); return null;
     }));
     console.log(player);
     return player;
-  }
-  function clickTripleCombo(player: IPlayer): IPlayer {
+  }, [clearNameCombo]);
+
+  const clickTripleCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
     player.combos.tripleCats.map((cr, ind) => cr.map((el) => {
       // eslint-disable-next-line no-param-reassign
@@ -54,8 +56,9 @@ export default function DeskPage({
     }));
     console.log(player);
     return player;
-  }
-  function clickFiveCombo(player: IPlayer): IPlayer {
+  }, [clearNameCombo]);
+
+  const clickFiveCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
     player.combos.fiveCats.map((cr, ind) => cr.map((el) => {
       // eslint-disable-next-line no-param-reassign
@@ -64,40 +67,40 @@ export default function DeskPage({
     }));
     console.log(player);
     return player;
-  }
-  const usedDoubleCombo = () => {
+  }, [clearNameCombo]);
+
+  const usedDoubleCombo = useCallback(() => {
     const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       clickDoubleCombo(pl);
-      // game.players[0] = pl;
       game.gameState.stateGame = 'doubleCombo';
       console.log('---combo---');
       console.log(game);
-      setGame(game);
+      setPlayerState((p) => ({ ...p }));
     }
-  };
-  const usedTripleCombo = () => {
+  }, [clickDoubleCombo, game]);
+
+  const usedTripleCombo = useCallback(() => {
     const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       clickTripleCombo(pl);
-      // game.players[0] = pl;
       game.gameState.stateGame = 'tripleCombo';
       console.log('---combo---');
       console.log(game);
-      setGame(game);
+      setPlayerState((p) => ({ ...p }));
     }
-  };
-  const usedFiveCombo = () => {
+  }, [clickTripleCombo, game]);
+
+  const usedFiveCombo = useCallback(() => {
     const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       clickFiveCombo(pl);
-      // game.players[0] = pl;
       game.gameState.stateGame = 'fiveCombo';
       console.log('---combo---');
       console.log(game);
-      setGame(game);
+      setPlayerState((p) => ({ ...p }));
     }
-  };
+  }, [clickFiveCombo, game]);
 
   return (
     <main className="desk">
@@ -141,45 +144,47 @@ export default function DeskPage({
           <button type="button" className="rebound-deck-controls">{'>'}</button>
         </div>
       </div>
-      <div className="main-player">
-        <Player name="main" className={gameState.playerTurn/* activePlayer */ === 'player1' ? 'activePlayer' : ''} />
-        <div className="control-buttons">
-          <button
-            type="button"
-            onClick={() => {
-              setGame(endMove(game));
-              // setActivePlayer(endMove(game).gameState.playerTurn);
-            }}
-            disabled={!game.players[0].buttons.finishMove}
-          >
-            end
-          </button>
-          <div className={game.players[0].buttons.comboEnabled ? 'combo-visible' : 'combo-hidden'}>
+      <div className="main-player" aria-disabled>
+        <div className="main-player-container">
+          <Player name="main" className={gameState.playerTurn === 'player1' ? 'activePlayer' : ''} />
+          <div className="control-buttons">
             <button
               type="button"
-              disabled={!game.players[0].buttons.dobleEnabled}
-              onClick={() => usedDoubleCombo()}
+              onClick={() => {
+                setGame(endMove(game));
+                // setActivePlayer(endMove(game).gameState.playerTurn);
+              }}
+              disabled={!game.players[0].buttons.finishMove}
             >
-              2x Combo
+              end
             </button>
-            <button
-              type="button"
-              disabled={!game.players[0].buttons.tripleEnabled}
-              onClick={() => usedTripleCombo()}
-            >
-              3x Combo
-            </button>
-            <button
-              type="button"
-              disabled={!game.players[0].buttons.fiveEnabled}
-              onClick={() => usedFiveCombo()}
-            >
-              5x Combo
-            </button>
+            <div className={game.players[0].buttons.comboEnabled ? 'combo-visible' : 'combo-hidden'}>
+              <button
+                type="button"
+                disabled={!game.players[0].buttons.dobleEnabled}
+                onClick={() => usedDoubleCombo()}
+              >
+                2x Combo
+              </button>
+              <button
+                type="button"
+                disabled={!game.players[0].buttons.tripleEnabled}
+                onClick={() => usedTripleCombo()}
+              >
+                3x Combo
+              </button>
+              <button
+                type="button"
+                disabled={!game.players[0].buttons.fiveEnabled}
+                onClick={() => usedFiveCombo()}
+              >
+                5x Combo
+              </button>
+            </div>
           </div>
         </div>
         <div className="main-player-cards">
-          {players[0].deck.map((el) => (
+          {playerState[0].deck.map((el) => (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <div className="animate__animated animate__backInDown">
               <img
@@ -189,8 +194,6 @@ export default function DeskPage({
                 onMouseDown={() => {
                   const myGame = makeMove(game, el.id);
                   if (myGame !== null) setGame(myGame);
-                  // setCurrentCard(el.id);
-                  // console.log(currentCard, el.id);
                 }}
                 className={el.nameCombo ? 'comboActive' : 'scaleCard'}
               />
