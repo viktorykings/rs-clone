@@ -1,5 +1,5 @@
 type TFunctionState =
 'waitPlayerTurn' | 'waitTakeCardDeskDeck' | 'waitAnserTurn'
-| 'waitEndMove' | '';
+| 'waitEndMove' | 'waitCombo2' | 'waitCombo3' | 'waitCombo5' | '';
 
 export default TFunctionState;
