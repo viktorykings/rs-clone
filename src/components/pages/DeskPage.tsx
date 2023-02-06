@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React/* , { useState } */ from 'react';
+import React, { useState } from 'react';
 import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
 import endMove from '../../controller/game-event/endMove';
@@ -25,7 +25,7 @@ export default function DeskPage({
     showCards,
     gameState,
   };
-  // const [currentCard, 
+  // const [currentCard,
   // ] = useState(-1);
   // const [activePlayer, setActivePlayer] = useState(game.gameState.playerTern);
   const [activeRebound, setActiveRebound] = useState(false);
@@ -66,30 +66,33 @@ export default function DeskPage({
     return player;
   }
   const usedDoubleCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTern);
+    const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
-      pl = clickDoubleCombo(pl);
-      game.players[0] = pl;
+      clickDoubleCombo(pl);
+      // game.players[0] = pl;
+      game.gameState.stateGame = 'doubleCombo';
       console.log('---combo---');
       console.log(game);
       setGame(game);
     }
   };
   const usedTripleCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTern);
+    let pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       pl = clickTripleCombo(pl);
       game.players[0] = pl;
+      game.gameState.stateGame = 'tripleCombo';
       console.log('---combo---');
       console.log(game);
       setGame(game);
     }
   };
   const usedFiveCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTern);
+    let pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       pl = clickFiveCombo(pl);
       game.players[0] = pl;
+      game.gameState.stateGame = 'fiveCombo';
       console.log('---combo---');
       console.log(game);
       setGame(game);
@@ -117,7 +120,7 @@ export default function DeskPage({
           <img
             src={cardBack}
             alt="deck"
-            onMouseDown={() => { setGame(takeCardDeskDeck.bind(null, game)); }}
+            onMouseDown={() => { setGame(takeCardDeskDeck(game)); }}
           />
           <p>
             Left
