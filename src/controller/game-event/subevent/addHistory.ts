@@ -9,13 +9,13 @@ function addHistory(
   result: boolean,
 ) {
   game.gameState.history.unshift({
-    playerName: game.gameState.playerTern,
+    playerName: game.gameState.playerTurn,
     event,
     card,
     result,
   });
   console.log({
-    playerName: game.gameState.playerTern,
+    playerName: game.gameState.playerTurn,
     event,
     card,
     result,

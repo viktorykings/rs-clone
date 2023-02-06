@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React/* , { useState } */ from 'react';
 import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
 import endMove from '../../controller/game-event/endMove';
@@ -25,8 +25,9 @@ export default function DeskPage({
     showCards,
     gameState,
   };
-  const [currentCard, setCurrentCard] = useState(-1);
-  const [activePlayer, setActivePlayer] = useState(game.gameState.playerTern);
+  // const [currentCard, 
+  // ] = useState(-1);
+  // const [activePlayer, setActivePlayer] = useState(game.gameState.playerTern);
   const [activeRebound, setActiveRebound] = useState(false);
   function clearNameCombo(player: IPlayer): void {
     player.deck.map((el) => {
@@ -98,7 +99,7 @@ export default function DeskPage({
   return (
     <main className="desk">
       <div className="other-players">
-        {players.slice(1, players.length).map((el) => <Player key={el.name} name={el.name} className={activePlayer === el.name ? 'activePlayer' : ''} />)}
+        {players.slice(1, players.length).map((el) => <Player key={el.name} name={el.name} className={gameState.playerTurn /* activePlayer */ === el.name ? 'activePlayer' : ''} />)}
       </div>
       <div className="game">
         <div className="game-info">
@@ -138,13 +139,13 @@ export default function DeskPage({
         </div>
       </div>
       <div className="main-player">
-        <Player name="main" className={activePlayer === 'player1' ? 'activePlayer' : ''} />
+        <Player name="main" className={gameState.playerTurn/* activePlayer */ === 'player1' ? 'activePlayer' : ''} />
         <div className="control-buttons">
           <button
             type="button"
             onClick={() => {
               setGame(endMove(game));
-              setActivePlayer(endMove(game).gameState.playerTern);
+              // setActivePlayer(endMove(game).gameState.playerTurn);
             }}
             disabled={!game.players[0].buttons.finishMove}
           >
@@ -183,9 +184,9 @@ export default function DeskPage({
                 alt={el.name}
                 key={el.id}
                 onMouseDown={() => {
-                  setGame(makeMove.bind(null, game, el.id));
-                  setCurrentCard(el.id);
-                  console.log(currentCard, el.id);
+                  setGame(makeMove(game, el.id));
+                  // setCurrentCard(el.id);
+                  // console.log(currentCard, el.id);
                 }}
                 className={el.nameCombo ? 'comboActive' : 'scaleCard'}
               />

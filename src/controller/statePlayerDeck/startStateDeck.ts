@@ -34,9 +34,15 @@ function startStateDeck(player: IPlayer): IPlayer {
     }
   }
 
-  if (myPl.combos.doubleCats[ind2].length !== 2) myPl.combos.doubleCats.splice(ind2, 1);
-  if (myPl.combos.tripleCats[ind3].length !== 3) myPl.combos.tripleCats.splice(ind3, 1);
-  if (myPl.combos.fiveCats[0].length !== 5) myPl.combos.fiveCats.splice(0, 1);
+  if (myPl.combos.doubleCats.length > 0 && myPl.combos.doubleCats[ind2].length !== 2) {
+    myPl.combos.doubleCats.splice(ind2, 1);
+  }
+  if (myPl.combos.tripleCats.length > 0 && myPl.combos.tripleCats[ind3].length !== 3) {
+    myPl.combos.tripleCats.splice(ind3, 1);
+  }
+  if (myPl.combos.fiveCats.length > 0 && myPl.combos.fiveCats[0].length !== 5) {
+    myPl.combos.fiveCats.splice(0, 1);
+  }
 
   myPl.buttons.comboEnabled = false;
   myPl.buttons.dobleVisible = false;
