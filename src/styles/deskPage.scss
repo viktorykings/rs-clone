@@ -14,7 +14,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  overflow-x: hidden;
   width: 1280px;
   height: auto;
   margin: 0 auto;
@@ -22,6 +22,7 @@ body {
 }
 
 .desk{
+  position: relative;
   box-sizing: border-box;
   width: 100%;
   min-height: 100vh;
@@ -31,7 +32,7 @@ body {
   padding: 5px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .other-players,
 .main-player{
@@ -191,4 +192,33 @@ body {
 .activePlayer{
   border: 2px solid $highlights;
   box-shadow: 0 0 10px $highlights;
+}
+.take-card-modal-active{
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 240px;
+  width: 800px;
+  min-height: 450px;
+  background-color: $main-red;
+  color: $text-color;
+  border-radius: 30px;
+  &players{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    width: 700px;
+  }
+  &players-cards{
+    margin: 0 auto;
+    width: 720px;
+    display: flex;
+    flex-wrap: wrap;
+    &img{
+      width: 80px;
+    }
+  }
+}
+.take-card-modal{
+  display: none;
 }

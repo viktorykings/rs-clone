@@ -27,8 +27,10 @@ export default function DeskPage({
     gameState,
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   // const [decks, setDecks] = useState(game.players[0].deck);
+  console.log('functionState', game.gameState.functionState);
   const [playerState, setPlayerState] = useState(game.players);
   const [activeRebound, setActiveRebound] = useState(false);
+  const ourMessage = game.gameState.message;
   const clearNameCombo = useCallback((player: IPlayer): void => {
     player.deck.map((el) => {
       // eslint-disable-next-line no-param-reassign
@@ -36,6 +38,10 @@ export default function DeskPage({
       return null;
     });
   }, []);
+  const checkFunctionState = () => {
+    const state = game.gameState.functionState;
+    return state === 'waitCombo2' || state === 'waitCombo3' || state === 'waitCombo5';
+  };
   const clickDoubleCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
     player.combos.doubleCats.map((cr, ind) => cr.map((el) => {
@@ -113,7 +119,7 @@ export default function DeskPage({
             <img src={infoCat} alt="info" />
           </div>
           <div className="game-info-messages">
-            <p>{ourMessage }</p>
+            <p>{ourMessage}</p>
           </div>
           <p className="game-info-timer">
             {game.gameState.timeLeft}
@@ -186,7 +192,7 @@ export default function DeskPage({
         <div className="main-player-cards">
           {playerState[0].deck.map((el) => (
             // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-            <div className="animate__animated animate__backInDown">
+            <div className="animate__animated animate__backInDown" key={el.id}>
               <img
                 src={el.link}
                 alt={el.name}
@@ -198,6 +204,18 @@ export default function DeskPage({
                 className={el.nameCombo ? 'comboActive' : 'scaleCard'}
               />
             </div>
+          ))}
+        </div>
+      </div>
+      <div className={checkFunctionState() ? 'take-card-modal-active' : 'take-card-modal'}>
+        <div className="players">
+          {playerState.map((el) => (
+            <button type="button" key={el.name}>{el.name}</button>
+          ))}
+        </div>
+        <div className="players-cards">
+          {playerState[1].deck.map((el) => (
+            <img src={el.link} alt="card" width="50px" key={el.id} />
           ))}
         </div>
       </div>
