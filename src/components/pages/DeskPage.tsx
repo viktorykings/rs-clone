@@ -9,6 +9,7 @@ import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
 import IPlayer from '../../interface/IPlayer';
+// import clearNameCombo from '../../controller/statePlayerDeck/clearNameCombo';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -72,6 +73,7 @@ export default function DeskPage({
     const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       clickDoubleCombo(pl);
+      game.gameState.stateGame = 'doubleCombo';
       console.log('---combo---');
       console.log(game);
       setPlayerState((p) => ({ ...p }));
@@ -82,6 +84,7 @@ export default function DeskPage({
     const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       clickTripleCombo(pl);
+      game.gameState.stateGame = 'tripleCombo';
       console.log('---combo---');
       console.log(game);
       setPlayerState((p) => ({ ...p }));
@@ -92,6 +95,7 @@ export default function DeskPage({
     const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       clickFiveCombo(pl);
+      game.gameState.stateGame = 'fiveCombo';
       console.log('---combo---');
       console.log(game);
       setPlayerState((p) => ({ ...p }));
@@ -109,7 +113,7 @@ export default function DeskPage({
             <img src={infoCat} alt="info" />
           </div>
           <div className="game-info-messages">
-            <p>{game.gameState.message}</p>
+            <p>{ourMessage }</p>
           </div>
           <p className="game-info-timer">
             {game.gameState.timeLeft}
@@ -119,7 +123,7 @@ export default function DeskPage({
           <img
             src={cardBack}
             alt="deck"
-            onMouseDown={() => { setGame(takeCardDeskDeck.bind(null, game)); }}
+            onMouseDown={() => { setGame(takeCardDeskDeck(game)); }}
           />
           <p>
             Left
@@ -188,7 +192,8 @@ export default function DeskPage({
                 alt={el.name}
                 key={el.id}
                 onMouseDown={() => {
-                  setGame(makeMove(game, el.id));
+                  const myGame = makeMove(game, el.id);
+                  if (myGame !== null) setGame(myGame);
                 }}
                 className={el.nameCombo ? 'comboActive' : 'scaleCard'}
               />

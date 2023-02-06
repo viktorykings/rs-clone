@@ -3,6 +3,7 @@ import addHistory from './subevent/addHistory';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import findNextActivePlayer from './subevent/findNextActivePlayer';
 import getPause from '../game-loop/subevent/getPause';
+import clearNameCombo from '../statePlayerDeck/clearNameCombo';
 
 function endMove(game: IGame): IGame {
   const myGame = { ...game };
@@ -18,7 +19,7 @@ function endMove(game: IGame): IGame {
     myGame.players[indexPl].buttons.fiveVisible = false;
     myGame.players[indexPl].countTakeCard = 1;
     myGame.gameState.message = `${myGame.players[indexPl].name} закончил ход.`;
-
+    clearNameCombo(myGame.players[indexPl]);
     addHistory(myGame, 'endMove', [], true);
 
     myGame.gameState.playerTurn = findNextActivePlayer(myGame).name;
