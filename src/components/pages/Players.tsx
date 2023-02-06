@@ -9,7 +9,10 @@ interface Iplayer {
 export default function Player({ name, className }: Iplayer): JSX.Element {
   return (
     <div className={`player ${className}`}>
-      <p>{name}</p>
+      <div className="info">
+        <p>{name}</p>
+        {/* <button type="button">Take card!</button> */}
+      </div>
       <img src="" alt="player1" />
     </div>
   );

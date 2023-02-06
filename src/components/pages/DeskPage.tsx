@@ -140,41 +140,43 @@ export default function DeskPage({
           <button type="button" className="rebound-deck-controls">{'>'}</button>
         </div>
       </div>
-      <div className="main-player">
-        <Player name="main" className={gameState.playerTurn/* activePlayer */ === 'player1' ? 'activePlayer' : ''} />
-        <div className="control-buttons">
-          <button
-            type="button"
-            onClick={() => {
-              setGame(endMove(game));
-              // setActivePlayer(endMove(game).gameState.playerTurn);
-            }}
-            disabled={!game.players[0].buttons.finishMove}
-          >
-            end
-          </button>
-          <div className={game.players[0].buttons.comboEnabled ? 'combo-visible' : 'combo-hidden'}>
+      <div className="main-player" aria-disabled>
+        <div className="main-player-container">
+          <Player name="main" className={gameState.playerTurn === 'player1' ? 'activePlayer' : ''} />
+          <div className="control-buttons">
             <button
               type="button"
-              disabled={!game.players[0].buttons.dobleEnabled}
-              onClick={() => usedDoubleCombo()}
+              onClick={() => {
+                setGame(endMove(game));
+                // setActivePlayer(endMove(game).gameState.playerTurn);
+              }}
+              disabled={!game.players[0].buttons.finishMove}
             >
-              2x Combo
+              end
             </button>
-            <button
-              type="button"
-              disabled={!game.players[0].buttons.tripleEnabled}
-              onClick={() => usedTripleCombo()}
-            >
-              3x Combo
-            </button>
-            <button
-              type="button"
-              disabled={!game.players[0].buttons.fiveEnabled}
-              onClick={() => usedFiveCombo()}
-            >
-              5x Combo
-            </button>
+            <div className={game.players[0].buttons.comboEnabled ? 'combo-visible' : 'combo-hidden'}>
+              <button
+                type="button"
+                disabled={!game.players[0].buttons.dobleEnabled}
+                onClick={() => usedDoubleCombo()}
+              >
+                2x Combo
+              </button>
+              <button
+                type="button"
+                disabled={!game.players[0].buttons.tripleEnabled}
+                onClick={() => usedTripleCombo()}
+              >
+                3x Combo
+              </button>
+              <button
+                type="button"
+                disabled={!game.players[0].buttons.fiveEnabled}
+                onClick={() => usedFiveCombo()}
+              >
+                5x Combo
+              </button>
+            </div>
           </div>
         </div>
         <div className="main-player-cards">
