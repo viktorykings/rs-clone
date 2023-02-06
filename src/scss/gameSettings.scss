@@ -25,6 +25,9 @@
     }
   }
 }
+.start-btn {
+  margin-top: 12rem;
+}
 .add-bot {
   display: flex;
   gap: 20px;
@@ -55,6 +58,13 @@
     border: 10px solid;
     color: white;
     box-shadow: rgba(0, 0, 0, 1) 0px 25px 20px -20px;
+  }
+}
+.btn-groupe {
+  margin: 10px auto;
+  button {
+    margin: 0 10px;
+    width: 100px;
   }
 }
 .bot {
@@ -157,6 +167,14 @@
     transform: translateY(-90px);
     padding: 4rem 4rem;
   }
+  .modal-bot-level {
+    // color: hsl(80, 70%, 55%);
+    font-size: 4rem;
+    text-transform: uppercase;
+    transform: translateY(-70px) rotate(-15deg);
+    color: rgba(167, 221, 60, 1);
+    text-shadow: 16px 22px 11px rgba(167, 221, 60, 0.8);
+  }
 }
 
 .levels {
@@ -176,31 +194,35 @@
     background-position-x: center;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
-
-    // &:hover .easy {
-    //   box-shadow: 12px 12px 2px 1px rgba(2, 255, 15, 1);
-    //   cursor: pointer;
-    // }
   }
   .easy {
     background-image: url('../assets/levels/easy.jpg');
     &:hover {
-      box-shadow: 0px 0px 8px 6px rgba(2, 255, 15, 1);
+      box-shadow: 0px 0px 8px 6px rgba(2, 255, 15, 0.8);
       cursor: pointer;
+    }
+    &.active {
+      box-shadow: 0px 0px 10px 8px rgba(2, 255, 15, 1);
     }
   }
   .normal {
     background-image: url('../assets/levels/normal.jpg');
     &:hover {
-      box-shadow: 0px 0px 8px 6px rgb(255, 137, 2);
+      box-shadow: 0px 0px 8px 6px rgb(255, 137, 0.8);
       cursor: pointer;
+    }
+    &.active {
+      box-shadow: 0px 0px 10px 8px rgb(255, 137, 2);
     }
   }
   .hard {
     background-image: url('../assets/levels/hard.jpg');
     &:hover {
-      box-shadow: 0px 0px 8px 6px rgb(255, 2, 2);
+      box-shadow: 0px 0px 8px 6px rgb(255, 2, 0.8);
       cursor: pointer;
+    }
+    &.active {
+      box-shadow: 0px 0px 10px 8px rgb(255, 2, 2);
     }
   }
 }

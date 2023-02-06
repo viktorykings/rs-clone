@@ -22,6 +22,12 @@ interface IBotSettings {
 }
 
 export default function GameSettings() {
+  const [botLevel, setBotLevel] = useState('easy');
+
+  const updateBotLevel = (value: string) => {
+    setBotLevel(value);
+  };
+
   const botsNames = [
     'Diablo Gato',
     'Puss in Boots',
@@ -56,6 +62,17 @@ export default function GameSettings() {
 
   const [bots, setBots] = useState(DATA);
   // const [level, setLevel] = useState('easy');
+
+  const setGameLevel = (value: string) => {
+    const editedBots = bots.map((bot) => {
+      if (value) {
+        return { ...bot, levelBot: value };
+      }
+      return bot;
+    });
+
+    setBots(editedBots);
+  };
 
   const deleteBot = useCallback(
     (namePLayer: string) => {
@@ -120,9 +137,9 @@ export default function GameSettings() {
 
     const newBot: IBotSettings = {
       name: newBotName,
-      levelBot: 'easy',
-      link: newLink,
       isBot: true,
+      link: newLink,
+      levelBot: 'easy',
     };
     setBots([...bots, newBot]);
   }
@@ -132,6 +149,7 @@ export default function GameSettings() {
   // };
 
   function createBots(items: IBotSettings[]): void {
+    console.log(bots);
     const result = items.reduce((acc: IPlayer[], cur) => {
       const [n, isB, lnk, lvl] = [...Object.values(cur)];
       acc.push(createPlayer(n, isB, lnk, lvl));
@@ -142,14 +160,19 @@ export default function GameSettings() {
 
   return (
     <div className="settings">
-      <ModalBot title="Choose level" />
+      <ModalBot
+        title="Choose level"
+        level={botLevel}
+        updateLevel={updateBotLevel}
+        setGameLevel={setGameLevel}
+      />
       <h1>Game Settings</h1>
 
       <div className="wrap-players">
         <div className="bot-settings">
           <form onSubmit={handleSubmit}>
             <h2>Add Bot</h2>
-
+            <p>{botLevel}</p>
             <div className="add-bot">
               {/* <input
                 type="text"
@@ -197,7 +220,11 @@ export default function GameSettings() {
           />
         </div>
       </div>
-      <button type="button" className="btn" onClick={() => createBots(bots)}>
+      <button
+        type="button"
+        className="start-btn btn"
+        onClick={() => createBots(bots)}
+      >
         Start Game
       </button>
       <button
