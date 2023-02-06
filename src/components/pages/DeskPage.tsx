@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React/* , { useState } */ from 'react';
+import React, { useState }/* , { useState } */ from 'react';
 import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
 import endMove from '../../controller/game-event/endMove';
@@ -25,9 +25,10 @@ export default function DeskPage({
     showCards,
     gameState,
   };
-  // const [currentCard, 
+  // const [currentCard,
   // ] = useState(-1);
   // const [activePlayer, setActivePlayer] = useState(game.gameState.playerTern);
+  const [combos, setCombos] = useState(game.players[0].combos);
   const [activeRebound, setActiveRebound] = useState(false);
   function clearNameCombo(player: IPlayer): void {
     player.deck.map((el) => {
@@ -38,11 +39,12 @@ export default function DeskPage({
   }
   function clickDoubleCombo(player: IPlayer): IPlayer {
     clearNameCombo(player);
+    // combos.doubleCats.map((cr, ind) => cr.map((el) => {
     player.combos.doubleCats.map((cr, ind) => cr.map((el) => {
       // eslint-disable-next-line no-param-reassign
       el.nameCombo = String(ind); return null;
     }));
-    console.log(player);
+    console.log(combos);
     return player;
   }
   function clickTripleCombo(player: IPlayer): IPlayer {
@@ -66,17 +68,16 @@ export default function DeskPage({
     return player;
   }
   const usedDoubleCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTern);
+    let pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       pl = clickDoubleCombo(pl);
-      game.players[0] = pl;
       console.log('---combo---');
       console.log(game);
-      setGame(game);
+      setCombos(game.players[0].combos);
     }
   };
   const usedTripleCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTern);
+    let pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       pl = clickTripleCombo(pl);
       game.players[0] = pl;
@@ -86,10 +87,9 @@ export default function DeskPage({
     }
   };
   const usedFiveCombo = () => {
-    let pl = game.players.find((p) => p.name === game.gameState.playerTern);
+    let pl = game.players.find((p) => p.name === game.gameState.playerTurn);
     if (pl !== undefined) {
       pl = clickFiveCombo(pl);
-      game.players[0] = pl;
       console.log('---combo---');
       console.log(game);
       setGame(game);
