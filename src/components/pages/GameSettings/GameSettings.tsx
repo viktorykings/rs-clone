@@ -4,6 +4,15 @@ import createPlayer from '../../../controller/createPlayer';
 import IPlayer from '../../../interface/IPlayer';
 import MainPlayer from './MainPlayer';
 
+import av0 from '../../../assets/avCats/av0.png';
+import av1 from '../../../assets/avCats/av1.png';
+import av2 from '../../../assets/avCats/av2.png';
+import av3 from '../../../assets/avCats/av3.png';
+import av4 from '../../../assets/avCats/av4.png';
+import av5 from '../../../assets/avCats/av5.png';
+import av6 from '../../../assets/avCats/av6.png';
+import av7 from '../../../assets/avCats/av7.png';
+
 interface IBotSettings {
   name: string;
   isBot: boolean;
@@ -23,6 +32,13 @@ export default function GameSettings() {
     'bot 8',
     'bot 9',
   ];
+  const avCats = [av0, av1, av2, av3, av4, av5, av6, av7];
+  const getRandomBotAvatar = (): string => {
+    const avatar = avCats[Math.floor(Math.random() * avCats.length)];
+
+    return avatar;
+  };
+
   const getRandomBotName = (): string => {
     const name = botsNames[Math.floor(Math.random() * botsNames.length)];
 
@@ -32,15 +48,9 @@ export default function GameSettings() {
     {
       name: getRandomBotName(),
       isBot: true,
-      link: '',
+      link: getRandomBotAvatar(),
       levelBot: 'easy',
     },
-    // {
-    //   name: getBotName(botsNames),
-    //   isBot: true,
-    //   link: '',
-    //   levelBot: 'easy',
-    // },
   ];
 
   const [bots, setBots] = useState(DATA);
@@ -48,7 +58,7 @@ export default function GameSettings() {
 
   const deleteBot = useCallback(
     (namePLayer: string) => {
-      if (bots.length > 2) {
+      if (bots.length > 1) {
         const remainingBots = bots.filter((bot) => namePLayer !== bot.name);
         setBots(remainingBots);
       }
@@ -79,6 +89,17 @@ export default function GameSettings() {
   function isBotNameExist(name: string) {
     return (bots.find((bot) => bot.name === name) && true) || false;
   }
+  function isBotAvatarExist(link: string) {
+    return (bots.find((bot) => bot.link === link) && true) || false;
+  }
+  function getBotAvatar(): string {
+    let result = getRandomBotAvatar();
+
+    while (isBotAvatarExist(result)) {
+      result = getRandomBotAvatar();
+    }
+    return result;
+  }
   function getBotName(): string {
     let result = getRandomBotName();
 
@@ -94,11 +115,12 @@ export default function GameSettings() {
       return;
     }
     const newBotName = getBotName();
+    const newLink = getBotAvatar();
 
     const newBot: IBotSettings = {
       name: newBotName,
       levelBot: 'easy',
-      link: '',
+      link: newLink,
       isBot: true,
     };
     setBots([...bots, newBot]);
@@ -124,6 +146,7 @@ export default function GameSettings() {
   return (
     <div className="settings">
       <h1>Game Settings</h1>
+
       <div className="wrap-players">
         <div className="bot-settings">
           <form onSubmit={handleSubmit}>
@@ -155,6 +178,7 @@ export default function GameSettings() {
                 <Bot
                   name={player.name}
                   level={player.levelBot}
+                  link={player.link}
                   key={player.name}
                   isBot={player.isBot}
                   deletePlayer={deleteBot}

@@ -3,6 +3,7 @@ import React from 'react';
 export interface IBotProps {
   name: string;
   isBot: boolean;
+  link: string;
   level: string;
   deletePlayer: (name: string) => void;
   // editPlayer: (newName: string, name: string, level: string) => void;
@@ -12,6 +13,7 @@ export interface IBotProps {
 export default function Bot({
   name,
   isBot = true,
+  link,
   level,
   deletePlayer,
   // editPlayer,
@@ -41,6 +43,7 @@ export default function Bot({
       <div className="bot">
         <div className="bot-avatar" />
         <p className="bot-name">{name}</p>
+
         {isBot && <p className="bot-lavel hidden">{level}</p>}
       </div>
       <div className="btn-group">
@@ -58,7 +61,14 @@ export default function Bot({
   );
 
   return (
-    <li style={{ borderColor: brdrColor }} className="list-item">
+    <li
+      style={{
+        borderColor: brdrColor,
+
+        backgroundImage: `url(${link})`,
+      }}
+      className="list-item"
+    >
       {viewTemplate}
     </li>
   );
