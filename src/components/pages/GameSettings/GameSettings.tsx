@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import PlayerSettings from './PlayerSettings';
+import Bot from './Bot';
 import createPlayer from '../../../controller/createPlayer';
 import IPlayer from '../../../interface/IPlayer';
+import MainPlayer from './MainPlayer';
 
-interface IPlayerSettings {
+interface IBotSettings {
   name: string;
   isBot: boolean;
   link: string;
@@ -11,132 +12,170 @@ interface IPlayerSettings {
 }
 
 export default function GameSettings() {
-  const DATA: IPlayerSettings[] = [
+  const botsNames = [
+    'bot 1',
+    'bot 2',
+    'bot 3',
+    'bot 4',
+    'bot 5',
+    'bot 6',
+    'bot 7',
+    'bot 8',
+    'bot 9',
+  ];
+  const getRandomBotName = (): string => {
+    const name = botsNames[Math.floor(Math.random() * botsNames.length)];
+
+    return name;
+  };
+  const DATA: IBotSettings[] = [
     {
-      name: 'Main Player',
-      isBot: false,
-      link: '',
-      levelBot: 'hard',
-    },
-    {
-      name: 'Player 1',
+      name: getRandomBotName(),
       isBot: true,
       link: '',
       levelBot: 'easy',
     },
-    {
-      name: 'Player 2',
-      isBot: true,
-      link: '',
-      levelBot: 'hard',
-    },
+    // {
+    //   name: getBotName(botsNames),
+    //   isBot: true,
+    //   link: '',
+    //   levelBot: 'easy',
+    // },
   ];
 
-  const [name, setName] = useState('Enter Player Name...');
-  const [players, setPlayers] = useState(DATA);
-  const [level, setLevel] = useState('easy');
+  const [bots, setBots] = useState(DATA);
+  // const [level, setLevel] = useState('easy');
 
-  const deletePlayer = useCallback(
+  const deleteBot = useCallback(
     (namePLayer: string) => {
-      if (players.length > 2) {
-        const remainingPLayers = players.filter(
-          (player) => namePLayer !== player.name,
-        );
-        setPlayers(remainingPLayers);
+      if (bots.length > 2) {
+        const remainingBots = bots.filter((bot) => namePLayer !== bot.name);
+        setBots(remainingBots);
       }
     },
-    [players],
+    [bots],
   );
 
-  const editNamePLayer = useCallback(
+  const editNameBot = useCallback(
     (newName: string, namePlayer: string, newLevel: string) => {
-      const editedPlayers = players.map((player) => {
-        console.log(namePlayer === player.name);
-        if (namePlayer === player.name) {
-          return { ...player, name: newName, levelBot: newLevel };
+      const editedBots = bots.map((bot) => {
+        console.log(namePlayer === bot.name);
+        if (namePlayer === bot.name) {
+          return { ...bot, name: newName, levelBot: newLevel };
         }
-        return player;
+        return bot;
       });
 
-      setPlayers(editedPlayers);
+      setBots(editedBots);
     },
-    [players],
+    [bots],
   );
 
-  // Add New PLayer
+  const getRandomColor = useCallback(() => {
+    const color = Math.floor(Math.random() * 16777215).toString(16);
+    return `#${color}`;
+  }, []);
+
+  function isBotNameExist(name: string) {
+    return (bots.find((bot) => bot.name === name) && true) || false;
+  }
+  function getBotName(): string {
+    let result = getRandomBotName();
+
+    while (isBotNameExist(result)) {
+      result = getRandomBotName();
+    }
+    return result;
+  }
+  // Add New Bot
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (players.length >= 5) {
+    if (bots.length >= 4) {
       return;
     }
-    const newPlayer: IPlayerSettings = {
-      name: `${name}`,
-      levelBot: `${level}`,
+    const newBotName = getBotName();
+
+    const newBot: IBotSettings = {
+      name: newBotName,
+      levelBot: 'easy',
       link: '',
       isBot: true,
     };
-    setPlayers([...players, newPlayer]);
+    setBots([...bots, newBot]);
   }
 
-  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLevel(e.target.value);
-  };
+  // const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setLevel(e.target.value);
+  // };
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setName(e.target.value);
-  }
+  // function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   setName(e.target.value);
+  // }
 
-  function createPlayers(items: IPlayerSettings[]): void {
+  function createBots(items: IBotSettings[]): void {
     const result = items.reduce((acc: IPlayer[], cur) => {
       const [n, isB, lnk, lvl] = [...Object.values(cur)];
       acc.push(createPlayer(n, isB, lnk, lvl));
       return acc;
     }, []);
-    console.log(result);
+    console.log('Create players: ', result);
   }
 
   return (
     <div className="settings">
       <h1>Game Settings</h1>
-      <form onSubmit={handleSubmit}>
-        <h2>Add New Player</h2>
-        <input
-          type="text"
-          id="new-player-input"
-          className="input"
-          name="text"
-          autoComplete="off"
-          value={name}
-          onChange={handleChange}
-        />
-        <select value={level} onChange={handleChangeSelect}>
-          <option value="Easy">Easy</option>
-          <option value="Normal">Normal</option>
-          <option value="Hard">Hard</option>
-        </select>
-        <button type="submit" className="btn">
-          Add
-        </button>
-      </form>
-      <h3>List Of Players</h3>
-      <ul className="list">
-        {players.map((player) => (
-          <PlayerSettings
-            name={player.name}
-            level={player.levelBot}
-            key={player.name}
-            isBot={player.isBot}
-            deletePlayer={deletePlayer}
-            editPlayer={editNamePLayer}
+      <div className="wrap-players">
+        <div className="bot-settings">
+          <form onSubmit={handleSubmit}>
+            <h2>Add Bot</h2>
+            <div className="add-bot">
+              {/* <input
+                type="text"
+                id="new-player-input"
+                className="input"
+                name="text"
+                autoComplete="off"
+                value={name}
+                onChange={handleChange}
+              /> */}
+              {/* <select value={level} onChange={handleChangeSelect}>
+                <option value="Easy">Easy</option>
+                <option value="Normal">Normal</option>
+                <option value="Hard">Hard</option>
+              </select> */}
+              <button type="submit" className="btn">
+                Add
+              </button>
+            </div>
+          </form>
+          <ul className="list">
+            {bots.map((player) => {
+              const bdrcolor = getRandomColor();
+              return (
+                <Bot
+                  name={player.name}
+                  level={player.levelBot}
+                  key={player.name}
+                  isBot={player.isBot}
+                  deletePlayer={deleteBot}
+                  // editPlayer={editNamePLayer}
+                  brdrColor={bdrcolor}
+                />
+              );
+            })}
+          </ul>
+        </div>
+        <div className="player-settings">
+          <MainPlayer
+            name="DON LOKAILO"
+            isBot={false}
+            level=""
+            editPlayer={editNameBot}
           />
-        ))}
-      </ul>
-      <button
-        type="button"
-        className="btn"
-        onClick={() => createPlayers(players)}
-      >
-        Done
+        </div>
+      </div>
+      <button type="button" className="btn" onClick={() => createBots(bots)}>
+        Start Game
       </button>
       <button
         type="button"

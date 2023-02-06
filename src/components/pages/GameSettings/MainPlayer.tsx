@@ -1,21 +1,20 @@
-// import { setegid } from 'process';
 import React, { useState } from 'react';
 
-export interface IPlayerProps {
+export interface IMainPlayer {
   name: string;
   isBot: boolean;
   level: string;
-  deletePlayer: (name: string) => void;
+
   editPlayer: (newName: string, name: string, level: string) => void;
 }
 
-export default function PlayerSettings({
+export default function MainPlayer({
   name,
   isBot,
   level,
-  deletePlayer,
+  // deletePlayer,
   editPlayer,
-}: IPlayerProps) {
+}: IMainPlayer) {
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState('');
   const [newLevel, setNewLevel] = useState('easy');
@@ -70,12 +69,11 @@ export default function PlayerSettings({
   );
 
   const viewTemplate = (
-    <>
-      <div className="player">
-        <div className="player-avatar" />
-        <p className="player-name">{name}</p>
-        {isBot && <p className="player-lavel">{level}</p>}
-      </div>
+    <div className="human-player">
+      <p className="human-player-name">{name}</p>
+      <div className="human-avatar" />
+      {isBot && <p className="player-lavel">{level}</p>}
+
       <div className="btn-group">
         <button
           type="button"
@@ -84,22 +82,24 @@ export default function PlayerSettings({
             setEditing(true);
           }}
         >
-          Edit
+          Edit Name
         </button>
-        {isBot && (
-          <button
-            type="button"
-            className="btn"
-            onClick={() => deletePlayer(name)}
-          >
-            Delete
-          </button>
-        )}
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            setEditing(true);
+          }}
+        >
+          Choose Avatar
+        </button>
       </div>
-    </>
+    </div>
   );
 
   return (
-    <li className="list-item">{isEditing ? editingTemplate : viewTemplate}</li>
+    <div className="list-item">
+      {isEditing ? editingTemplate : viewTemplate}
+    </div>
   );
 }
