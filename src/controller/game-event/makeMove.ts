@@ -8,7 +8,11 @@ import startStateDeck from '../statePlayerDeck/startStateDeck';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
 // import ICard from '../../interface/ICard';
 
-function makeMove(game: IGame, idCard: number): IGame {
+function makeMove(
+  game: IGame,
+  idCard: number,
+  // setOurMessage: React.Dispatch<React.SetStateAction<string>>,
+): IGame | null {
   // console.log('make move');
   const myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
@@ -61,11 +65,15 @@ function makeMove(game: IGame, idCard: number): IGame {
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = nextPl.isBot ? botWaitAnswer : playerWaitTurn;
     }
+  } else {
+    myGame.gameState.message = 'Картами котов можно ходить только через режим Combo';
+    // setOurMessage('Картами котов можно ходить только через режим Combo');
+    return null;
   }
   /* if (myGame.gameState.stateGame === 'endTern') {
     myGame = endMove(myGame);
   } */
-  console.log(myGame);
+  // console.log(myGame);
   return myGame;
 }
 

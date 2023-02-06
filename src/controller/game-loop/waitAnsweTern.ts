@@ -31,6 +31,7 @@ function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction
       default: break;
     }
     myGame.gameState.typeTern = null;
+    myGame.reboundDeck.push(...myGame.showCards.splice(0));
   }
 
   setGame(myGame);

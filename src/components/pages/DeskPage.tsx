@@ -30,6 +30,11 @@ export default function DeskPage({
   // ] = useState(-1);
   // const [activePlayer, setActivePlayer] = useState(game.gameState.playerTern);
   const [activeRebound, setActiveRebound] = useState(false);
+  // const [ourPlayers, setOurPlayers] = useState(players);
+  const [ourMessage, setOurMessage] = useState(game.gameState.message);
+  // const [ourTimeLeft, setOurTimeLeft] = useState(20);
+  if (ourMessage !== game.gameState.message) setOurMessage(game.gameState.message);
+  // setOurTimeLeft(game.gameState.timeLeft);
 
   function clickDoubleCombo(player: IPlayer): IPlayer {
     clearNameCombo(player);
@@ -105,7 +110,7 @@ export default function DeskPage({
             <img src={infoCat} alt="info" />
           </div>
           <div className="game-info-messages">
-            <p>{game.gameState.message}</p>
+            <p>{ourMessage }</p>
           </div>
           <p className="game-info-timer">
             {game.gameState.timeLeft}
@@ -182,7 +187,8 @@ export default function DeskPage({
                 alt={el.name}
                 key={el.id}
                 onMouseDown={() => {
-                  setGame(makeMove(game, el.id));
+                  const myGame = makeMove(game, el.id);
+                  if (myGame !== null) setGame(myGame);
                   // setCurrentCard(el.id);
                   // console.log(currentCard, el.id);
                 }}
