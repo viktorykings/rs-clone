@@ -26,8 +26,6 @@ export default function DeskPage({
     showCards,
     gameState,
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
-  // const [decks, setDecks] = useState(game.players[0].deck);
-  console.log('functionState', game.gameState.functionState);
   const [playerState, setPlayerState] = useState(game.players);
   const [activeRebound, setActiveRebound] = useState(false);
   const ourMessage = game.gameState.message;
@@ -38,6 +36,7 @@ export default function DeskPage({
       return null;
     });
   }, []);
+
   const checkFunctionState = () => {
     const state = game.gameState.functionState;
     return state === 'waitCombo2' || state === 'waitCombo3' || state === 'waitCombo5';
@@ -82,7 +81,7 @@ export default function DeskPage({
       game.gameState.stateGame = 'doubleCombo';
       console.log('---combo---');
       console.log(game);
-      setPlayerState((p) => ({ ...p }));
+      setPlayerState((p) => ([...p]));
     }
   }, [clickDoubleCombo, game]);
 
@@ -93,7 +92,7 @@ export default function DeskPage({
       game.gameState.stateGame = 'tripleCombo';
       console.log('---combo---');
       console.log(game);
-      setPlayerState((p) => ({ ...p }));
+      setPlayerState((p) => ([...p]));
     }
   }, [clickTripleCombo, game]);
 
@@ -104,7 +103,7 @@ export default function DeskPage({
       game.gameState.stateGame = 'fiveCombo';
       console.log('---combo---');
       console.log(game);
-      setPlayerState((p) => ({ ...p }));
+      setPlayerState((p) => ([...p]));
     }
   }, [clickFiveCombo, game]);
 
