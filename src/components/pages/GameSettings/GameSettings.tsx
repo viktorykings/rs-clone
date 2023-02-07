@@ -61,6 +61,7 @@ export default function GameSettings() {
   ];
 
   const [bots, setBots] = useState(DATA);
+  const [modal, setModal] = useState(true);
   // const [level, setLevel] = useState('easy');
 
   const setGameLevel = (value: string) => {
@@ -160,12 +161,15 @@ export default function GameSettings() {
 
   return (
     <div className="settings">
-      <ModalBot
-        title="Choose level"
-        level={botLevel}
-        updateLevel={updateBotLevel}
-        setGameLevel={setGameLevel}
-      />
+      {modal && (
+        <ModalBot
+          title="Choose level"
+          level={botLevel}
+          updateLevel={updateBotLevel}
+          setGameLevel={setGameLevel}
+          onSetLevel={() => setModal(false)}
+        />
+      )}
       <h1>Game Settings</h1>
 
       <div className="wrap-players">
@@ -210,6 +214,11 @@ export default function GameSettings() {
               );
             })}
           </ul>
+          <div className="choose-level">
+            <button type="button" onClick={() => setModal(true)}>
+              CHOOSE GAME LEVEL
+            </button>
+          </div>
         </div>
         <div className="player-settings">
           <MainPlayer

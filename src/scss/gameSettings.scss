@@ -37,7 +37,6 @@
 
   margin: 0 auto;
   padding: 1em;
-  border: 1px solid #ccc;
 
   .list-item:hover .bot-name {
     transform: perspective(800px) rotateY(-15deg) translateY(-50px)
@@ -106,11 +105,9 @@
 }
 .bot-settings {
   width: 60%;
-  border: 1px solid #ccc;
 }
 .player-settings {
   width: 40%;
-  border: 1px solid #ccc;
 }
 .human-player {
   .btn-group {
@@ -225,4 +222,26 @@
       box-shadow: 0px 0px 10px 8px rgb(255, 2, 2);
     }
   }
+}
+.choose-level {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    font-size: 3rem;
+
+    &:hover {
+      background-color: orangered;
+    }
+  }
+}
+.wrap-modal {
+  z-index: 50;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0, 0.5);
 }
