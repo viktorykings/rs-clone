@@ -9,7 +9,7 @@ function combo2AutoCardGive(
   const indPl = findIndexPlayerTern(game.players, game.gameState.playerTurn);
   const len = game.players[indPl].deck.length;
   const indCard = Math.floor(Math.random() * len);
-  const myGame = combo2GiveCard(game, indCard);
+  const myGame = combo2GiveCard(game, game.players[indPl].deck[indCard].id);
   setGame(myGame);
 }
 

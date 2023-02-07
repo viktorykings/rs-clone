@@ -12,7 +12,7 @@ function combo3AutoCardGive(
       || (cr.type >= 8 && game.gameState.modalTypeCard !== null
           && game.gameState.modalTypeCard >= 8),
   );
-  const myGame = combo3GiveCard(game, indCard);
+  const myGame = combo3GiveCard(game, game.players[indPlGive].deck[indCard].id);
   setGame(myGame);
 }
 

@@ -9,6 +9,7 @@ import moveMix from '../game-event/subevent/moveMix';
 import moveLook from '../game-event/subevent/moveLook';
 import combo2Start from './combo2Start';
 import combo3Start from './combo3Start';
+import combo5Start from './combo5Start';
 
 function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction<IGame>>): void {
   let myGame = { ...game };
@@ -37,7 +38,7 @@ function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction
       case 12:
         if (myGame.gameState.stateGame === 'doubleCombo') myGame = combo2Start(myGame);
         if (myGame.gameState.stateGame === 'tripleCombo') myGame = combo3Start(myGame);
-        if (myGame.gameState.stateGame === 'fiveCombo') myGame.gameState.functionState = 'waitCombo5';
+        if (myGame.gameState.stateGame === 'fiveCombo') myGame = combo5Start(myGame);
         break;
       default: break;
     }
