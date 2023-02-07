@@ -31,6 +31,10 @@ function createGame(players: IPlayer [] = []): IGame {
     playerWaitAnswer: '',
     message: '',
     history: [],
+    modalPlayers: [],
+    modalDeck: [],
+    modalTitle: '',
+    modalMessage: '',
   };
 
   return {

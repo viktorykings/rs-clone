@@ -1,5 +1,7 @@
 import IGame from '../../interface/IGame';
 import findIndexPlayerTern from '../game-event/subevent/findIndexPlayerTern';
+import combo2AutoCardGive from './subevent/combo2AutoCartGive';
+import combo2AutoPlayerChoise from './subevent/combo2AutoChoisePlayer';
 import waitAnserTurn from './waitAnsweTern';
 import waitEndMove from './waitEndMove';
 import waitPlayerTurn from './waitPlayerTurn';
@@ -18,7 +20,16 @@ function mainGameLoop(
       myGame.gameState.timerId = null;
     }
 
-    if (funcState === 'waitPlayerTurn' || funcState === 'waitTakeCardDeskDeck') {
+    switch (funcState) {
+      case 'waitPlayerTurn':
+      case 'waitTakeCardDeskDeck': waitPlayerTurn(myGame, setGame); return;
+      case 'waitEndMove': waitEndMove(myGame, setGame); return;
+      case 'waitAnserTurn': waitAnserTurn(myGame, setGame); return;
+      case 'waitCombo2': combo2AutoPlayerChoise(myGame, setGame); return;
+      case 'waitPlayerCombo2': combo2AutoCardGive(myGame, setGame); return;
+      default: return;
+    }
+    /* if (funcState === 'waitPlayerTurn' || funcState === 'waitTakeCardDeskDeck') {
       waitPlayerTurn(myGame, setGame);
       return;
     }
@@ -31,7 +42,7 @@ function mainGameLoop(
     if (funcState === 'waitAnserTurn') {
       waitAnserTurn(myGame, setGame);
       return;
-    }
+    } */
   }
 
   if (myGame.gameState.functionState === 'waitAnserTurn'
@@ -39,6 +50,20 @@ function mainGameLoop(
     && myGame.players[inPl].isBot) {
     // вызов функции хода бота
     console.log('Bot maybe do move NOT');
+  }
+
+  if (myGame.gameState.functionState === 'waitCombo2'
+    && myGame.gameState.timeLeft === 4
+    && myGame.players[inPl].isBot) {
+    // вызов функции бота выбора игрока для Космбо2
+    console.log('Bot maybe choise player');
+  }
+
+  if (myGame.gameState.functionState === 'waitPlayerCombo2'
+    && myGame.gameState.timeLeft === 4
+    && myGame.players[inPl].isBot) {
+    // вызов функции бота выбора игрока для Космбо2
+    console.log('Bot maybe choise card');
   }
 
   if (myGame.gameState.functionState === 'waitPlayerTurn'
