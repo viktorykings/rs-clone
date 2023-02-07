@@ -3,6 +3,9 @@ import Bot from './Bot';
 import createPlayer from '../../../controller/createPlayer';
 import IPlayer from '../../../interface/IPlayer';
 import MainPlayer from './MainPlayer';
+import ModalBot from './ModalBot';
+import ModalChangeName from './ModalChangeName';
+// import ModalChangeAvatar from './ModalChangeAvatar';
 
 import av0 from '../../../assets/avCats/av0.png';
 import av1 from '../../../assets/avCats/av1.png';
@@ -12,7 +15,6 @@ import av4 from '../../../assets/avCats/av4.png';
 import av5 from '../../../assets/avCats/av5.png';
 import av6 from '../../../assets/avCats/av6.png';
 import av7 from '../../../assets/avCats/av7.png';
-import ModalBot from './ModalBot';
 
 interface IBotSettings {
   name: string;
@@ -20,6 +22,7 @@ interface IBotSettings {
   link: string;
   levelBot: string;
 }
+const { log } = console;
 
 export default function GameSettings() {
   const [botLevel, setBotLevel] = useState('easy');
@@ -59,10 +62,24 @@ export default function GameSettings() {
       levelBot: 'easy',
     },
   ];
+  const dataMainPlayer: IBotSettings[] = [
+    {
+      name: 'Don Lokailo',
+      isBot: false,
+      link: '',
+      levelBot: 'easy',
+    },
+  ];
 
   const [bots, setBots] = useState(DATA);
-  const [modal, setModal] = useState(true);
-  // const [level, setLevel] = useState('easy');
+
+  const [nameMainPlayer, setMainPlayer] = useState(dataMainPlayer[0].name);
+  const updateMainPlayer = (value: string) => {
+    setMainPlayer(value);
+  };
+
+  const [modal, setModal] = useState(false);
+  const [modlChangeName, setModalChangeName] = useState(true);
 
   const setGameLevel = (value: string) => {
     const editedBots = bots.map((bot) => {
@@ -81,21 +98,6 @@ export default function GameSettings() {
         const remainingBots = bots.filter((bot) => namePLayer !== bot.name);
         setBots(remainingBots);
       }
-    },
-    [bots],
-  );
-
-  const editNameBot = useCallback(
-    (newName: string, namePlayer: string, newLevel: string) => {
-      const editedBots = bots.map((bot) => {
-        console.log(namePlayer === bot.name);
-        if (namePlayer === bot.name) {
-          return { ...bot, name: newName, levelBot: newLevel };
-        }
-        return bot;
-      });
-
-      setBots(editedBots);
     },
     [bots],
   );
@@ -145,18 +147,14 @@ export default function GameSettings() {
     setBots([...bots, newBot]);
   }
 
-  // const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setLevel(e.target.value);
-  // };
-
   function createBots(items: IBotSettings[]): void {
-    console.log(bots);
+    log(bots);
     const result = items.reduce((acc: IPlayer[], cur) => {
       const [n, isB, lnk, lvl] = [...Object.values(cur)];
       acc.push(createPlayer(n, isB, lnk, lvl));
       return acc;
     }, []);
-    console.log('Create players: ', result);
+    log('Create players: ', result);
   }
 
   return (
@@ -175,23 +173,9 @@ export default function GameSettings() {
       <div className="wrap-players">
         <div className="bot-settings">
           <form onSubmit={handleSubmit}>
-            <h2>Add Bot</h2>
-            <p>{botLevel}</p>
+            <h2>Bad Kittings</h2>
+            <p className="game-level">{botLevel}</p>
             <div className="add-bot">
-              {/* <input
-                type="text"
-                id="new-player-input"
-                className="input"
-                name="text"
-                autoComplete="off"
-                value={name}
-                onChange={handleChange}
-              /> */}
-              {/* <select value={level} onChange={handleChangeSelect}>
-                <option value="Easy">Easy</option>
-                <option value="Normal">Normal</option>
-                <option value="Hard">Hard</option>
-              </select> */}
               <button type="submit" className="btn">
                 Add a kitten
               </button>
@@ -208,7 +192,6 @@ export default function GameSettings() {
                   key={player.name}
                   isBot={player.isBot}
                   deletePlayer={deleteBot}
-                  // editPlayer={editNamePLayer}
                   brdrColor={bdrcolor}
                 />
               );
@@ -221,11 +204,19 @@ export default function GameSettings() {
           </div>
         </div>
         <div className="player-settings">
+          {modlChangeName && (
+            <ModalChangeName
+              title="Change Name"
+              updateName={updateMainPlayer}
+              onChangeName={() => setModalChangeName(false)}
+            />
+          )}
+          {/* <ModalChangeAvatar title="Change Avatar" /> */}
           <MainPlayer
-            name="DON LOKAILO"
+            name={nameMainPlayer}
             isBot={false}
             level=""
-            editPlayer={editNameBot}
+            openModal={() => setModalChangeName(true)}
           />
         </div>
       </div>

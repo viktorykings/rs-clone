@@ -21,8 +21,8 @@ export default function ModalBot({
   }
   return (
     <div className="wrap-modal">
-      <div className="modal-bot">
-        <h1 className="modal-bot-title">{title}</h1>
+      <div className="modal">
+        <h1 className="modal-title">{title}</h1>
         <h3 className="modal-bot-level">{level}</h3>
         <div className="levels">
           <div
