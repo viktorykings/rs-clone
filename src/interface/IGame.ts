@@ -26,6 +26,7 @@ interface IGame {
     modalDeck: ICard [],
     modalTitle: string,
     modalMessage: string,
+    modalTypeCard: number | null,
   }
 }
 export interface Setter extends IGame {

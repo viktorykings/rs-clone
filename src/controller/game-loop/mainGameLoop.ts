@@ -2,6 +2,8 @@ import IGame from '../../interface/IGame';
 import findIndexPlayerTern from '../game-event/subevent/findIndexPlayerTern';
 import combo2AutoCardGive from './subevent/combo2AutoCartGive';
 import combo2AutoPlayerChoise from './subevent/combo2AutoChoisePlayer';
+import combo3AutoChoise from './subevent/combo3AutoChoise';
+import combo3AutoCardGive from './subevent/combo3AutoCartGive';
 import waitAnserTurn from './waitAnsweTern';
 import waitEndMove from './waitEndMove';
 import waitPlayerTurn from './waitPlayerTurn';
@@ -27,6 +29,8 @@ function mainGameLoop(
       case 'waitAnserTurn': waitAnserTurn(myGame, setGame); return;
       case 'waitCombo2': combo2AutoPlayerChoise(myGame, setGame); return;
       case 'waitPlayerCombo2': combo2AutoCardGive(myGame, setGame); return;
+      case 'waitCombo3': combo3AutoChoise(myGame, setGame); return;
+      case 'waitPlayerCombo3': combo3AutoCardGive(myGame, setGame); return;
       default: return;
     }
     /* if (funcState === 'waitPlayerTurn' || funcState === 'waitTakeCardDeskDeck') {
@@ -64,6 +68,13 @@ function mainGameLoop(
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для Космбо2
     console.log('Bot maybe choise card');
+  }
+
+  if (myGame.gameState.functionState === 'waitCombo3'
+    && myGame.gameState.timeLeft === 4
+    && myGame.players[inPl].isBot) {
+    // вызов функции бота выбора игрока и типа карты для Космбо3
+    console.log('Bot maybe choise player and type card');
   }
 
   if (myGame.gameState.functionState === 'waitPlayerTurn'
