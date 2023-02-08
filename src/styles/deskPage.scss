@@ -20,6 +20,9 @@ body {
   margin: 0 auto;
   background-color: $main-red;
 }
+button{
+  cursor: pointer;
+}
 
 .desk{
   overflow: hidden;
@@ -254,11 +257,24 @@ body {
   background-color: $main-red;
   color: $text-color;
   border-radius: 30px;
-  &players{
+  .players{
     display: flex;
     justify-content: center;
     height: 50px;
     width: 700px;
+    margin: 0 auto;
+    button{
+      height: 50px;
+      width: 90px;
+      margin: 10px;
+      background-color: transparent;
+      border: 2px solid $highlights;
+      border-radius: 10px;
+      transition: background-color .5s ease;
+    }
+    button:hover{
+      background-color: rgba(255, 255, 255, 0.5);
+    }
   }
   .players-cards-active{
     margin: 0 auto;

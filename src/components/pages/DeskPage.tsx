@@ -145,10 +145,10 @@ export default function DeskPage({
     }
   };
   const showNextRebound = () => {
-    setTranslateRebound(translateRebound - 240);
+    setTranslateRebound(translateRebound - 160);
   };
   const showPrevRebound = () => {
-    setTranslateRebound(translateRebound + 240);
+    setTranslateRebound(translateRebound + 160);
   };
 
   return (
@@ -259,6 +259,7 @@ export default function DeskPage({
                   onMouseDown={() => {
                     const myGame = makeMove(game, el.id);
                     if (myGame !== null) setGame(myGame);
+                    setPlayerState([...game.players]);
                   }}
                   className={el.nameCombo ? 'comboActive' : 'scaleCard'}
                 />
