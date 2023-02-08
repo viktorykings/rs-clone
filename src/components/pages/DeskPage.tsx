@@ -11,6 +11,7 @@ import infoCat from '../../assets/info-cat.png';
 import IPlayer from '../../interface/IPlayer';
 import combo3Choise from '../../controller/game-event/subevent/combo3Choise';
 import combo5GiveCard from '../../controller/game-event/subevent/combo5GiveCard';
+import combo2ChoisePlayer from '../../controller/game-event/subevent/combo2ChoisePlayer';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -54,6 +55,15 @@ export default function DeskPage({
       setIsCombo3(true);
     }
     console.log(game);
+  };
+  const handleChoosePlayer = (myGame: IGame, playerName: string) => {
+    const state = game.gameState.functionState;
+    if (state === 'waitCombo2') {
+      combo2ChoisePlayer(myGame, playerName);
+    }
+    if (state === 'waitCombo3') {
+      handleIsCombo3();
+    }
   };
   const clickDoubleCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
@@ -261,7 +271,7 @@ export default function DeskPage({
       <div className={checkFunctionState() ? 'take-card-modal-active' : 'take-card-modal'}>
         <div className="players">
           {game.gameState.modalPlayers.map((el) => (
-            <button type="button" key={el.name} onClick={() => handleIsCombo3()}>{el.name}</button>
+            <button type="button" key={el.name} onClick={() => handleChoosePlayer(game, game.gameState.playerTurn)}>{el.name}</button>
           ))}
         </div>
         <div className={isCombo3 ? 'players-cards-active' : 'players-cards'}>
