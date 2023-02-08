@@ -60,10 +60,15 @@ export default function DeskPage({
     const state = game.gameState.functionState;
     if (state === 'waitCombo2') {
       combo2ChoisePlayer(myGame, playerName);
+      setGame(myGame);
     }
     if (state === 'waitCombo3') {
       handleIsCombo3();
     }
+  };
+  const handleCombo5 = (myGame: IGame, index: number) => {
+    combo5GiveCard(myGame, index);
+    setGame(myGame);
   };
   const clickDoubleCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
@@ -197,7 +202,7 @@ export default function DeskPage({
                     src={el.link}
                     alt="card"
                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                    onMouseDown={() => combo5GiveCard(game, el.id)}
+                    onMouseDown={() => handleCombo5(game, el.id)}
                   />
                 ))
                 : <img src={emptyCardsPlace} alt="card" />}
@@ -272,7 +277,13 @@ export default function DeskPage({
       <div className={checkFunctionState() ? 'take-card-modal-active' : 'take-card-modal'}>
         <div className="players">
           {game.gameState.modalPlayers.map((el) => (
-            <button type="button" key={el.name} onClick={() => handleChoosePlayer(game, game.gameState.playerTurn)}>{el.name}</button>
+            <button
+              type="button"
+              key={el.name}
+              onClick={() => handleChoosePlayer(game, game.gameState.playerTurn)}
+            >
+              {el.name}
+            </button>
           ))}
         </div>
         <div className={isCombo3 ? 'players-cards-active' : 'players-cards'}>
