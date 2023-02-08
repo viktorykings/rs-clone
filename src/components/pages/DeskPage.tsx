@@ -9,7 +9,6 @@ import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
 import IPlayer from '../../interface/IPlayer';
-// import clearNameCombo from '../../controller/statePlayerDeck/clearNameCombo';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -28,6 +27,7 @@ export default function DeskPage({
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
   const [activeRebound, setActiveRebound] = useState(false);
+  const [translateVal, setTranslateVal] = useState(0);
   const ourMessage = game.gameState.message;
   const clearNameCombo = useCallback((player: IPlayer): void => {
     player.deck.map((el) => {
@@ -106,6 +106,18 @@ export default function DeskPage({
       setPlayerState((p) => ([...p]));
     }
   }, [clickFiveCombo, game]);
+  const showNextCard = () => {
+    if (translateVal < 0) {
+      console.log(190 * playerState[0].deck.length - 190);
+      setTranslateVal(translateVal + 190);
+    }
+  };
+  const showPrevCard = () => {
+    if (Math.abs(translateVal) < 190 * playerState[0].deck.length - 190 * 5) {
+      console.log(190 * playerState[0].deck.length - 190 * 5);
+      setTranslateVal(translateVal - 190);
+    }
+  };
 
   return (
     <main className="desk">
@@ -188,32 +200,36 @@ export default function DeskPage({
             </div>
           </div>
         </div>
+        <button type="button" onClick={() => showPrevCard()} className="slider-controls">{'<'}</button>
         <div className="main-player-cards">
-          {playerState[0].deck.map((el) => (
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-            <div className="animate__animated animate__backInDown" key={el.id}>
-              <img
-                src={el.link}
-                alt={el.name}
-                key={el.id}
-                onMouseDown={() => {
-                  const myGame = makeMove(game, el.id);
-                  if (myGame !== null) setGame(myGame);
-                }}
-                className={el.nameCombo ? 'comboActive' : 'scaleCard'}
-              />
-            </div>
-          ))}
+          <div className="main-player-cards-row" style={{ transform: `translateX(${translateVal}px)` }}>
+            {playerState[0].deck.map((el) => (
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              <div className="animate__animated animate__backInDown" key={el.id}>
+                <img
+                  src={el.link}
+                  alt={el.name}
+                  key={el.id}
+                  onMouseDown={() => {
+                    const myGame = makeMove(game, el.id);
+                    if (myGame !== null) setGame(myGame);
+                  }}
+                  className={el.nameCombo ? 'comboActive' : 'scaleCard'}
+                />
+              </div>
+            ))}
+          </div>
         </div>
+        <button type="button" onClick={() => showNextCard()} className="slider-controls">{'>'}</button>
       </div>
       <div className={checkFunctionState() ? 'take-card-modal-active' : 'take-card-modal'}>
         <div className="players">
-          {playerState.map((el) => (
+          {game.players.map((el) => (
             <button type="button" key={el.name}>{el.name}</button>
           ))}
         </div>
         <div className="players-cards">
-          {playerState[1].deck.map((el) => (
+          {game.players[1].deck.map((el) => (
             <img src={el.link} alt="card" width="50px" key={el.id} />
           ))}
         </div>

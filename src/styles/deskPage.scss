@@ -22,6 +22,7 @@ body {
 }
 
 .desk{
+  overflow: hidden;
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -148,44 +149,78 @@ body {
 }
 
 .main-player{
+  height: 185px;
   .main-player-container{
     display: flex;
     flex-direction: column;
+    width: 160px;
+    flex-shrink: 0;
     .control-buttons{
         display: flex;
         flex-direction: column;
         .combo-visible{
-        opacity: 1;
-
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          opacity: 1;
+          button{
+            margin: 5px 0;
+            width: 100px;
+            height: 20px;
+            // background-color: transparent;
+            // color: $highlights;
+            // border: 1px solid $highlights;
+            border-radius: 5px;
+          }
         }
         .combo-hidden{
-        opacity: 0;
+          opacity: 0;
         }
     }
   }
-
+  .slider-controls{
+    height: 50px;
+    background: transparent;
+    color: $highlights;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+    font-size: 30px;
+    border: 1 px solid $highlights;
+    border-radius: 5px;
+  }
+  .slider-controls:hover{
+    opacity: 1;
+  }
   .main-player-cards{
-    display: flex;
-    flex-direction: row-reverse;
-    // flex-wrap: wrap;
-    img{
-      width: 120px;
-      margin: 5px;
-      border-radius: 5px;
-      transition: all 0.5s ease-in-out 0s;
-      border: none;
-      outline: none;
-      box-sizing: border-box;
-      cursor: pointer;
-    }
-    .scaleCard:hover{
-      transform: scale(2) translateY(-80px);
-      border: 2px solid $highlights;
-      box-shadow: 0 0 10px $highlights;
-    }
-    .comboActive{
-      transform: translateY(-80px);
-      border: 2px solid $highlights;
+    width: 950px;
+    overflow-x: clip;
+    position: relative;
+
+    .main-player-cards-row{
+      position: absolute;
+      display: flex;
+      flex-direction: row-reverse;
+      transition: all 0.5s ease 0s;
+      img{
+        width: 180px;
+        margin: 5px;
+        border-radius: 5px;
+        transition: all 0.5s ease-in-out 0s;
+        border: none;
+        outline: none;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .scaleCard:hover{
+        transform: translateY(-120px);
+        border: 2px solid $highlights;
+        box-shadow: 0 0 10px $highlights;
+      }
+      .comboActive{
+        transform: translateY(-80px);
+        border: 2px solid $highlights;
+      }
     }
   }
 }
