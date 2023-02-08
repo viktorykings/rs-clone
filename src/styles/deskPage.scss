@@ -244,7 +244,7 @@ body {
     height: 50px;
     width: 700px;
   }
-  &players-cards{
+  .players-cards-active{
     margin: 0 auto;
     width: 720px;
     display: flex;
@@ -252,6 +252,9 @@ body {
     &img{
       width: 80px;
     }
+  }
+  .players-cards{
+    display: none;
   }
 }
 .take-card-modal{

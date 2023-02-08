@@ -9,6 +9,7 @@ import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
 import IPlayer from '../../interface/IPlayer';
+// import combo3GiveCard from '../../controller/game-loop/subevent/'
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -27,6 +28,7 @@ export default function DeskPage({
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
   const [activeRebound, setActiveRebound] = useState(false);
+  const [isCombo3, setIsCombo3] = useState(false);
   const [translateVal, setTranslateVal] = useState(0);
   const ourMessage = game.gameState.message;
   const clearNameCombo = useCallback((player: IPlayer): void => {
@@ -36,10 +38,16 @@ export default function DeskPage({
       return null;
     });
   }, []);
-
   const checkFunctionState = () => {
     const state = game.gameState.functionState;
-    return state === 'waitCombo2' || state === 'waitCombo3' || state === 'waitCombo5';
+    return state === 'waitCombo2' || state === 'waitCombo3';
+  };
+  const handleIsCombo3 = () => {
+    const state = game.gameState.functionState;
+    if (state === 'waitCombo3') {
+      setIsCombo3(true);
+    }
+    console.log(game);
   };
   const clickDoubleCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
@@ -49,8 +57,9 @@ export default function DeskPage({
       el.nameCombo = String(ind); return null;
     }));
     console.log(player);
+    console.log(game);
     return player;
-  }, [clearNameCombo]);
+  }, [clearNameCombo, game]);
 
   const clickTripleCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
@@ -60,8 +69,9 @@ export default function DeskPage({
       return null;
     }));
     console.log(player);
+    console.log(game);
     return player;
-  }, [clearNameCombo]);
+  }, [clearNameCombo, game]);
 
   const clickFiveCombo = useCallback((player: IPlayer): IPlayer => {
     clearNameCombo(player);
@@ -224,13 +234,19 @@ export default function DeskPage({
       </div>
       <div className={checkFunctionState() ? 'take-card-modal-active' : 'take-card-modal'}>
         <div className="players">
-          {game.players.map((el) => (
-            <button type="button" key={el.name}>{el.name}</button>
+          {game.gameState.modalPlayers.map((el) => (
+            <button type="button" key={el.name} onClick={() => handleIsCombo3()}>{el.name}</button>
           ))}
         </div>
-        <div className="players-cards">
-          {game.players[1].deck.map((el) => (
-            <img src={el.link} alt="card" width="50px" key={el.id} />
+        <div className={isCombo3 ? 'players-cards-active' : 'players-cards'}>
+          {game.gameState.modalDeck.map((el) => (
+            <img
+              src={el.link}
+              alt="card"
+              width="50px"
+              key={el.id}
+              onClick={() => combo3GiveCard(game, el.id)}
+            />
           ))}
         </div>
       </div>
