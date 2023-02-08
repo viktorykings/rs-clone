@@ -22,7 +22,7 @@ function gameLoop(
     myGame.gameState.timeLeft = timerLeft === 0 ? 30 : timerLeft;
   }
 
-  myGame.gameState.timerId = setInterval(() => { mainGameLoop(myGame, setGame); }, 1000);
+  myGame.gameState.timerId = setInterval(() => { mainGameLoop(myGame, setGame); }, 5000);
 }
 
 export default gameLoop;

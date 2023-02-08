@@ -28,6 +28,7 @@ function combo3GiveCard(game: IGame, idCard: number): IGame {
   myGame.gameState.modalTypeCard = null;
   myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer;
   myGame.gameState.playerWaitAnswer = '';
+  console.log(myGame);
   return myGame;
 }
 

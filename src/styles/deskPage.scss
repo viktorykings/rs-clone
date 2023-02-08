@@ -101,30 +101,46 @@ body {
   }
   .rebound-deck{
     box-sizing: border-box;
-    @include cardsSize;
     width: 223px;
-    transform: rotate(45deg) translateX(10%) translateY(-50%);
+    height: 240px;
+    transform: rotate(135deg) translate(-20%, -40%);
     transition: all 0.5s ease-in-out;
     .rebound-deck-controls{
       display: none;
     }
     &-active{
+      width: 230px;
+      height: 240px;
       cursor: pointer;
       display: flex;
+      justify-content: space-between;
       align-items: center;
       img{
         @include cardsSize;
       }
-      transform: rotate(180deg) translateX(0) translateY(0);
+      transform: rotate(-0deg) translate(0, 0);
       transition: all 0.5s ease-in-out;
       .rebound-deck-controls{
         display: flex;
         height: 40px;
+        width: 32px;
         font-size: 30px;
         color: $highlights;
         border: 1px solid $highlights;
         border-radius: 5px;
         background: transparent;
+      }
+      .rebound-deck-container{
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        width: 160px;
+        height: 240px;
+      }
+      .rebound-deck-row{
+        position: absolute;
+        height: 240px;
+        display: flex;
       }
     }
   }

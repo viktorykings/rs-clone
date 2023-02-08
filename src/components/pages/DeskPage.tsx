@@ -9,7 +9,8 @@ import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
 import IPlayer from '../../interface/IPlayer';
-// import combo3GiveCard from '../../controller/game-loop/subevent/'
+import combo3Choise from '../../controller/game-event/subevent/combo3Choise';
+import combo5GiveCard from '../../controller/game-event/subevent/combo5GiveCard';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -27,9 +28,10 @@ export default function DeskPage({
     gameState,
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
-  const [activeRebound, setActiveRebound] = useState(false);
+  // const [activeRebound, setActiveRebound] = useState(false);
   const [isCombo3, setIsCombo3] = useState(false);
   const [translateVal, setTranslateVal] = useState(0);
+  const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
   const clearNameCombo = useCallback((player: IPlayer): void => {
     player.deck.map((el) => {
@@ -41,6 +43,10 @@ export default function DeskPage({
   const checkFunctionState = () => {
     const state = game.gameState.functionState;
     return state === 'waitCombo2' || state === 'waitCombo3';
+  };
+  const checkFunctionStateCombo5 = () => {
+    const state = game.gameState.functionState;
+    return state === 'waitCombo5';
   };
   const handleIsCombo3 = () => {
     const state = game.gameState.functionState;
@@ -128,6 +134,12 @@ export default function DeskPage({
       setTranslateVal(translateVal - 190);
     }
   };
+  const showNextRebound = () => {
+    setTranslateRebound(translateRebound - 240);
+  };
+  const showPrevRebound = () => {
+    setTranslateRebound(translateRebound + 240);
+  };
 
   return (
     <main className="desk">
@@ -165,13 +177,28 @@ export default function DeskPage({
             : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animate__animated animate__backInUp" />)
           }
         </div>
-        <div className={activeRebound ? 'rebound-deck-active' : 'rebound-deck'}>
-          <button type="button" className="rebound-deck-controls">{'<'}</button>
-          <img src={emptyCardsPlace} alt="card" onMouseDown={() => setActiveRebound(!activeRebound)} />
-          <button type="button" className="rebound-deck-controls">{'>'}</button>
+        <div className={checkFunctionStateCombo5() ? 'rebound-deck-active' : 'rebound-deck'}>
+          <button type="button" className="rebound-deck-controls" onClick={() => showPrevRebound()}>{'<'}</button>
+          <div className="rebound-deck-container">
+            <div className="rebound-deck-row" style={{ transform: `translateX(${translateRebound}px)` }}>
+              {checkFunctionStateCombo5()
+                ? game.reboundDeck.map((el) => (
+                  <img
+                    src={el.link}
+                    alt="card"
+                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                    onMouseDown={() => combo5GiveCard(game, el.id)}
+                  />
+                ))
+                : <img src={emptyCardsPlace} alt="card" />}
+            </div>
+          </div>
+          <button type="button" className="rebound-deck-controls" onClick={() => showNextRebound()}>
+            {'>'}
+          </button>
         </div>
       </div>
-      <div className="main-player" aria-disabled>
+      <div className="main-player">
         <div className="main-player-container">
           <Player name="main" className={gameState.playerTurn === 'player1' ? 'activePlayer' : ''} />
           <div className="control-buttons">
@@ -179,7 +206,6 @@ export default function DeskPage({
               type="button"
               onClick={() => {
                 setGame(endMove(game));
-                // setActivePlayer(endMove(game).gameState.playerTurn);
               }}
               disabled={!game.players[0].buttons.finishMove}
             >
@@ -245,7 +271,8 @@ export default function DeskPage({
               alt="card"
               width="50px"
               key={el.id}
-              onClick={() => combo3GiveCard(game, el.id)}
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              onMouseDown={() => combo3Choise(game, game.gameState.playerTurn, el.type)}
             />
           ))}
         </div>
