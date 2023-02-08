@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, {
-  useCallback, useMemo, useState,
+  useMemo, useState,
 } from 'react';
 import Player from './Players';
 import makeMove from '../../controller/game-event/makeMove';
@@ -8,10 +8,16 @@ import endMove from '../../controller/game-event/endMove';
 import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
-import IPlayer from '../../interface/IPlayer';
 import combo3Choise from '../../controller/game-event/subevent/combo3Choise';
-import combo5GiveCard from '../../controller/game-event/subevent/combo5GiveCard';
-import combo2ChoisePlayer from '../../controller/game-event/subevent/combo2ChoisePlayer';
+import {
+  checkFunctionState,
+  checkFunctionStateCombo5,
+  handleChoosePlayer,
+  handleCombo5,
+  usedDoubleCombo,
+  usedFiveCombo,
+  usedTripleCombo,
+} from './handlers/comboHandlers';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -29,114 +35,10 @@ export default function DeskPage({
     gameState,
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
-  // const [activeRebound, setActiveRebound] = useState(false);
   const [isCombo3, setIsCombo3] = useState(false);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
-  const clearNameCombo = useCallback((player: IPlayer): void => {
-    player.deck.map((el) => {
-      // eslint-disable-next-line no-param-reassign
-      el.nameCombo = String('');
-      return null;
-    });
-  }, []);
-  const checkFunctionState = () => {
-    const state = game.gameState.functionState;
-    return state === 'waitCombo2' || state === 'waitCombo3';
-  };
-  const checkFunctionStateCombo5 = () => {
-    const state = game.gameState.functionState;
-    return state === 'waitCombo5';
-  };
-  const handleIsCombo3 = () => {
-    const state = game.gameState.functionState;
-    if (state === 'waitCombo3') {
-      setIsCombo3(true);
-    }
-    console.log(game);
-  };
-  const handleChoosePlayer = (myGame: IGame, playerName: string) => {
-    const state = game.gameState.functionState;
-    if (state === 'waitCombo2') {
-      combo2ChoisePlayer(myGame, playerName);
-      setGame(myGame);
-    }
-    if (state === 'waitCombo3') {
-      handleIsCombo3();
-    }
-  };
-  const handleCombo5 = (myGame: IGame, index: number) => {
-    combo5GiveCard(myGame, index);
-    setGame(myGame);
-  };
-  const clickDoubleCombo = useCallback((player: IPlayer): IPlayer => {
-    clearNameCombo(player);
-    player.combos.doubleCats.map((cr, ind) => cr.map((el) => {
-    // player.combos.doubleCats.map((cr, ind) => cr.map((el) => {
-      // eslint-disable-next-line no-param-reassign
-      el.nameCombo = String(ind); return null;
-    }));
-    console.log(player);
-    console.log(game);
-    return player;
-  }, [clearNameCombo, game]);
-
-  const clickTripleCombo = useCallback((player: IPlayer): IPlayer => {
-    clearNameCombo(player);
-    player.combos.tripleCats.map((cr, ind) => cr.map((el) => {
-      // eslint-disable-next-line no-param-reassign
-      el.nameCombo = String(ind + 1);
-      return null;
-    }));
-    console.log(player);
-    console.log(game);
-    return player;
-  }, [clearNameCombo, game]);
-
-  const clickFiveCombo = useCallback((player: IPlayer): IPlayer => {
-    clearNameCombo(player);
-    player.combos.fiveCats.map((cr, ind) => cr.map((el) => {
-      // eslint-disable-next-line no-param-reassign
-      el.nameCombo = String(ind + 1);
-      return null;
-    }));
-    console.log(player);
-    return player;
-  }, [clearNameCombo]);
-
-  const usedDoubleCombo = useCallback(() => {
-    const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
-    if (pl !== undefined) {
-      clickDoubleCombo(pl);
-      game.gameState.stateGame = 'doubleCombo';
-      console.log('---combo---');
-      console.log(game);
-      setPlayerState((p) => ([...p]));
-    }
-  }, [clickDoubleCombo, game]);
-
-  const usedTripleCombo = useCallback(() => {
-    const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
-    if (pl !== undefined) {
-      clickTripleCombo(pl);
-      game.gameState.stateGame = 'tripleCombo';
-      console.log('---combo---');
-      console.log(game);
-      setPlayerState((p) => ([...p]));
-    }
-  }, [clickTripleCombo, game]);
-
-  const usedFiveCombo = useCallback(() => {
-    const pl = game.players.find((p) => p.name === game.gameState.playerTurn);
-    if (pl !== undefined) {
-      clickFiveCombo(pl);
-      game.gameState.stateGame = 'fiveCombo';
-      console.log('---combo---');
-      console.log(game);
-      setPlayerState((p) => ([...p]));
-    }
-  }, [clickFiveCombo, game]);
   const showNextCard = () => {
     if (translateVal < 0) {
       console.log(190 * playerState[0].deck.length - 190);
@@ -192,17 +94,17 @@ export default function DeskPage({
             : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animate__animated animate__backInUp" />)
           }
         </div>
-        <div className={checkFunctionStateCombo5() ? 'rebound-deck-active' : 'rebound-deck'}>
+        <div className={checkFunctionStateCombo5(game) ? 'rebound-deck-active' : 'rebound-deck'}>
           <button type="button" className="rebound-deck-controls" onClick={() => showPrevRebound()}>{'<'}</button>
           <div className="rebound-deck-container">
             <div className="rebound-deck-row" style={{ transform: `translateX(${translateRebound}px)` }}>
-              {checkFunctionStateCombo5()
+              {checkFunctionStateCombo5(game)
                 ? game.reboundDeck.map((el) => (
                   <img
                     src={el.link}
                     alt="card"
                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                    onMouseDown={() => handleCombo5(game, el.id)}
+                    onMouseDown={() => handleCombo5(game, el.id, setGame)}
                   />
                 ))
                 : <img src={emptyCardsPlace} alt="card" />}
@@ -230,21 +132,21 @@ export default function DeskPage({
               <button
                 type="button"
                 disabled={!game.players[0].buttons.dobleEnabled}
-                onClick={() => usedDoubleCombo()}
+                onClick={() => usedDoubleCombo(game, setPlayerState)}
               >
                 2x Combo
               </button>
               <button
                 type="button"
                 disabled={!game.players[0].buttons.tripleEnabled}
-                onClick={() => usedTripleCombo()}
+                onClick={() => usedTripleCombo(game, setPlayerState)}
               >
                 3x Combo
               </button>
               <button
                 type="button"
                 disabled={!game.players[0].buttons.fiveEnabled}
-                onClick={() => usedFiveCombo()}
+                onClick={() => usedFiveCombo(game, setPlayerState)}
               >
                 5x Combo
               </button>
@@ -274,13 +176,15 @@ export default function DeskPage({
         </div>
         <button type="button" onClick={() => showNextCard()} className="slider-controls">{'>'}</button>
       </div>
-      <div className={checkFunctionState() ? 'take-card-modal-active' : 'take-card-modal'}>
+      <div className={checkFunctionState(game) ? 'take-card-modal-active' : 'take-card-modal'}>
         <div className="players">
           {game.gameState.modalPlayers.map((el) => (
             <button
               type="button"
               key={el.name}
-              onClick={() => handleChoosePlayer(game, game.gameState.playerTurn)}
+              onClick={() => {
+                handleChoosePlayer(game, game.gameState.playerTurn, setGame, setIsCombo3);
+              }}
             >
               {el.name}
             </button>
