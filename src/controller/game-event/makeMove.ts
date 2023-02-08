@@ -6,6 +6,7 @@ import { botWaitAnswer, playerWaitTurn } from '../../const/gameVariable';
 import ICard from '../../interface/ICard';
 import startStateDeck from '../statePlayerDeck/startStateDeck';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
+import moveNeutralize from './subevent/moveNeutralize';
 // import ICard from '../../interface/ICard';
 
 function makeMove(
@@ -14,7 +15,7 @@ function makeMove(
   // setOurMessage: React.Dispatch<React.SetStateAction<string>>,
 ): IGame | null {
   // console.log('make move');
-  const myGame = { ...game };
+  let myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
   const typeTern = myGame.players[inPl].deck[indCard].type;
@@ -65,14 +66,15 @@ function makeMove(
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = nextPl.isBot ? botWaitAnswer : playerWaitTurn;
     }
-  } else {
+  }/* else {
     myGame.gameState.message = 'Картами котов можно ходить только через режим Combo';
     // setOurMessage('Картами котов можно ходить только через режим Combo');
     return null;
-  }
-  /* if (myGame.gameState.stateGame === 'endTern') {
-    myGame = endMove(myGame);
   } */
+
+  if (myGame.gameState.functionState === 'waitNeutralize' && typeTern === 1) {
+    myGame = moveNeutralize(myGame, idCard);
+  }
   // console.log(myGame);
   return myGame;
 }

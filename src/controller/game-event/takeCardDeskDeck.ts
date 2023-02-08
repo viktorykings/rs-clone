@@ -2,7 +2,6 @@ import IGame from '../../interface/IGame';
 import addHistory from './subevent/addHistory';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import getPause from '../game-loop/subevent/getPause';
-import { waitEndMove } from '../../const/gameVariable';
 
 function takeCardDeskDeck(game: IGame): IGame {
   const myGame = { ...game };
@@ -14,12 +13,12 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.players[iPl].deck.push(...card);
       myGame.players[iPl].buttons.finishMove = myGame.players[iPl].countTakeCard === 0;
       myGame.gameState.message = `${myGame.players[iPl].name} взял 1 карту.`;
+      myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
       myGame.gameState.timeNeed = getPause(
         myGame.players[iPl].isBot,
-        myGame.players[iPl].countTakeCard,
+        myGame.gameState.functionState,
       );
-      myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
-      myGame.gameState.timeNeed = waitEndMove;
+      // myGame.gameState.timeNeed = waitEndMove;
       addHistory(myGame, 'takeCardDeskDeck', card, true);
     } else {
       myGame.gameState.stateGame = 'explosion';
@@ -27,6 +26,18 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.gameState.message = `${myGame.players[iPl].name} вытянул 'Взрывного котенка'.`;
       // eslint-disable-next-line no-param-reassign
       myGame.players[iPl].deck.map((el) => { el.enabled = el.type === 1; return el; });
+      const neutralize = myGame.players[iPl].deck.findIndex((cr) => cr.type === 1);
+      myGame.gameState.functionState = 'waitExplosion';
+      myGame.gameState.timeNeed = 3;
+      if (neutralize !== -1) {
+        myGame.gameState.functionState = 'waitNeutralize';
+        myGame.gameState.timeNeed = getPause(
+          myGame.players[iPl].isBot,
+          myGame.gameState.functionState,
+        );
+      } else {
+        console.log(myGame);
+      }
       addHistory(myGame, 'takeCardDeskDeck', card, true);
     }
   } else {

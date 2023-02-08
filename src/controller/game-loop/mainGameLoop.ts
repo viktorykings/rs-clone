@@ -8,6 +8,8 @@ import combo5AutoCardGive from './subevent/combo5AutoCartGive';
 import waitAnserTurn from './waitAnsweTern';
 import waitEndMove from './waitEndMove';
 import waitPlayerTurn from './waitPlayerTurn';
+import moveAutoNeutralize from './subevent/moveAutoNeutralize';
+import endMoveAutoNeutralize from './subevent/endMoveAutoNeutralize';
 
 function mainGameLoop(
   game: IGame,
@@ -33,6 +35,8 @@ function mainGameLoop(
       case 'waitCombo3': combo3AutoChoise(myGame, setGame); return;
       case 'waitPlayerCombo3': combo3AutoCardGive(myGame, setGame); return;
       case 'waitCombo5': combo5AutoCardGive(myGame, setGame); return;
+      case 'waitNeutralize': moveAutoNeutralize(myGame, setGame); return;
+      case 'endNeutralize': endMoveAutoNeutralize(myGame, setGame); return;
       default: return;
     }
   }

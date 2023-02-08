@@ -30,7 +30,7 @@ function endMove(game: IGame): IGame {
     myGame.players[nIndPl] = startStateDeck(myGame.players[nIndPl]);
     myGame.gameState.timeNeed = getPause(
       myGame.players[nIndPl].isBot,
-      myGame.players[nIndPl].countTakeCard,
+      myGame.gameState.functionState,
     );
   } else {
     myGame.players[indexPl].buttons.finishMove = false;
