@@ -21,7 +21,12 @@ interface IGame {
     timeLeft: number,
     timeNeed: number,
     message: string,
-    history: IHistory []
+    history: IHistory [],
+    modalPlayers: IPlayer[],
+    modalDeck: ICard [],
+    modalTitle: string,
+    modalMessage: string,
+    modalTypeCard: number | null,
   }
 }
 export interface Setter extends IGame {

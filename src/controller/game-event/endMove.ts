@@ -4,6 +4,7 @@ import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import findNextActivePlayer from './subevent/findNextActivePlayer';
 import getPause from '../game-loop/subevent/getPause';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
+import startStateDeck from '../statePlayerDeck/startStateDeck';
 
 function endMove(game: IGame): IGame {
   const myGame = { ...game };
@@ -26,6 +27,7 @@ function endMove(game: IGame): IGame {
     console.log('next player', myGame.gameState.playerTurn);
     const nIndPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
     myGame.gameState.functionState = 'waitPlayerTurn';
+    myGame.players[nIndPl] = startStateDeck(myGame.players[nIndPl]);
     myGame.gameState.timeNeed = getPause(
       myGame.players[nIndPl].isBot,
       myGame.players[nIndPl].countTakeCard,
