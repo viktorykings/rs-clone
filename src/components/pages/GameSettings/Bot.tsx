@@ -44,7 +44,6 @@ export default function Bot({
     <li
       style={{
         borderColor: brdrColor,
-
         backgroundImage: `url(${link})`,
       }}
       className="list-item"

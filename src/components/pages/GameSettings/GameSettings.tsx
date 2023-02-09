@@ -5,7 +5,7 @@ import IPlayer from '../../../interface/IPlayer';
 import MainPlayer from './MainPlayer';
 import ModalBot from './ModalBot';
 import ModalChangeName from './ModalChangeName';
-// import ModalChangeAvatar from './ModalChangeAvatar';
+import ModalChangeAvatar from './ModalChangeAvatar';
 
 import av0 from '../../../assets/avCats/av0.png';
 import av1 from '../../../assets/avCats/av1.png';
@@ -79,7 +79,7 @@ export default function GameSettings() {
   };
 
   const [modal, setModal] = useState(false);
-  const [modlChangeName, setModalChangeName] = useState(true);
+  const [modalChangeName, setModalChangeName] = useState(false);
 
   const setGameLevel = (value: string) => {
     const editedBots = bots.map((bot) => {
@@ -204,14 +204,14 @@ export default function GameSettings() {
           </div>
         </div>
         <div className="player-settings">
-          {modlChangeName && (
+          {modalChangeName && (
             <ModalChangeName
               title="Change Name"
               updateName={updateMainPlayer}
               onChangeName={() => setModalChangeName(false)}
             />
           )}
-          {/* <ModalChangeAvatar title="Change Avatar" /> */}
+          <ModalChangeAvatar title="Change Avatar" />
           <MainPlayer
             name={nameMainPlayer}
             isBot={false}
