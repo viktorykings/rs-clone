@@ -10,6 +10,7 @@ import waitEndMove from './waitEndMove';
 import waitPlayerTurn from './waitPlayerTurn';
 import moveAutoNeutralize from './subevent/moveAutoNeutralize';
 import endMoveAutoNeutralize from './subevent/endMoveAutoNeutralize';
+import endExplosion from './subevent/endExplosion';
 
 function mainGameLoop(
   game: IGame,
@@ -37,6 +38,7 @@ function mainGameLoop(
       case 'waitCombo5': combo5AutoCardGive(myGame, setGame); return;
       case 'waitNeutralize': moveAutoNeutralize(myGame, setGame); return;
       case 'endNeutralize': endMoveAutoNeutralize(myGame, setGame); return;
+      case 'waitExplosion': endExplosion(myGame, setGame); return;
       default: return;
     }
   }
