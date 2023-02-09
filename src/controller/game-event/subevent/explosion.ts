@@ -2,10 +2,9 @@ import IGame from '../../../interface/IGame';
 import getPause from '../../game-loop/subevent/getPause';
 import findIndexPlayerTern from './findIndexPlayerTern';
 import findNextActivePlayer from './findNextActivePlayer';
-import endMoveNeutralize from './endMoveNeutralize';
 
 function explosion(game: IGame): IGame {
-  let myGame = { ...game };
+  const myGame = { ...game };
   const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const nextPl = findNextActivePlayer(myGame);
   if (myGame.players[iPl].isBot) {
@@ -14,7 +13,7 @@ function explosion(game: IGame): IGame {
     if (countActive === 1) {
       myGame.gameState.functionState = 'win';
     } else {
-      myGame = endMoveNeutralize(myGame, 0);
+      myGame.reboundDeck.push(...myGame.showCards.splice(0));
       myGame.gameState.stateGame = 'tern';
       myGame.gameState.functionState = 'waitPlayerTurn';
       myGame.gameState.playerTurn = nextPl.name;
