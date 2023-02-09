@@ -1,17 +1,29 @@
-import React from 'react';
-// import Carousel from './carousel';
-import av1big from '../../../assets/avatars/av1-big.jpg';
-
+import React, { useState } from 'react';
 import Carousel from './carousel';
+import audiourl from '../../../assets/sounds/button-click.mp3';
 
 interface IModalChangeAvatar {
   title: string;
+  curAvatar: string;
+  onChangeAvatar: () => void;
+  updateAvatar: (value: string) => void;
 }
-export default function ModalChangeAvatar({ title }: IModalChangeAvatar) {
-  // const [urlAv, setUrAv] = useState(av1big);
-  // const updateUrlAv = (url: string) => {
-  //   setUrAv(url);
-  // };
+export default function ModalChangeAvatar({
+  title,
+  curAvatar,
+  onChangeAvatar,
+  updateAvatar,
+}: IModalChangeAvatar) {
+  const [urlAv, setUrAv] = useState(curAvatar);
+  const updateUrlAv = (url: string) => {
+    setUrAv(url);
+  };
+
+  // console.log(updateUrlAv);
+  const audio = new Audio(audiourl);
+  const buttonClick = () => {
+    audio.play();
+  };
   return (
     <div className="wrap-modal">
       {/* <Carousel /> */}
@@ -22,21 +34,36 @@ export default function ModalChangeAvatar({ title }: IModalChangeAvatar) {
             <div
               className="avatar"
               style={{
-                backgroundImage: `url(${av1big})`,
+                backgroundImage: `url(${urlAv})`,
                 backgroundSize: 'cover',
               }}
             >
               avatar
             </div>
             <div className="wrap-carousel">
-              <Carousel />
+              <Carousel curAvatar={curAvatar} updateUrlAv={updateUrlAv} />
             </div>
           </div>
           <div className="btn-groupe">
-            <button type="button" className="btn" onClick={() => {}}>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                buttonClick();
+                updateAvatar(urlAv);
+                onChangeAvatar();
+              }}
+            >
               Done
             </button>
-            <button type="button" className="btn" onClick={() => {}}>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                buttonClick();
+                onChangeAvatar();
+              }}
+            >
               Cancel
             </button>
           </div>

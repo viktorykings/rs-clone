@@ -64,6 +64,18 @@
   button {
     margin: 0 10px;
     width: 100px;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #700000;
+
+    &:hover {
+      background-color: orange;
+      color: black;
+    }
+    &:active {
+      background-color: yellow;
+    }
   }
 }
 .bot {
@@ -137,7 +149,6 @@
   border: 20px solid gold;
   border-radius: 50%;
   margin: 0 auto;
-  background-image: url('../assets/human-av1.jpg');
   background-repeat: no-repeat;
   background-position: center center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
@@ -303,7 +314,8 @@
   }
 }
 .item-img {
-  background-color: cadetblue;
+  box-sizing: border-box;
+  background-color: orange;
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -314,6 +326,12 @@
     cursor: pointer;
   }
   &.active {
+    border: 4px solid orange;
     box-shadow: inset 0 0 10px orange;
+  }
+}
+.controls {
+  button {
+    margin: 0 10px;
   }
 }

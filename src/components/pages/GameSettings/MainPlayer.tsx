@@ -4,19 +4,26 @@ export interface IMainPlayer {
   name: string;
   isBot: boolean;
   level: string;
-  openModal: () => void;
+  avatar: string;
+  openModalChangeName: () => void;
+  openModalChangeAvatar: () => void;
 }
 
 export default function MainPlayer({
   name,
   isBot,
   level,
-  openModal,
+  avatar,
+  openModalChangeName,
+  openModalChangeAvatar,
 }: IMainPlayer) {
   const viewTemplate = (
     <div className="human-player">
       <p className="human-player-name">{name}</p>
-      <div className="human-avatar" />
+      <div
+        className="human-avatar"
+        style={{ backgroundImage: `url(${avatar})` }}
+      />
       {isBot && <p className="player-lavel">{level}</p>}
 
       <div className="btn-group">
@@ -24,12 +31,18 @@ export default function MainPlayer({
           type="button"
           className="btn"
           onClick={() => {
-            openModal();
+            openModalChangeName();
           }}
         >
           Edit Name
         </button>
-        <button type="button" className="btn" onClick={() => {}}>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            openModalChangeAvatar();
+          }}
+        >
           Choose Avatar
         </button>
       </div>

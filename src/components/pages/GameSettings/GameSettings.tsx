@@ -16,6 +16,8 @@ import av5 from '../../../assets/avCats/av5.png';
 import av6 from '../../../assets/avCats/av6.png';
 import av7 from '../../../assets/avCats/av7.png';
 
+import defaultAvatar from '../../../assets/avatars/av9-big.jpg';
+
 interface IBotSettings {
   name: string;
   isBot: boolean;
@@ -79,7 +81,13 @@ export default function GameSettings() {
   };
 
   const [modal, setModal] = useState(false);
+  const [modalChangeAvatar, setModalChangeAvatar] = useState(false);
   const [modalChangeName, setModalChangeName] = useState(false);
+  const [avatar, setAvatar] = useState(defaultAvatar);
+
+  const updateAvatar = (value: string) => {
+    setAvatar(value);
+  };
 
   const setGameLevel = (value: string) => {
     const editedBots = bots.map((bot) => {
@@ -211,12 +219,21 @@ export default function GameSettings() {
               onChangeName={() => setModalChangeName(false)}
             />
           )}
-          <ModalChangeAvatar title="Change Avatar" />
+          {modalChangeAvatar && (
+            <ModalChangeAvatar
+              curAvatar={avatar}
+              updateAvatar={updateAvatar}
+              onChangeAvatar={() => setModalChangeAvatar(false)}
+              title="Change Avatar"
+            />
+          )}
           <MainPlayer
             name={nameMainPlayer}
             isBot={false}
             level=""
-            openModal={() => setModalChangeName(true)}
+            avatar={avatar}
+            openModalChangeName={() => setModalChangeName(true)}
+            openModalChangeAvatar={() => setModalChangeAvatar(true)}
           />
         </div>
       </div>

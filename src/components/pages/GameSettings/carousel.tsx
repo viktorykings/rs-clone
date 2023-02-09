@@ -7,9 +7,19 @@ import av5big from '../../../assets/avatars/av5-big.jpg';
 import av6big from '../../../assets/avatars/av6-big.jpg';
 import av7big from '../../../assets/avatars/av7-big.jpg';
 import av8big from '../../../assets/avatars/av8-big.jpg';
+import av9big from '../../../assets/avatars/av9-big.jpg';
+import audiourl from '../../../assets/sounds/button-click.mp3';
 
-const { log } = console;
-export default function Carousel() {
+export interface ICarousel {
+  curAvatar: string;
+  updateUrlAv: (url: string) => void;
+}
+
+export default function Carousel({ curAvatar, updateUrlAv }: ICarousel) {
+  const audio = new Audio(audiourl);
+  const buttonClick = () => {
+    audio.play();
+  };
   const data = [
     { big: av1big, small: av1big },
     { big: av2big, small: av2big },
@@ -19,10 +29,11 @@ export default function Carousel() {
     { big: av6big, small: av6big },
     { big: av7big, small: av7big },
     { big: av8big, small: av8big },
+    { big: av9big, small: av9big },
   ];
 
   const [currentIndex, setIndex] = useState(0);
-  const length = 3;
+  const length = 4;
 
   const handlePrevious = () => {
     const newIndex = currentIndex - 1;
@@ -33,20 +44,40 @@ export default function Carousel() {
     const newIndex = currentIndex + 1;
     setIndex(newIndex >= length ? 0 : newIndex);
   };
+
   function toggleClass(target: EventTarget) {
-    log(target);
     const levelItems = document.querySelectorAll('.item-img');
     levelItems.forEach((item) => item.classList.remove('active'));
     (target as HTMLElement).classList.toggle('active');
   }
 
+  function selectAvatar(target: EventTarget) {
+    toggleClass(target);
+    const targetUrl = (target as HTMLElement).style.backgroundImage
+      .slice(4, -1)
+      .replace(/"/g, '');
+    updateUrlAv(targetUrl);
+  }
+
   return (
     <>
-      <div className="controls">
-        <button type="button" onClick={handlePrevious}>
+      <div className="btn-groupe">
+        <button
+          type="button"
+          onClick={() => {
+            handlePrevious();
+            buttonClick();
+          }}
+        >
           Previous
         </button>
-        <button type="button" onClick={handleNext}>
+        <button
+          type="button"
+          onClick={() => {
+            handleNext();
+            buttonClick();
+          }}
+        >
           Next
         </button>
       </div>
@@ -59,13 +90,15 @@ export default function Carousel() {
               key={item.big}
             >
               <div
-                className="item-img"
+                className={
+                  curAvatar === item.big ? 'item-img active' : 'item-img'
+                }
                 style={{
                   backgroundImage: `url(${item.big})`,
                   backgroundSize: 'cover',
                 }}
-                onClick={(e) => toggleClass(e.target)}
-                onKeyPress={(e) => toggleClass(e.target)}
+                onClick={(e) => selectAvatar(e.target)}
+                onKeyPress={(e) => selectAvatar(e.target)}
                 role="presentation"
               />
             </div>
