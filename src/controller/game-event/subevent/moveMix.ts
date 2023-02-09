@@ -12,6 +12,7 @@ function moveMix(game: IGame): IGame {
     myGame.reboundDeck.push(...myGame.showCards.splice(0));
     myGame.gameState.message = `${myGame.players[iPl].name} перемешал колоду`;
     myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
+    myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     addHistory(myGame, 'moveMix', [myCard], true);
   } else {
     addHistory(myGame, 'moveMix', [], false);

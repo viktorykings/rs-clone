@@ -32,6 +32,7 @@ function endMove(game: IGame): IGame {
       myGame.players[nIndPl].isBot,
       myGame.gameState.functionState,
     );
+    myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   } else {
     myGame.players[indexPl].buttons.finishMove = false;
     const mes = `${myGame.players[indexPl].name} нужно взять ${myGame.players[indexPl].countTakeCard} карту/ы.`;

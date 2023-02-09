@@ -17,6 +17,7 @@ function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction
   const nextPl = findNextActivePlayer(myGame);
   myGame.gameState.timeNeed = nextPl.isBot ? botWaitAnswer : playerWaitTurn;
   myGame.gameState.playerTurn = nextPl.name;
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
 
   if (nextPl.name === myGame.gameState.playerWaitAnswer) {
     myGame.gameState.playerWaitAnswer = '';

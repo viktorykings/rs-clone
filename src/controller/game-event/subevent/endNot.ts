@@ -9,6 +9,7 @@ function endNot(game: IGame): IGame {
   myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
   myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
   myGame.gameState.message = '';
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

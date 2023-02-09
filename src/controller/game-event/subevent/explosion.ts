@@ -18,6 +18,7 @@ function explosion(game: IGame): IGame {
       myGame.gameState.functionState = 'waitPlayerTurn';
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);
+      myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     }
   } else {
     myGame.gameState.functionState = 'lose';

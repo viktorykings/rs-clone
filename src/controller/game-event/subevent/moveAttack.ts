@@ -19,6 +19,7 @@ function moveAttack(game: IGame, /* myCard: ICard, */ inPl: number): IGame {
     myGame.gameState.message = `${myGame.players[inPl].name} походил картой 'Атака'`;
     myGame.gameState.functionState = 'waitEndMove';
     myGame.gameState.timeNeed = waitEndMove;
+    myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     addHistory(myGame, 'moveAttack', [myCard], true);
   } else {
     addHistory(myGame, 'moveAttack', [], false);

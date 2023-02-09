@@ -2,11 +2,12 @@ import IGame from '../../interface/IGame';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import cardType from '../../const/cardType';
 import findNextActivePlayer from './subevent/findNextActivePlayer';
-import { botWaitAnswer, playerWaitTurn } from '../../const/gameVariable';
+// import { botWaitAnswer, playerWaitTurn } from '../../const/gameVariable';
 import ICard from '../../interface/ICard';
 import startStateDeck from '../statePlayerDeck/startStateDeck';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
 import moveNeutralize from './subevent/moveNeutralize';
+import getPause from '../game-loop/subevent/getPause';
 // import ICard from '../../interface/ICard';
 
 function makeMove(
@@ -64,7 +65,8 @@ function makeMove(
       myGame.gameState.playerWaitAnswer = pl.name;
       const nextPl = findNextActivePlayer(myGame);
       myGame.gameState.playerTurn = nextPl.name;
-      myGame.gameState.timeNeed = nextPl.isBot ? botWaitAnswer : playerWaitTurn;
+      myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);
+      myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     }
   }/* else {
     myGame.gameState.message = 'Картами котов можно ходить только через режим Combo';

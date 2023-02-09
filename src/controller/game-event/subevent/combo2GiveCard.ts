@@ -14,6 +14,7 @@ function combo2GiveCard(game: IGame, idCard: number): IGame {
   myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer;
   myGame.gameState.playerWaitAnswer = '';
   myGame.gameState.message = `${myGame.gameState.playerTurn} получает карту ${cardType[card.type].name}.`;
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

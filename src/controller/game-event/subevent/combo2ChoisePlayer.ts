@@ -6,6 +6,7 @@ function combo2ChoisePlayer(game: IGame, playerName: string): IGame {
   myGame.gameState.playerWaitAnswer = myGame.gameState.playerTurn;
   myGame.gameState.playerTurn = playerName;
   myGame.gameState.message = `${playerName} думает какую отдать карту.`;
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

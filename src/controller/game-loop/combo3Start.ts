@@ -15,6 +15,7 @@ function combo3Start(game: IGame): IGame {
   }
   myGame.gameState.modalTitle = 'Выберите игрока и название карты, которую отдаст Вам игрок, если у него она есть!';
   myGame.gameState.message = '';
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

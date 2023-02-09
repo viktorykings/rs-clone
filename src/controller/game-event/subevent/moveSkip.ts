@@ -17,6 +17,7 @@ function moveSkip(game: IGame): IGame {
       myGame.gameState.functionState = 'waitEndMove';
     }
     myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
+    myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     addHistory(myGame, 'moveSkip', [myCard], true);
   } else {
     addHistory(myGame, 'moveSkip', [], false);

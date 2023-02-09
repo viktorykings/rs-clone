@@ -12,6 +12,7 @@ function moveSkip(game: IGame, idCard: number): IGame {
   myGame.gameState.playerWaitAnswer = '';
   myGame.gameState.timeNeed = waitEndMove;
   myGame.gameState.message = `${myGame.players[iPl].name} походил картой 'Нет'`;
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

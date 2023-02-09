@@ -90,6 +90,7 @@ function mainGameLoop(
   if (myGame.gameState.timeLeft > 1) {
     myGame.gameState.timeLeft -= 1;
   }
+  setGame(myGame);
 }
 
 export default mainGameLoop;

@@ -17,6 +17,7 @@ function endMoveNeutralize(game: IGame, ind: number): IGame {
   myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
   myGame.gameState.message = '';
   myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

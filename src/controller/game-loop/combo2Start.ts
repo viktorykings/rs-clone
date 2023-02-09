@@ -10,6 +10,7 @@ function combo2Start(game: IGame): IGame {
   myGame.gameState.modalDeck = [];
   myGame.gameState.modalTitle = 'Выберите игрока, который отдаст Вам одну карту!';
   myGame.gameState.message = '';
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

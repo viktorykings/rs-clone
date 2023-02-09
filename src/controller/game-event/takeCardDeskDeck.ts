@@ -45,6 +45,7 @@ function takeCardDeskDeck(game: IGame): IGame {
 
     addHistory(myGame, 'takeCardDeskDeck', [], false);
   }
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   // console.log(myGame);
   return myGame;
 }

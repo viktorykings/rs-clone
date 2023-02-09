@@ -11,6 +11,7 @@ function combo5GiveCard(game: IGame, idCard: number): IGame {
   const [card] = myGame.reboundDeck.splice(indCard, 1);
   myGame.players[indPlTake].deck.push(card);
   myGame.gameState.message = `${myGame.gameState.playerTurn} получает карту ${cardType[card.type].name}.`;
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 

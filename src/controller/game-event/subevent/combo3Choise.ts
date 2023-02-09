@@ -8,6 +8,7 @@ function combo3Choise(game: IGame, playerName: string, typeCard: number): IGame 
   myGame.gameState.playerTurn = playerName;
   myGame.gameState.modalTypeCard = typeCard;
   myGame.gameState.message = `${myGame.gameState.playerWaitAnswer} хочет получить карту ${cardType[typeCard].name} у ${playerName}.`;
+  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
 
