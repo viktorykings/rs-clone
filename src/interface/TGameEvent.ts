@@ -1,3 +1,3 @@
-type TGameEvent = 'takeCardDeskDeck' | 'endMove' | 'moveAttack';
+type TGameEvent = 'takeCardDeskDeck' | 'endMove' | 'moveAttack' | 'moveSkip';
 
 export default TGameEvent;
