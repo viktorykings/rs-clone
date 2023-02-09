@@ -15,6 +15,7 @@ interface IGame {
     playerTurn: string,
     stateGame: TStateGame,
     functionState: TFunctionState,
+    functionEtap: number,
     timerId: NodeJS.Timer | null;
     typeTern: number | null;
     playerWaitAnswer: string;
