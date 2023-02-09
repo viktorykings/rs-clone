@@ -31,11 +31,13 @@ function createGame(players: IPlayer [] = []): IGame {
     playerWaitAnswer: '',
     message: '',
     history: [],
+    modalVisible: false,
     modalPlayers: [],
     modalDeck: [],
     modalTitle: '',
     modalMessage: '',
     modalTypeCard: null,
+    choicePlayer: null,
   };
 
   return {
