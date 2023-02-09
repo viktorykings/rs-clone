@@ -4,33 +4,30 @@ import cardType from '../../../const/cardType';
 
 function combo3GiveCard(game: IGame, idCard: number): IGame {
   const myGame = { ...game };
-  const indPlGive = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
-  const indPlTake = findIndexPlayerTern(myGame.players, myGame.gameState.playerWaitAnswer);
-  const indCard = myGame.players[indPlGive].deck.findIndex((cr) => cr.id === idCard);
+  const indPlTake = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  let indPlGive = -1;
+  if (myGame.gameState.choicePlayer !== null) {
+    indPlGive = findIndexPlayerTern(myGame.players, myGame.gameState.choicePlayer.name);
+  }
+  const typeCard = myGame.gameState.modalDeck.find((cr) => cr.id === idCard)?.type;
+  const indCard = myGame.players[indPlGive].deck.findIndex(
+    (cr) => cr.type === typeCard
+      || (cr.type >= 8 && typeCard !== undefined
+          && typeCard >= 8),
+  );
   if (indCard === -1) {
-    if (myGame.gameState.modalTypeCard !== null) {
-      myGame.gameState.message = `У ${myGame.gameState.playerTurn} нет карты ${cardType[myGame.gameState.modalTypeCard].name}.`;
-    }
+    myGame.gameState.message = `У ${myGame.players[indPlGive].name} нет карты ${cardType[typeCard ?? -1].name}.`;
   } else {
-    if (myGame.gameState.modalTypeCard !== null
-      && myGame.gameState.modalTypeCard !== myGame.players[indPlGive].deck[indCard].type) {
-      myGame.gameState.message = `${myGame.gameState.playerWaitAnswer} попросил ${cardType[myGame.gameState.modalTypeCard].name}!`;
-      myGame.gameState.timeLeft = myGame.gameState.timeNeed;
-      return myGame;
-    }
     const [card] = myGame.players[indPlGive].deck.splice(indCard, 1);
     myGame.players[indPlTake].deck.push(card);
-    if (myGame.gameState.modalTypeCard !== null) {
-      myGame.gameState.message = `${myGame.gameState.playerWaitAnswer} получает карту ${cardType[myGame.gameState.modalTypeCard].name}.`;
-    }
+    myGame.gameState.message = `${myGame.players[indPlGive].name} получает карту ${cardType[typeCard ?? -1].name}.`;
   }
   myGame.gameState.functionState = 'waitPlayerTurn';
   myGame.gameState.stateGame = 'tern';
   myGame.gameState.modalTypeCard = null;
-  myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer;
-  myGame.gameState.playerWaitAnswer = '';
+  myGame.gameState.modalDeck = [];
+  myGame.gameState.modalMessage = '';
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
-  console.log(myGame);
   return myGame;
 }
 
