@@ -5,7 +5,6 @@ import addHistory from './addHistory';
 
 function moveSkip(game: IGame): IGame {
   const myGame = { ...game };
-  // const indCard = myGame.players[inPl].deck.findIndex((el) => el.id === myCard.id);
   if (myGame.showCards.length === 1 && myGame.showCards[0].type === 4) {
     const myCard = myGame.showCards[0];
     const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
