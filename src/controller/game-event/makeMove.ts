@@ -20,11 +20,11 @@ function makeMove(
   const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
   const typeTern = myGame.players[inPl].deck[indCard].type;
 
-  if ((myGame.gameState.stateGame === 'tern' && typeTern > 2 && typeTern <= 7)
+  if (((myGame.gameState.stateGame === 'tern' && typeTern > 2 && typeTern <= 7)
     || myGame.gameState.stateGame === 'doubleCombo'
     || myGame.gameState.stateGame === 'tripleCombo'
     || myGame.gameState.stateGame === 'fiveCombo'
-  ) {
+  ) && myGame.gameState.functionState === 'waitPlayerTurn') {
     if (indCard !== -1) {
       const pl = myGame.players[inPl];
       myGame.gameState.typeTern = typeTern;
