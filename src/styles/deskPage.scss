@@ -234,7 +234,7 @@ button{
     .main-player-cards-row{
       position: absolute;
       display: flex;
-      // flex-direction: row-reverse;
+      flex-direction: row-reverse;
       transition: all 0.5s ease 0s;
       img{
         width: 180px;
@@ -306,4 +306,23 @@ button{
 }
 .take-card-modal{
   display: none;
+}
+.animated-card{
+  animation: 1s takeCard ease;
+}
+@keyframes takeCard{
+  from{
+    transform: translate(100px, -350px);
+  }
+  to{
+    transform: translate(0, 0);
+  }
+}
+@keyframes moveCard{
+  from{
+    transform: translateY(-250px);
+  }
+  to{
+    transform: translateY(0);
+  }
 }

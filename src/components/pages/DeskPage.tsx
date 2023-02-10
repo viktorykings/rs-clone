@@ -35,7 +35,6 @@ export default function DeskPage({
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
   const [translateVal, setTranslateVal] = useState(0);
-  // const [sliderWidth, setWidth] = useState(game.players[0].deck.length * 190);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
   const showPrevCard = () => {
@@ -169,7 +168,8 @@ export default function DeskPage({
           <div className="main-player-cards-row" style={{ transform: `translateX(${translateVal}px)` }}>
             {playerState[0].deck.sort((a, b) => a.type - b.type).map((el) => (
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-              <div className="animate__animated animate__backInDown" key={el.id}>
+              // <div className="animate__animated animate__backInDown" key={el.id}>
+              <div className="animated-card" key={el.id}>
                 <img
                   src={el.link}
                   alt={el.name}
