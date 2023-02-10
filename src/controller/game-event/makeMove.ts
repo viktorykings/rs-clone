@@ -2,10 +2,12 @@ import IGame from '../../interface/IGame';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import cardType from '../../const/cardType';
 import findNextActivePlayer from './subevent/findNextActivePlayer';
-import { botWaitAnswer, playerWaitTurn } from '../../const/gameVariable';
+// import { botWaitAnswer, playerWaitTurn } from '../../const/gameVariable';
 import ICard from '../../interface/ICard';
 import startStateDeck from '../statePlayerDeck/startStateDeck';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
+import moveNeutralize from './subevent/moveNeutralize';
+import getPause from '../game-loop/subevent/getPause';
 // import ICard from '../../interface/ICard';
 
 function makeMove(
@@ -14,16 +16,16 @@ function makeMove(
   // setOurMessage: React.Dispatch<React.SetStateAction<string>>,
 ): IGame | null {
   // console.log('make move');
-  const myGame = { ...game };
+  let myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
   const typeTern = myGame.players[inPl].deck[indCard].type;
 
-  if ((myGame.gameState.stateGame === 'tern' && typeTern > 2 && typeTern <= 7)
+  if (((myGame.gameState.stateGame === 'tern' && typeTern > 2 && typeTern <= 7)
     || myGame.gameState.stateGame === 'doubleCombo'
     || myGame.gameState.stateGame === 'tripleCombo'
     || myGame.gameState.stateGame === 'fiveCombo'
-  ) {
+  ) && myGame.gameState.functionState === 'waitPlayerTurn') {
     if (indCard !== -1) {
       const pl = myGame.players[inPl];
       myGame.gameState.typeTern = typeTern;
@@ -63,16 +65,18 @@ function makeMove(
       myGame.gameState.playerWaitAnswer = pl.name;
       const nextPl = findNextActivePlayer(myGame);
       myGame.gameState.playerTurn = nextPl.name;
-      myGame.gameState.timeNeed = nextPl.isBot ? botWaitAnswer : playerWaitTurn;
+      myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);
+      myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     }
-  } else {
+  }/* else {
     myGame.gameState.message = 'Картами котов можно ходить только через режим Combo';
     // setOurMessage('Картами котов можно ходить только через режим Combo');
     return null;
-  }
-  /* if (myGame.gameState.stateGame === 'endTern') {
-    myGame = endMove(myGame);
   } */
+
+  if (myGame.gameState.functionState === 'waitNeutralize' && typeTern === 1) {
+    myGame = moveNeutralize(myGame, idCard);
+  }
   // console.log(myGame);
   return myGame;
 }

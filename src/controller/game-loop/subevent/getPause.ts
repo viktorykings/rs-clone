@@ -1,7 +1,16 @@
-function getPause(isBot: boolean, countTakeCard: number): number {
+import {
+  botWaitAnswer,
+  botWaitTurn,
+  playerWaitTurn,
+  waitEndMove,
+} from '../../../const/gameVariable';
+import TFunctionState from '../../../interface/TFunctionState';
+
+function getPause(isBot: boolean, functionState: TFunctionState): number {
   // pause for player
-  const time = isBot ? 10 : 12;
-  return countTakeCard > 0 ? time : 5;
+  let time = isBot ? botWaitTurn : playerWaitTurn;
+  if (functionState === 'waitAnserTurn') time = isBot ? botWaitAnswer : playerWaitTurn;
+  return functionState === 'waitEndMove' ? waitEndMove : time;
 }
 
 export default getPause;

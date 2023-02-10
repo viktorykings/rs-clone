@@ -15,6 +15,7 @@ interface IGame {
     playerTurn: string,
     stateGame: TStateGame,
     functionState: TFunctionState,
+    functionEtap: number,
     timerId: NodeJS.Timer | null;
     typeTern: number | null;
     playerWaitAnswer: string;
@@ -22,11 +23,13 @@ interface IGame {
     timeNeed: number,
     message: string,
     history: IHistory [],
+    modalVisible: boolean,
     modalPlayers: IPlayer[],
     modalDeck: ICard [],
     modalTitle: string,
     modalMessage: string,
     modalTypeCard: number | null,
+    choicePlayer: IPlayer | null,
   }
 }
 export interface Setter extends IGame {

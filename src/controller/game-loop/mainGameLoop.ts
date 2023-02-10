@@ -8,6 +8,10 @@ import combo5AutoCardGive from './subevent/combo5AutoCartGive';
 import waitAnserTurn from './waitAnsweTern';
 import waitEndMove from './waitEndMove';
 import waitPlayerTurn from './waitPlayerTurn';
+import moveAutoNeutralize from './subevent/moveAutoNeutralize';
+import endMoveAutoNeutralize from './subevent/endMoveAutoNeutralize';
+import endExplosion from './subevent/endExplosion';
+import endWaitEndNot from './subevent/endWaitEndNot';
 
 function mainGameLoop(
   game: IGame,
@@ -33,6 +37,10 @@ function mainGameLoop(
       case 'waitCombo3': combo3AutoChoise(myGame, setGame); return;
       case 'waitPlayerCombo3': combo3AutoCardGive(myGame, setGame); return;
       case 'waitCombo5': combo5AutoCardGive(myGame, setGame); return;
+      case 'waitNeutralize': moveAutoNeutralize(myGame, setGame); return;
+      case 'endNeutralize': endMoveAutoNeutralize(myGame, setGame); return;
+      case 'waitExplosion': endExplosion(myGame, setGame); return;
+      case 'waitEndNot': endWaitEndNot(myGame, setGame); return;
       default: return;
     }
   }
@@ -82,6 +90,7 @@ function mainGameLoop(
   if (myGame.gameState.timeLeft > 1) {
     myGame.gameState.timeLeft -= 1;
   }
+  setGame(myGame);
 }
 
 export default mainGameLoop;

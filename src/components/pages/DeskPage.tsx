@@ -8,7 +8,7 @@ import endMove from '../../controller/game-event/endMove';
 import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
-import combo3Choise from '../../controller/game-event/subevent/combo3Choise';
+import combo3Choise from '../../controller/game-event/subevent/combo3ChoisePlayer';
 import {
   checkFunctionState,
   checkFunctionStateCombo5,
