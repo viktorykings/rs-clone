@@ -17,8 +17,10 @@ function createPlayer(
     name,
     link,
     isBot,
+
     levelBot: !isBot ? null : levelBot,
     countTakeCard: 0,
+    active: true,
     deck,
     combos: {
       doubleCats,

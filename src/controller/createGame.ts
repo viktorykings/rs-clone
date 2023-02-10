@@ -4,6 +4,8 @@ import ICard from '../interface/ICard';
 import IPlayer from '../interface/IPlayer';
 import TStateGame from '../interface/IStateGame';
 import createDeckFirst from './createDeckFirst';
+import TFunctionState from '../interface/TFunctionState';
+import { playerWaitTurn } from '../const/gameVariable';
 
 function createGame(players: IPlayer [] = []): IGame {
   const settings: ISettings = { countPlayer: players.length, level: 'easy' };
@@ -16,11 +18,19 @@ function createGame(players: IPlayer [] = []): IGame {
 
   const stateGame: TStateGame = 'tern';
 
+  const functionState: TFunctionState = 'waitPlayerTurn';
+
   const gameState = {
-    playerTern: 'player1',
+    playerTurn: 'player1',
     stateGame,
+    functionState,
+    timerId: null,
     timeLeft: 30,
+    timeNeed: playerWaitTurn,
+    typeTern: null,
+    playerWaitAnswer: '',
     message: '',
+    history: [],
   };
 
   return {

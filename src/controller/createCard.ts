@@ -1,7 +1,7 @@
 import ICard from '../interface/ICard';
 import cardType from '../const/cardType';
 
-function createCard(id: number, type: number): ICard {
+function createCard(id: number, type: number, link: number): ICard {
   return {
     id,
     type,
@@ -9,7 +9,7 @@ function createCard(id: number, type: number): ICard {
     nameCombo: '',
     numberCombo: -1,
     enabled: false,
-    link: '',
+    link: cardType[type].links[link],
     description: cardType[type].description,
   };
 }
