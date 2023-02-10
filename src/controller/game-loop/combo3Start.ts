@@ -7,6 +7,7 @@ function combo3Start(game: IGame): IGame {
   const mPlayers = myGame.players.filter(
     (pl) => pl.name !== myGame.gameState.playerTurn && pl.active,
   );
+  myGame.gameState.modalVisible = true;
   myGame.gameState.modalPlayers = mPlayers;
   myGame.gameState.modalTypeCard = null;
   myGame.gameState.modalDeck = [];

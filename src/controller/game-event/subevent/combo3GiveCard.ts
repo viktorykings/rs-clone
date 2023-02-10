@@ -20,10 +20,11 @@ function combo3GiveCard(game: IGame, idCard: number): IGame {
   } else {
     const [card] = myGame.players[indPlGive].deck.splice(indCard, 1);
     myGame.players[indPlTake].deck.push(card);
-    myGame.gameState.message = `${myGame.players[indPlGive].name} получает карту ${cardType[typeCard ?? -1].name}.`;
+    myGame.gameState.message = `${myGame.players[indPlTake].name} получает карту ${cardType[typeCard ?? -1].name}.`;
   }
   myGame.gameState.functionState = 'waitPlayerTurn';
   myGame.gameState.stateGame = 'tern';
+  myGame.gameState.modalVisible = false;
   myGame.gameState.modalTypeCard = null;
   myGame.gameState.modalDeck = [];
   myGame.gameState.modalMessage = '';

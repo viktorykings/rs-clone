@@ -8,7 +8,7 @@ import endMove from '../../controller/game-event/endMove';
 import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
-import combo3Choise from '../../controller/game-event/subevent/combo3ChoisePlayer';
+// import combo3Choise from '../../controller/game-event/subevent/combo3ChoisePlayer';
 import {
   checkModalVisible,
   checkFunctionStateCombo5,
@@ -19,6 +19,7 @@ import {
   usedTripleCombo,
 } from './handlers/comboHandlers';
 import modalChoicePlayer from '../../controller/game-event/modalChoicePlayer';
+import modalChoiseCard from '../../controller/game-event/modalChoiceCard';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -36,8 +37,8 @@ export default function DeskPage({
     gameState,
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
-  const [isCombo3, setIsCombo3] = useState(false);
-  console.log(setIsCombo3);
+  // const [isCombo3, setIsCombo3] = useState(false);
+  // console.log(setIsCombo3);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
@@ -194,7 +195,7 @@ export default function DeskPage({
             </button>
           ))}
         </div>
-        <div className={isCombo3 ? 'players-cards-active' : 'players-cards'}>
+        <div className="players-cards-active">
           {game.gameState.modalDeck.map((el) => (
             <img
               src={el.link}
@@ -202,7 +203,7 @@ export default function DeskPage({
               width="50px"
               key={el.id}
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-              onMouseDown={() => combo3Choise(game, el.name)}
+              onMouseDown={() => modalChoiseCard(game, el.id)}
             />
           ))}
         </div>
