@@ -9,6 +9,7 @@ function combo2Start(game: IGame): IGame {
     (pl) => pl.name !== myGame.gameState.playerTurn && pl.active,
   );
   myGame.gameState.modalVisible = true;
+  myGame.gameState.modalCardVisible = false;
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalPlayers = mPlayers;
   myGame.gameState.modalDeck = [];

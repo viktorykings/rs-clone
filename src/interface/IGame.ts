@@ -30,6 +30,7 @@ interface IGame {
     modalMessage: string,
     modalTypeCard: number | null,
     choicePlayer: IPlayer | null,
+    modalCardVisible: boolean,
   }
 }
 export interface Setter extends IGame {
