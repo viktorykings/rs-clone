@@ -31,6 +31,7 @@ interface IGame {
     modalTypeCard: number | null,
     choicePlayer: IPlayer | null,
     modalCardVisible: boolean,
+    returnToDeck: boolean,
   }
 }
 export interface Setter extends IGame {

@@ -17,7 +17,7 @@ import {
   usedTripleCombo,
   handleChooseCard,
 } from './handlers/comboHandlers';
-import handleMove from './handlers/moveHandlers';
+import { handleMove, handleMoveNeut } from './handlers/moveHandlers';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -56,6 +56,7 @@ export default function DeskPage({
   const showPrevRebound = () => {
     setTranslateRebound(translateRebound + 160);
   };
+  const checkNeutralize = () => game.gameState.returnToDeck && game.gameState.playerTurn === 'player1';
 
   return (
     <main className="desk">
@@ -80,6 +81,18 @@ export default function DeskPage({
             alt="deck"
             onMouseDown={() => { setGame(takeCardDeskDeck(game)); }}
           />
+          <div className={checkNeutralize() ? 'return-to-deck-active' : 'return-to-deck'}>
+            <button type="button" onClick={() => handleMoveNeut(game, 1, setGame)}>First</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 2, setGame)}>Second</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 3, setGame)}>Third</button>
+            <button
+              type="button"
+              onClick={() => handleMoveNeut(game, game.deskDeck.length - 1, setGame)}
+            >
+              Last
+            </button>
+            <button type="button" onClick={() => handleMoveNeut(game, 0, setGame)}>Random</button>
+          </div>
           <p>
             Left
             {game.deskDeck.length}

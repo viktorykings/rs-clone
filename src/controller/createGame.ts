@@ -40,6 +40,7 @@ function createGame(players: IPlayer [] = []): IGame {
     modalTypeCard: null,
     choicePlayer: null,
     modalCardVisible: false,
+    returnToDeck: false,
   };
 
   return {

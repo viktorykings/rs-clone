@@ -10,6 +10,8 @@ function moveNeutralize(game: IGame, idCard: number): IGame {
   myGame.gameState.message = `${myGame.players[iPl].name} походил картой 'Обезвредить'.`;
   myGame.gameState.timeNeed = 5;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
+  myGame.gameState.returnToDeck = true;
+  console.log('moveneut', myGame);
   return myGame;
 }
 

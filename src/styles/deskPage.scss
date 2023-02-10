@@ -98,6 +98,20 @@ button{
       border-radius: 5px;
     }
   }
+  .deck{
+    position: relative;
+    .return-to-deck{
+      display: none;
+    }
+    .return-to-deck-active{
+      position: absolute;
+      @include cardsSize;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      top: 0;
+    }
+  }
   .play-cards-place{
     @include cardsSize;
     border: 1px dashed $text-color;
@@ -144,6 +158,7 @@ button{
         position: absolute;
         height: 240px;
         display: flex;
+        transition: all 0.5s ease;
       }
     }
   }
