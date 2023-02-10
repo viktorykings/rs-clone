@@ -1,12 +1,6 @@
 import React from 'react';
+import IModalBotProps from '../../../interface/IModalBotProps';
 
-export interface IModalBotProps {
-  title: string;
-  level: string;
-  updateLevel: (value: string) => void;
-  setGameLevel: (value: string) => void;
-  onSetLevel: () => void;
-}
 export default function ModalBot({
   title,
   level,

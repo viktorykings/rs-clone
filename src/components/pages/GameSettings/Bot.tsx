@@ -1,13 +1,5 @@
 import React from 'react';
-
-export interface IBotProps {
-  name: string;
-  isBot: boolean;
-  link: string;
-  level: string;
-  deletePlayer: (name: string) => void;
-  brdrColor: string;
-}
+import IBotProps from '../../../interface/IBotProps';
 
 export default function Bot({
   name,

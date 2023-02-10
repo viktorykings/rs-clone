@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ICarouselSettings from '../../../interface/ICarouselSettings';
+
 import av1big from '../../../assets/avatars/av1-big.jpg';
 import av2big from '../../../assets/avatars/av2-big.jpg';
 import av3big from '../../../assets/avatars/av3-big.jpg';
@@ -10,12 +12,10 @@ import av8big from '../../../assets/avatars/av8-big.jpg';
 import av9big from '../../../assets/avatars/av9-big.jpg';
 import audiourl from '../../../assets/sounds/button-click.mp3';
 
-export interface ICarousel {
-  curAvatar: string;
-  updateUrlAv: (url: string) => void;
-}
-
-export default function Carousel({ curAvatar, updateUrlAv }: ICarousel) {
+export default function Carousel({
+  curAvatar,
+  updateUrlAv,
+}: ICarouselSettings) {
   const audio = new Audio(audiourl);
   const buttonClick = () => {
     audio.play();

@@ -1,13 +1,5 @@
 import React from 'react';
-
-export interface IMainPlayer {
-  name: string;
-  isBot: boolean;
-  level: string;
-  avatar: string;
-  openModalChangeName: () => void;
-  openModalChangeAvatar: () => void;
-}
+import IMainPlayerSettings from '../../../interface/IMainPlayerSettings';
 
 export default function MainPlayer({
   name,
@@ -16,7 +8,7 @@ export default function MainPlayer({
   avatar,
   openModalChangeName,
   openModalChangeAvatar,
-}: IMainPlayer) {
+}: IMainPlayerSettings) {
   const viewTemplate = (
     <div className="human-player">
       <p className="human-player-name">{name}</p>

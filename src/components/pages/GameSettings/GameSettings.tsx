@@ -1,169 +1,31 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import Bot from './Bot';
-import createPlayer from '../../../controller/createPlayer';
-import IPlayer from '../../../interface/IPlayer';
 import MainPlayer from './MainPlayer';
 import ModalBot from './ModalBot';
 import ModalChangeName from './ModalChangeName';
 import ModalChangeAvatar from './ModalChangeAvatar';
-
-import av0 from '../../../assets/avCats/av0.png';
-import av1 from '../../../assets/avCats/av1.png';
-import av2 from '../../../assets/avCats/av2.png';
-import av3 from '../../../assets/avCats/av3.png';
-import av4 from '../../../assets/avCats/av4.png';
-import av5 from '../../../assets/avCats/av5.png';
-import av6 from '../../../assets/avCats/av6.png';
-import av7 from '../../../assets/avCats/av7.png';
-
-import defaultAvatar from '../../../assets/avatars/av9-big.jpg';
-
-interface IBotSettings {
-  name: string;
-  isBot: boolean;
-  link: string;
-  levelBot: string;
-}
-const { log } = console;
+import useSettings from './useSettings';
 
 export default function GameSettings() {
-  const [botLevel, setBotLevel] = useState('easy');
-
-  const updateBotLevel = (value: string) => {
-    setBotLevel(value);
-  };
-
-  const botsNames = [
-    'Diablo Gato',
-    'Puss in Boots',
-    'Пушистый донжуан',
-    'Чупакабра',
-    'Игривый дваждылюб',
-    'Рыжий убийца',
-    'bot 7',
-    'bot 8',
-    'bot 9',
-  ];
-  const avCats = [av0, av1, av2, av3, av4, av5, av6, av7];
-  const getRandomBotAvatar = (): string => {
-    const avatar = avCats[Math.floor(Math.random() * avCats.length)];
-
-    return avatar;
-  };
-
-  const getRandomBotName = (): string => {
-    const name = botsNames[Math.floor(Math.random() * botsNames.length)];
-
-    return name;
-  };
-  const DATA: IBotSettings[] = [
-    {
-      name: getRandomBotName(),
-      isBot: true,
-      link: getRandomBotAvatar(),
-      levelBot: 'easy',
-    },
-  ];
-  const dataMainPlayer: IBotSettings[] = [
-    {
-      name: 'Don Lokailo',
-      isBot: false,
-      link: '',
-      levelBot: 'easy',
-    },
-  ];
-
-  const [bots, setBots] = useState(DATA);
-
-  const [nameMainPlayer, setMainPlayer] = useState(dataMainPlayer[0].name);
-  const updateMainPlayer = (value: string) => {
-    setMainPlayer(value);
-  };
-
-  const [modal, setModal] = useState(false);
-  const [modalChangeAvatar, setModalChangeAvatar] = useState(false);
-  const [modalChangeName, setModalChangeName] = useState(false);
-  const [avatar, setAvatar] = useState(defaultAvatar);
-
-  const updateAvatar = (value: string) => {
-    setAvatar(value);
-  };
-
-  const setGameLevel = (value: string) => {
-    const editedBots = bots.map((bot) => {
-      if (value) {
-        return { ...bot, levelBot: value };
-      }
-      return bot;
-    });
-
-    setBots(editedBots);
-  };
-
-  const deleteBot = useCallback(
-    (namePLayer: string) => {
-      if (bots.length > 1) {
-        const remainingBots = bots.filter((bot) => namePLayer !== bot.name);
-        setBots(remainingBots);
-      }
-    },
-    [bots],
-  );
-
-  const getRandomColor = useCallback(() => {
-    const color = Math.floor(Math.random() * 16777215).toString(16);
-    return `#${color}`;
-  }, []);
-
-  function isBotNameExist(name: string) {
-    return (bots.find((bot) => bot.name === name) && true) || false;
-  }
-  function isBotAvatarExist(link: string) {
-    return (bots.find((bot) => bot.link === link) && true) || false;
-  }
-  function getBotAvatar(): string {
-    let result = getRandomBotAvatar();
-
-    while (isBotAvatarExist(result)) {
-      result = getRandomBotAvatar();
-    }
-    return result;
-  }
-  function getBotName(): string {
-    let result = getRandomBotName();
-
-    while (isBotNameExist(result)) {
-      result = getRandomBotName();
-    }
-    return result;
-  }
-  // Add New Bot
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (bots.length >= 4) {
-      return;
-    }
-    const newBotName = getBotName();
-    const newLink = getBotAvatar();
-
-    const newBot: IBotSettings = {
-      name: newBotName,
-      isBot: true,
-      link: newLink,
-      levelBot: 'easy',
-    };
-    setBots([...bots, newBot]);
-  }
-
-  function createBots(items: IBotSettings[]): void {
-    log(bots);
-    const result = items.reduce((acc: IPlayer[], cur) => {
-      const [n, isB, lnk, lvl] = [...Object.values(cur)];
-      acc.push(createPlayer(n, isB, lnk, lvl));
-      return acc;
-    }, []);
-    log('Create players: ', result);
-  }
+  const {
+    botLevel,
+    updateBotLevel,
+    bots,
+    mainPlayer,
+    updateNameMainPlayer,
+    updateAvatarMainPlayer,
+    setGameLevel,
+    deleteBot,
+    modal,
+    setModal,
+    modalChangeAvatar,
+    setModalChangeAvatar,
+    modalChangeName,
+    setModalChangeName,
+    getRandomColor,
+    handleSubmit,
+    createPlayers,
+  } = useSettings();
 
   return (
     <div className="settings">
@@ -215,23 +77,23 @@ export default function GameSettings() {
           {modalChangeName && (
             <ModalChangeName
               title="Change Name"
-              updateName={updateMainPlayer}
+              updateName={updateNameMainPlayer}
               onChangeName={() => setModalChangeName(false)}
             />
           )}
           {modalChangeAvatar && (
             <ModalChangeAvatar
-              curAvatar={avatar}
-              updateAvatar={updateAvatar}
+              curAvatar={mainPlayer.link}
+              updateAvatar={updateAvatarMainPlayer}
               onChangeAvatar={() => setModalChangeAvatar(false)}
               title="Change Avatar"
             />
           )}
           <MainPlayer
-            name={nameMainPlayer}
+            name={mainPlayer.name}
             isBot={false}
             level=""
-            avatar={avatar}
+            avatar={mainPlayer.link}
             openModalChangeName={() => setModalChangeName(true)}
             openModalChangeAvatar={() => setModalChangeAvatar(true)}
           />
@@ -240,7 +102,7 @@ export default function GameSettings() {
       <button
         type="button"
         className="start-btn btn"
-        onClick={() => createBots(bots)}
+        onClick={() => createPlayers(bots)}
       >
         Start Game
       </button>
