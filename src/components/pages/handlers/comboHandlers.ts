@@ -41,9 +41,11 @@ export const handleCombo5 = (
   myGame: IGame,
   index: number,
   setter: React.Dispatch<React.SetStateAction<IGame>>,
+  setterPlayers: React.Dispatch<React.SetStateAction<IPlayer[]>>,
 ) => {
   combo5GiveCard(myGame, index);
   setter(myGame);
+  setterPlayers([...myGame.players]);
 };
 
 export const clickDoubleCombo = (player: IPlayer): IPlayer => {

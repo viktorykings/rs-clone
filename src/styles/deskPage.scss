@@ -219,7 +219,7 @@ button{
     .main-player-cards-row{
       position: absolute;
       display: flex;
-      flex-direction: row-reverse;
+      // flex-direction: row-reverse;
       transition: all 0.5s ease 0s;
       img{
         width: 180px;

@@ -3,12 +3,10 @@ import React, {
   useMemo, useState,
 } from 'react';
 import Player from './Players';
-import makeMove from '../../controller/game-event/makeMove';
 import endMove from '../../controller/game-event/endMove';
 import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
-// import combo3Choise from '../../controller/game-event/subevent/combo3ChoisePlayer';
 import {
   checkModalVisible,
   checkFunctionStateCombo5,
@@ -19,10 +17,10 @@ import {
   usedTripleCombo,
   handleChooseCard,
 } from './handlers/comboHandlers';
+import handleMove from './handlers/moveHandlers';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
-// const infoCat = '../../assets/info-cat.png';
 
 export default function DeskPage({
   deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
@@ -37,15 +35,16 @@ export default function DeskPage({
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
   const [translateVal, setTranslateVal] = useState(0);
+  // const [sliderWidth, setWidth] = useState(game.players[0].deck.length * 190);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
-  const showNextCard = () => {
+  const showPrevCard = () => {
     if (translateVal < 0) {
       console.log(190 * playerState[0].deck.length - 190);
       setTranslateVal(translateVal + 190);
     }
   };
-  const showPrevCard = () => {
+  const showNextCard = () => {
     if (Math.abs(translateVal) < 190 * playerState[0].deck.length - 190 * 5) {
       console.log(190 * playerState[0].deck.length - 190 * 5);
       setTranslateVal(translateVal - 190);
@@ -103,8 +102,7 @@ export default function DeskPage({
                   <img
                     src={el.link}
                     alt="card"
-                    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                    onMouseDown={() => handleCombo5(game, el.id, setGame)}
+                    onMouseDown={() => handleCombo5(game, el.id, setGame, setPlayerState)}
                   />
                 ))
                 : <img src={emptyCardsPlace} alt="card" />}
@@ -156,7 +154,7 @@ export default function DeskPage({
         <button type="button" onClick={() => showPrevCard()} className="slider-controls">{'<'}</button>
         <div className="main-player-cards">
           <div className="main-player-cards-row" style={{ transform: `translateX(${translateVal}px)` }}>
-            {playerState[0].deck.map((el) => (
+            {playerState[0].deck.sort((a, b) => a.type - b.type).map((el) => (
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
               <div className="animate__animated animate__backInDown" key={el.id}>
                 <img
@@ -164,9 +162,7 @@ export default function DeskPage({
                   alt={el.name}
                   key={el.id}
                   onMouseDown={() => {
-                    const myGame = makeMove(game, el.id);
-                    if (myGame !== null) setGame(myGame);
-                    setPlayerState([...game.players]);
+                    handleMove(game, el.id, setGame, setPlayerState, setTranslateVal);
                   }}
                   className={el.nameCombo ? 'comboActive' : 'scaleCard'}
                 />
