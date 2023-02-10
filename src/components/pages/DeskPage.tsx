@@ -10,14 +10,15 @@ import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
 import combo3Choise from '../../controller/game-event/subevent/combo3ChoisePlayer';
 import {
-  checkFunctionState,
+  checkModalVisible,
   checkFunctionStateCombo5,
-  handleChoosePlayer,
+  // handleChoosePlayer,
   handleCombo5,
   usedDoubleCombo,
   usedFiveCombo,
   usedTripleCombo,
 } from './handlers/comboHandlers';
+import modalChoicePlayer from '../../controller/game-event/modalChoicePlayer';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -36,6 +37,7 @@ export default function DeskPage({
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
   const [isCombo3, setIsCombo3] = useState(false);
+  console.log(setIsCombo3);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
@@ -176,14 +178,16 @@ export default function DeskPage({
         </div>
         <button type="button" onClick={() => showNextCard()} className="slider-controls">{'>'}</button>
       </div>
-      <div className={checkFunctionState(game) ? 'take-card-modal-active' : 'take-card-modal'}>
+      <div className={checkModalVisible(game) ? 'take-card-modal-active' : 'take-card-modal'}>
         <div className="players">
           {game.gameState.modalPlayers.map((el) => (
             <button
               type="button"
               key={el.name}
               onClick={() => {
-                handleChoosePlayer(game, game.gameState.playerTurn, setGame, setIsCombo3);
+                // handleChoosePlayer(game, el.name, setGame, setIsCombo3);
+                modalChoicePlayer(game, el.name);
+                setGame(game);
               }}
             >
               {el.name}
@@ -198,7 +202,7 @@ export default function DeskPage({
               width="50px"
               key={el.id}
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-              onMouseDown={() => combo3Choise(game, game.gameState.playerTurn, el.type)}
+              onMouseDown={() => combo3Choise(game, el.name)}
             />
           ))}
         </div>

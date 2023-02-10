@@ -1,7 +1,8 @@
-import combo2ChoisePlayer from '../../../controller/game-event/subevent/combo2ChoisePlayer';
 import combo5GiveCard from '../../../controller/game-event/subevent/combo5GiveCard';
 import IGame from '../../../interface/IGame';
 import IPlayer from '../../../interface/IPlayer';
+import modalChoicePlayer from '../../../controller/game-event/modalChoicePlayer';
+// import combo2ChoisePlayer from '../../../controller/game-event/subevent/combo2ChoisePlayer';
 
 export const clearNameCombo = (player: IPlayer): void => {
   player.deck.map((el) => {
@@ -10,10 +11,7 @@ export const clearNameCombo = (player: IPlayer): void => {
     return null;
   });
 };
-export const checkFunctionState = (game: IGame) => {
-  const state = game.gameState.functionState;
-  return state === 'waitCombo2' || state === 'waitCombo3';
-};
+export const checkModalVisible = (game: IGame) => game.gameState.modalVisible;
 export const checkFunctionStateCombo5 = (game: IGame) => {
   const state = game.gameState.functionState;
   return state === 'waitCombo5';
@@ -22,8 +20,7 @@ export const handleIsCombo3 = (
   game: IGame,
   setter: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  const state = game.gameState.functionState;
-  if (state === 'waitCombo3') {
+  if (game.gameState.modalDeck.length < 0) {
     setter(true);
   }
   console.log(game);
@@ -34,14 +31,18 @@ export const handleChoosePlayer = (
   setter: React.Dispatch<React.SetStateAction<IGame>>,
   setterBoolean: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  const state = myGame.gameState.functionState;
-  if (state === 'waitCombo2') {
-    combo2ChoisePlayer(myGame, playerName);
-    setter(myGame);
-  }
-  if (state === 'waitCombo3') {
-    handleIsCombo3(myGame, setterBoolean);
-  }
+  // const state = myGame.gameState.functionState;
+  // if (state === 'waitCombo2') {
+  //   combo2ChoisePlayer(myGame, playerName);
+  //   setter(myGame);
+  // }
+  // if (state === 'waitCombo3') {
+  //   handleIsCombo3(myGame, setterBoolean);
+  // }
+  // eslint-disable-next-line no-param-reassign
+  myGame = modalChoicePlayer(myGame, playerName);
+  handleIsCombo3(myGame, setterBoolean);
+  setter(myGame);
 };
 export const handleCombo5 = (
   myGame: IGame,
