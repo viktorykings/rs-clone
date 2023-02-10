@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
+import './scss/gameSettings.scss';
 import DeskPage from './components/pages/DeskPage';
+
+// import GameSettings from './components/pages/GameSettings/GameSettings';
+
 import createGame from './controller/createGame';
 import createPlayer from './controller/createPlayer';
 import gameLoop from './controller/game-loop/gameLoop';
+
 
 function App(): JSX.Element {
   const player = createPlayer('player1', false);
@@ -29,6 +34,7 @@ function App(): JSX.Element {
   // mainGameLoop(game, setGame);
   return (
     <div className="App">
+
       <DeskPage
         deskDeck={deskDeck}
         settings={settings}
