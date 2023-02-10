@@ -12,14 +12,13 @@ import infoCat from '../../assets/info-cat.png';
 import {
   checkModalVisible,
   checkFunctionStateCombo5,
-  // handleChoosePlayer,
+  handleChoosePlayer,
   handleCombo5,
   usedDoubleCombo,
   usedFiveCombo,
   usedTripleCombo,
+  handleChooseCard,
 } from './handlers/comboHandlers';
-import modalChoicePlayer from '../../controller/game-event/modalChoicePlayer';
-import modalChoiseCard from '../../controller/game-event/modalChoiceCard';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -37,8 +36,6 @@ export default function DeskPage({
     gameState,
   }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
-  // const [isCombo3, setIsCombo3] = useState(false);
-  // console.log(setIsCombo3);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
@@ -185,11 +182,7 @@ export default function DeskPage({
             <button
               type="button"
               key={el.name}
-              onClick={() => {
-                // handleChoosePlayer(game, el.name, setGame, setIsCombo3);
-                modalChoicePlayer(game, el.name);
-                setGame(game);
-              }}
+              onClick={() => handleChoosePlayer(game, el.name, setGame)}
             >
               {el.name}
             </button>
@@ -198,12 +191,11 @@ export default function DeskPage({
         <div className="players-cards-active">
           {game.gameState.modalDeck.map((el) => (
             <img
-              src={el.link}
+              src={game.gameState.modalCardVisible ? el.link : emptyCardsPlace}
               alt="card"
               width="50px"
               key={el.id}
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-              onMouseDown={() => modalChoiseCard(game, el.id)}
+              onMouseDown={() => handleChooseCard(game, el.id, setGame)}
             />
           ))}
         </div>

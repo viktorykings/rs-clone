@@ -2,6 +2,7 @@ import combo5GiveCard from '../../../controller/game-event/subevent/combo5GiveCa
 import IGame from '../../../interface/IGame';
 import IPlayer from '../../../interface/IPlayer';
 import modalChoicePlayer from '../../../controller/game-event/modalChoicePlayer';
+import modalChoiseCard from '../../../controller/game-event/modalChoiceCard';
 // import combo2ChoisePlayer from '../../../controller/game-event/subevent/combo2ChoisePlayer';
 
 export const clearNameCombo = (player: IPlayer): void => {
@@ -16,33 +17,25 @@ export const checkFunctionStateCombo5 = (game: IGame) => {
   const state = game.gameState.functionState;
   return state === 'waitCombo5';
 };
-export const handleIsCombo3 = (
-  game: IGame,
-  setter: React.Dispatch<React.SetStateAction<boolean>>,
-) => {
-  if (game.gameState.modalDeck.length < 0) {
-    setter(true);
-  }
-  console.log(game);
-};
 export const handleChoosePlayer = (
   myGame: IGame,
   playerName: string,
   setter: React.Dispatch<React.SetStateAction<IGame>>,
-  setterBoolean: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  // const state = myGame.gameState.functionState;
-  // if (state === 'waitCombo2') {
-  //   combo2ChoisePlayer(myGame, playerName);
-  //   setter(myGame);
-  // }
-  // if (state === 'waitCombo3') {
-  //   handleIsCombo3(myGame, setterBoolean);
-  // }
   // eslint-disable-next-line no-param-reassign
   myGame = modalChoicePlayer(myGame, playerName);
-  handleIsCombo3(myGame, setterBoolean);
   setter(myGame);
+  console.log(myGame);
+};
+export const handleChooseCard = (
+  myGame: IGame,
+  cardId: number,
+  setter: React.Dispatch<React.SetStateAction<IGame>>,
+) => {
+  // eslint-disable-next-line no-param-reassign
+  myGame = modalChoiseCard(myGame, cardId);
+  setter(myGame);
+  console.log(myGame);
 };
 export const handleCombo5 = (
   myGame: IGame,
