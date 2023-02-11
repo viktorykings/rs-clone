@@ -11,8 +11,9 @@ function endMove(game: IGame): IGame {
   const indexPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   if (myGame.players[indexPl].countTakeCard === 0 && myGame.gameState.functionState === 'waitEndMove') {
     // все что показываем в сброс
-    if (myGame.showCards.length !== 0) myGame.reboundDeck.push(...myGame.showCards.splice(0));
+    myGame.reboundDeck.push(...myGame.showCards.splice(0));
     myGame.gameState.stateGame = 'tern';
+    // myGame.players[indexPl] = startStateDeck(myGame.players[indexPl], 'waitEndMove');
     myGame.players[indexPl].buttons.finishMove = false;
     myGame.players[indexPl].buttons.comboEnabled = false;
     myGame.players[indexPl].buttons.dobleVisible = false;

@@ -23,8 +23,8 @@ function favorGiveCard(game: IGame, idCard: number): IGame {
   }
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalVisible = false;
-  myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer;
-  myGame.gameState.playerWaitAnswer = '';
+  myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer[0].name;
+  myGame.gameState.playerWaitAnswer.splice(0, 1);
   myGame.reboundDeck.push(...myGame.showCards.splice(0));
   if (myGame.gameState.timeLeft < 2) myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   console.log(myGame);

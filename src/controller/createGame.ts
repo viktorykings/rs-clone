@@ -29,7 +29,7 @@ function createGame(players: IPlayer [] = []): IGame {
     timeLeft: 30,
     timeNeed: playerWaitTurn,
     typeTern: null,
-    playerWaitAnswer: '',
+    playerWaitAnswer: [],
     message: 'Ваш ход.',
     history: [],
     modalVisible: false,

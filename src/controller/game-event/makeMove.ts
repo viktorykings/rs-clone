@@ -58,7 +58,8 @@ function makeMove(
       // console.log(nPl);
       myGame.players[indPl] = nPl;
       myGame.gameState.functionState = 'waitAnserTurn';
-      myGame.gameState.playerWaitAnswer = pl.name;
+      // myGame.gameState.playerWaitAnswer = pl.name;
+      myGame.gameState.playerWaitAnswer.unshift(pl);
       const nextPl = findNextActivePlayer(myGame);
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);

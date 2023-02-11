@@ -18,7 +18,7 @@ interface IGame {
     functionEtap: number,
     timerId: NodeJS.Timer | null;
     typeTern: number | null;
-    playerWaitAnswer: string;
+    playerWaitAnswer: IPlayer [];
     timeLeft: number,
     timeNeed: number,
     message: string,
