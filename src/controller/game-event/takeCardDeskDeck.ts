@@ -7,7 +7,7 @@ function takeCardDeskDeck(game: IGame): IGame {
   const myGame = { ...game };
   const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   if (myGame.players[iPl].countTakeCard > 0) {
-    const card = myGame.deskDeck.splice(-1, 1);
+    const card = myGame.deskDeck.splice(0, 1);
     myGame.players[iPl].countTakeCard -= 1;
     if (card[0].type !== 0) {
       myGame.players[iPl].deck.push(...card);

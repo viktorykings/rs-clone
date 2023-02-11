@@ -12,6 +12,7 @@ import moveAutoNeutralize from './subevent/moveAutoNeutralize';
 import endMoveAutoNeutralize from './subevent/endMoveAutoNeutralize';
 import endExplosion from './subevent/endExplosion';
 import endWaitEndNot from './subevent/endWaitEndNot';
+import endAutoEndLook from './subevent/endAutoEndLook';
 
 function mainGameLoop(
   game: IGame,
@@ -41,6 +42,7 @@ function mainGameLoop(
       case 'endNeutralize': endMoveAutoNeutralize(myGame, setGame); return;
       case 'waitExplosion': endExplosion(myGame, setGame); return;
       case 'waitEndNot': endWaitEndNot(myGame, setGame); return;
+      case 'waitPlayerLook': endAutoEndLook(myGame, setGame); return;
       default: return;
     }
   }
