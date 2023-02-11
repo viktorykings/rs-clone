@@ -19,7 +19,11 @@ function endMoveNeutralize(game: IGame, ind: number): IGame {
   myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   myGame.gameState.returnToDeck = false;
-  // console.log('neut', myGame);
+  myGame.players[iPl].buttons.finishMove = true;
+  myGame.players[iPl].buttons.dobleVisible = false;
+  myGame.players[iPl].buttons.tripleVisible = false;
+  myGame.players[iPl].buttons.fiveVisible = false;
+  console.log('neut', myGame);
   return myGame;
 }
 

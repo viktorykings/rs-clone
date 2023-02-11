@@ -27,7 +27,7 @@ function endMove(game: IGame): IGame {
     console.log('next player', myGame.gameState.playerTurn);
     const nIndPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
     myGame.gameState.functionState = 'waitPlayerTurn';
-    myGame.players[nIndPl] = startStateDeck(myGame.players[nIndPl]);
+    myGame.players[nIndPl] = startStateDeck(myGame.players[nIndPl], myGame.gameState.functionState);
     myGame.gameState.timeNeed = getPause(
       myGame.players[nIndPl].isBot,
       myGame.gameState.functionState,
