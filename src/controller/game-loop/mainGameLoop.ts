@@ -15,6 +15,7 @@ import endWaitEndNot from './subevent/endWaitEndNot';
 import endAutoEndLook from './subevent/endAutoEndLook';
 import favorAutoPlayerChoice from './subevent/favorAutoPlayerChoice';
 import favorAutoCardGive from './subevent/favorAutoCardGive';
+import win from './subevent/win';
 
 function mainGameLoop(
   game: IGame,
@@ -47,6 +48,7 @@ function mainGameLoop(
       case 'waitPlayerLook': endAutoEndLook(myGame, setGame); return;
       case 'waitFavorPlayer': favorAutoPlayerChoice(myGame, setGame); return;
       case 'waitFavorPlayerCard': favorAutoCardGive(myGame, setGame); return;
+      case 'win': win(myGame, setGame); return;
       default: return;
     }
   }
