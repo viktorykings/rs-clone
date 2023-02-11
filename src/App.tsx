@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
+import './scss/gameSettings.scss';
 import AboutPage from './components/pages/AboutPage';
 import DeskPage from './components/pages/DeskPage';
 import MainPage from './components/pages/MainPage';
 import Settings from './components/pages/Settings';
+import GameSettings from './components/pages/GameSettings/GameSettings';
 import createGame from './controller/createGame';
 import createPlayer from './controller/createPlayer';
 import gameLoop from './controller/game-loop/gameLoop';
@@ -35,7 +37,7 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/gamesettings" element={<Settings />} />
+        <Route path="/gamesettings" element={<GameSettings />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/about" element={<AboutPage />} />
         <Route
@@ -50,7 +52,7 @@ function App(): JSX.Element {
               gameState={gameState}
               setGame={setGame}
             />
-        )}
+          )}
         />
       </Routes>
     </BrowserRouter>
