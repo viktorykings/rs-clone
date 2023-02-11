@@ -22,8 +22,7 @@ function combo2GiveCard(game: IGame, idCard: number): IGame {
   myGame.gameState.modalDeck = [];
   myGame.gameState.modalTitle = '';
 
-  // myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer;
-  // myGame.gameState.playerWaitAnswer = '';
+  myGame.reboundDeck.push(...myGame.showCards.splice(0));
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }

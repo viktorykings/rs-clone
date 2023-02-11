@@ -28,6 +28,7 @@ function combo3GiveCard(game: IGame, idCard: number): IGame {
   myGame.gameState.modalTypeCard = null;
   myGame.gameState.modalDeck = [];
   myGame.gameState.modalMessage = '';
+  myGame.reboundDeck.push(...myGame.showCards.splice(0));
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }
