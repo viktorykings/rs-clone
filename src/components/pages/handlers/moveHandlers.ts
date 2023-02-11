@@ -1,5 +1,6 @@
 import makeMove from '../../../controller/game-event/makeMove';
 import endMoveNeutralize from '../../../controller/game-event/subevent/endMoveNeutralize';
+import takeCardDeskDeck from '../../../controller/game-event/takeCardDeskDeck';
 import IGame from '../../../interface/IGame';
 import IPlayer from '../../../interface/IPlayer';
 
@@ -8,12 +9,12 @@ export const handleMove = (
   cardId: number,
   setter: React.Dispatch<React.SetStateAction<IGame>>,
   setterPlayers: React.Dispatch<React.SetStateAction<IPlayer[]>>,
-  setWidth: React.Dispatch<React.SetStateAction<number>>,
+  setTranslate: React.Dispatch<React.SetStateAction<number>>,
 ) => {
   const myGame = makeMove(game, cardId);
   if (myGame !== null) setter(myGame);
   setterPlayers([...game.players]);
-  setWidth(0);
+  setTranslate(0);
 };
 
 export const handleMoveNeut = (
@@ -24,4 +25,12 @@ export const handleMoveNeut = (
   endMoveNeutralize(game, ind);
   setter(game);
   console.log(game.deskDeck);
+};
+
+export const handleTakeDeskCard = (
+  game: IGame,
+  setter: React.Dispatch<React.SetStateAction<IGame>>,
+) => {
+  takeCardDeskDeck(game);
+  setter(game);
 };

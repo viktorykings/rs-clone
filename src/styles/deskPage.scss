@@ -50,6 +50,7 @@ button{
   justify-content: space-between;
   flex-grow: 1;
   min-height: 240px;
+  max-height: 415px;
 
   .game-info{
     height: 120px;
@@ -91,6 +92,7 @@ button{
   .deck,
   .play-cards,
   .rebound-deck{
+    flex-shrink: 0;
     box-sizing: border-box;
     cursor: pointer;
     img{
@@ -112,9 +114,15 @@ button{
       top: 0;
     }
   }
+  .play-cards{
+    img{
+      margin: 0 2px;
+    }
+  }
   .play-cards-place{
     @include cardsSize;
     border: 1px dashed $text-color;
+    flex: 1;
   }
   .rebound-deck{
     box-sizing: border-box;
@@ -179,6 +187,13 @@ button{
     height: 80px;
     width: 80px;
     display: inline-block;
+  }
+  .bots-animated-cards{
+    display: flex;
+    // opacity: 0;
+    // width: 0;
+    // height: 0;
+    animation: 2s botTakeCard ease;
   }
 }
 
@@ -296,8 +311,9 @@ button{
     width: 720px;
     display: flex;
     flex-wrap: wrap;
-    &img{
+    img{
       width: 80px;
+      margin: 5px;
     }
   }
   .players-cards{
@@ -308,21 +324,42 @@ button{
   display: none;
 }
 .animated-card{
-  animation: 1s takeCard ease;
+  animation: 2s takeCard ease;
+  position: relative;
+  display: flex;
 }
+.animated-move{
+  animation: 2s makeMove ease;
+}
+
 @keyframes takeCard{
   from{
-    transform: translate(100px, -350px);
+    transform: translate(0, -350px);
   }
   to{
     transform: translate(0, 0);
   }
 }
-@keyframes moveCard{
+@keyframes makeMove{
+  from{
+    opacity: 0;
+  }
+  50%{
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  to{
+    transform: scale(1);
+  }
+}
+@keyframes botTakeCard{
   from{
     transform: translateY(-250px);
+    // opacity: 1;
   }
   to{
     transform: translateY(0);
+    // opacity: 0;
   }
 }
+

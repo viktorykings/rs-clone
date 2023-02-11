@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import Player from './Players';
 import endMove from '../../controller/game-event/endMove';
-import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
+// import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
 import IGame, { Setter } from '../../interface/IGame';
 import infoCat from '../../assets/info-cat.png';
 import {
@@ -17,7 +17,7 @@ import {
   usedTripleCombo,
   handleChooseCard,
 } from './handlers/comboHandlers';
-import { handleMove, handleMoveNeut } from './handlers/moveHandlers';
+import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveHandlers';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -37,23 +37,30 @@ export default function DeskPage({
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
+  const cardWidth = 190;
+  const sliderLen = 5;
+  const reboundCardWidth = 160;
   const showPrevCard = () => {
     if (translateVal < 0) {
-      console.log(190 * playerState[0].deck.length - 190);
-      setTranslateVal(translateVal + 190);
+      console.log(cardWidth * playerState[0].deck.length - cardWidth);
+      setTranslateVal(translateVal + cardWidth);
     }
   };
   const showNextCard = () => {
-    if (Math.abs(translateVal) < 190 * playerState[0].deck.length - 190 * 5) {
-      console.log(190 * playerState[0].deck.length - 190 * 5);
-      setTranslateVal(translateVal - 190);
+    if (Math.abs(translateVal) < cardWidth * playerState[0].deck.length - cardWidth * sliderLen) {
+      console.log(cardWidth * playerState[0].deck.length - cardWidth * sliderLen);
+      setTranslateVal(translateVal - cardWidth);
     }
   };
   const showNextRebound = () => {
-    setTranslateRebound(translateRebound - 160);
+    if (Math.abs(translateRebound) < game.reboundDeck.length - 1 * reboundCardWidth) {
+      setTranslateRebound(translateRebound - reboundCardWidth);
+    }
   };
   const showPrevRebound = () => {
-    setTranslateRebound(translateRebound + 160);
+    if (translateRebound < 0) {
+      setTranslateRebound(translateRebound + reboundCardWidth);
+    }
   };
   const checkNeutralize = () => game.gameState.returnToDeck && game.gameState.playerTurn === 'player1';
 
@@ -78,7 +85,7 @@ export default function DeskPage({
           <img
             src={cardBack}
             alt="deck"
-            onMouseDown={() => { setGame(takeCardDeskDeck(game)); }}
+            onMouseDown={() => handleTakeDeskCard(game, setGame)}
           />
           <div className={checkNeutralize() ? 'return-to-deck-active' : 'return-to-deck'}>
             <button type="button" onClick={() => handleMoveNeut(game, 1, setGame)}>First</button>
@@ -102,7 +109,7 @@ export default function DeskPage({
           {// eslint-disable-next-line no-restricted-globals
           showCards.length === 0
             ? <div className="play-cards-place" />
-            : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animate__animated animate__backInUp" />)
+            : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animated-move" />)
           }
         </div>
         <div className={checkFunctionStateCombo5(game) ? 'rebound-deck-active' : 'rebound-deck'}>
@@ -166,7 +173,7 @@ export default function DeskPage({
         <button type="button" onClick={() => showPrevCard()} className="slider-controls">{'<'}</button>
         <div className="main-player-cards">
           <div className="main-player-cards-row" style={{ transform: `translateX(${translateVal}px)` }}>
-            {playerState[0].deck.sort((a, b) => a.type - b.type).map((el) => (
+            {playerState[0].deck.map((el) => (
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
               // <div className="animate__animated animate__backInDown" key={el.id}>
               <div className="animated-card" key={el.id}>
@@ -202,7 +209,6 @@ export default function DeskPage({
             <img
               src={game.gameState.modalCardVisible ? el.link : emptyCardsPlace}
               alt="card"
-              width="50px"
               key={el.id}
               onMouseDown={() => handleChooseCard(game, el.id, setGame)}
             />
