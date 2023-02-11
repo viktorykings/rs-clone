@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
+import AboutPage from './components/pages/AboutPage';
 import DeskPage from './components/pages/DeskPage';
+import MainPage from './components/pages/MainPage';
+import Settings from './components/pages/Settings';
 import createGame from './controller/createGame';
 import createPlayer from './controller/createPlayer';
 import gameLoop from './controller/game-loop/gameLoop';
@@ -28,17 +32,28 @@ function App(): JSX.Element {
   useEffect(() => gameLoop(game, setGame), [game]);
   // mainGameLoop(game, setGame);
   return (
-    <div className="App">
-      <DeskPage
-        deskDeck={deskDeck}
-        settings={settings}
-        players={players}
-        reboundDeck={reboundDeck}
-        showCards={showCards}
-        gameState={gameState}
-        setGame={setGame}
-      />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/gamesettings" element={<MainPage />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route
+          path="/desk"
+          element={(
+            <DeskPage
+              deskDeck={deskDeck}
+              settings={settings}
+              players={players}
+              reboundDeck={reboundDeck}
+              showCards={showCards}
+              gameState={gameState}
+              setGame={setGame}
+            />
+        )}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
