@@ -1,17 +1,17 @@
 import IGame from '../../../interface/IGame';
-import combo3Choise from '../../game-event/subevent/combo3ChoisePlayer';
+import favorChoicePlayer from '../../game-event/subevent/favorChoicePlayer';
 import choiceIndexArr from './subevent/choiceIndexArr';
 
-function combo3AutoChoise(
+function favorAutoPlayerChoice(
   game: IGame,
   setGame: React.Dispatch<React.SetStateAction<IGame>>,
 ): void {
   const indPl = choiceIndexArr(game.gameState.modalPlayers);
-  const myGame = combo3Choise(
+  const myGame = favorChoicePlayer(
     game,
     game.gameState.modalPlayers[indPl].name,
   );
   setGame(myGame);
 }
 
-export default combo3AutoChoise;
+export default favorAutoPlayerChoice;

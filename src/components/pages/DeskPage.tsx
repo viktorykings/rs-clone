@@ -93,7 +93,7 @@ export default function DeskPage({
             <button type="button" onClick={() => handleMoveNeut(game, 3, setGame)}>Third</button>
             <button
               type="button"
-              onClick={() => handleMoveNeut(game, game.deskDeck.length - 1, setGame)}
+              onClick={() => handleMoveNeut(game, game.deskDeck.length + 1, setGame)}
             >
               Last
             </button>

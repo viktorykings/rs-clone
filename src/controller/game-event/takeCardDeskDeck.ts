@@ -14,10 +14,14 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.players[iPl].buttons.finishMove = myGame.players[iPl].countTakeCard === 0;
       myGame.gameState.message = `${myGame.players[iPl].name} взял 1 карту.`;
       myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
-      myGame.gameState.timeNeed = getPause(
+      myGame.players[iPl].buttons.dobleEnabled = false;
+      myGame.players[iPl].buttons.tripleEnabled = false;
+      myGame.players[iPl].buttons.fiveEnabled = false;
+      myGame.gameState.timeLeft = getPause(
         myGame.players[iPl].isBot,
         myGame.gameState.functionState,
       );
+      if (myGame.gameState.functionState === 'waitTakeCardDeskDeck') myGame.gameState.timeLeft = 3;
       // myGame.gameState.timeNeed = waitEndMove;
       addHistory(myGame, 'takeCardDeskDeck', card, true);
     } else {
@@ -31,7 +35,7 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.gameState.timeNeed = 3;
       if (neutralize !== -1) {
         myGame.gameState.functionState = 'waitNeutralize';
-        myGame.gameState.timeNeed = getPause(
+        myGame.gameState.timeLeft = getPause(
           myGame.players[iPl].isBot,
           myGame.gameState.functionState,
         );
@@ -45,7 +49,7 @@ function takeCardDeskDeck(game: IGame): IGame {
 
     addHistory(myGame, 'takeCardDeskDeck', [], false);
   }
-  myGame.gameState.timeLeft = myGame.gameState.timeNeed;
+  // myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   // console.log(myGame);
   return myGame;
 }

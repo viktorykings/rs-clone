@@ -46,7 +46,7 @@ function createDeckFirst(players: IPlayer []): ICardPlayers {
   }
   deskDeck.sort(() => Math.random() - 0.5);
 
-  playersDeck = playersDeck.map((pl) => startStateDeck(pl));
+  playersDeck = playersDeck.map((pl) => startStateDeck(pl, ''));
 
   return { deskDeck, playersDeck };
 }

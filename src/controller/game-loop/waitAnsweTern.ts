@@ -19,8 +19,8 @@ function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction
   myGame.gameState.playerTurn = nextPl.name;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
 
-  if (nextPl.name === myGame.gameState.playerWaitAnswer) {
-    myGame.gameState.playerWaitAnswer = '';
+  if (nextPl.name === myGame.gameState.playerWaitAnswer[0].name) {
+    myGame.gameState.playerWaitAnswer.splice(0, 1);
     myGame.gameState.functionState = 'waitPlayerTurn';
     myGame.gameState.timeNeed = nextPl.isBot ? botWaitTurn : playerWaitTurn;
 
@@ -44,7 +44,7 @@ function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction
       default: break;
     }
     myGame.gameState.typeTern = null;
-    myGame.reboundDeck.push(...myGame.showCards.splice(0));
+    // myGame.reboundDeck.push(...myGame.showCards.splice(0));
   }
 
   setGame(myGame);

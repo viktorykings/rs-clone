@@ -12,6 +12,10 @@ import moveAutoNeutralize from './subevent/moveAutoNeutralize';
 import endMoveAutoNeutralize from './subevent/endMoveAutoNeutralize';
 import endExplosion from './subevent/endExplosion';
 import endWaitEndNot from './subevent/endWaitEndNot';
+import endAutoEndLook from './subevent/endAutoEndLook';
+import favorAutoPlayerChoice from './subevent/favorAutoPlayerChoice';
+import favorAutoCardGive from './subevent/favorAutoCardGive';
+import win from './subevent/win';
 
 function mainGameLoop(
   game: IGame,
@@ -41,6 +45,10 @@ function mainGameLoop(
       case 'endNeutralize': endMoveAutoNeutralize(myGame, setGame); return;
       case 'waitExplosion': endExplosion(myGame, setGame); return;
       case 'waitEndNot': endWaitEndNot(myGame, setGame); return;
+      case 'waitPlayerLook': endAutoEndLook(myGame, setGame); return;
+      case 'waitFavorPlayer': favorAutoPlayerChoice(myGame, setGame); return;
+      case 'waitFavorPlayerCard': favorAutoCardGive(myGame, setGame); return;
+      case 'win': win(myGame, setGame); return;
       default: return;
     }
   }
@@ -85,6 +93,20 @@ function mainGameLoop(
     && myGame.players[inPl].isBot) {
     // вызов функции хода бота
     console.log('Bot do move');
+  }
+
+  if (myGame.gameState.functionState === 'waitFavorPlayer'
+    && myGame.gameState.timeLeft === 4
+    && myGame.players[inPl].isBot) {
+    // вызов функции бота выбора игрока для одолжить
+    console.log('Bot maybe choise player for Favor');
+  }
+
+  if (myGame.gameState.functionState === 'waitFavorPlayerCard'
+  && myGame.gameState.timeLeft === 4
+  && myGame.players[inPl].isBot) {
+  // вызов функции бота выбора карты, которую нужно отдать Одолжить
+    console.log('Bot maybe choise player for Favor');
   }
 
   if (myGame.gameState.timeLeft > 1) {

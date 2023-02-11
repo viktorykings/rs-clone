@@ -2,20 +2,16 @@ import IGame from '../../interface/IGame';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import cardType from '../../const/cardType';
 import findNextActivePlayer from './subevent/findNextActivePlayer';
-// import { botWaitAnswer, playerWaitTurn } from '../../const/gameVariable';
 import ICard from '../../interface/ICard';
 import startStateDeck from '../statePlayerDeck/startStateDeck';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
 import moveNeutralize from './subevent/moveNeutralize';
 import getPause from '../game-loop/subevent/getPause';
-// import ICard from '../../interface/ICard';
 
 function makeMove(
   game: IGame,
   idCard: number,
-  // setOurMessage: React.Dispatch<React.SetStateAction<string>>,
 ): IGame | null {
-  // console.log('make move');
   let myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
@@ -57,12 +53,13 @@ function makeMove(
       }
       clearNameCombo(pl);
       const indPl = findIndexPlayerTern(myGame.players, pl.name);
-      const nPl = startStateDeck(pl);
-      console.log('----pl----');
-      console.log(nPl);
+      const nPl = startStateDeck(pl, myGame.gameState.functionState);
+      // console.log('----pl----');
+      // console.log(nPl);
       myGame.players[indPl] = nPl;
       myGame.gameState.functionState = 'waitAnserTurn';
-      myGame.gameState.playerWaitAnswer = pl.name;
+      // myGame.gameState.playerWaitAnswer = pl.name;
+      myGame.gameState.playerWaitAnswer.unshift(pl);
       const nextPl = findNextActivePlayer(myGame);
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);

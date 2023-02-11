@@ -18,7 +18,7 @@ interface IGame {
     functionEtap: number,
     timerId: NodeJS.Timer | null;
     typeTern: number | null;
-    playerWaitAnswer: string;
+    playerWaitAnswer: IPlayer [];
     timeLeft: number,
     timeNeed: number,
     message: string,
@@ -32,6 +32,7 @@ interface IGame {
     choicePlayer: IPlayer | null,
     modalCardVisible: boolean,
     returnToDeck: boolean,
+    showCardVisible: boolean,
   }
 }
 export interface Setter extends IGame {

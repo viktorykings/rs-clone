@@ -29,8 +29,8 @@ function createGame(players: IPlayer [] = []): IGame {
     timeLeft: 30,
     timeNeed: playerWaitTurn,
     typeTern: null,
-    playerWaitAnswer: '',
-    message: '',
+    playerWaitAnswer: [],
+    message: 'Ваш ход.',
     history: [],
     modalVisible: false,
     modalPlayers: [],
@@ -41,6 +41,7 @@ function createGame(players: IPlayer [] = []): IGame {
     choicePlayer: null,
     modalCardVisible: false,
     returnToDeck: false,
+    showCardVisible: true,
   };
 
   return {
