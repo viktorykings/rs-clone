@@ -74,7 +74,7 @@ function makeMove(
   if (myGame.gameState.functionState === 'waitNeutralize' && typeTern === 1) {
     myGame = moveNeutralize(myGame, idCard);
   }
-  // console.log(myGame);
+  console.log(myGame);
   return myGame;
 }
 

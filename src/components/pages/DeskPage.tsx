@@ -53,7 +53,7 @@ export default function DeskPage({
     }
   };
   const showNextRebound = () => {
-    if (Math.abs(translateRebound) < game.reboundDeck.length - 1 * reboundCardWidth) {
+    if (Math.abs(translateRebound) < (game.reboundDeck.length - 1) * reboundCardWidth) {
       setTranslateRebound(translateRebound - reboundCardWidth);
     }
   };
@@ -119,6 +119,7 @@ export default function DeskPage({
               {checkFunctionStateCombo5(game)
                 ? game.reboundDeck.map((el) => (
                   <img
+                    key={el.id}
                     src={el.link}
                     alt="card"
                     onMouseDown={() => handleCombo5(game, el.id, setGame, setPlayerState)}
