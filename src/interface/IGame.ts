@@ -33,6 +33,7 @@ interface IGame {
     modalCardVisible: boolean,
     returnToDeck: boolean,
     showCardVisible: boolean,
+    playerWin: boolean,
   }
 }
 export interface Setter extends IGame {

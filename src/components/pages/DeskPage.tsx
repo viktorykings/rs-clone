@@ -18,6 +18,7 @@ import {
   handleChooseCard,
 } from './handlers/comboHandlers';
 import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveHandlers';
+import EndGameModal from './EndGameModal';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -193,29 +194,32 @@ export default function DeskPage({
         </div>
         <button type="button" onClick={() => showNextCard()} className="slider-controls">{'>'}</button>
       </div>
-      <div className={checkModalVisible(game) ? 'take-card-modal-active' : 'take-card-modal'}>
-        <div className="players">
-          {game.gameState.modalPlayers.map((el) => (
-            <button
-              type="button"
-              key={el.name}
-              onClick={() => handleChoosePlayer(game, el.name, setGame)}
-            >
-              {el.name}
-            </button>
-          ))}
-        </div>
-        <div className="players-cards-active">
-          {game.gameState.modalDeck.map((el) => (
-            <img
-              src={game.gameState.modalCardVisible ? el.link : emptyCardsPlace}
-              alt="card"
-              key={el.id}
-              onMouseDown={() => handleChooseCard(game, el.id, setGame)}
-            />
-          ))}
+      <div className={checkModalVisible(game) ? 'modal-bg-active' : 'modal-bg'}>
+        <div className={checkModalVisible(game) ? 'take-card-modal-active' : 'take-card-modal'}>
+          <div className="players">
+            {game.gameState.modalPlayers.map((el) => (
+              <button
+                type="button"
+                key={el.name}
+                onClick={() => handleChoosePlayer(game, el.name, setGame)}
+              >
+                {el.name}
+              </button>
+            ))}
+          </div>
+          <div className="players-cards-active">
+            {game.gameState.modalDeck.map((el) => (
+              <img
+                src={game.gameState.modalCardVisible ? el.link : emptyCardsPlace}
+                alt="card"
+                key={el.id}
+                onMouseDown={() => handleChooseCard(game, el.id, setGame)}
+              />
+            ))}
+          </div>
         </div>
       </div>
+      <EndGameModal show={game.gameState.playerWin} />
     </main>
   );
 }
