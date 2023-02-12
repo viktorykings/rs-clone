@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import IGame from '../../interface/IGame';
 
 interface EndGame {
   show: boolean,
+  game: IGame,
 }
 
-export default function EndGameModal({ show }: EndGame): JSX.Element {
+export default function EndGameModal({ show, game }: EndGame): JSX.Element {
   return (
     <div className={show ? 'end-game-bg-active' : 'end-game-bg'}>
       <div className="end-game">
-        <h1>you win!</h1>
+        <h2>{game.gameState.message}</h2>
         <div className="end-game-buttons">
           <Link to="/gamesettings"><button type="button">Новая игра</button></Link>
           <Link to="/"><button type="button">Главное меню</button></Link>

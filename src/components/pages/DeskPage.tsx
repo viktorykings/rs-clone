@@ -219,7 +219,7 @@ export default function DeskPage({
           </div>
         </div>
       </div>
-      <EndGameModal show={game.gameState.playerWin} />
+      <EndGameModal show={game.gameState.endGame} game={game} />
     </main>
   );
 }
