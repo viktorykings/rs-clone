@@ -8,14 +8,14 @@ import MainPage from './components/pages/MainPage';
 import Settings from './components/pages/Settings';
 import GameSettings from './components/pages/GameSettings/GameSettings';
 import createGame from './controller/createGame';
-import createPlayer from './controller/createPlayer';
+// import createPlayer from './controller/createPlayer';
 import gameLoop from './controller/game-loop/gameLoop';
 
 function App(): JSX.Element {
-  const player = createPlayer('player1', false);
-  const player1 = createPlayer('и');
-  const player2 = createPlayer('л');
-  const [game, setGame] = useState(createGame([player, player1, player2]));
+  // const player = createPlayer('player1', false);
+  // const player1 = createPlayer('и');
+  // const player2 = createPlayer('л');
+  const [game, setGame] = useState(createGame());
   // const game = createGame([player, player1, player2]);
   const { deskDeck } = game;
   const { settings } = game;
@@ -37,12 +37,15 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/gamesettings" element={<GameSettings />} />
+        <Route
+          path="/gamesettings"
+          element={<GameSettings setGame={setGame} />}
+        />
         <Route path="/settings" element={<Settings />} />
         <Route path="/about" element={<AboutPage />} />
         <Route
           path="/desk"
-          element={(
+          element={
             <DeskPage
               deskDeck={deskDeck}
               settings={settings}
@@ -52,7 +55,7 @@ function App(): JSX.Element {
               gameState={gameState}
               setGame={setGame}
             />
-          )}
+          }
         />
       </Routes>
     </BrowserRouter>

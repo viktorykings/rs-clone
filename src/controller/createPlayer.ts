@@ -19,7 +19,7 @@ function createPlayer(
     isBot,
 
     levelBot: !isBot ? null : levelBot,
-    countTakeCard: 0,
+    countTakeCard: 1,
     active: true,
     deck,
     combos: {
