@@ -11,7 +11,7 @@ import {
   avCats,
 } from './dataSettings';
 
-const { log } = console;
+// const { log } = console;
 
 const { getRandomBotName, getRandomBotAvatar } = utils();
 
@@ -102,7 +102,7 @@ export default function useSettings() {
     };
     setBots([...bots, newBot]);
   }
-  function createPlayers(items: IPlayerSettings[]): void {
+  function createPlayers(items: IPlayerSettings[]): IPlayer[] {
     // заполняем массив ботами
     const result = items.reduce((acc: IPlayer[], cur) => {
       const [n, isB, lnk, lvl] = [...Object.values(cur)];
@@ -112,8 +112,9 @@ export default function useSettings() {
 
     // доабавляеем главного игрока
     const [n, isB, lnk, lvl] = [...Object.values(mainPlayer)];
-    result.push(createPlayer(n, isB, lnk, lvl));
-    log('Create players: ', result);
+    result.unshift(createPlayer(n, isB, lnk, lvl));
+    // log('Create players: ', result);
+    return result;
   }
 
   return {

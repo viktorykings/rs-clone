@@ -1,12 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Bot from './Bot';
 import MainPlayer from './MainPlayer';
 import ModalBot from './ModalBot';
 import ModalChangeName from './ModalChangeName';
 import ModalChangeAvatar from './ModalChangeAvatar';
 import useSettings from './useSettings';
+import IGame from '../../../interface/IGame';
+import createGame from '../../../controller/createGame';
 
-export default function GameSettings() {
+interface IGameSettings {
+  setGame: (obj: IGame) => void;
+}
+
+export default function GameSettings({ setGame }: IGameSettings) {
   const {
     botLevel,
     updateBotLevel,
@@ -99,13 +106,18 @@ export default function GameSettings() {
           />
         </div>
       </div>
-      <button
-        type="button"
-        className="start-btn btn"
-        onClick={() => createPlayers(bots)}
-      >
-        Start Game
-      </button>
+      <Link to="/desk">
+        <button
+          type="button"
+          className="start-btn btn"
+          onClick={() => {
+            const Players = createPlayers(bots);
+            setGame(createGame(Players));
+          }}
+        >
+          Start Game
+        </button>
+      </Link>
       <button
         type="button"
         className="btn"
