@@ -1,0 +1,365 @@
+$main-red: #75210c;
+$highlights: #fbff12;
+$text-color: #fff;
+
+@mixin cardsSize{
+  height: 240px;
+  width: 160px;
+  border-radius: 5px;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 1280px;
+  height: auto;
+  margin: 0 auto;
+  background-color: $main-red;
+}
+button{
+  cursor: pointer;
+}
+
+.desk{
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(../assets/desk.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+.other-players,
+.main-player{
+  display: flex;
+  justify-content: space-between;
+  min-height: 150px;
+  flex-shrink: 0;
+}
+.game{
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  min-height: 240px;
+  max-height: 415px;
+
+  .game-info{
+    height: 120px;
+    width: 180px;
+    .game-info-cat{
+      img{
+        display: inline-block;
+        height: 160px;
+        width: 160px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+    }
+    .game-info-messages{
+      background-color: $text-color;
+      height: 80px;
+      width: 120px;
+      border-radius: 20px;
+      position: relative;
+      text-align: center;
+    }
+    .game-info-messages:before{
+      content: ' ';
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 10px;
+      top: -25px;
+      border: 15px solid;
+      border-color: transparent $text-color $text-color transparent;
+    }
+    .game-info-timer{
+      background-color: $text-color;
+      border-radius: 10px;
+      width: 30px;
+    }
+  }
+
+  .deck,
+  .play-cards,
+  .rebound-deck{
+    flex-shrink: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    img{
+      @include cardsSize;
+      border-radius: 5px;
+    }
+  }
+  .deck{
+    position: relative;
+    .return-to-deck{
+      display: none;
+    }
+    .return-to-deck-active{
+      position: absolute;
+      @include cardsSize;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      top: 0;
+    }
+  }
+  .play-cards{
+    img{
+      margin: 0 2px;
+    }
+  }
+  .play-cards-place{
+    @include cardsSize;
+    border: 1px dashed $text-color;
+    flex: 1;
+  }
+  .rebound-deck{
+    box-sizing: border-box;
+    width: 223px;
+    height: 240px;
+    transform: rotate(135deg) translate(-20%, -40%);
+    transition: all 0.5s ease-in-out;
+    .rebound-deck-controls{
+      display: none;
+    }
+    &-active{
+      width: 230px;
+      height: 240px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img{
+        @include cardsSize;
+      }
+      transform: rotate(-0deg) translate(0, 0);
+      transition: all 0.5s ease-in-out;
+      .rebound-deck-controls{
+        display: flex;
+        height: 40px;
+        width: 32px;
+        font-size: 30px;
+        color: $highlights;
+        border: 1px solid $highlights;
+        border-radius: 5px;
+        background: transparent;
+      }
+      .rebound-deck-container{
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        width: 160px;
+        height: 240px;
+      }
+      .rebound-deck-row{
+        position: absolute;
+        height: 240px;
+        display: flex;
+        transition: all 0.5s ease;
+      }
+    }
+  }
+}
+.player{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  height: 80px;
+  width: 150px;
+  background-color: #fff;
+  border-radius: 45px;
+  border: 3px solid $main-red;
+
+  img{
+    background-color: green;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    display: inline-block;
+  }
+  .bots-animated-cards{
+    display: flex;
+    // opacity: 0;
+    // width: 0;
+    // height: 0;
+    animation: 2s botTakeCard ease;
+  }
+}
+
+.main-player{
+  height: 185px;
+  .main-player-container{
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    flex-shrink: 0;
+    .control-buttons{
+        display: flex;
+        flex-direction: column;
+        .combo-visible{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          opacity: 1;
+          button{
+            margin: 5px 0;
+            width: 100px;
+            height: 20px;
+            // background-color: transparent;
+            // color: $highlights;
+            // border: 1px solid $highlights;
+            border-radius: 5px;
+          }
+        }
+        .combo-hidden{
+          opacity: 0;
+        }
+    }
+  }
+  .slider-controls{
+    height: 50px;
+    background: transparent;
+    color: $highlights;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+    font-size: 30px;
+    border: 1 px solid $highlights;
+    border-radius: 5px;
+  }
+  .slider-controls:hover{
+    opacity: 1;
+  }
+  .main-player-cards{
+    width: 950px;
+    overflow-x: clip;
+    position: relative;
+
+    .main-player-cards-row{
+      position: absolute;
+      display: flex;
+      flex-direction: row-reverse;
+      transition: all 0.5s ease 0s;
+      img{
+        width: 180px;
+        margin: 5px;
+        border-radius: 5px;
+        transition: all 0.5s ease-in-out 0s;
+        border: none;
+        outline: none;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .scaleCard:hover{
+        transform: translateY(-120px);
+        border: 2px solid $highlights;
+        box-shadow: 0 0 10px $highlights;
+      }
+      .comboActive{
+        transform: translateY(-80px);
+        border: 2px solid $highlights;
+      }
+    }
+  }
+}
+.activePlayer{
+  border: 2px solid $highlights;
+  box-shadow: 0 0 10px $highlights;
+}
+.take-card-modal-active{
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: 240px;
+  width: 800px;
+  min-height: 450px;
+  background-color: $main-red;
+  color: $text-color;
+  border-radius: 30px;
+  .players{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    width: 700px;
+    margin: 0 auto;
+    button{
+      height: 50px;
+      width: 90px;
+      margin: 10px;
+      background-color: transparent;
+      border: 2px solid $highlights;
+      border-radius: 10px;
+      transition: background-color .5s ease;
+    }
+    button:hover{
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+  .players-cards-active{
+    margin: 0 auto;
+    width: 720px;
+    display: flex;
+    flex-wrap: wrap;
+    img{
+      width: 80px;
+      margin: 5px;
+    }
+  }
+  .players-cards{
+    display: none;
+  }
+}
+.take-card-modal{
+  display: none;
+}
+.animated-card{
+  animation: 2s takeCard ease;
+  position: relative;
+  display: flex;
+}
+.animated-move{
+  animation: 2s makeMove ease;
+}
+
+@keyframes takeCard{
+  from{
+    transform: translate(0, -350px);
+  }
+  to{
+    transform: translate(0, 0);
+  }
+}
+@keyframes makeMove{
+  from{
+    opacity: 0;
+  }
+  50%{
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  to{
+    transform: scale(1);
+  }
+}
+@keyframes botTakeCard{
+  from{
+    transform: translateY(-250px);
+    // opacity: 1;
+  }
+  to{
+    transform: translateY(0);
+    // opacity: 0;
+  }
+}
+
