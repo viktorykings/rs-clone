@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
+$main-red: #970d14;
+$highlights: #fbff12;
+$text-color: #fff;
+.main-page-bg{
+  background-image: url(../assets/bg.jpg);
+  background-size: 100% 100%;
+  width: 100%;
+  min-height: 660px;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container{
+    box-sizing: border-box;
+    width: 500px;
+    height: 300px;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $main-red;
+    border: 1px solid $text-color;
+    border-radius: 10px;
+    button{
+        height: 50px;
+        width: 300px;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 1px solid $main-red;
+        transition: all 1s ease;
+        font-size: 20px;
+        &:hover{
+          background-color: transparent;
+          border: 1px solid $text-color;
+          color: $text-color;
+        }
+      }
+  }
+}

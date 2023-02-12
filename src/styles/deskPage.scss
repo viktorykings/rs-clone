@@ -1,4 +1,6 @@
-$main-red: #75210c;
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
+$main-red: #970d14;
 $highlights: #fbff12;
 $text-color: #fff;
 
@@ -9,9 +11,7 @@ $text-color: #fff;
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Gloria Hallelujah', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -22,6 +22,7 @@ body {
 }
 button{
   cursor: pointer;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 .desk{
@@ -29,7 +30,8 @@ button{
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  min-height: 100vh;
+  min-height: 660px;
+  max-height: 920px;
   background-image: url(../assets/desk.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -71,6 +73,9 @@ button{
       border-radius: 20px;
       position: relative;
       text-align: center;
+      line-height: 1.2;
+      font-size: 15px;
+      padding: 5px;
     }
     .game-info-messages:before{
       content: ' ';
@@ -86,6 +91,8 @@ button{
       background-color: $text-color;
       border-radius: 10px;
       width: 30px;
+      padding: 5px;
+      box-sizing: border-box;
     }
   }
 
@@ -205,22 +212,27 @@ button{
     width: 160px;
     flex-shrink: 0;
     .control-buttons{
+        margin: 5px 0 0 0;
         display: flex;
         flex-direction: column;
         .combo-visible{
           display: flex;
-          flex-direction: column;
           align-items: center;
           justify-content: center;
           opacity: 1;
           button{
-            margin: 5px 0;
-            width: 100px;
-            height: 20px;
+            margin: 2px;
+            width: 50px;
+            height: 60px;
             // background-color: transparent;
             // color: $highlights;
-            // border: 1px solid $highlights;
+            border: 1px solid black;
             border-radius: 5px;
+            transition: all 0.5s ease;
+            &:hover{
+              border: 1px solid $highlights;
+              background-color: rgba(255, 255, 255, 0.5);
+            }
           }
         }
         .combo-hidden{
@@ -230,16 +242,22 @@ button{
   }
   .slider-controls{
     height: 50px;
+    width: 30px;
+    line-height: 0;
+    font-size: 30px;
     background: transparent;
     color: $highlights;
     opacity: 0.5;
     transition: opacity 0.5s ease;
-    font-size: 30px;
-    border: 1 px solid $highlights;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
   }
   .slider-controls:hover{
     opacity: 1;
+    border: 2px solid $highlights;
   }
   .main-player-cards{
     width: 950px;
@@ -323,6 +341,12 @@ button{
 .take-card-modal{
   display: none;
 }
+.modal-bg-active{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-bg{
+  background-color: transparent;
+}
 .animated-card{
   animation: 2s takeCard ease;
   position: relative;
@@ -363,3 +387,90 @@ button{
   }
 }
 
+@keyframes explosion{
+  0%{
+    background: transparent;
+  }
+  10%{
+    background: $highlights;
+  }
+  20%{
+    background: orangered;
+  }
+  30%{
+    background: orange;
+  }
+  40%{
+    background: red;
+  }
+  50%{
+    background: orange;
+  }
+  60%{
+    background: orangered;
+  }
+  70%{
+    background: $highlights;
+  }
+  80%{
+    background: red;
+  }
+  90%{
+    background: $main-red;
+  }
+  100%{
+    background: url(../assets/bg.jpg);
+    background-size: contain;
+  }
+}
+.end-game-bg-active{
+  animation: 1s explosion ease;
+  background: url(../assets/bg.jpg);
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  .end-game{
+    box-sizing: border-box;
+    height: 400px;
+    width: 500px;
+    border-radius: 10px;
+    border: 1px solid $text-color;
+    position: absolute;
+    top: 60px;
+    left: 390px;
+    background-color: $main-red;
+    color: $text-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 50px 50px;
+    font-size: 32px;
+    .end-game-buttons{
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      button{
+        height: 50px;
+        width: 300px;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 1px solid $main-red;
+        transition: all 1s ease;
+        font-size: 20px;
+        &:hover{
+          background-color: transparent;
+          border: 1px solid $text-color;
+          color: $text-color;
+        }
+      }
+    }
+  }
+}
+.end-game-bg{
+  display: none;
+}
