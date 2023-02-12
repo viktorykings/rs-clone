@@ -9,8 +9,10 @@ function gameLoop(
   console.log(game.gameState.functionState);
   if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
 
-  const myGame = { ...game };
-  myGame.gameState.timerId = setInterval(() => { mainGameLoop(myGame, setGame); }, 1000);
+  if (game.players.length > 0) {
+    const myGame = { ...game };
+    myGame.gameState.timerId = setInterval(() => { mainGameLoop(myGame, setGame); }, 1000);
+  }
 }
 
 export default gameLoop;

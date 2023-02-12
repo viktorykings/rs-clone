@@ -20,8 +20,11 @@ function createGame(players: IPlayer [] = []): IGame {
 
   const functionState: TFunctionState = 'waitPlayerTurn';
 
+  let playerTurn = '';
+  if (players.length > 0) playerTurn = players[0].name;
+
   const gameState = {
-    playerTurn: 'player1',
+    playerTurn,
     stateGame,
     functionState,
     functionEtap: 0,

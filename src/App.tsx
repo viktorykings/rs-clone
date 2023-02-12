@@ -45,7 +45,7 @@ function App(): JSX.Element {
         <Route path="/about" element={<AboutPage />} />
         <Route
           path="/desk"
-          element={
+          element={(
             <DeskPage
               deskDeck={deskDeck}
               settings={settings}
@@ -55,7 +55,7 @@ function App(): JSX.Element {
               gameState={gameState}
               setGame={setGame}
             />
-          }
+          )}
         />
       </Routes>
     </BrowserRouter>
