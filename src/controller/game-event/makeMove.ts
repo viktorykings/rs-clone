@@ -67,6 +67,8 @@ function makeMove(
       myGame.gameState.playerWaitAnswer.unshift(nPl);
       let nextPl = findNextActivePlayer(myGame);
       nextPl = startStateDeck(nextPl, myGame.gameState.functionState, true);
+      const indPlN = findIndexPlayerTern(myGame.players, nextPl.name);
+      myGame.players[indPlN] = nextPl;
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);
       myGame.gameState.timeLeft = myGame.gameState.timeNeed;

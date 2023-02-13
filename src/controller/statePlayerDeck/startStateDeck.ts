@@ -12,7 +12,8 @@ function startStateDeck(player: IPlayer, functionState: TFunctionState, isTurn: 
   myPl.buttons.fiveEnabled = false;
   myPl.buttons.finishMove = false;
 
-  if (functionState !== 'waitEndMove' && functionState !== 'waitAnserTurn') {
+  if (functionState !== 'waitEndMove' && functionState !== 'waitAnserTurn'
+    && functionState !== 'waitPlayerLook') {
     const deckCats = player.deck.filter((card) => card.type >= 8 && card.type <= 12);
     deckCats.sort((a, b) => a.type - b.type);
     let i2 = -1;
@@ -71,7 +72,8 @@ function startStateDeck(player: IPlayer, functionState: TFunctionState, isTurn: 
     myPl.deck.map((card) => { card.enabled = card.type >= 3 && card.type <= 7; return card; });
   }
 
-  if ((functionState === 'waitEndMove' || functionState === 'waitAnserTurn') && isTurn) myPl.buttons.finishMove = true;
+  if ((functionState === 'waitEndMove' || functionState === 'waitAnserTurn'
+    || functionState === 'waitPlayerLook') && isTurn) myPl.buttons.finishMove = true;
 
   return myPl;
 }
