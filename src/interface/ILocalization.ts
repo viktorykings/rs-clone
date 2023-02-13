@@ -8,6 +8,7 @@ interface Pages {
   settings: SettingsPage,
   deskPage: DeskPage,
   endGameModal: EndGameModal,
+  startGame: string,
 }
 
 interface MainPage {
@@ -34,6 +35,7 @@ interface DeskPageBtns {
 interface ModalTitles {
   combo: string,
   favour: string,
+  comboStart: string[],
 }
 interface GameEvents {
   makeMove: Move,

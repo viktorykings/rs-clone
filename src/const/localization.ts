@@ -26,9 +26,11 @@ const langs: ILocalization = {
       modalTitles: {
         combo: 'Выберите карту!',
         favour: 'Выберите игрока, который отдаст Вам карту!',
+        comboStart: ['Выберите игрока, у которого заберете карту!', 'Выберите игрока который отдаст Вам карту, если у него она есть!', 'Выберите любую карту из отбоя!'],
       },
     },
-    endGameModal: { buttons: ['Новая игра', 'Главное меню'] },
+    endGameModal: { buttons: ['Новая игра', 'Главное меню', 'Вы победили!'] },
+    startGame: 'Ваш ход!',
   },
   en: {
     main: { start: 'Start game', settings: 'Settings', about: 'About' },
@@ -55,9 +57,11 @@ const langs: ILocalization = {
       modalTitles: {
         combo: 'Choose a card!',
         favour: 'Choose a player who will give you a card!',
+        comboStart: ['Choose player, whose card u\'ll take!', 'Choose player, who\'ll give you card, if they have it!', 'Choose any card from rebound!'],
       },
     },
-    endGameModal: { buttons: ['New game', 'Main menu'] },
+    endGameModal: { buttons: ['New game', 'Main menu', 'You win!'] },
+    startGame: 'Your turn!',
   },
 };
 

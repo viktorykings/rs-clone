@@ -59,7 +59,9 @@ export default function DeskPage({
       setTranslateRebound(translateRebound + reboundCardWidth);
     }
   };
-  const checkNeutralize = () => game.gameState.returnToDeck && game.gameState.playerTurn === 'player1';
+  const checkNeutralize = () => (
+    game.gameState.returnToDeck && game.gameState.playerTurn === game.players[0].name
+  );
 
   return (
     <main className="desk">
@@ -192,6 +194,7 @@ export default function DeskPage({
       </div>
       <div className={checkModalVisible(game) ? 'modal-bg-active' : 'modal-bg'}>
         <div className={checkModalVisible(game) ? 'take-card-modal-active' : 'take-card-modal'}>
+          <h5>{game.gameState.modalTitle}</h5>
           <div className="players">
             {game.gameState.modalPlayers.map((el) => (
               <button

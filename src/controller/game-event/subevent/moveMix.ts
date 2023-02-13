@@ -6,7 +6,7 @@ import langs from '../../../const/localization';
 
 function moveMix(game: IGame): IGame {
   const currLang = game.settings.lang;
-  const base = langs[currLang].deskPage.gameMsg.explosion;
+  const base = langs[currLang].deskPage.gameMsg.mix;
   const myGame = { ...game };
   if (myGame.showCards.length === 1 && myGame.showCards[0].type === 6) {
     const myCard = myGame.showCards[0];

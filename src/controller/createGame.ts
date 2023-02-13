@@ -7,6 +7,7 @@ import createDeckFirst from './createDeckFirst';
 import TFunctionState from '../interface/TFunctionState';
 import { playerWaitTurn } from '../const/gameVariable';
 import EasyBot from './game-loop/bots/easyBot';
+import langs from '../const/localization';
 
 function createGame(players: IPlayer [] = []): IGame {
   const settings: ISettings = {
@@ -28,6 +29,9 @@ function createGame(players: IPlayer [] = []): IGame {
   let playerTurn = '';
   if (players.length > 0) playerTurn = players[0].name;
 
+  const currLang = settings.lang;
+  const base = langs[currLang].startGame;
+
   const bot = new EasyBot();
   const gameState = {
     playerTurn,
@@ -39,7 +43,7 @@ function createGame(players: IPlayer [] = []): IGame {
     timeNeed: playerWaitTurn,
     typeTern: null,
     playerWaitAnswer: [],
-    message: 'Ваш ход.',
+    message: `${base}`,
     history: [],
     modalVisible: false,
     modalPlayers: [],

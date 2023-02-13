@@ -6,7 +6,7 @@ import langs from '../../../const/localization';
 
 function moveSkip(game: IGame): IGame {
   const currLang = game.settings.lang;
-  const base = langs[currLang].deskPage.gameMsg.explosion;
+  const base = langs[currLang].deskPage.gameMsg.skip;
   const myGame = { ...game };
   if (myGame.showCards.length === 1 && myGame.showCards[0].type === 4) {
     const myCard = myGame.showCards[0];
