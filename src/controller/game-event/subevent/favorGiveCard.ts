@@ -31,7 +31,7 @@ function favorGiveCard(game: IGame, idCard: number): IGame {
   myGame.gameState.playerWaitAnswer.splice(0, 1);
   myGame.reboundDeck.push(...myGame.showCards.splice(0));
   if (myGame.gameState.timeLeft < 2) myGame.gameState.timeLeft = myGame.gameState.timeNeed;
-  console.log(myGame);
+  // console.log(myGame);
   return myGame;
 }
 

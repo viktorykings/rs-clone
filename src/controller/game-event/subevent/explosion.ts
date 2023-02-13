@@ -1,5 +1,6 @@
 import IGame from '../../../interface/IGame';
 import getPause from '../../game-loop/subevent/getPause';
+import startStateDeck from '../../statePlayerDeck/startStateDeck';
 import findIndexPlayerTern from './findIndexPlayerTern';
 import findNextActivePlayer from './findNextActivePlayer';
 
@@ -19,6 +20,8 @@ function explosion(game: IGame): IGame {
       myGame.gameState.stateGame = 'tern';
       myGame.gameState.functionState = 'waitPlayerTurn';
       myGame.gameState.playerTurn = nextPl.name;
+      const inPl = findIndexPlayerTern(myGame.players, nextPl.name);
+      myGame.players[inPl] = startStateDeck(myGame.players[inPl], 'waitPlayerTurn', true);
       myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);
       myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     }
