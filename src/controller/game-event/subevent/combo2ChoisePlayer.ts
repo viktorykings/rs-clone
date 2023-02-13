@@ -1,7 +1,10 @@
+import langs from '../../../const/localization';
 import IGame from '../../../interface/IGame';
 import combo2GiveCard from './combo2GiveCard';
 
 function combo2ChoisePlayer(game: IGame, playerName: string): IGame {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.modalTitles.combo;
   let myGame = { ...game };
   myGame.gameState.functionState = 'waitPlayerCombo2';
   myGame.gameState.choicePlayer = myGame.players.find((pl) => pl.name === playerName) ?? null;
@@ -10,7 +13,7 @@ function combo2ChoisePlayer(game: IGame, playerName: string): IGame {
   if (myGame.gameState.choicePlayer !== null) {
     myGame.gameState.modalDeck = myGame.gameState.choicePlayer.deck;
   }
-  myGame.gameState.modalTitle = 'Выберите карту!';
+  myGame.gameState.modalTitle = `${base}`;
   myGame.gameState.message = '';
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
 

@@ -1,8 +1,11 @@
+import langs from '../../../const/localization';
 import IGame from '../../../interface/IGame';
 import getPause from '../../game-loop/subevent/getPause';
 import favorGiveCard from './favorGiveCard';
 
 function favorChoicePlayer(game: IGame, playerName: string): IGame {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.gameMsg.favour;
   let myGame = { ...game };
   myGame.gameState.functionState = 'waitFavorPlayerCard';
   myGame.gameState.choicePlayer = myGame.players.find((pl) => pl.name === playerName) ?? null;
@@ -19,7 +22,7 @@ function favorChoicePlayer(game: IGame, playerName: string): IGame {
     );
   }
   myGame.gameState.modalTitle = '';
-  myGame.gameState.message = `${myGame.gameState.playerTurn} думает какую отдать карту!`;
+  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base}`;
 
   if (myGame.gameState.choicePlayer !== null && myGame.gameState.choicePlayer.deck.length <= 1) {
     myGame = favorGiveCard(myGame, myGame.gameState.choicePlayer.deck.length === 1

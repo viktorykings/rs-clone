@@ -22,18 +22,31 @@ interface EndGameModal {
   buttons: string[],
 }
 interface DeskPage {
-  buttons: DeskPageBtns
+  buttons: DeskPageBtns,
   gameMsg: GameEvents,
+  modalTitles: ModalTitles,
 }
 interface DeskPageBtns {
   neutButtons: string[],
   comboButtons: string[],
   endMoveBtn: string,
 }
+interface ModalTitles {
+  combo: string,
+  favour: string,
+}
 interface GameEvents {
   makeMove: Move,
   endMove: string[],
   combos: string[],
+  neut: string[],
+  explosion: string,
+  favour: string,
+  attack: string,
+  mix: string,
+  no: string,
+  skip: string[],
+  takeCard: string[],
 }
 interface Move{
   move: string,
