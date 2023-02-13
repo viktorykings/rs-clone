@@ -14,7 +14,7 @@ function moveFavor(game: IGame): IGame {
   myGame.gameState.modalPlayers = mPlayers;
   myGame.gameState.modalDeck = [];
   myGame.gameState.modalTitle = 'Выберите игрока, который отдаст Вам карту!';
-  myGame.gameState.message = '';
+  myGame.gameState.message = `${myGame.gameState.playerTurn} думает кого выбрать.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   if (mPlayers.length === 1) {
     // [myGame.gameState.choicePlayer] = mPlayers;

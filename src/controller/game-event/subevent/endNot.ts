@@ -9,7 +9,7 @@ function endNot(game: IGame): IGame {
   myGame.reboundDeck.push(...myGame.showCards.splice(0));
   myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitPlayerTurn' : 'waitEndMove';
   myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
-  myGame.gameState.message = '';
+  myGame.gameState.message = `${myGame.gameState.playerTurn} думает как походить.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   myGame.players[iPl] = startStateDeck(
     myGame.players[iPl],

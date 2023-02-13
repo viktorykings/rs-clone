@@ -11,7 +11,7 @@ function combo2ChoisePlayer(game: IGame, playerName: string): IGame {
     myGame.gameState.modalDeck = myGame.gameState.choicePlayer.deck;
   }
   myGame.gameState.modalTitle = 'Выберите карту!';
-  myGame.gameState.message = '';
+  myGame.gameState.message = `${myGame.gameState.playerTurn} выбрал игрока ${playerName}.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
 
   if (myGame.gameState.modalDeck.length <= 1) {

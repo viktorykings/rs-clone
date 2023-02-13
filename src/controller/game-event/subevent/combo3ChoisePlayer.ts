@@ -13,6 +13,7 @@ function combo3ChoisePlayer(game: IGame, playerName: string): IGame {
     myGame.gameState.modalDeck.push(createCard(i, i, 1));
   }
   myGame.gameState.modalTitle = 'Выберите карту!';
+  myGame.gameState.message = `${myGame.gameState.playerTurn} выбрал игрока ${playerName}.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }

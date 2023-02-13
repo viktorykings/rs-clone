@@ -22,6 +22,7 @@ function favorGiveCard(game: IGame, idCard: number): IGame {
   } else {
     myGame.gameState.message = `У ${myGame.gameState.choicePlayer?.name} нет карт и отдать ему нечего.`;
   }
+  myGame.players[indPlGive] = startStateDeck(myGame.players[indPlGive], 'waitEndMove', false);
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalVisible = false;
   myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer[0].name;
