@@ -9,7 +9,7 @@ function gameLoop(
   console.log(game.gameState.functionState);
   if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
 
-  if (game.players.length > 0/* && game.gameState.functionState !== 'waitAnserTurn' */) {
+  if (game.players.length > 0 && (game.gameState.functionState !== 'lose' && game.gameState.functionState !== 'win')) {
     const myGame = { ...game };
     myGame.gameState.timerId = setInterval(() => { mainGameLoop(myGame, setGame); }, 1000);
   }

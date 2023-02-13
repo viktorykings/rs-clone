@@ -7,6 +7,7 @@ import startStateDeck from '../statePlayerDeck/startStateDeck';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
 import moveNeutralize from './subevent/moveNeutralize';
 import getPause from '../game-loop/subevent/getPause';
+import moveNot from './subevent/moveNot';
 
 function makeMove(
   game: IGame,
@@ -73,6 +74,10 @@ function makeMove(
 
   if (myGame.gameState.functionState === 'waitNeutralize' && typeTern === 1) {
     myGame = moveNeutralize(myGame, idCard);
+  }
+
+  if (myGame.gameState.functionState === 'waitAnserTurn' && typeTern === 2) {
+    myGame = moveNot(myGame, idCard);
   }
   console.log(myGame);
   return myGame;
