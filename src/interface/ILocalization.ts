@@ -18,12 +18,24 @@ interface MainPage {
 interface SettingsPage {
   language: string,
 }
-interface DeskPage {
-  buttons: string[],
-  comboButtons: string[],
-  endMove: string,
-  gameMsg: string,
-}
 interface EndGameModal {
   buttons: string[],
+}
+interface DeskPage {
+  buttons: DeskPageBtns
+  gameMsg: GameEvents,
+}
+interface DeskPageBtns {
+  neutButtons: string[],
+  comboButtons: string[],
+  endMoveBtn: string,
+}
+interface GameEvents {
+  makeMove: Move,
+  endMove: string[],
+  combos: string[],
+}
+interface Move{
+  move: string,
+  moveCombo: string[],
 }

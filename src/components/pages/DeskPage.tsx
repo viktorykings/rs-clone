@@ -35,8 +35,8 @@ export default function DeskPage({
   const sliderLen = 5;
   const reboundCardWidth = 160;
   const currLang = game.settings.lang;
-  const neutBtnName = langs[currLang].deskPage.buttons;
-  const comboBtnName = langs[currLang].deskPage.comboButtons;
+  const neutBtnName = langs[currLang].deskPage.buttons.neutButtons;
+  const comboBtnName = langs[currLang].deskPage.buttons.comboButtons;
   const showPrevCard = () => {
     if (translateVal < 0) {
       console.log(cardWidth * playerState[0].deck.length - cardWidth);
@@ -141,7 +141,7 @@ export default function DeskPage({
               }}
               disabled={!game.players[0].buttons.finishMove}
             >
-              {langs[currLang].deskPage.endMove}
+              {langs[currLang].deskPage.buttons.endMoveBtn}
             </button>
             <div className={game.players[0].buttons.comboEnabled ? 'combo-visible' : 'combo-hidden'}>
               <button

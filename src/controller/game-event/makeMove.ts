@@ -7,6 +7,7 @@ import startStateDeck from '../statePlayerDeck/startStateDeck';
 import clearNameCombo from '../statePlayerDeck/clearNameCombo';
 import moveNeutralize from './subevent/moveNeutralize';
 import getPause from '../game-loop/subevent/getPause';
+import langs from '../../const/localization';
 
 function makeMove(
   game: IGame,
@@ -16,6 +17,8 @@ function makeMove(
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
   const typeTern = myGame.players[inPl].deck[indCard].type;
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.gameMsg;
 
   if (((myGame.gameState.stateGame === 'tern' && typeTern > 2 && typeTern <= 7)
     || myGame.gameState.stateGame === 'doubleCombo'
@@ -27,21 +30,21 @@ function makeMove(
       myGame.gameState.typeTern = typeTern;
       if (typeTern > 2 && typeTern <= 7) {
         myGame.showCards.push(...myGame.players[inPl].deck.splice(indCard, 1));
-        myGame.gameState.message = `${pl.name} походил картой ${cardType[typeTern].name}`;
+        myGame.gameState.message = `${pl.name} ${base.makeMove.move} ${cardType[typeTern].name}`;
       }
       if (typeTern >= 8 && typeTern <= 12
         && (myGame.gameState.stateGame === 'doubleCombo'
           || myGame.gameState.stateGame === 'tripleCombo'
           || myGame.gameState.stateGame === 'fiveCombo')) {
         let combo = pl.combos.doubleCats;
-        myGame.gameState.message = `${pl.name} походил 2x Combo`;
+        myGame.gameState.message = `${pl.name} ${base.makeMove.moveCombo[0]}`;
         if (myGame.gameState.stateGame === 'tripleCombo') {
           combo = pl.combos.tripleCats;
-          myGame.gameState.message = `${pl.name} походил 3x Combo`;
+          myGame.gameState.message = `${pl.name} ${base.makeMove.moveCombo[1]}`;
         }
         if (myGame.gameState.stateGame === 'fiveCombo') {
           combo = pl.combos.fiveCats;
-          myGame.gameState.message = `${pl.name} походил 5x Combo`;
+          myGame.gameState.message = `${pl.name} ${base.makeMove.moveCombo[2]}`;
         }
         const indCar = combo.findIndex((com) => com.find((cr) => cr.id === idCard));
         const t = combo[indCar];
