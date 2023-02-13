@@ -14,7 +14,8 @@ function endMoveNeutralize(game: IGame, ind: number): IGame {
   const [cardExCat] = myGame.showCards.splice(iDC, 1);
   myGame.deskDeck.splice(iDeck, 0, cardExCat);
   myGame.reboundDeck.push(...myGame.showCards.splice(0));
-  myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
+  myGame.players[iPl].countTakeCard = 0;
+  myGame.gameState.functionState = 'waitEndMove';
   myGame.gameState.message = `${myGame.players[iPl].name} обезвредил 'Взрывного котенка'.`;
   myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
