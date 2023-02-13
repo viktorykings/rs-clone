@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, {
-  useMemo, useState,
+  useState,
 } from 'react';
 import Player from './Players';
 import endMove from '../../controller/game-event/endMove';
-// import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
-import IGame, { Setter } from '../../interface/IGame';
+import { Setter } from '../../interface/IGameProp';
 import infoCat from '../../assets/info-cat.png';
 import {
   checkModalVisible,
@@ -25,16 +24,9 @@ const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
 
 export default function DeskPage({
-  deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
+  // deskDeck, settings, players, reboundDeck, showCards, gameState,
+  game, setGame,
 }: Setter): JSX.Element {
-  const game = useMemo((): IGame => ({
-    deskDeck,
-    settings,
-    players,
-    reboundDeck,
-    showCards,
-    gameState,
-  }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
@@ -72,7 +64,7 @@ export default function DeskPage({
   return (
     <main className="desk">
       <div className="other-players">
-        {players.slice(1, players.length).map((el) => <Player key={el.name} name={el.name} className={gameState.playerTurn /* activePlayer */ === el.name ? 'activePlayer' : ''} />)}
+        {game.players.slice(1, game.players.length).map((el) => <Player key={el.name} name={el.name} className={game.gameState.playerTurn === el.name ? 'activePlayer' : ''} />)}
       </div>
       <div className="game">
         <div className="game-info">
@@ -112,9 +104,9 @@ export default function DeskPage({
         </div>
         <div className="play-cards">
           {// eslint-disable-next-line no-restricted-globals
-          showCards.length === 0
+          game.showCards.length === 0
             ? <div className="play-cards-place" />
-            : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animated-move" />)
+            : game.showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animated-move" />)
           }
         </div>
         <div className={checkFunctionStateCombo5(game) ? 'rebound-deck-active' : 'rebound-deck'}>
@@ -140,7 +132,7 @@ export default function DeskPage({
       </div>
       <div className="main-player">
         <div className="main-player-container">
-          <Player name="main" className={gameState.playerTurn === players[0].name ? 'activePlayer' : ''} />
+          <Player name="main" className={game.gameState.playerTurn === game.players[0].name ? 'activePlayer' : ''} />
           <div className="control-buttons">
             <button
               type="button"
