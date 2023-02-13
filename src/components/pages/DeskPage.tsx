@@ -136,7 +136,7 @@ export default function DeskPage({
       </div>
       <div className="main-player">
         <div className="main-player-container">
-          <Player name="main" className={gameState.playerTurn === 'player1' ? 'activePlayer' : ''} />
+          <Player name="main" className={gameState.playerTurn === players[0].name ? 'activePlayer' : ''} />
           <div className="control-buttons">
             <button
               type="button"

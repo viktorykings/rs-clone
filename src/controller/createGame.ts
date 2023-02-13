@@ -6,6 +6,7 @@ import TStateGame from '../interface/IStateGame';
 import createDeckFirst from './createDeckFirst';
 import TFunctionState from '../interface/TFunctionState';
 import { playerWaitTurn } from '../const/gameVariable';
+import EasyBot from './game-loop/bots/easyBot';
 
 function createGame(players: IPlayer [] = []): IGame {
   const settings: ISettings = { countPlayer: players.length, level: 'easy' };
@@ -23,6 +24,7 @@ function createGame(players: IPlayer [] = []): IGame {
   let playerTurn = '';
   if (players.length > 0) playerTurn = players[0].name;
 
+  const bot = new EasyBot();
   const gameState = {
     playerTurn,
     stateGame,
@@ -46,6 +48,7 @@ function createGame(players: IPlayer [] = []): IGame {
     returnToDeck: false,
     showCardVisible: true,
     endGame: false,
+    bot,
   };
 
   return {

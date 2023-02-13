@@ -28,9 +28,9 @@ function App(): JSX.Element {
   // console.log('player2', game.players[2].deck);
   // console.log('desk', game.deskDeck);
   // // console.log('desk', game.playersDeck);
+  // console.log('----App--------');
   // console.log('showcards', game.gameState.playerTurn);
   // console.log(game);
-  // console.log('----App--------');
   useEffect(() => gameLoop(game, setGame), [game]);
   // mainGameLoop(game, setGame);
   return (

@@ -16,6 +16,7 @@ import endAutoEndLook from './subevent/endAutoEndLook';
 import favorAutoPlayerChoice from './subevent/favorAutoPlayerChoice';
 import favorAutoCardGive from './subevent/favorAutoCardGive';
 import win from './subevent/win';
+import makeMove from '../game-event/makeMove';
 
 function mainGameLoop(
   game: IGame,
@@ -92,7 +93,12 @@ function mainGameLoop(
     && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции хода бота
-    console.log('Bot do move');
+    // console.log('Bot do move');
+    const botMove = myGame.gameState.bot.onTurn(myGame.players[inPl]);
+    if (botMove.idCard > -1) {
+      myGame.gameState.stateGame = botMove.stateGame;
+      setGame(makeMove(myGame, botMove.idCard));
+    }
   }
 
   if (myGame.gameState.functionState === 'waitFavorPlayer'

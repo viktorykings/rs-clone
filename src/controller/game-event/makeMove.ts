@@ -11,7 +11,7 @@ import getPause from '../game-loop/subevent/getPause';
 function makeMove(
   game: IGame,
   idCard: number,
-): IGame | null {
+): IGame {
   let myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
@@ -26,7 +26,7 @@ function makeMove(
       const pl = myGame.players[inPl];
       myGame.gameState.typeTern = typeTern;
       if (typeTern > 2 && typeTern <= 7) {
-        myGame.showCards = myGame.players[inPl].deck.splice(indCard, 1);
+        myGame.showCards.push(...myGame.players[inPl].deck.splice(indCard, 1));
         myGame.gameState.message = `${pl.name} походил картой ${cardType[typeTern].name}`;
       }
       if (typeTern >= 8 && typeTern <= 12
