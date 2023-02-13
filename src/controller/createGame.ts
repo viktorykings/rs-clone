@@ -9,7 +9,11 @@ import { playerWaitTurn } from '../const/gameVariable';
 import EasyBot from './game-loop/bots/easyBot';
 
 function createGame(players: IPlayer [] = []): IGame {
-  const settings: ISettings = { countPlayer: players.length, level: 'easy' };
+  const settings: ISettings = {
+    countPlayer: players.length,
+    level: 'easy',
+    lang: 'ru',
+  };
 
   const { deskDeck, playersDeck } = createDeckFirst(players);
 

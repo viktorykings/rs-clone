@@ -19,6 +19,7 @@ import {
 } from './handlers/comboHandlers';
 import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveHandlers';
 import EndGameModal from './EndGameModal';
+import langs from '../../const/localization';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
@@ -41,6 +42,9 @@ export default function DeskPage({
   const cardWidth = 190;
   const sliderLen = 5;
   const reboundCardWidth = 160;
+  const currLang = game.settings.lang;
+  const neutBtnName = langs[currLang].deskPage.buttons;
+  const comboBtnName = langs[currLang].deskPage.comboButtons;
   const showPrevCard = () => {
     if (translateVal < 0) {
       console.log(cardWidth * playerState[0].deck.length - cardWidth);
@@ -89,16 +93,16 @@ export default function DeskPage({
             onMouseDown={() => handleTakeDeskCard(game, setGame)}
           />
           <div className={checkNeutralize() ? 'return-to-deck-active' : 'return-to-deck'}>
-            <button type="button" onClick={() => handleMoveNeut(game, 1, setGame)}>First</button>
-            <button type="button" onClick={() => handleMoveNeut(game, 2, setGame)}>Second</button>
-            <button type="button" onClick={() => handleMoveNeut(game, 3, setGame)}>Third</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 1, setGame)}>{neutBtnName[0]}</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 2, setGame)}>{neutBtnName[1]}</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 3, setGame)}>{neutBtnName[2]}</button>
             <button
               type="button"
               onClick={() => handleMoveNeut(game, game.deskDeck.length + 1, setGame)}
             >
-              Last
+              {neutBtnName[3]}
             </button>
-            <button type="button" onClick={() => handleMoveNeut(game, 0, setGame)}>Random</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 0, setGame)}>{neutBtnName[4]}</button>
           </div>
           <p>
             Left
@@ -145,7 +149,7 @@ export default function DeskPage({
               }}
               disabled={!game.players[0].buttons.finishMove}
             >
-              end
+              {langs[currLang].deskPage.endMove}
             </button>
             <div className={game.players[0].buttons.comboEnabled ? 'combo-visible' : 'combo-hidden'}>
               <button
@@ -153,21 +157,21 @@ export default function DeskPage({
                 disabled={!game.players[0].buttons.dobleEnabled}
                 onClick={() => usedDoubleCombo(game, setPlayerState)}
               >
-                2x Combo
+                {comboBtnName[0]}
               </button>
               <button
                 type="button"
                 disabled={!game.players[0].buttons.tripleEnabled}
                 onClick={() => usedTripleCombo(game, setPlayerState)}
               >
-                3x Combo
+                {comboBtnName[1]}
               </button>
               <button
                 type="button"
                 disabled={!game.players[0].buttons.fiveEnabled}
                 onClick={() => usedFiveCombo(game, setPlayerState)}
               >
-                5x Combo
+                {comboBtnName[2]}
               </button>
             </div>
           </div>

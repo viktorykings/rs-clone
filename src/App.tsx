@@ -36,12 +36,12 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage settings={game.settings} />} />
         <Route
           path="/gamesettings"
           element={<GameSettings setGame={setGame} />}
         />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/settings" element={<Settings settings={game.settings} />} />
         <Route path="/about" element={<AboutPage />} />
         <Route
           path="/desk"
