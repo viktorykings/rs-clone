@@ -7,6 +7,7 @@ interface Pages {
   main: MainPage,
   settings: SettingsPage,
   deskPage: DeskPage,
+  endGameModal: EndGameModal,
 }
 
 interface MainPage {
@@ -22,4 +23,7 @@ interface DeskPage {
   comboButtons: string[],
   endMove: string,
   gameMsg: string,
+}
+interface EndGameModal {
+  buttons: string[],
 }

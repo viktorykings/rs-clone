@@ -12,7 +12,7 @@ function createGame(players: IPlayer [] = []): IGame {
   const settings: ISettings = {
     countPlayer: players.length,
     level: 'easy',
-    lang: 'ru',
+    lang: 'en',
   };
 
   const { deskDeck, playersDeck } = createDeckFirst(players);

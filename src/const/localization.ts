@@ -10,6 +10,7 @@ const langs: ILocalization = {
       endMove: 'Конец хода',
       gameMsg: 'msg',
     },
+    endGameModal: { buttons: ['Новая игра', 'Главное меню'] },
   },
   en: {
     main: { start: 'Start game', settings: 'Settings', about: 'About' },
@@ -20,6 +21,7 @@ const langs: ILocalization = {
       endMove: 'End Move',
       gameMsg: 'msg',
     },
+    endGameModal: { buttons: ['New game', 'Main menu'] },
   },
 };
 
