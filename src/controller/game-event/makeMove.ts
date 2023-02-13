@@ -52,16 +52,21 @@ function makeMove(
           return dec;
         }, []);
       }
+      myGame.gameState.functionState = 'waitAnserTurn';
       clearNameCombo(pl);
       const indPl = findIndexPlayerTern(myGame.players, pl.name);
-      const nPl = startStateDeck(pl, myGame.gameState.functionState);
+      const nPl = startStateDeck(
+        pl,
+        myGame.gameState.functionState,
+        false,
+      );
       // console.log('----pl----');
       // console.log(nPl);
       myGame.players[indPl] = nPl;
-      myGame.gameState.functionState = 'waitAnserTurn';
       // myGame.gameState.playerWaitAnswer = pl.name;
-      myGame.gameState.playerWaitAnswer.unshift(pl);
-      const nextPl = findNextActivePlayer(myGame);
+      myGame.gameState.playerWaitAnswer.unshift(nPl);
+      let nextPl = findNextActivePlayer(myGame);
+      nextPl = startStateDeck(nextPl, myGame.gameState.functionState, true);
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);
       myGame.gameState.timeLeft = myGame.gameState.timeNeed;

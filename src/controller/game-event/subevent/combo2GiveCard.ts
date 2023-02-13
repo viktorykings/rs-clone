@@ -1,6 +1,7 @@
 import IGame from '../../../interface/IGame';
 import findIndexPlayerTern from './findIndexPlayerTern';
 import cardType from '../../../const/cardType';
+import startStateDeck from '../../statePlayerDeck/startStateDeck';
 
 function combo2GiveCard(game: IGame, idCard: number): IGame {
   const myGame = { ...game };
@@ -16,6 +17,8 @@ function combo2GiveCard(game: IGame, idCard: number): IGame {
   } else {
     myGame.gameState.message = `${myGame.gameState.choicePlayer?.name} нет карт и отдать ему нечего.`;
   }
+  myGame.players[iPl] = startStateDeck(myGame.players[iPl], myGame.gameState.functionState, true);
+
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalVisible = false;
   myGame.gameState.modalPlayers = [];

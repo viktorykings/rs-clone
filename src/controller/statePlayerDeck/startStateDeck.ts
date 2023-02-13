@@ -1,7 +1,7 @@
 import IPlayer from '../../interface/IPlayer';
 import TFunctionState from '../../interface/TFunctionState';
 
-function startStateDeck(player: IPlayer, functionState: TFunctionState): IPlayer {
+function startStateDeck(player: IPlayer, functionState: TFunctionState, isTurn: boolean): IPlayer {
   const myPl = { ...player };
   myPl.buttons.comboEnabled = false;
   myPl.buttons.dobleVisible = false;
@@ -12,7 +12,7 @@ function startStateDeck(player: IPlayer, functionState: TFunctionState): IPlayer
   myPl.buttons.fiveEnabled = false;
   myPl.buttons.finishMove = false;
 
-  if (functionState !== 'waitEndMove') {
+  if (functionState !== 'waitEndMove' && functionState !== 'waitAnserTurn') {
     const deckCats = player.deck.filter((card) => card.type >= 8 && card.type <= 12);
     deckCats.sort((a, b) => a.type - b.type);
     let i2 = -1;
@@ -69,9 +69,10 @@ function startStateDeck(player: IPlayer, functionState: TFunctionState): IPlayer
     }
     // eslint-disable-next-line no-param-reassign
     myPl.deck.map((card) => { card.enabled = card.type >= 3 && card.type <= 7; return card; });
-  } else {
-    myPl.buttons.finishMove = true;
   }
+
+  if ((functionState === 'waitEndMove' || functionState === 'waitAnserTurn') && isTurn) myPl.buttons.finishMove = true;
+
   return myPl;
 }
 

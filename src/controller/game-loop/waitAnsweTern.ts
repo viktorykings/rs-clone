@@ -10,14 +10,18 @@ import moveLook from '../game-event/subevent/moveLook';
 import combo2Start from './combo2Start';
 import combo3Start from './combo3Start';
 import combo5Start from './combo5Start';
+import startStateDeck from '../statePlayerDeck/startStateDeck';
 
 function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction<IGame>>): void {
   let myGame = { ...game };
 
-  const nextPl = findNextActivePlayer(myGame);
+  const indPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  myGame.players[indPl] = startStateDeck(myGame.players[indPl], 'waitAnserTurn', false);
+  let nextPl = findNextActivePlayer(myGame);
   myGame.gameState.timeNeed = nextPl.isBot ? botWaitAnswer : playerWaitTurn;
   myGame.gameState.playerTurn = nextPl.name;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
+  nextPl = startStateDeck(nextPl, myGame.gameState.functionState, true);
 
   if (nextPl.name === myGame.gameState.playerWaitAnswer[0].name) {
     myGame.gameState.playerWaitAnswer.splice(0, 1);
