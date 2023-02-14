@@ -10,7 +10,7 @@ function moveNeutralize(game: IGame, idCard: number): IGame {
   myGame.players[iPl] = startStateDeck(myGame.players[iPl], 'waitEndMove', false);
   myGame.gameState.functionState = 'endNeutralize';
   myGame.gameState.message = `${myGame.players[iPl].name} походил картой 'Обезвредить'.`;
-  myGame.gameState.timeNeed = 5;
+  myGame.gameState.timeNeed = 3;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   myGame.gameState.returnToDeck = true;
   console.log('moveneut', myGame);
