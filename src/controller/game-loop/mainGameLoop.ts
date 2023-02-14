@@ -70,6 +70,7 @@ function mainGameLoop(
     // console.log('Bot maybe do move NOT');
     const idCardBotNot = myGame.gameState.bot.onAnswerTurn(
       myGame.players[inPl],
+      myGame.players,
       myGame.gameState.playerWaitAnswer,
     );
     if (idCardBotNot > -1) {
@@ -86,6 +87,8 @@ function mainGameLoop(
     // console.log('Bot maybe choise player');
     const choicePlayerName = myGame.gameState.bot.onComboPlayerChoice(
       myGame.gameState.modalPlayers,
+      myGame.players,
+      myGame.gameState.playerTurn,
     );
     myGame = combo2ChoisePlayer(myGame, choicePlayerName);
   }
@@ -106,6 +109,8 @@ function mainGameLoop(
     // console.log('Bot maybe choise player and type card');
     const choicePlayerName = myGame.gameState.bot.onComboPlayerChoice(
       myGame.gameState.modalPlayers,
+      myGame.players,
+      myGame.gameState.playerTurn,
     );
     myGame = combo3ChoisePlayer(myGame, choicePlayerName);
   }
@@ -149,6 +154,8 @@ function mainGameLoop(
     // console.log('Bot maybe choise player for Favor');
     const choicePlayerName = myGame.gameState.bot.onComboPlayerChoice(
       myGame.gameState.modalPlayers,
+      myGame.players,
+      myGame.gameState.playerTurn,
     );
     myGame = favorChoicePlayer(myGame, choicePlayerName);
   }
@@ -158,7 +165,8 @@ function mainGameLoop(
   && myGame.players[inPl].isBot) {
   // вызов функции бота выбора карты, которую нужно отдать Одолжить
   // console.log('Bot maybe choise player for Favor');
-    const idCard = myGame.gameState.bot.onFavorChoiceCard(myGame.reboundDeck);
+    const indPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+    const idCard = myGame.gameState.bot.onFavorChoiceCard(myGame.players[indPl]);
     myGame = favorGiveCard(myGame, idCard);
   }
 
