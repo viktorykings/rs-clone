@@ -25,6 +25,7 @@ import combo3GiveCard from '../game-event/subevent/combo3GiveCard';
 import combo5GiveCard from '../game-event/subevent/combo5GiveCard';
 import favorChoicePlayer from '../game-event/subevent/favorChoicePlayer';
 import favorGiveCard from '../game-event/subevent/favorGiveCard';
+import endMoveNeutralize from '../game-event/subevent/endMoveNeutralize';
 
 function mainGameLoop(
   game: IGame,
@@ -159,6 +160,15 @@ function mainGameLoop(
   // console.log('Bot maybe choise player for Favor');
     const idCard = myGame.gameState.bot.onFavorChoiceCard(myGame.reboundDeck);
     myGame = favorGiveCard(myGame, idCard);
+  }
+
+  if (myGame.gameState.functionState === 'endNeutralize'
+  && myGame.gameState.timeLeft === 7
+  && myGame.players[inPl].isBot) {
+  // вызов функции бота выбора карты, которую нужно отдать Одолжить
+  // console.log('Bot maybe choise player for Favor');
+    const nomCard = myGame.gameState.bot.onPutExplosiveKitten();
+    myGame = endMoveNeutralize(myGame, nomCard);
   }
 
   if (myGame.gameState.timeLeft > 1) {

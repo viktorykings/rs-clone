@@ -73,6 +73,10 @@ class EasyBot implements IBot {
     if (deck.length > 0) ret = deck[choiceIndexArr(deck)].id;
     return ret;
   }
+
+  onPutExplosiveKitten(): number {
+    return 0;
+  }
 }
 
 export default EasyBot;

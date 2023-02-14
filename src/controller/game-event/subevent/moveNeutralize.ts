@@ -1,5 +1,5 @@
-import { playerWaitTurn } from '../../../const/gameVariable';
 import IGame from '../../../interface/IGame';
+import getPause from '../../game-loop/subevent/getPause';
 import startStateDeck from '../../statePlayerDeck/startStateDeck';
 import findIndexPlayerTern from './findIndexPlayerTern';
 
@@ -11,7 +11,7 @@ function moveNeutralize(game: IGame, idCard: number): IGame {
   myGame.players[iPl] = startStateDeck(myGame.players[iPl], 'waitEndMove', false);
   myGame.gameState.functionState = 'endNeutralize';
   myGame.gameState.message = `${myGame.players[iPl].name} походил картой 'Обезвредить'.`;
-  myGame.gameState.timeNeed = myGame.players[iPl].isBot ? 3 : playerWaitTurn;
+  myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, 'endNeutralize');
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   myGame.gameState.returnToDeck = true;
   console.log('moveneut', myGame);

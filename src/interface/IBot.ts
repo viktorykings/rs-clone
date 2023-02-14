@@ -10,6 +10,7 @@ interface IBot {
   onCombo3CardChoice(deck: ICard[]): number;
   onCombo5CardChoice(deck: ICard[]): number;
   onFavorChoiceCard(deck: ICard[]): number;
+  onPutExplosiveKitten(): number;
 }
 
 export default IBot;
