@@ -2,6 +2,7 @@ import IGame from '../../interface/IGame';
 import addHistory from './subevent/addHistory';
 import findIndexPlayerTern from './subevent/findIndexPlayerTern';
 import getPause from '../game-loop/subevent/getPause';
+import startStateDeck from '../statePlayerDeck/startStateDeck';
 
 function takeCardDeskDeck(game: IGame): IGame {
   const myGame = { ...game };
@@ -13,10 +14,18 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.players[iPl].deck.push(...card);
       myGame.players[iPl].buttons.finishMove = myGame.players[iPl].countTakeCard === 0;
       myGame.gameState.message = `${myGame.players[iPl].name} взял 1 карту.`;
+      if (myGame.gameState.functionState === 'waitTakeCardDeskDeck') {
+        myGame.gameState.message = `${myGame.players[iPl].name} взял еще 1 карту.`;
+      }
       myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
-      myGame.players[iPl].buttons.dobleEnabled = false;
+      myGame.players[iPl] = startStateDeck(
+        myGame.players[iPl],
+        myGame.gameState.functionState,
+        true,
+      );
+      /* myGame.players[iPl].buttons.dobleEnabled = false;
       myGame.players[iPl].buttons.tripleEnabled = false;
-      myGame.players[iPl].buttons.fiveEnabled = false;
+      myGame.players[iPl].buttons.fiveEnabled = false; */
       myGame.gameState.timeLeft = getPause(
         myGame.players[iPl].isBot,
         myGame.gameState.functionState,
@@ -32,7 +41,7 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.players[iPl].deck.map((el) => { el.enabled = el.type === 1; return el; });
       const neutralize = myGame.players[iPl].deck.findIndex((cr) => cr.type === 1);
       myGame.gameState.functionState = 'waitExplosion';
-      myGame.gameState.timeNeed = 3;
+      myGame.gameState.timeLeft = 4;
       if (neutralize !== -1) {
         myGame.gameState.functionState = 'waitNeutralize';
         myGame.gameState.timeLeft = getPause(

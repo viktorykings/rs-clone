@@ -13,7 +13,7 @@ function startStateDeck(player: IPlayer, functionState: TFunctionState, isTurn: 
   myPl.buttons.finishMove = false;
 
   if (functionState !== 'waitEndMove' && functionState !== 'waitAnserTurn'
-    && functionState !== 'waitPlayerLook') {
+    && functionState !== 'waitPlayerLook' && functionState !== 'waitTakeCardDeskDeck') {
     const deckCats = player.deck.filter((card) => card.type >= 8 && card.type <= 12);
     deckCats.sort((a, b) => a.type - b.type);
     let i2 = -1;
