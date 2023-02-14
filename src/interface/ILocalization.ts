@@ -9,6 +9,7 @@ interface Pages {
   deskPage: DeskPage,
   endGameModal: EndGameModal,
   startGame: string,
+  gameSettings: GameSettings,
 }
 
 interface MainPage {
@@ -21,6 +22,17 @@ interface SettingsPage {
 }
 interface EndGameModal {
   buttons: string[],
+}
+interface GameSettings {
+  bot: string,
+  player: string[],
+  level: string[],
+  buttons: string[],
+  modal: GameSettingsModals,
+}
+interface GameSettingsModals {
+  name: string[],
+  avatar: string[],
 }
 interface DeskPage {
   buttons: DeskPageBtns,

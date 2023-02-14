@@ -9,6 +9,7 @@ export default function Bot({
   deletePlayer,
   // editPlayer,
   brdrColor,
+  localLang,
 }: IBotProps) {
   const viewTemplate = (
     <>
@@ -25,7 +26,7 @@ export default function Bot({
             className="btn"
             onClick={() => deletePlayer(name)}
           >
-            DELETE
+            {localLang}
           </button>
         )}
       </div>

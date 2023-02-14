@@ -31,6 +31,16 @@ const langs: ILocalization = {
     },
     endGameModal: { buttons: ['Новая игра', 'Главное меню', 'Вы победили!'] },
     startGame: 'Ваш ход!',
+    gameSettings: {
+      bot: 'Удалить',
+      player: ['Изменить имя', 'Выбрать картинку'],
+      level: ['Выбрать уровень сложности', 'Легкий'],
+      buttons: ['Добавить котёнка', 'Начать игру', 'Отмена'],
+      modal: {
+        name: ['Изменить имя', 'Введите имя', 'Отмена'],
+        avatar: ['Выбрать картинку', 'Назад', 'Далее', 'Готово', 'Отмена'],
+      },
+    },
   },
   en: {
     main: { start: 'Start game', settings: 'Settings', about: 'About' },
@@ -62,6 +72,16 @@ const langs: ILocalization = {
     },
     endGameModal: { buttons: ['New game', 'Main menu', 'You win!'] },
     startGame: 'Your turn!',
+    gameSettings: {
+      bot: 'Delete',
+      player: ['Edit name', 'Choose avatar'],
+      level: ['Choose game level', 'Easy'],
+      buttons: ['Add kitten', 'Start game', 'Cancel'],
+      modal: {
+        name: ['Change Name', 'Enter your name', 'Cancel'],
+        avatar: ['Choose avatar', 'Previous', 'Next', 'Done', 'Cancel'],
+      },
+    },
   },
 };
 

@@ -19,7 +19,7 @@ function App(): JSX.Element {
         <Route path="/" element={<MainPage settings={game.settings} />} />
         <Route
           path="/gamesettings"
-          element={<GameSettings setGame={setGame} />}
+          element={<GameSettings game={game} setGame={setGame} />}
         />
         <Route path="/settings" element={<Settings settings={game.settings} />} />
         <Route path="/about" element={<AboutPage />} />
