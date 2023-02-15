@@ -78,14 +78,16 @@ class MiddleBot implements IBot {
     return myRet;
   }
 
-  onAnswerTurn(player: IPlayer, players: IPlayer []): number {
+  onAnswerTurn(player: IPlayer, players: IPlayer [], playerWaitAnswer: IPlayer[]): number {
     let retId = -1;
     const deckNot = player.deck.filter((cr) => cr.type === 2);
     if (deckNot.length > 0) {
       const activePl = players.filter((pl) => pl.active);
       const myInd = findIndexPlayerTern(activePl, player.name);
       const indPlRight = findPriorIndex(activePl, myInd);
-      if (player.name === activePl[indPlRight].name) retId = deckNot[0].id;
+      if (indPlRight !== -1 && playerWaitAnswer[0].name === activePl[indPlRight].name) {
+        retId = deckNot[0].id;
+      }
     }
     return retId;
   }
