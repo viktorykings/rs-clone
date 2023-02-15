@@ -44,7 +44,7 @@ export default function ModalChangeAvatar({
               <Carousel curAvatar={curAvatar} updateUrlAv={updateUrlAv} />
             </div>
           </div>
-          <div className="btn-groupe">
+          <div className="btn-group">
             <button
               type="button"
               className="btn"
@@ -54,7 +54,7 @@ export default function ModalChangeAvatar({
                 onChangeAvatar();
               }}
             >
-              Done
+              Готово
             </button>
             <button
               type="button"
@@ -64,7 +64,7 @@ export default function ModalChangeAvatar({
                 onChangeAvatar();
               }}
             >
-              Cancel
+              Отмена
             </button>
           </div>
         </div>

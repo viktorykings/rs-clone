@@ -99,6 +99,7 @@
 }
 .add-bot {
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 .list {
@@ -119,7 +120,6 @@
   }
   .list-item {
     position: relative;
-    // background-image: url('../assets/01.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -132,25 +132,7 @@
     box-shadow: rgba(0, 0, 0, 1) 0px 25px 20px -20px;
   }
 }
-.btn-groupe {
-  margin: 10px auto;
-  button {
-    margin: 0 10px;
-    width: 100px;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    border: 2px solid #700000;
 
-    &:hover {
-      background-color: orange;
-      color: black;
-    }
-    &:active {
-      background-color: yellow;
-    }
-  }
-}
 .bot {
   width: 100%;
   height: auto;
@@ -207,7 +189,8 @@
   .btn-group {
     margin: 10px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1rem;
   }
 }
 .human-player-name {

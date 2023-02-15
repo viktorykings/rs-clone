@@ -61,24 +61,26 @@ export default function Carousel({
 
   return (
     <>
-      <div className="btn-groupe">
+      <div className="btn-group">
         <button
+          className="btn"
           type="button"
           onClick={() => {
             handlePrevious();
             buttonClick();
           }}
         >
-          Previous
+          Назад
         </button>
         <button
+          className="btn"
           type="button"
           onClick={() => {
             handleNext();
             buttonClick();
           }}
         >
-          Next
+          Вперёд
         </button>
       </div>
       <div className="wrap-avatar-list">

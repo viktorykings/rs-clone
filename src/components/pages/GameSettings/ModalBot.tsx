@@ -29,7 +29,7 @@ export default function ModalBot({
             onKeyPress={() => updateLevel('easy')}
             role="presentation"
           >
-            <p className="levels-desc"> Easy</p>
+            <p className="levels-desc">Леко</p>
           </div>
           <div
             className="levels-item normal"
@@ -41,7 +41,7 @@ export default function ModalBot({
             onKeyPress={() => updateLevel('normal')}
             role="presentation"
           >
-            <p className="levels-desc">Normal</p>
+            <p className="levels-desc">Нормально</p>
           </div>
           <div
             className="levels-item hard"
@@ -53,11 +53,11 @@ export default function ModalBot({
             onKeyPress={() => updateLevel('hard')}
             role="presentation"
           >
-            <p className="levels-desc">Hard</p>
+            <p className="levels-desc">Сложно</p>
           </div>
         </div>
-        <div className="btn-groupe">
-          <button type="button" onClick={() => onSetLevel()}>
+        <div className="btn-group">
+          <button className="btn" type="button" onClick={() => onSetLevel()}>
             OK
           </button>
         </div>

@@ -44,13 +44,15 @@ export default function ModalChangeName({
               />
             </label>
             <br />
-            <input className="modal-body-btn submit" type="submit" value="OK" />
-            <input
-              className="modal-body-btn cancel"
-              type="button"
-              value="Cancel"
-              onClick={() => onChangeName()}
-            />
+            <div className="btn-group">
+              <input className="btn submit" type="submit" value="OK" />
+              <input
+                className="btn cancel"
+                type="button"
+                value="Cancel"
+                onClick={() => onChangeName()}
+              />
+            </div>
           </form>
         </div>
       </div>
