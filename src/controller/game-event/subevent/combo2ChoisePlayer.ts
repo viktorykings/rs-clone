@@ -4,7 +4,7 @@ import combo2GiveCard from './combo2GiveCard';
 
 function combo2ChoisePlayer(game: IGame, playerName: string): IGame {
   const currLang = game.settings.lang;
-  const base = langs[currLang].deskPage.modalTitles.combo;
+  const base = langs[currLang].deskPage;
   let myGame = { ...game };
   myGame.gameState.functionState = 'waitPlayerCombo2';
   myGame.gameState.choicePlayer = myGame.players.find((pl) => pl.name === playerName) ?? null;
@@ -13,8 +13,8 @@ function combo2ChoisePlayer(game: IGame, playerName: string): IGame {
   if (myGame.gameState.choicePlayer !== null) {
     myGame.gameState.modalDeck = myGame.gameState.choicePlayer.deck;
   }
-  myGame.gameState.modalTitle = `${base}`;
-  myGame.gameState.message = '';
+  myGame.gameState.modalTitle = `${base.modalTitles.combo}`;
+  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base.gameMsg.combos[4]} ${playerName}.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
 
   if (myGame.gameState.modalDeck.length <= 1) {

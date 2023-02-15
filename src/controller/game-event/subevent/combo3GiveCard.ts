@@ -1,6 +1,7 @@
 import IGame from '../../../interface/IGame';
 import findIndexPlayerTern from './findIndexPlayerTern';
 import cardType from '../../../const/cardType';
+import startStateDeck from '../../statePlayerDeck/startStateDeck';
 import langs from '../../../const/localization';
 
 function combo3GiveCard(game: IGame, idCard: number): IGame {
@@ -25,6 +26,11 @@ function combo3GiveCard(game: IGame, idCard: number): IGame {
     myGame.players[indPlTake].deck.push(card);
     myGame.gameState.message = `${myGame.players[indPlTake].name} ${base[0]} ${cardType[typeCard ?? -1].name}.`;
   }
+  myGame.players[indPlTake] = startStateDeck(
+    myGame.players[indPlTake],
+    myGame.gameState.functionState,
+    true,
+  );
   myGame.gameState.functionState = 'waitPlayerTurn';
   myGame.gameState.stateGame = 'tern';
   myGame.gameState.modalVisible = false;

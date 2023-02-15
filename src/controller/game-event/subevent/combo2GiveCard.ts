@@ -1,6 +1,7 @@
 import IGame from '../../../interface/IGame';
 import findIndexPlayerTern from './findIndexPlayerTern';
 import cardType from '../../../const/cardType';
+import startStateDeck from '../../statePlayerDeck/startStateDeck';
 import langs from '../../../const/localization';
 
 function combo2GiveCard(game: IGame, idCard: number): IGame {
@@ -19,6 +20,8 @@ function combo2GiveCard(game: IGame, idCard: number): IGame {
   } else {
     myGame.gameState.message = `${base[1]} ${myGame.gameState.choicePlayer?.name} ${base[2]}`;
   }
+  myGame.players[iPl] = startStateDeck(myGame.players[iPl], myGame.gameState.functionState, true);
+
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalVisible = false;
   myGame.gameState.modalPlayers = [];

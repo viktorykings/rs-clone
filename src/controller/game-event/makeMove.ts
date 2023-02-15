@@ -8,6 +8,8 @@ import clearNameCombo from '../statePlayerDeck/clearNameCombo';
 import moveNeutralize from './subevent/moveNeutralize';
 import getPause from '../game-loop/subevent/getPause';
 import langs from '../../const/localization';
+import moveNot from './subevent/moveNot';
+import favorGiveCard from './subevent/favorGiveCard';
 
 function makeMove(
   game: IGame,
@@ -54,30 +56,44 @@ function makeMove(
           return dec;
         }, []);
       }
+
+      myGame.gameState.functionState = 'waitAnserTurn';
       clearNameCombo(pl);
       const indPl = findIndexPlayerTern(myGame.players, pl.name);
-      const nPl = startStateDeck(pl, myGame.gameState.functionState);
-      // console.log('----pl----');
-      // console.log(nPl);
+      const nPl = startStateDeck(
+        pl,
+        myGame.gameState.functionState,
+        false,
+      );
       myGame.players[indPl] = nPl;
-      myGame.gameState.functionState = 'waitAnserTurn';
       // myGame.gameState.playerWaitAnswer = pl.name;
-      myGame.gameState.playerWaitAnswer.unshift(pl);
-      const nextPl = findNextActivePlayer(myGame);
+      myGame.gameState.playerWaitAnswer.unshift(nPl);
+      let nextPl = findNextActivePlayer(myGame);
+      nextPl = startStateDeck(nextPl, myGame.gameState.functionState, true);
+      const indPlN = findIndexPlayerTern(myGame.players, nextPl.name);
+      myGame.players[indPlN] = nextPl;
       myGame.gameState.playerTurn = nextPl.name;
       myGame.gameState.timeNeed = getPause(nextPl.isBot, myGame.gameState.functionState);
       myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     }
-  }/* else {
-    myGame.gameState.message = 'Картами котов можно ходить только через режим Combo';
-    // setOurMessage('Картами котов можно ходить только через режим Combo');
-    return null;
-  } */
+  }
+
+  if (myGame.gameState.stateGame === 'tern' && typeTern >= 8) {
+    myGame.gameState.message = 'Картами котов можно ходить только после выбора режима Combo';
+  }
 
   if (myGame.gameState.functionState === 'waitNeutralize' && typeTern === 1) {
     myGame = moveNeutralize(myGame, idCard);
   }
-  console.log(myGame);
+
+  if (myGame.gameState.functionState === 'waitAnserTurn' && typeTern === 2) {
+    myGame = moveNot(myGame, idCard);
+  }
+
+  if (myGame.gameState.functionState === 'waitFavorPlayerCard') {
+    myGame = favorGiveCard(myGame, idCard);
+  }
+  // console.log(myGame);
   return myGame;
 }
 

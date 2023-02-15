@@ -14,6 +14,7 @@ function moveMix(game: IGame): IGame {
     myGame.deskDeck.sort(() => Math.random() - 0.5);
     myGame.reboundDeck.push(...myGame.showCards.splice(0));
     myGame.gameState.message = `${myGame.players[iPl].name} ${base}`;
+    for (let i = 0; i < myGame.players.length; i += 1) myGame.players[i].visibleCards = [];
     myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
     myGame.gameState.timeLeft = myGame.gameState.timeNeed;
     addHistory(myGame, 'moveMix', [myCard], true);

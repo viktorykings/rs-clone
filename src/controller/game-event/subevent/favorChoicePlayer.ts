@@ -1,7 +1,9 @@
 import langs from '../../../const/localization';
 import IGame from '../../../interface/IGame';
 import getPause from '../../game-loop/subevent/getPause';
+import startStateDeck from '../../statePlayerDeck/startStateDeck';
 import favorGiveCard from './favorGiveCard';
+import findIndexPlayerTern from './findIndexPlayerTern';
 
 function favorChoicePlayer(game: IGame, playerName: string): IGame {
   const currLang = game.settings.lang;
@@ -14,7 +16,9 @@ function favorChoicePlayer(game: IGame, playerName: string): IGame {
   myGame.gameState.modalPlayers = [];
   if (myGame.gameState.choicePlayer !== null && plTurn !== null) {
     // myGame.gameState.playerWaitAnswer = myGame.gameState.playerTurn;
-    myGame.gameState.playerWaitAnswer.unshift(plTurn);
+    const inPl = findIndexPlayerTern(myGame.players, plTurn.name);
+    myGame.players[inPl] = startStateDeck(myGame.players[inPl], 'waitEndMove', false);
+    myGame.gameState.playerWaitAnswer.unshift(myGame.players[inPl]);
     myGame.gameState.playerTurn = myGame.gameState.choicePlayer.name;
     myGame.gameState.timeLeft = getPause(
       myGame.gameState.choicePlayer.isBot,

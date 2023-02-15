@@ -67,4 +67,5 @@ interface GameEvents {
 interface Move{
   move: string,
   moveCombo: string[],
+  rule: string,
 }

@@ -4,7 +4,7 @@ import createCard from '../../createCard';
 
 function combo3ChoisePlayer(game: IGame, playerName: string): IGame {
   const currLang = game.settings.lang;
-  const base = langs[currLang].deskPage.modalTitles.combo;
+  const base = langs[currLang].deskPage;
   const myGame = { ...game };
   myGame.gameState.functionState = 'waitPlayerCombo3';
   myGame.gameState.choicePlayer = myGame.players.find((pl) => pl.name === playerName) ?? null;
@@ -15,7 +15,8 @@ function combo3ChoisePlayer(game: IGame, playerName: string): IGame {
   for (let i = 1; i <= 8; i += 1) {
     myGame.gameState.modalDeck.push(createCard(i, i, 1));
   }
-  myGame.gameState.modalTitle = `${base}`;
+  myGame.gameState.modalTitle = `${base.modalTitles.combo}`;
+  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base.gameMsg.combos[4]} ${playerName}.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }

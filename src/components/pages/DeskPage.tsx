@@ -18,6 +18,7 @@ import {
 } from './handlers/comboHandlers';
 import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveHandlers';
 import EndGameModal from './EndGameModal';
+import findIndexPlayerTern from '../../controller/game-event/subevent/findIndexPlayerTern';
 import langs from '../../const/localization';
 
 const cardBack = 'cards/back.png';
@@ -59,9 +60,10 @@ export default function DeskPage({
       setTranslateRebound(translateRebound + reboundCardWidth);
     }
   };
-  const checkNeutralize = () => (
-    game.gameState.returnToDeck && game.gameState.playerTurn === game.players[0].name
-  );
+  const checkNeutralize = () => {
+    const indPl = findIndexPlayerTern(game.players, game.gameState.playerTurn);
+    return game.gameState.returnToDeck && (!game.players[indPl].isBot);
+  };
 
   return (
     <main className="desk">

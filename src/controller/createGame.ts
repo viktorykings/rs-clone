@@ -6,7 +6,7 @@ import TStateGame from '../interface/IStateGame';
 import createDeckFirst from './createDeckFirst';
 import TFunctionState from '../interface/TFunctionState';
 import { playerWaitTurn } from '../const/gameVariable';
-import EasyBot from './game-loop/bots/easyBot';
+import MiddleBot from './game-loop/bots/middleBot';
 import langs from '../const/localization';
 
 function createGame(players: IPlayer [] = []): IGame {
@@ -29,10 +29,10 @@ function createGame(players: IPlayer [] = []): IGame {
   let playerTurn = '';
   if (players.length > 0) playerTurn = players[0].name;
 
+  const bot = new MiddleBot();
   const currLang = settings.lang;
   const base = langs[currLang].startGame;
 
-  const bot = new EasyBot();
   const gameState = {
     playerTurn,
     stateGame,

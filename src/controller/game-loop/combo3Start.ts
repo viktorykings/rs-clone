@@ -4,7 +4,7 @@ import combo3ChoisePlayer from '../game-event/subevent/combo3ChoisePlayer';
 
 function combo3Start(game: IGame): IGame {
   const currLang = game.settings.lang;
-  const base = langs[currLang].deskPage.modalTitles.comboStart;
+  const base = langs[currLang].deskPage;
   let myGame = { ...game };
   myGame.gameState.functionState = 'waitCombo3';
   const mPlayers = myGame.players.filter(
@@ -15,8 +15,8 @@ function combo3Start(game: IGame): IGame {
   myGame.gameState.modalPlayers = mPlayers;
   myGame.gameState.modalTypeCard = null;
   myGame.gameState.modalDeck = [];
-  myGame.gameState.modalTitle = `${base[1]}`;
-  myGame.gameState.message = '';
+  myGame.gameState.modalTitle = `${base.modalTitles.comboStart[1]}`;
+  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base.gameMsg.combos[5]}`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   if (myGame.gameState.modalPlayers.length === 1) {
     myGame = combo3ChoisePlayer(myGame, mPlayers[0].name);
