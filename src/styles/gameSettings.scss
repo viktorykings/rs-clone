@@ -7,9 +7,36 @@
   display: none;
 }
 .settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   height: 100vh;
   position: relative;
-  background-color: #700000;
+  background-image: linear-gradient(
+    140deg,
+    hsl(0deg 100% 22%) 72%,
+    hsl(4deg 96% 24%) 86%,
+    hsl(8deg 93% 26%) 92%,
+    hsl(10deg 92% 28%) 95%,
+    hsl(13deg 91% 29%) 98%,
+    hsl(15deg 91% 31%) 99%,
+    hsl(17deg 91% 32%) 100%,
+    hsl(19deg 91% 34%) 101%,
+    hsl(21deg 92% 35%) 101%,
+    hsl(23deg 92% 36%) 101%,
+    hsl(24deg 93% 38%) 102%,
+    hsl(26deg 93% 39%) 102%,
+    hsl(27deg 94% 40%) 102%,
+    hsl(29deg 95% 41%) 102%,
+    hsl(30deg 96% 43%) 101%,
+    hsl(32deg 97% 44%) 101%,
+    hsl(33deg 97% 45%) 101%,
+    hsl(34deg 98% 46%) 101%,
+    hsl(35deg 99% 47%) 101%,
+    hsl(37deg 99% 48%) 100%,
+    hsl(38deg 100% 49%) 100%,
+    hsl(39deg 100% 50%) 100%
+  );
   padding: 0 20px;
   margin: 0 auto;
   button,
@@ -21,30 +48,65 @@
       cursor: pointer;
     }
   }
-}
-.btn {
-  margin: 0 10px;
-  padding: 2px 5px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  border: 2px solid black;
-  &:hover {
-    background-color: orange;
-    color: black;
+  h1 {
+    text-align: center;
+    color: orange;
   }
-  &:active {
-    background-color: yellow;
+  h2 {
+    text-align: center;
+    color: white;
+  }
+
+  .btn-group {
+    text-align: center;
+  }
+  .btn {
+    font-size: 1rem;
+    padding: 15px 35px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #fff;
+    box-shadow: 0 0 20px #111;
+    border-radius: 10px;
+    border: none;
+    display: block;
+    background-image: linear-gradient(
+      to right,
+      #c21500 0%,
+      #ffc500 51%,
+      #c21500 100%
+    );
+    &:hover {
+      background-position: right center;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+  a {
+    text-decoration: none;
   }
 }
+.page-title {
+  color: orange;
+  text-align: center;
+}
+
 .start-btn {
-  margin-top: 12rem;
+}
+.back-btn {
 }
 .add-bot {
   display: flex;
   gap: 20px;
 }
 .list {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  justify-items: center;
+  aspect-ratio: 3/2;
 
   margin: 0 auto;
   padding: 1em;
@@ -95,7 +157,10 @@
 
   .bot-name {
     margin: 0;
-    font-size: 30px;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    padding: 0 10px;
+    width: max-content;
     transform: perspective(800px) rotateY(30deg) scale(0.9) rotateX(10deg);
     // filter: blur(1px);
     opacity: 0.9;
@@ -105,17 +170,23 @@
   }
   & + .btn-group {
     position: absolute;
-    bottom: -80px;
+    top: 50%;
+    right: -80px;
 
     .btn {
       font-size: 20px;
-      // width: 100px;
-      // height: 100px;
-      // border: none;
-      // background-image: url('../assets/color-bang.png');
-      // background-color: transparent;
-      // background-size: contain;
-      // background-repeat: no-repeat;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: none;
+      background-image: url('../assets/cross.svg');
+      background-repeat: no-repeat;
+      background-size: 50%;
+      background-position: center;
+    }
+    &:hover {
+      filter: invert(29%) sepia(97%) saturate(7266%) hue-rotate(356deg)
+        brightness(107%) contrast(117%);
     }
   }
 }
@@ -132,14 +203,15 @@
 .player-settings {
   width: 40%;
 }
-.human-player {
+.settings {
   .btn-group {
+    margin: 10px 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 }
 .human-player-name {
-  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
   line-height: 200px;
   font-size: 60px;
   font-weight: bold;
@@ -166,6 +238,8 @@
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 .modal {
+  text-align: center;
+  backdrop-filter: blur(8px) saturate(180%);
   background-color: rgba(255, 255, 255, 0.3);
   position: absolute;
   left: 50%;
@@ -246,16 +320,15 @@
   }
 }
 .choose-level {
-  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   button {
-    font-size: 3rem;
+    font-size: 1.5rem;
 
-    &:hover {
-      background-color: orangered;
-    }
+    // &:hover {
+    //   background-color: orangered;
+    // }
   }
 }
 .wrap-modal {
@@ -269,9 +342,10 @@
 }
 
 .game-level {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   color: rgba(167, 221, 60, 1);
+  text-align: center;
   text-transform: uppercase;
 }
 

@@ -1,0 +1,53 @@
+.wrap-team {
+  display: flex;
+  background-color: #770000;
+}
+.team-desc {
+  margin: auto 0;
+  h3 {
+    writing-mode: vertical-rl;
+    transform: rotate(-180deg);
+    font-size: 7rem;
+  }
+}
+.team-list {
+  width: 100%;
+}
+.left {
+  margin-left: auto;
+}
+.right {
+  margin-right: auto;
+}
+.row {
+  display: flex;
+  gap: 1rem;
+  padding: 10px;
+  height: 27vh;
+  margin: 1rem;
+  border: 6px solid orange;
+  border-radius: 20px;
+  p {
+    flex-grow: 1;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    font-size: 2rem;
+    font-weight: bold;
+    color: orange;
+    span {
+      font-size: 6rem;
+    }
+  }
+
+  .row-item {
+    aspect-ratio: 2/3;
+
+    border-radius: 12px;
+    background-position: center;
+    background-size: cover;
+  }
+}

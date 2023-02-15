@@ -45,16 +45,27 @@ export default function GameSettings({ setGame }: IGameSettings) {
           onSetLevel={() => setModal(false)}
         />
       )}
-      <h1>Game Settings</h1>
+      <h1>Настройки игры</h1>
 
       <div className="wrap-players">
         <div className="bot-settings">
+          <h2>Плохие котейки</h2>
+          <hr />
+          <br />
+          <div className="choose-level">
+            <button
+              className="btn"
+              type="button"
+              onClick={() => setModal(true)}
+            >
+              Выбрать уровень сложности
+            </button>
+          </div>
+          <p className="game-level">{botLevel}</p>
           <form onSubmit={handleSubmit}>
-            <h2>Bad Kittings</h2>
-            <p className="game-level">{botLevel}</p>
             <div className="add-bot">
               <button type="submit" className="btn">
-                Add a kitten
+                Добавить котёночка
               </button>
             </div>
           </form>
@@ -74,11 +85,6 @@ export default function GameSettings({ setGame }: IGameSettings) {
               );
             })}
           </ul>
-          <div className="choose-level">
-            <button type="button" onClick={() => setModal(true)}>
-              CHOOSE GAME LEVEL
-            </button>
-          </div>
         </div>
         <div className="player-settings">
           {modalChangeName && (
@@ -96,6 +102,8 @@ export default function GameSettings({ setGame }: IGameSettings) {
               title="Change Avatar"
             />
           )}
+          <h2>Хороший котик</h2>
+          <hr />
           <MainPlayer
             name={mainPlayer.name}
             isBot={false}
@@ -106,25 +114,30 @@ export default function GameSettings({ setGame }: IGameSettings) {
           />
         </div>
       </div>
-      <Link to="/desk">
-        <button
-          type="button"
-          className="start-btn btn"
-          onClick={() => {
-            const Players = createPlayers(bots);
-            setGame(createGame(Players));
-          }}
-        >
-          Start Game
-        </button>
-      </Link>
-      <button
-        type="button"
-        className="btn"
-        onClick={() => console.log('Cancel')}
-      >
-        Cancel
-      </button>
+      <hr />
+      <div className="btn-group">
+        <Link to="/desk">
+          <button
+            type="button"
+            className="start-btn btn"
+            onClick={() => {
+              const Players = createPlayers(bots);
+              setGame(createGame(Players));
+            }}
+          >
+            Начать игру
+          </button>
+        </Link>
+        <Link to="/">
+          <button
+            type="button"
+            className="btn"
+            onClick={() => console.log('Cancel')}
+          >
+            Вернуться назад
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

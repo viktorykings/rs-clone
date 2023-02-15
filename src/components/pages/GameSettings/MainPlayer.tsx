@@ -26,7 +26,7 @@ export default function MainPlayer({
             openModalChangeName();
           }}
         >
-          Edit Name
+          Редактировать имя
         </button>
         <button
           type="button"
@@ -35,7 +35,7 @@ export default function MainPlayer({
             openModalChangeAvatar();
           }}
         >
-          Choose Avatar
+          Выбрать Аватар
         </button>
       </div>
     </div>
