@@ -19,14 +19,12 @@ export default function ModalChangeAvatar({
     setUrAv(url);
   };
 
-  // console.log(updateUrlAv);
   const audio = new Audio(audiourl);
   const buttonClick = () => {
     audio.play();
   };
   return (
     <div className="wrap-modal">
-      {/* <Carousel /> */}
       <div className="modal">
         <h1 className="modal-title">{title}</h1>
         <div className="modal-body">
@@ -37,9 +35,7 @@ export default function ModalChangeAvatar({
                 backgroundImage: `url(${urlAv})`,
                 backgroundSize: 'cover',
               }}
-            >
-              avatar
-            </div>
+            />
             <div className="wrap-carousel">
               <Carousel curAvatar={curAvatar} updateUrlAv={updateUrlAv} />
             </div>

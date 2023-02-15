@@ -11,8 +11,6 @@ import {
   avCats,
 } from './dataSettings';
 
-// const { log } = console;
-
 const { getRandomBotName, getRandomBotAvatar } = utils();
 
 export default function useSettings() {

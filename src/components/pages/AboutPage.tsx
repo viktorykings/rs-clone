@@ -1,4 +1,5 @@
 import React from 'react';
+import vika from '../../assets/team/vika.png';
 
 export default function AboutPage(): JSX.Element {
   return (
@@ -39,7 +40,7 @@ export default function AboutPage(): JSX.Element {
             />
             <div
               className="row-item"
-              style={{ backgroundImage: 'url(/cards/neutralize2.png)' }}
+              style={{ backgroundImage: `url(${vika})` }}
             />
             <div
               className="row-item"
