@@ -10,6 +10,15 @@ function takeCardDeskDeck(game: IGame): IGame {
   if (myGame.players[iPl].countTakeCard > 0) {
     const card = myGame.deskDeck.splice(0, 1);
     myGame.players[iPl].countTakeCard -= 1;
+    for (let i = 0; i < myGame.players.length; i += 1) {
+      if (myGame.players[i].visibleCards.length > 0) {
+        myGame.players[i].visibleCards = myGame.players[i].visibleCards
+          .reduce((res: number[], el) => {
+            if (el - 1 >= 0) res.push(el - 1);
+            return res;
+          }, []);
+      }
+    }
     if (card[0].type !== 0) {
       myGame.players[iPl].deck.push(...card);
       myGame.players[iPl].buttons.finishMove = myGame.players[iPl].countTakeCard === 0;

@@ -138,7 +138,11 @@ function mainGameLoop(
     && myGame.players[inPl].isBot) {
     // вызов функции хода бота
     // console.log('Bot do move');
-    const botMove = myGame.gameState.bot.onTurn(myGame.players[inPl]);
+    const botMove = myGame.gameState.bot.onTurn(
+      myGame.players[inPl],
+      myGame.reboundDeck,
+      myGame.deskDeck,
+    );
     if (botMove.idCard > -1) {
       myGame.gameState.stateGame = botMove.stateGame;
       myGame = (makeMove(myGame, botMove.idCard));

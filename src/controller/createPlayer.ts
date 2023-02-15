@@ -38,6 +38,7 @@ function createPlayer(
       tripleVisible: false,
       fiveVisible: false,
     },
+    visibleCards: [],
   };
 }
 

@@ -6,6 +6,7 @@ function endMoveNeutralize(game: IGame, ind: number): IGame {
   const myGame = { ...game };
   const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const iDC = myGame.showCards.findIndex((cr) => cr.type === 0);
+  if (ind > 0) myGame.players[iPl].visibleCards.push(ind);
   let iDeck = ind - 1;
   if (iDeck < 0) {
     const len = game.deskDeck.length;

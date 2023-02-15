@@ -24,7 +24,8 @@ interface IPlayer {
     dobleVisible: boolean;
     tripleVisible: boolean;
     fiveVisible: boolean;
-  }
+  },
+  visibleCards: number[],
 }
 
 export default IPlayer;
