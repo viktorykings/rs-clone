@@ -175,7 +175,10 @@ function mainGameLoop(
   && myGame.players[inPl].isBot) {
   // вызов функции бота выбора карты, которую нужно отдать Одолжить
   // console.log('Bot maybe choise player for Favor');
-    const nomCard = myGame.gameState.bot.onPutExplosiveKitten();
+    const nomCard = myGame.gameState.bot.onPutExplosiveKitten(
+      myGame.players,
+      myGame.gameState.playerTurn,
+    );
     myGame = endMoveNeutralize(myGame, nomCard);
   }
 

@@ -94,8 +94,9 @@ class MiddleBot implements IBot {
     return ret;
   }
 
-  onPutExplosiveKitten(): number {
-    return 0;
+  onPutExplosiveKitten(players: IPlayer[]): number {
+    const actPl = players.filter((pl) => pl.active);
+    return actPl.length - 1;
   }
 }
 
