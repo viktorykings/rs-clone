@@ -38,8 +38,5 @@ interface IGame {
     bot: IBot,
   }
 }
-export interface Setter extends IGame {
-  setGame: React.Dispatch<React.SetStateAction<IGame>>;
-}
 
 export default IGame;

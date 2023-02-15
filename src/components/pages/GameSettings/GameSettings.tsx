@@ -8,12 +8,14 @@ import ModalChangeAvatar from './ModalChangeAvatar';
 import useSettings from './useSettings';
 import IGame from '../../../interface/IGame';
 import createGame from '../../../controller/createGame';
+import langs from '../../../const/localization';
 
-interface IGameSettings {
+export interface IGameSettings {
+  game: IGame,
   setGame: (obj: IGame) => void;
 }
 
-export default function GameSettings({ setGame }: IGameSettings) {
+export default function GameSettings({ game, setGame }: IGameSettings) {
   const {
     botLevel,
     updateBotLevel,
@@ -34,58 +36,66 @@ export default function GameSettings({ setGame }: IGameSettings) {
     createPlayers,
   } = useSettings();
 
+  const currLang = game.settings.lang;
+  const base = langs[currLang].gameSettings;
+
   return (
     <div className="settings">
       {modal && (
         <ModalBot
-          title="Choose level"
+          title={base.modal.level[3]}
           level={botLevel}
           updateLevel={updateBotLevel}
           setGameLevel={setGameLevel}
           onSetLevel={() => setModal(false)}
+          localLang={base.modal.level}
         />
       )}
-      <h1>Game Settings</h1>
+      {/* <h1>Game Settings</h1> */}
 
       <div className="wrap-players">
         <div className="bot-settings">
-          <form onSubmit={handleSubmit}>
-            <h2>Bad Kittings</h2>
+          <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e, base.botNames)}>
+            {/* <h2>Bad Kittings</h2> */}
             <p className="game-level">{botLevel}</p>
             <div className="add-bot">
               <button type="submit" className="btn">
-                Add a kitten
+                {base.buttons[0]}
               </button>
             </div>
           </form>
           <ul className="list">
-            {bots.map((player) => {
-              const bdrcolor = getRandomColor();
-              return (
-                <Bot
-                  name={player.name}
-                  level={player.levelBot}
-                  link={player.link}
-                  key={player.name}
-                  isBot={player.isBot}
-                  deletePlayer={deleteBot}
-                  brdrColor={bdrcolor}
-                />
-              );
-            })}
+            {bots.length
+              ? bots.map((player) => {
+                const bdrcolor = getRandomColor();
+                return (
+                  <Bot
+                    name={player.name}
+                    level={player.levelBot}
+                    link={player.link}
+                    key={player.name}
+                    isBot={player.isBot}
+                    deletePlayer={deleteBot}
+                    brdrColor={bdrcolor}
+                    localLang={base.bot}
+                  />
+                );
+              })
+              : <div className="bot-place">?</div>}
           </ul>
           <div className="choose-level">
             <button type="button" onClick={() => setModal(true)}>
-              CHOOSE GAME LEVEL
+              {base.level[0]}
             </button>
           </div>
         </div>
         <div className="player-settings">
           {modalChangeName && (
             <ModalChangeName
-              title="Change Name"
+              title={base.modal.name[0]}
               updateName={updateNameMainPlayer}
               onChangeName={() => setModalChangeName(false)}
+              localLang={base.modal.name}
             />
           )}
           {modalChangeAvatar && (
@@ -93,7 +103,8 @@ export default function GameSettings({ setGame }: IGameSettings) {
               curAvatar={mainPlayer.link}
               updateAvatar={updateAvatarMainPlayer}
               onChangeAvatar={() => setModalChangeAvatar(false)}
-              title="Change Avatar"
+              title={base.modal.avatar[0]}
+              localLang={base.modal.avatar}
             />
           )}
           <MainPlayer
@@ -103,6 +114,7 @@ export default function GameSettings({ setGame }: IGameSettings) {
             avatar={mainPlayer.link}
             openModalChangeName={() => setModalChangeName(true)}
             openModalChangeAvatar={() => setModalChangeAvatar(true)}
+            localLang={base.player}
           />
         </div>
       </div>
@@ -115,16 +127,18 @@ export default function GameSettings({ setGame }: IGameSettings) {
             setGame(createGame(Players));
           }}
         >
-          Start Game
+          {base.buttons[1]}
         </button>
       </Link>
-      <button
-        type="button"
-        className="btn"
-        onClick={() => console.log('Cancel')}
-      >
-        Cancel
-      </button>
+      <Link to="/">
+        <button
+          type="button"
+          className="btn"
+          onClick={() => console.log('Cancel')}
+        >
+          {base.buttons[2]}
+        </button>
+      </Link>
     </div>
   );
 }

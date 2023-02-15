@@ -2,11 +2,14 @@ import IGame from '../../../interface/IGame';
 import findIndexPlayerTern from './findIndexPlayerTern';
 import cardType from '../../../const/cardType';
 import startStateDeck from '../../statePlayerDeck/startStateDeck';
+import langs from '../../../const/localization';
 
 function combo3GiveCard(game: IGame, idCard: number): IGame {
   const myGame = { ...game };
   const indPlTake = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   let indPlGive = -1;
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.gameMsg.combos;
   if (myGame.gameState.choicePlayer !== null) {
     indPlGive = findIndexPlayerTern(myGame.players, myGame.gameState.choicePlayer.name);
   }
@@ -17,11 +20,11 @@ function combo3GiveCard(game: IGame, idCard: number): IGame {
           && typeCard >= 8),
   );
   if (indCard === -1) {
-    myGame.gameState.message = `У ${myGame.players[indPlGive].name} нет карты ${cardType[typeCard ?? -1].name}.`;
+    myGame.gameState.message = `${base[1]} ${myGame.players[indPlGive].name} ${base[3]} ${cardType[typeCard ?? -1].name}.`;
   } else {
     const [card] = myGame.players[indPlGive].deck.splice(indCard, 1);
     myGame.players[indPlTake].deck.push(card);
-    myGame.gameState.message = `${myGame.players[indPlTake].name} получает карту ${cardType[typeCard ?? -1].name}.`;
+    myGame.gameState.message = `${myGame.players[indPlTake].name} ${base[0]} ${cardType[typeCard ?? -1].name}.`;
   }
   myGame.players[indPlTake] = startStateDeck(
     myGame.players[indPlTake],

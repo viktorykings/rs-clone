@@ -1,3 +1,4 @@
+import langs from '../../../const/localization';
 import IGame from '../../../interface/IGame';
 import getPause from '../../game-loop/subevent/getPause';
 import startStateDeck from '../../statePlayerDeck/startStateDeck';
@@ -5,12 +6,14 @@ import findIndexPlayerTern from './findIndexPlayerTern';
 import findNextActivePlayer from './findNextActivePlayer';
 
 function explosion(game: IGame): IGame {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.gameMsg.explosion;
   const myGame = { ...game };
   const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const nextPl = findNextActivePlayer(myGame);
   if (myGame.players[iPl].isBot) {
     myGame.players[iPl].active = false;
-    myGame.gameState.message = `${myGame.players[iPl].name} взорвался!`;
+    myGame.gameState.message = `${myGame.players[iPl].name} ${base}`;
     const countActive = myGame.players.reduce((sum, pl) => sum + (pl.active === true ? 1 : 0), 0);
     if (countActive === 1) {
       myGame.gameState.functionState = 'win';

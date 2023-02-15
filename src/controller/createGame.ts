@@ -6,11 +6,15 @@ import TStateGame from '../interface/IStateGame';
 import createDeckFirst from './createDeckFirst';
 import TFunctionState from '../interface/TFunctionState';
 import { playerWaitTurn } from '../const/gameVariable';
-// import EasyBot from './game-loop/bots/easyBot';
 import MiddleBot from './game-loop/bots/middleBot';
+import langs from '../const/localization';
 
 function createGame(players: IPlayer [] = []): IGame {
-  const settings: ISettings = { countPlayer: players.length, level: 'easy' };
+  const settings: ISettings = {
+    countPlayer: players.length,
+    level: 'easy',
+    lang: 'ru',
+  };
 
   const { deskDeck, playersDeck } = createDeckFirst(players);
 
@@ -26,6 +30,9 @@ function createGame(players: IPlayer [] = []): IGame {
   if (players.length > 0) playerTurn = players[0].name;
 
   const bot = new MiddleBot();
+  const currLang = settings.lang;
+  const base = langs[currLang].startGame;
+
   const gameState = {
     playerTurn,
     stateGame,
@@ -36,7 +43,7 @@ function createGame(players: IPlayer [] = []): IGame {
     timeNeed: playerWaitTurn,
     typeTern: null,
     playerWaitAnswer: [],
-    message: 'Ваш ход.',
+    message: `${base}`,
     history: [],
     modalVisible: false,
     modalPlayers: [],

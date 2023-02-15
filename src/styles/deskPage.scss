@@ -449,6 +449,11 @@ button{
     justify-content: space-between;
     padding: 20px 50px 50px;
     font-size: 32px;
+    h2{
+      line-height: 1.2;
+      text-align: center;
+      font-size: 40px;
+    }
     .end-game-buttons{
       height: 150px;
       display: flex;

@@ -1,9 +1,12 @@
+import langs from '../../../const/localization';
 import IGame from '../../../interface/IGame';
 import startStateDeck from '../../statePlayerDeck/startStateDeck';
 import favorChoicePlayer from './favorChoicePlayer';
 import findIndexPlayerTern from './findIndexPlayerTern';
 
 function moveFavor(game: IGame): IGame {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.modalTitles.favour;
   let myGame = { ...game };
   myGame.gameState.functionState = 'waitFavorPlayer';
 
@@ -15,7 +18,7 @@ function moveFavor(game: IGame): IGame {
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalPlayers = mPlayers;
   myGame.gameState.modalDeck = [];
-  myGame.gameState.modalTitle = 'Выберите игрока, который отдаст Вам карту!';
+  myGame.gameState.modalTitle = `${base}`;
   myGame.gameState.message = `${myGame.gameState.playerTurn} думает кого выбрать.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);

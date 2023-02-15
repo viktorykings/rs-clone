@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, {
-  useMemo, useState,
+  useState,
 } from 'react';
 import Player from './Players';
 import endMove from '../../controller/game-event/endMove';
-// import takeCardDeskDeck from '../../controller/game-event/takeCardDeskDeck';
-import IGame, { Setter } from '../../interface/IGame';
+import { Setter } from '../../interface/IGameProp';
 import infoCat from '../../assets/info-cat.png';
 import {
   checkModalVisible,
@@ -20,21 +19,15 @@ import {
 import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveHandlers';
 import EndGameModal from './EndGameModal';
 import findIndexPlayerTern from '../../controller/game-event/subevent/findIndexPlayerTern';
+import langs from '../../const/localization';
 
 const cardBack = 'cards/back.png';
 const emptyCardsPlace = 'cards/empty.png';
 
 export default function DeskPage({
-  deskDeck, settings, players, reboundDeck, showCards, gameState, setGame,
+  // deskDeck, settings, players, reboundDeck, showCards, gameState,
+  game, setGame,
 }: Setter): JSX.Element {
-  const game = useMemo((): IGame => ({
-    deskDeck,
-    settings,
-    players,
-    reboundDeck,
-    showCards,
-    gameState,
-  }), [deskDeck, gameState, players, reboundDeck, settings, showCards]);
   const [playerState, setPlayerState] = useState(game.players);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
@@ -42,6 +35,9 @@ export default function DeskPage({
   const cardWidth = 190;
   const sliderLen = 5;
   const reboundCardWidth = 160;
+  const currLang = game.settings.lang;
+  const neutBtnName = langs[currLang].deskPage.buttons.neutButtons;
+  const comboBtnName = langs[currLang].deskPage.buttons.comboButtons;
   const showPrevCard = () => {
     if (translateVal < 0) {
       console.log(cardWidth * playerState[0].deck.length - cardWidth);
@@ -72,7 +68,7 @@ export default function DeskPage({
   return (
     <main className="desk">
       <div className="other-players">
-        {players.slice(1, players.length).map((el) => <Player key={el.name} name={el.name} className={gameState.playerTurn /* activePlayer */ === el.name ? 'activePlayer' : ''} />)}
+        {game.players.slice(1, game.players.length).map((el) => <Player key={el.name} name={el.name} className={game.gameState.playerTurn === el.name ? 'activePlayer' : ''} />)}
       </div>
       <div className="game">
         <div className="game-info">
@@ -93,16 +89,16 @@ export default function DeskPage({
             onMouseDown={() => handleTakeDeskCard(game, setGame)}
           />
           <div className={checkNeutralize() ? 'return-to-deck-active' : 'return-to-deck'}>
-            <button type="button" onClick={() => handleMoveNeut(game, 1, setGame)}>First</button>
-            <button type="button" onClick={() => handleMoveNeut(game, 2, setGame)}>Second</button>
-            <button type="button" onClick={() => handleMoveNeut(game, 3, setGame)}>Third</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 1, setGame)}>{neutBtnName[0]}</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 2, setGame)}>{neutBtnName[1]}</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 3, setGame)}>{neutBtnName[2]}</button>
             <button
               type="button"
               onClick={() => handleMoveNeut(game, game.deskDeck.length + 1, setGame)}
             >
-              Last
+              {neutBtnName[3]}
             </button>
-            <button type="button" onClick={() => handleMoveNeut(game, 0, setGame)}>Random</button>
+            <button type="button" onClick={() => handleMoveNeut(game, 0, setGame)}>{neutBtnName[4]}</button>
           </div>
           <p>
             Left
@@ -112,9 +108,9 @@ export default function DeskPage({
         </div>
         <div className="play-cards">
           {// eslint-disable-next-line no-restricted-globals
-          showCards.length === 0
+          game.showCards.length === 0
             ? <div className="play-cards-place" />
-            : showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animated-move" />)
+            : game.showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animated-move" />)
           }
         </div>
         <div className={checkFunctionStateCombo5(game) ? 'rebound-deck-active' : 'rebound-deck'}>
@@ -140,7 +136,7 @@ export default function DeskPage({
       </div>
       <div className="main-player">
         <div className="main-player-container">
-          <Player name="main" className={gameState.playerTurn === players[0].name ? 'activePlayer' : ''} />
+          <Player name="main" className={game.gameState.playerTurn === game.players[0].name ? 'activePlayer' : ''} />
           <div className="control-buttons">
             <button
               type="button"
@@ -149,7 +145,7 @@ export default function DeskPage({
               }}
               disabled={!game.players[0].buttons.finishMove}
             >
-              end
+              {langs[currLang].deskPage.buttons.endMoveBtn}
             </button>
             <div className={game.players[0].buttons.comboEnabled ? 'combo-visible' : 'combo-hidden'}>
               <button
@@ -157,21 +153,21 @@ export default function DeskPage({
                 disabled={!game.players[0].buttons.dobleEnabled}
                 onClick={() => usedDoubleCombo(game, setPlayerState)}
               >
-                2x Combo
+                {comboBtnName[0]}
               </button>
               <button
                 type="button"
                 disabled={!game.players[0].buttons.tripleEnabled}
                 onClick={() => usedTripleCombo(game, setPlayerState)}
               >
-                3x Combo
+                {comboBtnName[1]}
               </button>
               <button
                 type="button"
                 disabled={!game.players[0].buttons.fiveEnabled}
                 onClick={() => usedFiveCombo(game, setPlayerState)}
               >
-                5x Combo
+                {comboBtnName[2]}
               </button>
             </div>
           </div>
@@ -200,6 +196,7 @@ export default function DeskPage({
       </div>
       <div className={checkModalVisible(game) ? 'modal-bg-active' : 'modal-bg'}>
         <div className={checkModalVisible(game) ? 'take-card-modal-active' : 'take-card-modal'}>
+          <h5>{game.gameState.modalTitle}</h5>
           <div className="players">
             {game.gameState.modalPlayers.map((el) => (
               <button
