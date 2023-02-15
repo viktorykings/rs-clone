@@ -4,4 +4,5 @@ export default interface IModalBotProps {
   updateLevel: (value: string) => void;
   setGameLevel: (value: string) => void;
   onSetLevel: () => void;
+  localLang: string[];
 }

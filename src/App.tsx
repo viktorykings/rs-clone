@@ -8,54 +8,29 @@ import MainPage from './components/pages/MainPage';
 import Settings from './components/pages/Settings';
 import GameSettings from './components/pages/GameSettings/GameSettings';
 import createGame from './controller/createGame';
-// import createPlayer from './controller/createPlayer';
 import gameLoop from './controller/game-loop/gameLoop';
 
 function App(): JSX.Element {
-  // const player = createPlayer('player1', false);
-  // const player1 = createPlayer('и');
-  // const player2 = createPlayer('л');
   const [game, setGame] = useState(createGame());
-  // const game = createGame([player, player1, player2]);
-  const { deskDeck } = game;
-  const { settings } = game;
-  const { players } = game;
-  const { reboundDeck } = game;
-  const { showCards } = game;
-  const { gameState } = game;
-  // console.log('player1', game.players[0].active);
-  // console.log('player2', game.players[1].deck);
-  // console.log('player2', game.players[2].deck);
-  // console.log('desk', game.deskDeck);
-  // // console.log('desk', game.playersDeck);
-  // console.log('showcards', game.gameState.playerTurn);
-  // console.log(game);
-  // console.log('----App--------');
   useEffect(() => gameLoop(game, setGame), [game]);
-  // mainGameLoop(game, setGame);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage settings={game.settings} />} />
         <Route
           path="/gamesettings"
-          element={<GameSettings setGame={setGame} />}
+          element={<GameSettings game={game} setGame={setGame} />}
         />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/settings" element={<Settings settings={game.settings} />} />
         <Route path="/about" element={<AboutPage />} />
         <Route
           path="/desk"
-          element={
+          element={(
             <DeskPage
-              deskDeck={deskDeck}
-              settings={settings}
-              players={players}
-              reboundDeck={reboundDeck}
-              showCards={showCards}
-              gameState={gameState}
+              game={game}
               setGame={setGame}
             />
-          }
+          )}
         />
       </Routes>
     </BrowserRouter>

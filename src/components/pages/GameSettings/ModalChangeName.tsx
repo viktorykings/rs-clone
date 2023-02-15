@@ -4,12 +4,14 @@ interface IModalChangeName {
   title: string;
   updateName: (value: string) => void;
   onChangeName: () => void;
+  localLang: string[];
 }
 
 export default function ModalChangeName({
   title,
   updateName,
   onChangeName,
+  localLang,
 }: IModalChangeName) {
   const [username, setUsername] = useState('');
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,7 +33,7 @@ export default function ModalChangeName({
         <div className="modal-body">
           <form onSubmit={handleSubmit}>
             <label className="modal-body-label" htmlFor="myinput">
-              Enter your name
+              {localLang[1]}
               <br />
               <input
                 className="modal-body-input"
@@ -48,7 +50,7 @@ export default function ModalChangeName({
             <input
               className="modal-body-btn cancel"
               type="button"
-              value="Cancel"
+              value={`${localLang[2]}`}
               onClick={() => onChangeName()}
             />
           </form>
