@@ -39,7 +39,9 @@ const langs: ILocalization = {
       modal: {
         name: ['Изменить имя', 'Введите имя', 'Отмена'],
         avatar: ['Выбрать картинку', 'Назад', 'Далее', 'Готово', 'Отмена'],
+        level: ['Легкий', 'Средний', 'Сложный', 'Выберите уровень'],
       },
+      botNames: ['Адский кот', 'Толстяк', 'Пушистый донжуан', 'Чупакабра', 'Игривый дваждылюб', 'Рыжий убийца', 'Рыбовладелец', 'Мистер кот', 'Босс мяуфии'],
     },
   },
   en: {
@@ -80,7 +82,9 @@ const langs: ILocalization = {
       modal: {
         name: ['Change Name', 'Enter your name', 'Cancel'],
         avatar: ['Choose avatar', 'Previous', 'Next', 'Done', 'Cancel'],
+        level: ['Easy', 'Normal', 'Hard', 'Choose level'],
       },
+      botNames: ['Diablo Gato', 'Puss in Boots', 'Fluffy don Huan', 'Chonk', 'The Furry Lover', 'Ginger Hit Man', 'Mr. Cat', 'Meow boss', 'Chupacabra'],
     },
   },
 };

@@ -29,10 +29,12 @@ interface GameSettings {
   level: string[],
   buttons: string[],
   modal: GameSettingsModals,
+  botNames: string[],
 }
 interface GameSettingsModals {
   name: string[],
   avatar: string[],
+  level: string[]
 }
 interface DeskPage {
   buttons: DeskPageBtns,

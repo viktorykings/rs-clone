@@ -10,7 +10,7 @@ import IGame from '../../../interface/IGame';
 import createGame from '../../../controller/createGame';
 import langs from '../../../const/localization';
 
-interface IGameSettings {
+export interface IGameSettings {
   game: IGame,
   setGame: (obj: IGame) => void;
 }
@@ -43,18 +43,19 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
     <div className="settings">
       {modal && (
         <ModalBot
-          title="Choose level"
+          title={base.modal.level[3]}
           level={botLevel}
           updateLevel={updateBotLevel}
           setGameLevel={setGameLevel}
           onSetLevel={() => setModal(false)}
+          localLang={base.modal.level}
         />
       )}
       {/* <h1>Game Settings</h1> */}
 
       <div className="wrap-players">
         <div className="bot-settings">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e, base.botNames)}>
             {/* <h2>Bad Kittings</h2> */}
             <p className="game-level">{botLevel}</p>
             <div className="add-bot">
@@ -64,21 +65,23 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
             </div>
           </form>
           <ul className="list">
-            {bots.map((player) => {
-              const bdrcolor = getRandomColor();
-              return (
-                <Bot
-                  name={player.name}
-                  level={player.levelBot}
-                  link={player.link}
-                  key={player.name}
-                  isBot={player.isBot}
-                  deletePlayer={deleteBot}
-                  brdrColor={bdrcolor}
-                  localLang={base.bot}
-                />
-              );
-            })}
+            {bots.length
+              ? bots.map((player) => {
+                const bdrcolor = getRandomColor();
+                return (
+                  <Bot
+                    name={player.name}
+                    level={player.levelBot}
+                    link={player.link}
+                    key={player.name}
+                    isBot={player.isBot}
+                    deletePlayer={deleteBot}
+                    brdrColor={bdrcolor}
+                    localLang={base.bot}
+                  />
+                );
+              })
+              : <div className="bot-place">?</div>}
           </ul>
           <div className="choose-level">
             <button type="button" onClick={() => setModal(true)}>

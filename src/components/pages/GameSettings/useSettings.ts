@@ -5,11 +5,13 @@ import createPlayer from '../../../controller/createPlayer';
 import utils from './utils';
 
 import {
-  defaultBot,
+  // defaultBot,
   defaultMainPlayer,
-  botNames,
+  // botNames,
   avCats,
 } from './dataSettings';
+// import IGame from '../../../interface/IGame';
+// import { IGameSettings } from './GameSettings';
 
 // const { log } = console;
 
@@ -25,7 +27,7 @@ export default function useSettings() {
     setBotLevel(value);
   };
 
-  const [bots, setBots] = useState(defaultBot);
+  const [bots, setBots] = useState<IPlayerSettings[]>([]);
   const [mainPlayer, setMainPlayer] = useState(defaultMainPlayer);
 
   const updateNameMainPlayer = (value: string) => {
@@ -76,22 +78,22 @@ export default function useSettings() {
     }
     return result;
   }
-  function getBotName(): string {
-    let result = getRandomBotName(botNames);
+  function getBotName(botNamesArr: string[]): string {
+    let result = getRandomBotName(botNamesArr);
 
     while (isBotNameExist(result)) {
-      result = getRandomBotName(botNames);
+      result = getRandomBotName(botNamesArr);
     }
     return result;
   }
 
   // Add New Bot
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent, langArr: string[]) {
     e.preventDefault();
     if (bots.length >= 4) {
       return;
     }
-    const newBotName = getBotName();
+    const newBotName = getBotName(langArr);
     const newLink = getBotAvatar();
 
     const newBot: IPlayerSettings = {
