@@ -142,6 +142,7 @@ function mainGameLoop(
       myGame.players[inPl],
       myGame.reboundDeck,
       myGame.deskDeck,
+      myGame.players,
     );
     if (botMove.idCard > -1) {
       myGame.gameState.stateGame = botMove.stateGame;

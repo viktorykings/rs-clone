@@ -3,7 +3,7 @@ import TStateGame from './IStateGame';
 import ICard from './ICard';
 
 interface IBot {
-  onTurn(player: IPlayer, reboundDeck: ICard[], deskDeck: ICard[]): {
+  onTurn(player: IPlayer, reboundDeck: ICard[], deskDeck: ICard[], players: IPlayer[]): {
     idCard: number, stateGame: TStateGame };
   onAnswerTurn(player: IPlayer, players: IPlayer [], playerWaitAnswer: IPlayer[]): number;
   onComboPlayerChoice(modulPlayers: IPlayer[], players: IPlayer[], playerTurnName: string): string;
