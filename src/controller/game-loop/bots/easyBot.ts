@@ -8,7 +8,7 @@ import ICard from '../../../interface/ICard';
 class EasyBot implements IBot {
   onTurn(player: IPlayer): { idCard: number, stateGame: TStateGame } {
     const deck = [
-      ...player.deck.filter((cr) => cr.type >= 3 && cr.type <= 8),
+      ...player.deck.filter((cr) => cr.type >= 3 && cr.type <= 7),
       ...player.combos.doubleCats,
       ...player.combos.tripleCats,
       ...player.combos.fiveCats,

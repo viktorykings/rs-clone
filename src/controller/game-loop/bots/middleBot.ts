@@ -57,7 +57,7 @@ class MiddleBot implements IBot {
     }
 
     const deck = [
-      ...player.deck.filter((cr) => cr.type >= 3 && cr.type <= 8),
+      ...player.deck.filter((cr) => cr.type >= 3 && cr.type <= 7),
       ...player.combos.doubleCats,
       ...player.combos.tripleCats,
     ];

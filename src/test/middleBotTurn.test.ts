@@ -151,3 +151,17 @@ test('get result from visible 1-st card, and have card Not', () => {
   expect(MB.onTurn(pl9, [c1], deck2)).toStrictEqual(result111);
   expect(MB.onTurn(pl9, [c1], deck3)).toStrictEqual(result111);
 });
+
+const pl10 = createPlayer('a');
+const c41 = createCard(115, 8, 0);
+const c42 = createCard(116, 9, 0);
+const c43 = createCard(117, 10, 0);
+pl10.deck.push(c41, c42, c43);
+pl10.visibleCards.push(1, 2, 3);
+pl10.countTakeCard = 2;
+
+test('get result only different cats', () => {
+  expect(MB.onTurn(pl10, [c1], deck1)).toStrictEqual(result0);
+  expect(MB.onTurn(pl10, [c1], deck2)).toStrictEqual(result0);
+  expect(MB.onTurn(pl10, [c1], deck3)).toStrictEqual(result0);
+});
