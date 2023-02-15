@@ -27,7 +27,7 @@ function takeCardDeskDeck(game: IGame): IGame {
       myGame.players[iPl].buttons.finishMove = myGame.players[iPl].countTakeCard === 0;
       myGame.gameState.message = `${myGame.players[iPl].name} ${base[0]}`;
       if (myGame.gameState.functionState === 'waitTakeCardDeskDeck') {
-        myGame.gameState.message = `${myGame.players[iPl].name} взял еще 1 карту.`;
+        myGame.gameState.message = `${myGame.players[iPl].name} ${base[3]}`;
       }
       myGame.gameState.functionState = myGame.players[iPl].countTakeCard > 0 ? 'waitTakeCardDeskDeck' : 'waitEndMove';
       myGame.players[iPl] = startStateDeck(

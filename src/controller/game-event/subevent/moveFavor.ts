@@ -6,7 +6,7 @@ import findIndexPlayerTern from './findIndexPlayerTern';
 
 function moveFavor(game: IGame): IGame {
   const currLang = game.settings.lang;
-  const base = langs[currLang].deskPage.modalTitles.favour;
+  const base = langs[currLang].deskPage;
   let myGame = { ...game };
   myGame.gameState.functionState = 'waitFavorPlayer';
 
@@ -18,8 +18,8 @@ function moveFavor(game: IGame): IGame {
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalPlayers = mPlayers;
   myGame.gameState.modalDeck = [];
-  myGame.gameState.modalTitle = `${base}`;
-  myGame.gameState.message = `${myGame.gameState.playerTurn} думает кого выбрать.`;
+  myGame.gameState.modalTitle = `${base.modalTitles.favour}`;
+  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base.gameMsg.combos[5]}`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   myGame.players[inPl] = startStateDeck(myGame.players[inPl], 'waitEndMove', false);

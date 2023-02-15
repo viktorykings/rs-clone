@@ -11,9 +11,13 @@ const langs: ILocalization = {
         endMoveBtn: 'Конец хода',
       },
       gameMsg: {
-        makeMove: { move: 'походил картой', moveCombo: ['походил 2x комбо!', 'походил 3x комбо!', 'походил 5x комбо!'] },
+        makeMove: {
+          move: 'походил картой',
+          moveCombo: ['походил 2x комбо!', 'походил 3x комбо!', 'походил 5x комбо!'],
+          rule: 'Картами котов можно ходить только после выбора режима Combo',
+        },
         endMove: ['закончил ход.', 'нужно взять', 'карту/ы.'],
-        combos: ['получает карту', 'У', 'нет карт и отдать ему нечего.', 'нет карты'],
+        combos: ['получает карту', 'У', 'нет карт и отдать ему нечего.', 'нет карты', 'выбрал игрока', 'думает кого выбрать.'],
         neut: ["обезвредил 'Взрывного котенка'!", "походил картой 'Обезвредить'."],
         explosion: 'взорвался!',
         favour: 'думает какую отдать карту.',
@@ -21,7 +25,7 @@ const langs: ILocalization = {
         mix: 'перемешал колоду.',
         no: "походил картой 'Нет'!",
         skip: ['Игроку', 'осталось взять одну карту.', 'передает ход.'],
-        takeCard: ['взял 1 карту.', "вытянул 'Взрывного котенка'!", 'не нужно брать карты!'],
+        takeCard: ['взял 1 карту.', "вытянул 'Взрывного котенка'!", 'не нужно брать карты!', 'взял еще 1 карту.'],
       },
       modalTitles: {
         combo: 'Выберите карту!',
@@ -54,9 +58,13 @@ const langs: ILocalization = {
         endMoveBtn: 'End Move',
       },
       gameMsg: {
-        makeMove: { move: 'moved the card', moveCombo: ['moved 2x combo!', 'moved 3x combo!', 'moved 5x combo!'] },
+        makeMove: {
+          move: 'moved the card',
+          moveCombo: ['moved 2x combo!', 'moved 3x combo!', 'moved 5x combo!'],
+          rule: 'Kitten\'s cards are allowed to use only in combo mode',
+        },
         endMove: ['finished the move.', 'should take', 'card(s).'],
-        combos: ['gets card', '', 'don\'t have any cards.', 'don\'t have card'],
+        combos: ['gets card', '', 'don\'t have any cards.', 'don\'t have card', 'chose player', 'is thinking which player to choose'],
         neut: ["neutralized 'Exploding kitten'!", "moved card 'Neutralize'."],
         explosion: 'have exlpoded!',
         favour: 'is thinking which card to give!',
@@ -64,7 +72,7 @@ const langs: ILocalization = {
         mix: 'mixed the deck.',
         no: "moved card 'Not'!",
         skip: ['Player', 'haveone card to take.', 'passes the move.'],
-        takeCard: ['took 1 card.', "took 'Exploding Kitten'!", 'shouldn\'t take cards!'],
+        takeCard: ['took 1 card.', "took 'Exploding Kitten'!", 'shouldn\'t take cards!', 'took 1 more card'],
       },
       modalTitles: {
         combo: 'Choose a card!',
