@@ -66,7 +66,7 @@ const langs: ILocalization = {
         },
         endMove: ['finished the move.', 'should take', 'card(s).'],
         combos: ['gets card', '', 'don\'t have any cards.', 'don\'t have card', 'chose player', 'is thinking which player to choose'],
-        neut: ["neutralized 'Exploding kitten'!", "moved card 'Neutralize'."],
+        neut: ["defused 'Exploding kitten'!", "moved card 'Defuse'."],
         explosion: 'have exlpoded!',
         favour: 'is thinking which card to give!',
         attack: "moved card 'Attack'!",

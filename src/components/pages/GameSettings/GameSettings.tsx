@@ -124,7 +124,7 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
           className="start-btn btn"
           onClick={() => {
             const Players = createPlayers(bots);
-            setGame(createGame(Players));
+            setGame(createGame(currLang, Players));
           }}
         >
           {base.buttons[1]}

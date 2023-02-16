@@ -11,7 +11,7 @@ import createGame from './controller/createGame';
 import gameLoop from './controller/game-loop/gameLoop';
 
 function App(): JSX.Element {
-  const [game, setGame] = useState(createGame());
+  const [game, setGame] = useState(createGame('ru', []));
   useEffect(() => gameLoop(game, setGame), [game]);
   return (
     <BrowserRouter>
@@ -21,7 +21,7 @@ function App(): JSX.Element {
           path="/gamesettings"
           element={<GameSettings game={game} setGame={setGame} />}
         />
-        <Route path="/settings" element={<Settings settings={game.settings} />} />
+        <Route path="/settings" element={<Settings game={game} setGame={setGame} />} />
         <Route path="/about" element={<AboutPage />} />
         <Route
           path="/desk"
