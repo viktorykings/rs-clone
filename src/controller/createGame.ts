@@ -40,7 +40,7 @@ function createGame(players: IPlayer [] = []): IGame {
     functionState,
     functionEtap: 0,
     timerId: null,
-    timeLeft: 30,
+    timeLeft: playerWaitTurn,
     timeNeed: playerWaitTurn,
     typeTern: null,
     playerWaitAnswer: [],

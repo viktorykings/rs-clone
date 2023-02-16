@@ -81,7 +81,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitCombo2'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для Космбо2
     // console.log('Bot maybe choise player');
@@ -94,7 +94,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitPlayerCombo2'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для Космбо2
     // console.log('Bot maybe choise card');
@@ -103,7 +103,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitCombo3'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока и типа карты для Космбо3
     // console.log('Bot maybe choise player and type card');
@@ -116,7 +116,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitPlayerCombo3'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для Космбо2
     // console.log('Bot maybe choise card');
@@ -125,7 +125,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitCombo5'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора карты для Космбо5
     // console.log('Bot maybe choise card from rebaund');
@@ -153,7 +153,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitFavorPlayer'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для одолжить
     // console.log('Bot maybe choise player for Favor');
@@ -166,7 +166,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitFavorPlayerCard'
-  && myGame.gameState.timeLeft === 4
+  && myGame.gameState.timeLeft === 7
   && myGame.players[inPl].isBot) {
   // вызов функции бота выбора карты, которую нужно отдать Одолжить
   // console.log('Bot maybe choise player for Favor');
