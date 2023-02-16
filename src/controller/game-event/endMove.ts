@@ -55,7 +55,9 @@ function endMove(game: IGame): IGame {
 
     addHistory(myGame, 'endMove', [], false);
   } */
-  if (myGame.gameState.functionState === 'waitAnserTurn' || myGame.gameState.functionState === 'waitPlayerLook') {
+  if (myGame.gameState.functionState === 'waitAnserTurn'
+    || myGame.gameState.functionState === 'waitPlayerLook'
+    || myGame.gameState.functionState === 'waitNotToNot') {
     myGame.gameState.timeLeft = 1;
     myGame.players[indexPl] = startStateDeck(
       myGame.players[indexPl],

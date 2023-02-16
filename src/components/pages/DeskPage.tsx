@@ -32,11 +32,8 @@ export default function DeskPage({
 }: Setter): JSX.Element {
   const [playerState, setPlayerState] = useState(game.players);
   useEffect(() => {
-    console.log('eeeeeeeee');
     if (game.players.length === 0) {
-      console.log('rrrrrrrrrrr');
       const myGame = loadGame();
-      console.log(myGame);
       if (myGame !== null) {
         setGame(myGame);
         setPlayerState(myGame.players);

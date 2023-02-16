@@ -26,6 +26,8 @@ import combo5GiveCard from '../game-event/subevent/combo5GiveCard';
 import favorChoicePlayer from '../game-event/subevent/favorChoicePlayer';
 import favorGiveCard from '../game-event/subevent/favorGiveCard';
 import endMoveNeutralize from '../game-event/subevent/endMoveNeutralize';
+import waitNotToNot from './waitNotToNot';
+import endWaitEndNotToNot from './subevent/endWaitEndNotToNot';
 
 function mainGameLoop(
   game: IGame,
@@ -59,6 +61,8 @@ function mainGameLoop(
       case 'waitFavorPlayer': favorAutoPlayerChoice(myGame, setGame); return;
       case 'waitFavorPlayerCard': favorAutoCardGive(myGame, setGame); return;
       case 'win': win(myGame, setGame); return;
+      case 'waitNotToNot': waitNotToNot(myGame, setGame); return;
+      case 'waitEndNotToNot': endWaitEndNotToNot(myGame, setGame); return;
       default: return;
     }
   }
