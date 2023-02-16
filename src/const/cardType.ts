@@ -1,20 +1,38 @@
-import ICardType from '../interface/ICardType';
+import ICardTypesObj from '../interface/ICardTypesObj';
 
-const base = '/cards';
-const cardType: ICardType [] = [
-  { name: 'Взрывной котенок', description: '', links: [`${base}/bang1.png`, `${base}/bang2.png`, `${base}/bang3.png`, `${base}/bang4.png`] },
-  { name: 'Обезвредить', description: '', links: [`${base}/neutralize1.png`, `${base}/neutralize2.png`, `${base}/neutralize3.png`, `${base}/neutralize4.png`, `${base}/neutralize5.png`, `${base}/neutralize6.png`] },
-  { name: 'Нет', description: '', links: [`${base}/no1.png`, `${base}/no2.png`, `${base}/no3.png`, `${base}/no4.png`, `${base}/no5.png`] },
-  { name: 'Атаковать', description: '', links: [`${base}/attack1.png`, `${base}/attack2.png`, `${base}/attack3.png`, `${base}/attack4.png`] },
-  { name: 'Пропустить', description: '', links: [`${base}/skip1.png`, `${base}/skip2.png`, `${base}/skip3.png`, `${base}/skip4.png`] },
-  { name: 'Одолжение', description: '', links: [`${base}/borrow1.png`, `${base}/borrow2.png`, `${base}/borrow3.png`, `${base}/borrow4.png`] },
-  { name: 'Перемешать', description: '', links: [`${base}/mix1.png`, `${base}/mix2.png`, `${base}/mix3.png`, `${base}/mix4.png`] },
-  { name: 'Заглянуть в будущее', description: '', links: [`${base}/future1.png`, `${base}/future2.png`, `${base}/future3.png`, `${base}/future4.png`] },
-  { name: 'Котенок', description: '', links: [`${base}/tacocat.png`, `${base}/tacocat.png`, `${base}/tacocat.png`, `${base}/tacocat.png`] },
-  { name: 'Котенок', description: '', links: [`${base}/rainbowcat.png`, `${base}/rainbowcat.png`, `${base}/rainbowcat.png`, `${base}/rainbowcat.png`] },
-  { name: 'Котенок', description: '', links: [`${base}/potatocat.png`, `${base}/potatocat.png`, `${base}/potatocat.png`, `${base}/potatocat.png`] },
-  { name: 'Котенок', description: '', links: [`${base}/meloncat.png`, `${base}/meloncat.png`, `${base}/meloncat.png`, `${base}/meloncat.png`] },
-  { name: 'Котенок', description: '', links: [`${base}/beardcat.png`, `${base}/beardcat.png`, `${base}/beardcat.png`, `${base}/beardcat.png`] },
-];
+const baseRu = '/cards/ru';
+const baseEn = '/cards/en';
+const cardType: ICardTypesObj = {
+ru: [
+  { name: 'Взрывной котенок', description: '', links: [`${baseRu}/bang1.png`, `${baseRu}/bang2.png`, `${baseRu}/bang3.png`, `${baseRu}/bang4.png`] },
+  { name: 'Обезвредить', description: '', links: [`${baseRu}/neutralize1.png`, `${baseRu}/neutralize2.png`, `${baseRu}/neutralize3.png`, `${baseRu}/neutralize4.png`, `${baseRu}/neutralize5.png`, `${baseRu}/neutralize6.png`] },
+  { name: 'Нет', description: '', links: [`${baseRu}/no1.png`, `${baseRu}/no2.png`, `${baseRu}/no3.png`, `${baseRu}/no4.png`, `${baseRu}/no5.png`] },
+  { name: 'Атаковать', description: '', links: [`${baseRu}/attack1.png`, `${baseRu}/attack2.png`, `${baseRu}/attack3.png`, `${baseRu}/attack4.png`] },
+  { name: 'Пропустить', description: '', links: [`${baseRu}/skip1.png`, `${baseRu}/skip2.png`, `${baseRu}/skip3.png`, `${baseRu}/skip4.png`] },
+  { name: 'Одолжение', description: '', links: [`${baseRu}/borrow1.png`, `${baseRu}/borrow2.png`, `${baseRu}/borrow3.png`, `${baseRu}/borrow4.png`] },
+  { name: 'Перемешать', description: '', links: [`${baseRu}/mix1.png`, `${baseRu}/mix2.png`, `${baseRu}/mix3.png`, `${baseRu}/mix4.png`] },
+  { name: 'Заглянуть в будущее', description: '', links: [`${baseRu}/future1.png`, `${baseRu}/future2.png`, `${baseRu}/future3.png`, `${baseRu}/future4.png`] },
+  { name: 'Котенок', description: '', links: [`${baseRu}/tacocat.png`, `${baseRu}/tacocat.png`, `${baseRu}/tacocat.png`, `${baseRu}/tacocat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseRu}/rainbowcat.png`, `${baseRu}/rainbowcat.png`, `${baseRu}/rainbowcat.png`, `${baseRu}/rainbowcat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseRu}/potatocat.png`, `${baseRu}/potatocat.png`, `${baseRu}/potatocat.png`, `${baseRu}/potatocat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseRu}/meloncat.png`, `${baseRu}/meloncat.png`, `${baseRu}/meloncat.png`, `${baseRu}/meloncat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseRu}/beardcat.png`, `${baseRu}/beardcat.png`, `${baseRu}/beardcat.png`, `${baseRu}/beardcat.png`] },
+],
+en: [
+  { name: 'Взрывной котенок', description: '', links: [`${baseEn}/bang1.png`, `${baseEn}/bang2.png`, `${baseEn}/bang3.png`, `${baseEn}/bang4.png`] },
+  { name: 'Обезвредить', description: '', links: [`${baseEn}/neutralize1.png`, `${baseEn}/neutralize2.png`, `${baseEn}/neutralize3.png`, `${baseEn}/neutralize4.png`, `${baseEn}/neutralize5.png`, `${baseEn}/neutralize6.png`] },
+  { name: 'Нет', description: '', links: [`${baseEn}/no1.png`, `${baseEn}/no2.png`, `${baseEn}/no3.png`, `${baseEn}/no4.png`, `${baseEn}/no5.png`] },
+  { name: 'Атаковать', description: '', links: [`${baseEn}/attack1.png`, `${baseEn}/attack2.png`, `${baseEn}/attack3.png`, `${baseEn}/attack4.png`] },
+  { name: 'Пропустить', description: '', links: [`${baseEn}/skip1.png`, `${baseEn}/skip2.png`, `${baseEn}/skip3.png`, `${baseEn}/skip4.png`] },
+  { name: 'Одолжение', description: '', links: [`${baseEn}/borrow1.png`, `${baseEn}/borrow2.png`, `${baseEn}/borrow3.png`, `${baseEn}/borrow4.png`] },
+  { name: 'Перемешать', description: '', links: [`${baseEn}/mix1.png`, `${baseEn}/mix2.png`, `${baseEn}/mix3.png`, `${baseEn}/mix4.png`] },
+  { name: 'Заглянуть в будущее', description: '', links: [`${baseEn}/future1.png`, `${baseEn}/future2.png`, `${baseEn}/future3.png`, `${baseEn}/future4.png`] },
+  { name: 'Котенок', description: '', links: [`${baseEn}/tacocat.png`, `${baseEn}/tacocat.png`, `${baseEn}/tacocat.png`, `${baseEn}/tacocat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseEn}/rainbowcat.png`, `${baseEn}/rainbowcat.png`, `${baseEn}/rainbowcat.png`, `${baseEn}/rainbowcat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseEn}/potatocat.png`, `${baseEn}/potatocat.png`, `${baseEn}/potatocat.png`, `${baseEn}/potatocat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseEn}/meloncat.png`, `${baseEn}/meloncat.png`, `${baseEn}/meloncat.png`, `${baseEn}/meloncat.png`] },
+  { name: 'Котенок', description: '', links: [`${baseEn}/beardcat.png`, `${baseEn}/beardcat.png`, `${baseEn}/beardcat.png`, `${baseEn}/beardcat.png`] },
+],
+};
 
 export default cardType;
