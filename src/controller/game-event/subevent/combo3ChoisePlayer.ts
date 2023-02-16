@@ -13,7 +13,7 @@ function combo3ChoisePlayer(game: IGame, playerName: string): IGame {
   myGame.gameState.modalPlayers = [];
   myGame.gameState.modalDeck = [];
   for (let i = 1; i <= 8; i += 1) {
-    myGame.gameState.modalDeck.push(createCard(i, i, 1));
+    myGame.gameState.modalDeck.push(createCard(i, i, 1, currLang));
   }
   myGame.gameState.modalTitle = `${base.modalTitles.combo}`;
   myGame.gameState.message = `${myGame.gameState.playerTurn} ${base.gameMsg.combos[4]} ${playerName}.`;

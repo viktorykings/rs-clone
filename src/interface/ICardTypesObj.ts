@@ -1,6 +1,6 @@
 import ICardType from "./ICardType";
 
 export default interface ICardTypesObj {
-  ru: ICardType [],
+  [ru: string]: ICardType [],
   en: ICardType [],
 }

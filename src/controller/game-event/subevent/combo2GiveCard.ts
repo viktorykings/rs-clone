@@ -16,7 +16,7 @@ function combo2GiveCard(game: IGame, idCard: number): IGame {
     const indCard = myGame.gameState.choicePlayer.deck.findIndex((cr) => cr.id === idCard);
     const [card] = myGame.gameState.choicePlayer.deck.splice(indCard, 1);
     myGame.players[iPl].deck.push(card);
-    myGame.gameState.message = `${myGame.gameState.playerTurn} ${base[0]} ${cardType[card.type].name}.`;
+    myGame.gameState.message = `${myGame.gameState.playerTurn} ${base[0]} ${cardType[currLang][card.type].name}.`;
   } else {
     myGame.gameState.message = `${base[1]} ${myGame.gameState.choicePlayer?.name} ${base[2]}`;
   }

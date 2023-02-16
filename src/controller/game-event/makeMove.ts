@@ -32,7 +32,7 @@ function makeMove(
       myGame.gameState.typeTern = typeTern;
       if (typeTern > 2 && typeTern <= 7) {
         myGame.showCards.push(...myGame.players[inPl].deck.splice(indCard, 1));
-        myGame.gameState.message = `${pl.name} ${base.makeMove.move} ${cardType[typeTern].name}`;
+        myGame.gameState.message = `${pl.name} ${base.makeMove.move} ${cardType[currLang][typeTern].name}`;
       }
       if (typeTern >= 8 && typeTern <= 12
         && (myGame.gameState.stateGame === 'doubleCombo'

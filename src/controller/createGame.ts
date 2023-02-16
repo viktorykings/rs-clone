@@ -13,10 +13,10 @@ function createGame(players: IPlayer [] = []): IGame {
   const settings: ISettings = {
     countPlayer: players.length,
     level: 'easy',
-    lang: 'ru',
+    lang: 'en',
   };
 
-  const { deskDeck, playersDeck } = createDeckFirst(players);
+  const { deskDeck, playersDeck } = createDeckFirst(players, settings.lang);
 
   const reboundDeck: ICard [] = [];
 

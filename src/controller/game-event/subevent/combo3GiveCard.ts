@@ -20,11 +20,11 @@ function combo3GiveCard(game: IGame, idCard: number): IGame {
           && typeCard >= 8),
   );
   if (indCard === -1) {
-    myGame.gameState.message = `${base[1]} ${myGame.players[indPlGive].name} ${base[3]} ${cardType[typeCard ?? -1].name}.`;
+    myGame.gameState.message = `${base[1]} ${myGame.players[indPlGive].name} ${base[3]} ${cardType[currLang][typeCard ?? -1].name}.`;
   } else {
     const [card] = myGame.players[indPlGive].deck.splice(indCard, 1);
     myGame.players[indPlTake].deck.push(card);
-    myGame.gameState.message = `${myGame.players[indPlTake].name} ${base[0]} ${cardType[typeCard ?? -1].name}.`;
+    myGame.gameState.message = `${myGame.players[indPlTake].name} ${base[0]} ${cardType[currLang][typeCard ?? -1].name}.`;
   }
   myGame.players[indPlTake] = startStateDeck(
     myGame.players[indPlTake],
