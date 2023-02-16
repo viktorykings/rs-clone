@@ -30,16 +30,19 @@ export default function DeskPage({
   // deskDeck, settings, players, reboundDeck, showCards, gameState,
   game, setGame,
 }: Setter): JSX.Element {
+  const [playerState, setPlayerState] = useState(game.players);
   useEffect(() => {
     console.log('eeeeeeeee');
     if (game.players.length === 0) {
       console.log('rrrrrrrrrrr');
       const myGame = loadGame();
       console.log(myGame);
-      if (myGame !== null) setGame(myGame);
+      if (myGame !== null) {
+        setGame(myGame);
+        setPlayerState(myGame.players);
+      }
     }
   }, [game, setGame]);
-  const [playerState, setPlayerState] = useState(game.players);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
