@@ -6,6 +6,7 @@ import findNextActivePlayer from './findNextActivePlayer';
 import getPause from '../../game-loop/subevent/getPause';
 
 function moveNot(game: IGame, idCard: number): IGame {
+  console.log('move not');
   const currLang = game.settings.lang;
   const base = langs[currLang].deskPage.gameMsg.no;
   const myGame = { ...game };

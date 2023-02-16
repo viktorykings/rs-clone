@@ -12,6 +12,7 @@ interface IBot {
   onCombo5CardChoice(deck: ICard[]): number;
   onFavorChoiceCard(player: IPlayer): number;
   onPutExplosiveKitten(players: IPlayer[], playerTurnName: string): number;
+  onAnswerNotToNot(player: IPlayer, players: IPlayer [], playerWaitAnswer: IPlayer[]): number;
 }
 
 export default IBot;

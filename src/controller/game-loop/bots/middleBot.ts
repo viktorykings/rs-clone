@@ -143,6 +143,10 @@ class MiddleBot implements IBot {
     const actPl = players.filter((pl) => pl.active);
     return actPl.length - 1;
   }
+
+  onAnswerNotToNot(): number {
+    return -1;
+  }
 }
 
 export default MiddleBot;

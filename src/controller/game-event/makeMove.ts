@@ -97,12 +97,12 @@ function makeMove(
     myGame = moveNeutralize(myGame, idCard);
   }
 
-  if (myGame.gameState.functionState === 'waitAnserTurn' && typeTern === 2) {
-    myGame = moveNot(myGame, idCard);
-  }
-
   if (myGame.gameState.functionState === 'waitNotToNot' && typeTern === 2) {
     myGame = moveNotToNot(myGame, idCard);
+  }
+
+  if (myGame.gameState.functionState === 'waitAnserTurn' && typeTern === 2) {
+    myGame = moveNot(myGame, idCard);
   }
 
   if (myGame.gameState.functionState === 'waitFavorPlayerCard') {

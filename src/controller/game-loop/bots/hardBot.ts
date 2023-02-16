@@ -162,6 +162,19 @@ class HardBot implements IBot {
     }
     return actPl.length - 1;
   }
+
+  onAnswerNotToNot(player: IPlayer, players: IPlayer [], playerWaitAnswer: IPlayer[]): number {
+    /* let retId = -1;
+    const deckNot = player.deck.filter((cr) => cr.type === 2);
+    if (deckNot.length > 0) {
+      const activePl = players.filter((pl) => pl.active && pl.isBot === false);
+      if (activePl.length > 0 && playerWaitAnswer[1].name !== activePl[0].name) {
+        retId = deckNot[0].id;
+      }
+    }
+    return retId; */
+    return this.onAnswerTurn(player, players, playerWaitAnswer);
+  }
 }
 
 export default HardBot;

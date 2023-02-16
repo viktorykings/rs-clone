@@ -28,6 +28,7 @@ import favorGiveCard from '../game-event/subevent/favorGiveCard';
 import endMoveNeutralize from '../game-event/subevent/endMoveNeutralize';
 import waitNotToNot from './waitNotToNot';
 import endWaitEndNotToNot from './subevent/endWaitEndNotToNot';
+import moveNotToNot from '../game-event/subevent/moveNotToNot';
 
 function mainGameLoop(
   game: IGame,
@@ -189,6 +190,23 @@ function mainGameLoop(
       myGame.gameState.playerTurn,
     );
     myGame = endMoveNeutralize(myGame, nomCard);
+  }
+
+  if (myGame.gameState.functionState === 'waitNotToNot'
+    && myGame.gameState.timeLeft === 4
+    && myGame.players[inPl].isBot) {
+    // вызов функции хода бота
+    // console.log('Bot maybe do move NOT');
+    const idCardBotNot = myGame.gameState.bot.onAnswerNotToNot(
+      myGame.players[inPl],
+      myGame.players,
+      myGame.gameState.playerWaitAnswer,
+    );
+    if (idCardBotNot > -1) {
+      myGame = (moveNotToNot(myGame, idCardBotNot));
+    } else {
+      myGame.gameState.timeLeft = 1;
+    }
   }
 
   if (myGame.gameState.timeLeft > 1) {
