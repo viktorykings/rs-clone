@@ -40,6 +40,7 @@ interface DeskPage {
   buttons: DeskPageBtns,
   gameMsg: GameEvents,
   modalTitles: ModalTitles,
+  deck: string[],
 }
 interface DeskPageBtns {
   neutButtons: string[],
