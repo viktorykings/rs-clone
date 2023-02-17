@@ -10,15 +10,24 @@ import getPause from '../game-loop/subevent/getPause';
 import langs from '../../const/localization';
 import moveNot from './subevent/moveNot';
 import favorGiveCard from './subevent/favorGiveCard';
+import moveNotToNot from './subevent/moveNotToNot';
 
 function makeMove(
   game: IGame,
   idCard: number,
+  pushRebound = true,
 ): IGame {
   let myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
-  const indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
-  const typeTern = myGame.players[inPl].deck[indCard].type;
+  let indCard = -1;
+  let typeTern = -1;
+  if (pushRebound) {
+    indCard = myGame.players[inPl].deck.findIndex((cr) => cr.id === idCard);
+    typeTern = myGame.players[inPl].deck[indCard].type;
+  } else {
+    indCard = myGame.showCards.findIndex((cr) => cr.id === idCard);
+    typeTern = myGame.showCards[indCard].type;
+  }
   const currLang = game.settings.lang;
   const base = langs[currLang].deskPage.gameMsg;
 
@@ -31,7 +40,7 @@ function makeMove(
       const pl = myGame.players[inPl];
       myGame.gameState.typeTern = typeTern;
       if (typeTern > 2 && typeTern <= 7) {
-        myGame.showCards.push(...myGame.players[inPl].deck.splice(indCard, 1));
+        if (pushRebound) myGame.showCards.push(...myGame.players[inPl].deck.splice(indCard, 1));
         myGame.gameState.message = `${pl.name} ${base.makeMove.move} ${cardType[currLang][typeTern].name}`;
       }
       if (typeTern >= 8 && typeTern <= 12
@@ -48,13 +57,15 @@ function makeMove(
           combo = pl.combos.fiveCats;
           myGame.gameState.message = `${pl.name} ${base.makeMove.moveCombo[2]}`;
         }
-        const indCar = combo.findIndex((com) => com.find((cr) => cr.id === idCard));
-        const t = combo[indCar];
-        myGame.showCards.push(...t);
-        pl.deck = pl.deck.reduce((dec: ICard[], card) => {
-          if (!combo[indCar].includes(card)) dec.push(card);
-          return dec;
-        }, []);
+        if (pushRebound) {
+          const indCar = combo.findIndex((com) => com.find((cr) => cr.id === idCard));
+          const t = combo[indCar];
+          myGame.showCards.push(...t);
+          pl.deck = pl.deck.reduce((dec: ICard[], card) => {
+            if (!combo[indCar].includes(card)) dec.push(card);
+            return dec;
+          }, []);
+        }
       }
 
       myGame.gameState.functionState = 'waitAnserTurn';
@@ -84,6 +95,10 @@ function makeMove(
 
   if (myGame.gameState.functionState === 'waitNeutralize' && typeTern === 1) {
     myGame = moveNeutralize(myGame, idCard);
+  }
+
+  if (myGame.gameState.functionState === 'waitNotToNot' && typeTern === 2) {
+    myGame = moveNotToNot(myGame, idCard);
   }
 
   if (myGame.gameState.functionState === 'waitAnserTurn' && typeTern === 2) {

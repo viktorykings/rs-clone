@@ -17,7 +17,7 @@ function takeCardDeskDeck(game: IGame): IGame {
       if (myGame.players[i].visibleCards.length > 0) {
         myGame.players[i].visibleCards = myGame.players[i].visibleCards
           .reduce((res: number[], el) => {
-            if (el - 1 >= 0) res.push(el - 1);
+            if (el - 1 > 0) res.push(el - 1);
             return res;
           }, []);
       }

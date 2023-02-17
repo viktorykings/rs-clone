@@ -6,8 +6,9 @@ import TStateGame from '../interface/IStateGame';
 import createDeckFirst from './createDeckFirst';
 import TFunctionState from '../interface/TFunctionState';
 import { playerWaitTurn } from '../const/gameVariable';
-import MiddleBot from './game-loop/bots/middleBot';
+// import MiddleBot from './game-loop/bots/middleBot';
 import langs from '../const/localization';
+import HardBot from './game-loop/bots/hardBot';
 
 function createGame(language: string, players: IPlayer [] = []): IGame {
   const settings: ISettings = {
@@ -29,7 +30,7 @@ function createGame(language: string, players: IPlayer [] = []): IGame {
   let playerTurn = '';
   if (players.length > 0) playerTurn = players[0].name;
 
-  const bot = new MiddleBot();
+  const bot = new HardBot();
   const currLang = settings.lang;
   const base = langs[currLang].startGame;
 
@@ -39,7 +40,7 @@ function createGame(language: string, players: IPlayer [] = []): IGame {
     functionState,
     functionEtap: 0,
     timerId: null,
-    timeLeft: 30,
+    timeLeft: playerWaitTurn,
     timeNeed: playerWaitTurn,
     typeTern: null,
     playerWaitAnswer: [],

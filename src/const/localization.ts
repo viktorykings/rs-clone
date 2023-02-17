@@ -8,7 +8,7 @@ const langs: ILocalization = {
       buttons: {
         neutButtons: ['Первой', 'Второй', 'Третьей', 'Последней', 'Случайно'],
         comboButtons: ['2x комбо!', '3x комбо!', '5x комбо!'],
-        endMoveBtn: 'Конец хода',
+        endMoveBtn: 'Завершить',
       },
       gameMsg: {
         makeMove: {
@@ -56,7 +56,7 @@ const langs: ILocalization = {
       buttons: {
         neutButtons: ['First', 'Second', 'Third', 'Last', 'Random'],
         comboButtons: ['2x combo!', '3x combo!', '5x combo!'],
-        endMoveBtn: 'End Move',
+        endMoveBtn: 'Finish',
       },
       gameMsg: {
         makeMove: {

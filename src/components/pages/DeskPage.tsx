@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, {
   useState,
+  useEffect,
 } from 'react';
 import Player from './Players';
 import endMove from '../../controller/game-event/endMove';
@@ -20,6 +21,7 @@ import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveH
 import EndGameModal from './EndGameModal';
 import findIndexPlayerTern from '../../controller/game-event/subevent/findIndexPlayerTern';
 import langs from '../../const/localization';
+import loadGame from '../../controller/loadGame';
 
 const cardBack = 'cards/ru/back.png';
 const emptyCardsPlace = 'cards/ru/empty.png';
@@ -29,6 +31,15 @@ export default function DeskPage({
   game, setGame,
 }: Setter): JSX.Element {
   const [playerState, setPlayerState] = useState(game.players);
+  useEffect(() => {
+    if (game.players.length === 0) {
+      const myGame = loadGame();
+      if (myGame !== null) {
+        setGame(myGame);
+        setPlayerState(myGame.players);
+      }
+    }
+  }, [game, setGame]);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
@@ -65,7 +76,14 @@ export default function DeskPage({
     const indPl = findIndexPlayerTern(game.players, game.gameState.playerTurn);
     return game.gameState.returnToDeck && (!game.players[indPl].isBot);
   };
-
+  if (game.players.length === 0) {
+    console.log('tttttt');
+    return (
+      <main className="desk">
+        <p>{ourMessage}</p>
+      </main>
+    );
+  }
   return (
     <main className="desk">
       <div className="other-players">
