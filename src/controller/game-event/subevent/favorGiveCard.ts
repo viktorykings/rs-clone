@@ -17,7 +17,7 @@ function favorGiveCard(game: IGame, idCard: number): IGame {
     const [card] = myGame.players[indPlGive].deck.splice(indCard, 1);
     // myGame.gameState.choicePlayer.deck.push(card);
     myGame.gameState.playerWaitAnswer[0].deck.push(card);
-    myGame.gameState.message = `${myGame.gameState.playerWaitAnswer[0].name} ${base[0]} ${cardType[card.type].name}.`;
+    myGame.gameState.message = `${myGame.gameState.playerWaitAnswer[0].name} ${base[0]} ${cardType[currLang][card.type].name}.`;
   } else {
     myGame.gameState.message = `${base[1]} ${myGame.gameState.choicePlayer?.name} ${base[2]}`;
   }

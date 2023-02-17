@@ -19,7 +19,7 @@ function combo5GiveCard(game: IGame, idCard: number): IGame {
     myGame.gameState.functionState,
     true,
   );
-  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base[0]} ${cardType[card.type].name}.`;
+  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base[0]} ${cardType[currLang][card.type].name}.`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   return myGame;
 }

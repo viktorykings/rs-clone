@@ -120,6 +120,13 @@ button{
       justify-content: space-around;
       top: 0;
     }
+    .deck-left{
+      border: 1px solid $text-color;
+      border-radius: 5px;
+      color: $text-color;
+      background-color: $main-red;
+      text-align: center;
+    }
   }
   .play-cards{
     img{

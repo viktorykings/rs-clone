@@ -10,14 +10,14 @@ import { playerWaitTurn } from '../const/gameVariable';
 import langs from '../const/localization';
 import HardBot from './game-loop/bots/hardBot';
 
-function createGame(players: IPlayer [] = []): IGame {
+function createGame(language: string, players: IPlayer [] = []): IGame {
   const settings: ISettings = {
     countPlayer: players.length,
     level: 'easy',
-    lang: 'ru',
+    lang: language,
   };
 
-  const { deskDeck, playersDeck } = createDeckFirst(players);
+  const { deskDeck, playersDeck } = createDeckFirst(players, settings.lang);
 
   const reboundDeck: ICard [] = [];
 

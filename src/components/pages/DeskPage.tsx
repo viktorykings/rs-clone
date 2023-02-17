@@ -23,8 +23,8 @@ import findIndexPlayerTern from '../../controller/game-event/subevent/findIndexP
 import langs from '../../const/localization';
 import loadGame from '../../controller/loadGame';
 
-const cardBack = 'cards/back.png';
-const emptyCardsPlace = 'cards/empty.png';
+const cardBack = 'cards/ru/back.png';
+const emptyCardsPlace = 'cards/ru/empty.png';
 
 export default function DeskPage({
   // deskDeck, settings, players, reboundDeck, showCards, gameState,
@@ -47,8 +47,9 @@ export default function DeskPage({
   const sliderLen = 5;
   const reboundCardWidth = 160;
   const currLang = game.settings.lang;
-  const neutBtnName = langs[currLang].deskPage.buttons.neutButtons;
-  const comboBtnName = langs[currLang].deskPage.buttons.comboButtons;
+  const base = langs[currLang].deskPage;
+  const neutBtnName = base.buttons.neutButtons;
+  const comboBtnName = base.buttons.comboButtons;
   const showPrevCard = () => {
     if (translateVal < 0) {
       console.log(cardWidth * playerState[0].deck.length - cardWidth);
@@ -118,10 +119,10 @@ export default function DeskPage({
             </button>
             <button type="button" onClick={() => handleMoveNeut(game, 0, setGame)}>{neutBtnName[4]}</button>
           </div>
-          <p>
-            Left
+          <p className="deck-left">
+            {base.deck[0]}
             {game.deskDeck.length}
-            cards!
+            {base.deck[1]}
           </p>
         </div>
         <div className="play-cards">

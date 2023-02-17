@@ -13,7 +13,7 @@ test('get -1 from empty data', () => {
 });
 
 const pl1 = createPlayer('a');
-pl1.deck.push(createCard(10, 1, 0));
+pl1.deck.push(createCard(10, 1, 0, 'ru'));
 
 test('get -1 from one neutralize card', () => {
   expect(findUnnecessaryCard(pl1.deck, [], [], [])).toStrictEqual(-1);
@@ -21,16 +21,16 @@ test('get -1 from one neutralize card', () => {
 });
 
 const pl2 = createPlayer('a');
-pl2.deck.push(createCard(10, 1, 0));
-pl2.deck.push(createCard(15, 2, 0));
+pl2.deck.push(createCard(10, 1, 0, 'ru'));
+pl2.deck.push(createCard(15, 2, 0, 'ru'));
 
 const pl3 = createPlayer('a');
-pl3.deck.push(createCard(10, 1, 0));
-pl3.deck.push(createCard(17, 3, 0));
+pl3.deck.push(createCard(10, 1, 0, 'ru'));
+pl3.deck.push(createCard(17, 3, 0, 'ru'));
 
 const pl4 = createPlayer('a');
-pl4.deck.push(createCard(10, 1, 0));
-pl4.deck.push(createCard(20, 8, 0));
+pl4.deck.push(createCard(10, 1, 0, 'ru'));
+pl4.deck.push(createCard(20, 8, 0, 'ru'));
 
 test('get id from one neutralize card and one other card', () => {
   expect(findUnnecessaryCard(pl2.deck, [], [], [])).toStrictEqual(15);
@@ -42,10 +42,10 @@ test('get id from one neutralize card and one other card', () => {
 });
 
 const pl5 = createPlayer('a');
-pl5.deck.push(createCard(10, 1, 0));
-pl5.deck.push(createCard(15, 2, 0));
-pl5.deck.push(createCard(20, 8, 0));
-pl5.deck.push(createCard(19, 8, 0));
+pl5.deck.push(createCard(10, 1, 0, 'ru'));
+pl5.deck.push(createCard(15, 2, 0, 'ru'));
+pl5.deck.push(createCard(20, 8, 0, 'ru'));
+pl5.deck.push(createCard(19, 8, 0, 'ru'));
 const combo2 = [[pl5.deck[3], pl5.deck[2]]];
 
 test('get id from one neutralize card and Combo2 one other card and not data from Combo2', () => {
@@ -55,11 +55,11 @@ test('get id from one neutralize card and Combo2 one other card and not data fro
 });
 
 const pl6 = createPlayer('a');
-pl6.deck.push(createCard(10, 1, 0));
-pl6.deck.push(createCard(15, 2, 0));
-pl6.deck.push(createCard(20, 8, 0));
-pl6.deck.push(createCard(19, 8, 0));
-pl6.deck.push(createCard(18, 8, 0));
+pl6.deck.push(createCard(10, 1, 0, 'ru'));
+pl6.deck.push(createCard(15, 2, 0, 'ru'));
+pl6.deck.push(createCard(20, 8, 0, 'ru'));
+pl6.deck.push(createCard(19, 8, 0, 'ru'));
+pl6.deck.push(createCard(18, 8, 0, 'ru'));
 const combo21 = [[pl6.deck[3], pl6.deck[2]]];
 const combo31 = [[pl6.deck[3], pl6.deck[2], pl6.deck[4]]];
 
@@ -70,12 +70,12 @@ test('get id from one neutralize card, Combo2, Combo3 one other card', () => {
 });
 
 const pl7 = createPlayer('a');
-pl7.deck.push(createCard(10, 1, 0));
-pl7.deck.push(createCard(15, 2, 0));
-pl7.deck.push(createCard(20, 8, 0));
-pl7.deck.push(createCard(19, 8, 0));
-pl7.deck.push(createCard(18, 8, 0));
-pl7.deck.push(createCard(22, 9, 0));
+pl7.deck.push(createCard(10, 1, 0, 'ru'));
+pl7.deck.push(createCard(15, 2, 0, 'ru'));
+pl7.deck.push(createCard(20, 8, 0, 'ru'));
+pl7.deck.push(createCard(19, 8, 0, 'ru'));
+pl7.deck.push(createCard(18, 8, 0, 'ru'));
+pl7.deck.push(createCard(22, 9, 0, 'ru'));
 const combo27 = [[pl7.deck[3], pl7.deck[2]]];
 const combo37 = [[pl7.deck[3], pl7.deck[2], pl7.deck[4]]];
 
@@ -86,13 +86,13 @@ test('get id from one neutralize card, Combo2, Combo3 one other card', () => {
 });
 
 const pl8 = createPlayer('a');
-pl8.deck.push(createCard(10, 1, 0));
-pl8.deck.push(createCard(15, 2, 0));
-pl8.deck.push(createCard(20, 8, 0));
-pl8.deck.push(createCard(19, 8, 0));
-pl8.deck.push(createCard(18, 8, 0));
-pl8.deck.push(createCard(24, 9, 0));
-pl8.deck.push(createCard(23, 9, 0));
+pl8.deck.push(createCard(10, 1, 0, 'ru'));
+pl8.deck.push(createCard(15, 2, 0, 'ru'));
+pl8.deck.push(createCard(20, 8, 0, 'ru'));
+pl8.deck.push(createCard(19, 8, 0, 'ru'));
+pl8.deck.push(createCard(18, 8, 0, 'ru'));
+pl8.deck.push(createCard(24, 9, 0, 'ru'));
+pl8.deck.push(createCard(23, 9, 0, 'ru'));
 const combo28 = [[pl8.deck[3], pl8.deck[2]], [pl8.deck[5], pl8.deck[6]]];
 const combo38 = [[pl8.deck[3], pl8.deck[2], pl8.deck[4]]];
 
@@ -103,14 +103,14 @@ test('get id from one neutralize card, 2 x Combo2, Combo3 one other card', () =>
 });
 
 const pl9 = createPlayer('a');
-pl9.deck.push(createCard(10, 1, 0));
-pl9.deck.push(createCard(15, 2, 0));
-pl9.deck.push(createCard(20, 8, 0));
-pl9.deck.push(createCard(19, 8, 0));
-pl9.deck.push(createCard(18, 8, 0));
-pl9.deck.push(createCard(24, 9, 0));
-pl9.deck.push(createCard(23, 9, 0));
-pl9.deck.push(createCard(25, 10, 0));
+pl9.deck.push(createCard(10, 1, 0, 'ru'));
+pl9.deck.push(createCard(15, 2, 0, 'ru'));
+pl9.deck.push(createCard(20, 8, 0, 'ru'));
+pl9.deck.push(createCard(19, 8, 0, 'ru'));
+pl9.deck.push(createCard(18, 8, 0, 'ru'));
+pl9.deck.push(createCard(24, 9, 0, 'ru'));
+pl9.deck.push(createCard(23, 9, 0, 'ru'));
+pl9.deck.push(createCard(25, 10, 0, 'ru'));
 const combo29 = [[pl9.deck[3], pl9.deck[2]], [pl9.deck[5], pl9.deck[6]]];
 const combo39 = [[pl9.deck[3], pl9.deck[2], pl9.deck[4]]];
 
@@ -121,14 +121,14 @@ test('get id from one neutralize card, 2 x Combo2, Combo3 one cat and other card
 });
 
 const pl10 = createPlayer('a');
-pl10.deck.push(createCard(10, 1, 0));
-pl10.deck.push(createCard(15, 2, 0));
-pl10.deck.push(createCard(20, 8, 0));
-pl10.deck.push(createCard(19, 8, 0));
-pl10.deck.push(createCard(18, 8, 0));
-pl10.deck.push(createCard(24, 9, 0));
-pl10.deck.push(createCard(23, 9, 0));
-pl10.deck.push(createCard(28, 9, 0));
+pl10.deck.push(createCard(10, 1, 0, 'ru'));
+pl10.deck.push(createCard(15, 2, 0, 'ru'));
+pl10.deck.push(createCard(20, 8, 0, 'ru'));
+pl10.deck.push(createCard(19, 8, 0, 'ru'));
+pl10.deck.push(createCard(18, 8, 0, 'ru'));
+pl10.deck.push(createCard(24, 9, 0, 'ru'));
+pl10.deck.push(createCard(23, 9, 0, 'ru'));
+pl10.deck.push(createCard(28, 9, 0, 'ru'));
 const combo210 = [[pl10.deck[3], pl10.deck[2]], [pl10.deck[5], pl10.deck[6]]];
 const combo310 = [
   [pl10.deck[3], pl10.deck[2], pl10.deck[4]], [pl10.deck[5], pl10.deck[6], pl10.deck[7]]];
@@ -141,13 +141,13 @@ test('get id from one neutralize card, 2 x Combo2, 2 x Combo3 other card', () =>
 });
 
 const pl11 = createPlayer('a');
-pl11.deck.push(createCard(10, 1, 0));
-pl11.deck.push(createCard(20, 8, 0));
-pl11.deck.push(createCard(19, 8, 0));
-pl11.deck.push(createCard(18, 8, 0));
-pl11.deck.push(createCard(24, 9, 0));
-pl11.deck.push(createCard(23, 9, 0));
-pl11.deck.push(createCard(28, 9, 0));
+pl11.deck.push(createCard(10, 1, 0, 'ru'));
+pl11.deck.push(createCard(20, 8, 0, 'ru'));
+pl11.deck.push(createCard(19, 8, 0, 'ru'));
+pl11.deck.push(createCard(18, 8, 0, 'ru'));
+pl11.deck.push(createCard(24, 9, 0, 'ru'));
+pl11.deck.push(createCard(23, 9, 0, 'ru'));
+pl11.deck.push(createCard(28, 9, 0, 'ru'));
 const combo211 = [[pl11.deck[1], pl11.deck[2]], [pl11.deck[5], pl11.deck[6]]];
 const combo311 = [
   [pl11.deck[1], pl11.deck[2], pl11.deck[3]], [pl11.deck[4], pl11.deck[5], pl11.deck[6]]];
@@ -159,16 +159,16 @@ test('get id from one neutralize card, 2 x Combo2, 2 x Combo3', () => {
 });
 
 const pl12 = createPlayer('a');
-pl12.deck.push(createCard(10, 1, 0));
-pl12.deck.push(createCard(20, 8, 0));
-pl12.deck.push(createCard(19, 8, 0));
-pl12.deck.push(createCard(18, 8, 0));
-pl12.deck.push(createCard(24, 9, 0));
-pl12.deck.push(createCard(23, 9, 0));
-pl12.deck.push(createCard(28, 9, 0));
-pl12.deck.push(createCard(31, 10, 0));
-pl12.deck.push(createCard(32, 11, 0));
-pl12.deck.push(createCard(33, 12, 0));
+pl12.deck.push(createCard(10, 1, 0, 'ru'));
+pl12.deck.push(createCard(20, 8, 0, 'ru'));
+pl12.deck.push(createCard(19, 8, 0, 'ru'));
+pl12.deck.push(createCard(18, 8, 0, 'ru'));
+pl12.deck.push(createCard(24, 9, 0, 'ru'));
+pl12.deck.push(createCard(23, 9, 0, 'ru'));
+pl12.deck.push(createCard(28, 9, 0, 'ru'));
+pl12.deck.push(createCard(31, 10, 0, 'ru'));
+pl12.deck.push(createCard(32, 11, 0, 'ru'));
+pl12.deck.push(createCard(33, 12, 0, 'ru'));
 const combo212 = [[pl12.deck[1], pl12.deck[2]], [pl12.deck[5], pl12.deck[6]]];
 const combo312 = [
   [pl12.deck[1], pl12.deck[2], pl12.deck[3]], [pl12.deck[4], pl12.deck[5], pl12.deck[6]]];
@@ -181,12 +181,12 @@ test('get id from one neutralize card, 2 x Combo2, 2 x Combo3 and Combo5', () =>
 });
 
 const pl13 = createPlayer('a');
-pl13.deck.push(createCard(10, 1, 0));
-pl13.deck.push(createCard(20, 8, 0));
-pl13.deck.push(createCard(24, 9, 0));
-pl13.deck.push(createCard(31, 10, 0));
-pl13.deck.push(createCard(32, 11, 0));
-pl13.deck.push(createCard(33, 12, 0));
+pl13.deck.push(createCard(10, 1, 0, 'ru'));
+pl13.deck.push(createCard(20, 8, 0, 'ru'));
+pl13.deck.push(createCard(24, 9, 0, 'ru'));
+pl13.deck.push(createCard(31, 10, 0, 'ru'));
+pl13.deck.push(createCard(32, 11, 0, 'ru'));
+pl13.deck.push(createCard(33, 12, 0, 'ru'));
 const combo513 = [[pl13.deck[1], pl13.deck[2], pl13.deck[3], pl13.deck[4], pl13.deck[5]]];
 
 test('get id from one neutralize card and Combo5', () => {
@@ -196,13 +196,13 @@ test('get id from one neutralize card and Combo5', () => {
 });
 
 const pl14 = createPlayer('a');
-pl14.deck.push(createCard(10, 1, 0));
-pl14.deck.push(createCard(20, 8, 0));
-pl14.deck.push(createCard(24, 9, 0));
-pl14.deck.push(createCard(31, 10, 0));
-pl14.deck.push(createCard(32, 11, 0));
-pl14.deck.push(createCard(33, 12, 0));
-pl14.deck.push(createCard(35, 12, 0));
+pl14.deck.push(createCard(10, 1, 0, 'ru'));
+pl14.deck.push(createCard(20, 8, 0, 'ru'));
+pl14.deck.push(createCard(24, 9, 0, 'ru'));
+pl14.deck.push(createCard(31, 10, 0, 'ru'));
+pl14.deck.push(createCard(32, 11, 0, 'ru'));
+pl14.deck.push(createCard(33, 12, 0, 'ru'));
+pl14.deck.push(createCard(35, 12, 0, 'ru'));
 const combo214 = [[pl14.deck[5], pl14.deck[6]]];
 const combo514 = [[pl14.deck[1], pl14.deck[2], pl14.deck[3], pl14.deck[4], pl14.deck[5]]];
 
@@ -213,14 +213,14 @@ test('get id from one neutralize card and Combo5', () => {
 });
 
 const pl15 = createPlayer('a');
-pl15.deck.push(createCard(10, 1, 0));
-pl15.deck.push(createCard(20, 8, 0));
-pl15.deck.push(createCard(24, 9, 0));
-pl15.deck.push(createCard(31, 10, 0));
-pl15.deck.push(createCard(32, 11, 0));
-pl15.deck.push(createCard(33, 12, 0));
-pl15.deck.push(createCard(35, 12, 0));
-pl15.deck.push(createCard(5, 4, 0));
+pl15.deck.push(createCard(10, 1, 0, 'ru'));
+pl15.deck.push(createCard(20, 8, 0, 'ru'));
+pl15.deck.push(createCard(24, 9, 0, 'ru'));
+pl15.deck.push(createCard(31, 10, 0, 'ru'));
+pl15.deck.push(createCard(32, 11, 0, 'ru'));
+pl15.deck.push(createCard(33, 12, 0, 'ru'));
+pl15.deck.push(createCard(35, 12, 0, 'ru'));
+pl15.deck.push(createCard(5, 4, 0, 'ru'));
 const combo215 = [[pl15.deck[5], pl15.deck[6]]];
 const combo515 = [[pl15.deck[1], pl15.deck[2], pl15.deck[3], pl15.deck[4], pl15.deck[5]]];
 
@@ -231,13 +231,13 @@ test('get id from one neutralize card and Combo5', () => {
 });
 
 const pl16 = createPlayer('a');
-pl16.deck.push(createCard(10, 1, 0));
-pl16.deck.push(createCard(20, 8, 0));
-pl16.deck.push(createCard(24, 9, 0));
-pl16.deck.push(createCard(31, 10, 0));
-pl16.deck.push(createCard(32, 11, 0));
-pl16.deck.push(createCard(33, 12, 0));
-pl16.deck.push(createCard(5, 4, 0));
+pl16.deck.push(createCard(10, 1, 0, 'ru'));
+pl16.deck.push(createCard(20, 8, 0, 'ru'));
+pl16.deck.push(createCard(24, 9, 0, 'ru'));
+pl16.deck.push(createCard(31, 10, 0, 'ru'));
+pl16.deck.push(createCard(32, 11, 0, 'ru'));
+pl16.deck.push(createCard(33, 12, 0, 'ru'));
+pl16.deck.push(createCard(5, 4, 0, 'ru'));
 const combo516 = [[pl16.deck[1], pl16.deck[2], pl16.deck[3], pl16.deck[4], pl16.deck[5]]];
 
 test('get id from one neutralize card and Combo5', () => {
