@@ -26,6 +26,9 @@ import combo5GiveCard from '../game-event/subevent/combo5GiveCard';
 import favorChoicePlayer from '../game-event/subevent/favorChoicePlayer';
 import favorGiveCard from '../game-event/subevent/favorGiveCard';
 import endMoveNeutralize from '../game-event/subevent/endMoveNeutralize';
+import waitNotToNot from './waitNotToNot';
+import endWaitEndNotToNot from './subevent/endWaitEndNotToNot';
+import moveNotToNot from '../game-event/subevent/moveNotToNot';
 
 function mainGameLoop(
   game: IGame,
@@ -59,6 +62,8 @@ function mainGameLoop(
       case 'waitFavorPlayer': favorAutoPlayerChoice(myGame, setGame); return;
       case 'waitFavorPlayerCard': favorAutoCardGive(myGame, setGame); return;
       case 'win': win(myGame, setGame); return;
+      case 'waitNotToNot': waitNotToNot(myGame, setGame); return;
+      case 'waitEndNotToNot': endWaitEndNotToNot(myGame, setGame); return;
       default: return;
     }
   }
@@ -81,7 +86,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitCombo2'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для Космбо2
     // console.log('Bot maybe choise player');
@@ -94,7 +99,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitPlayerCombo2'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для Космбо2
     // console.log('Bot maybe choise card');
@@ -103,7 +108,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitCombo3'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока и типа карты для Космбо3
     // console.log('Bot maybe choise player and type card');
@@ -116,7 +121,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitPlayerCombo3'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для Космбо2
     // console.log('Bot maybe choise card');
@@ -125,7 +130,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitCombo5'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора карты для Космбо5
     // console.log('Bot maybe choise card from rebaund');
@@ -142,6 +147,7 @@ function mainGameLoop(
       myGame.players[inPl],
       myGame.reboundDeck,
       myGame.deskDeck,
+      myGame.players,
     );
     if (botMove.idCard > -1) {
       myGame.gameState.stateGame = botMove.stateGame;
@@ -152,7 +158,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitFavorPlayer'
-    && myGame.gameState.timeLeft === 4
+    && myGame.gameState.timeLeft === 7
     && myGame.players[inPl].isBot) {
     // вызов функции бота выбора игрока для одолжить
     // console.log('Bot maybe choise player for Favor');
@@ -165,7 +171,7 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitFavorPlayerCard'
-  && myGame.gameState.timeLeft === 4
+  && myGame.gameState.timeLeft === 7
   && myGame.players[inPl].isBot) {
   // вызов функции бота выбора карты, которую нужно отдать Одолжить
   // console.log('Bot maybe choise player for Favor');
@@ -184,6 +190,23 @@ function mainGameLoop(
       myGame.gameState.playerTurn,
     );
     myGame = endMoveNeutralize(myGame, nomCard);
+  }
+
+  if (myGame.gameState.functionState === 'waitNotToNot'
+    && myGame.gameState.timeLeft === 4
+    && myGame.players[inPl].isBot) {
+    // вызов функции хода бота
+    // console.log('Bot maybe do move NOT');
+    const idCardBotNot = myGame.gameState.bot.onAnswerNotToNot(
+      myGame.players[inPl],
+      myGame.players,
+      myGame.gameState.playerWaitAnswer,
+    );
+    if (idCardBotNot > -1) {
+      myGame = (moveNotToNot(myGame, idCardBotNot));
+    } else {
+      myGame.gameState.timeLeft = 1;
+    }
   }
 
   if (myGame.gameState.timeLeft > 1) {

@@ -7,6 +7,9 @@ function gameLoop(
 ): void {
   console.log('call main loop');
   console.log(game.gameState.functionState);
+  console.log(window.location.hostname);
+  if (game.players.length > 0) localStorage.setItem('myGame', JSON.stringify(game));
+
   if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
 
   if (game.players.length > 0 && (game.gameState.functionState !== 'lose' && game.gameState.functionState !== 'win')) {

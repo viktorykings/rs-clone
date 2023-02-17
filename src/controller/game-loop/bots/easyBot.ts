@@ -71,6 +71,10 @@ class EasyBot implements IBot {
   onPutExplosiveKitten(): number {
     return 0;
   }
+
+  onAnswerNotToNot(player: IPlayer): number {
+    return this.onAnswerTurn(player);
+  }
 }
 
 export default EasyBot;
