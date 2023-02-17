@@ -6,6 +6,8 @@ import img4 from '../../assets/rules/4.jpg';
 import img5 from '../../assets/rules/5.jpg';
 import img6 from '../../assets/rules/6.jpg';
 import img7 from '../../assets/rules/7.jpg';
+import img8 from '../../assets/rules/8.jpg';
+import img9 from '../../assets/rules/9.jpg';
 import future from '../../assets/rules/future.jpg';
 import skip from '../../assets/rules/skip.jpg';
 import defuse from '../../assets/rules/defuse.jpg';
@@ -18,6 +20,9 @@ import iNo from '../../assets/icons/icon-no.png';
 import iShufle from '../../assets/icons/icon-shufle.png';
 import iSkip from '../../assets/icons/icon-skip.png';
 import iIcons from '../../assets/icons/icons.png';
+import img10 from '../../assets/rules/img1.png';
+import img12 from '../../assets/rules/12.png';
+import img13 from '../../assets/rules/13.png';
 
 export default function RulesPage(): JSX.Element {
   return (
@@ -42,7 +47,7 @@ export default function RulesPage(): JSX.Element {
           <p>Когда это произошло, этот игрок вылетел из игры.</p>
           <img src={img2} alt="img2" />
           <div className="short">
-            <h2>Короче</h2>
+            <h4>Короче</h4>
             <h4>Если ты взорвался - ты проиграл</h4>
             <p className="error">Почувствуй всю горечь поражения</p>
             <h4>Если ты не взорвался - ты победил!</h4>
@@ -227,12 +232,12 @@ export default function RulesPage(): JSX.Element {
                   Взрывного Котенка. Представьте, что любая карта (или Пара или
                   Особое Комбо) под Нет больше не существует.
                 </p>
-                <img src="" alt="" />
+                <img src={img8} width="80%" alt="img8" />
                 <p>
                   Вы также можете сыграть Нет на другую Нет. Короче, Нет на Нет
                   - законно работает.
                 </p>
-                <img src="" alt="" />
+                <img src={img9} width="80%" alt="img9" />
                 <p>
                   И еще: карту Нет можно сыграть в любое время, доже если сейчас
                   не Ваш ход.
@@ -348,34 +353,67 @@ export default function RulesPage(): JSX.Element {
           </ul>
         </section>
       </article>
-      <section className="combo column">
-        <h2>
-          <span>Особые комбо</span>
-        </h2>
-        <p>
-          Вы можете сыграть любую карту как две или три, если их иконки в левом
-          верхнем углу совпадают. Когда играете комбо, игнорируйте инструкции
-          карты и следуйте этим:
-        </p>
-        <p>Две одинаковые</p>
-        <p>
-          Чтобы взять наугад карту у вашего соперника, сыграйте две одинаковые
-          карты в колоду сброса. Это работает с ЛЮБЫМИ картами с одинаковыми
-          иконками в углу.
-        </p>
-        <p>Три одинаковые</p>
-        <p>
-          Сыграв три одинаковые карты, Вы можете назвать карту, которую хотите
-          получить, и Выбранный игрок обязан вам ее дать. Если у него такой нет,
-          вы не получите ничего.
-        </p>
-        <p>Пять разных</p>
-        <p>
-          Если Вы сыграли любые 5 разных карт с разными иконками, Вы можете
-          взять одну любую карту из колоды сброса. (Хватайте биту быстрее, чтобы
-          выбрать карту, пока никто не использовал карту Нет).
-        </p>
-      </section>
+      <article className="combo">
+        <section>
+          <h2>
+            <span>Особые комбо</span>
+          </h2>
+          <p>
+            Вы можете сыграть любую карту как две или три, если их иконки в
+            левом верхнем углу совпадают. Когда играете комбо, игнорируйте
+            инструкции карты и следуйте этим:
+          </p>
+          <div className="wrap-card">
+            <div className="card">
+              <div className="card-header">
+                <p className="header-tittle">Две одинаковые</p>
+              </div>
+              <div className="card-desc">
+                <p>
+                  Чтобы взять наугад карту у вашего соперника, сыграйте две
+                  одинаковые карты в колоду сброса. Это работает с ЛЮБЫМИ
+                  картами с одинаковыми иконками в углу.
+                </p>
+              </div>
+              <div className="card-img">
+                <img src={img10} width="60%" alt="many icons" />
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-header">
+                <p className="header-tittle">Три одинаковые</p>
+              </div>
+              <div className="card-desc">
+                <p>
+                  Сыграв три одинаковые карты, Вы можете назвать карту, которую
+                  хотите получить, и Выбранный игрок обязан вам ее дать. Если у
+                  него такой нет, вы не получите ничего.
+                </p>
+              </div>
+              <div className="card-img">
+                <img src={img12} width="60%" alt="many icons" />
+              </div>
+            </div>
+
+            <div className="card">
+              <div className="card-header">
+                <p className="header-tittle">Пять разных</p>
+              </div>
+              <div className="card-desc">
+                <p>
+                  Если Вы сыграли любые 5 разных карт с разными иконками, Вы
+                  можете взять одну любую карту из колоды сброса. (Хватайте биту
+                  быстрее, чтобы выбрать карту, пока никто не использовал карту
+                  Нет).
+                </p>
+              </div>
+              <div className="card-img">
+                <img src={img13} width="60%" alt="many icons" />
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
     </div>
   );
 }
