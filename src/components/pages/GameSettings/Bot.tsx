@@ -22,6 +22,7 @@ export default function Bot({
       <div className="btn-group">
         {isBot && (
           <button
+            aria-label="Delete"
             type="button"
             className="btn"
             onClick={() => deletePlayer(name)}

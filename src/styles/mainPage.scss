@@ -4,7 +4,7 @@ $main-red: #970d14;
 $highlights: #fbff12;
 $text-color: #fff;
 
-@mixin pageBackgroung{
+@mixin pageBackgroung {
   background-image: url(../assets/bg.jpg);
   background-size: 100% 100%;
   width: 100%;
@@ -28,34 +28,35 @@ $text-color: #fff;
   border: 1px solid $text-color;
   border-radius: 10px;
 }
-.main-page-bg{
+.main-page-bg {
   @include pageBackgroung;
-  .container{
+  .container {
     @include pageContainer;
-    button{
-        height: 50px;
-        width: 300px;
-        cursor: pointer;
-        border-radius: 10px;
-        border: 1px solid $main-red;
-        transition: all 1s ease;
-        font-size: 20px;
-        &:hover{
-          background-color: transparent;
-          border: 1px solid $text-color;
-          color: $text-color;
-        }
+    button {
+      height: 50px;
+      width: 300px;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 1px solid $main-red;
+      transition: all 1s ease;
+      font-size: 20px;
+      &:hover {
+        background-color: transparent;
+        border: 1px solid $text-color;
+        color: $text-color;
       }
+    }
   }
 }
-.settings-page-bg{
-  a{
+
+.settings-page-bg {
+  a {
     text-decoration: none;
   }
   @include pageBackgroung;
-  .container{
+  .container {
     @include pageContainer;
-    .back-btn{
+    .back-btn {
       height: 30px;
       width: 30px;
       font-size: 30px;
@@ -64,7 +65,7 @@ $text-color: #fff;
       justify-content: center;
       align-items: flex-end;
     }
-    .lang{
+    .lang {
       display: flex;
       justify-content: space-around;
     }

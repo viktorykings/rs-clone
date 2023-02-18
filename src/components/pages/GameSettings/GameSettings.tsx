@@ -11,7 +11,7 @@ import createGame from '../../../controller/createGame';
 import langs from '../../../const/localization';
 
 export interface IGameSettings {
-  game: IGame,
+  game: IGame;
   setGame: (obj: IGame) => void;
 }
 
@@ -51,13 +51,24 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
           localLang={base.modal.level}
         />
       )}
-      {/* <h1>Game Settings</h1> */}
 
       <div className="wrap-players">
         <div className="bot-settings">
-          <form onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e, base.botNames)}>
-            {/* <h2>Bad Kittings</h2> */}
-            <p className="game-level">{botLevel}</p>
+          <div className="choose-level">
+            <button
+              className="btn"
+              type="button"
+              onClick={() => setModal(true)}
+            >
+              {base.level[0]}
+            </button>
+          </div>
+          <p className="game-level">{botLevel}</p>
+          <form
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+              handleSubmit(e, base.botNames);
+            }}
+          >
             <div className="add-bot">
               <button type="submit" className="btn">
                 {base.buttons[0]}
@@ -65,8 +76,8 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
             </div>
           </form>
           <ul className="list">
-            {bots.length
-              ? bots.map((player) => {
+            {bots.length ? (
+              bots.map((player) => {
                 const bdrcolor = getRandomColor();
                 return (
                   <Bot
@@ -81,13 +92,10 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
                   />
                 );
               })
-              : <div className="bot-place">?</div>}
+            ) : (
+              <div className="bot-place">?</div>
+            )}
           </ul>
-          <div className="choose-level">
-            <button type="button" onClick={() => setModal(true)}>
-              {base.level[0]}
-            </button>
-          </div>
         </div>
         <div className="player-settings">
           {modalChangeName && (
@@ -107,6 +115,8 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
               localLang={base.modal.avatar}
             />
           )}
+          <h2>Хороший котик</h2>
+          <hr />
           <MainPlayer
             name={mainPlayer.name}
             isBot={false}
@@ -118,27 +128,31 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
           />
         </div>
       </div>
-      <Link to="/desk">
-        <button
-          type="button"
-          className="start-btn btn"
-          onClick={() => {
-            const Players = createPlayers(bots);
-            setGame(createGame(currLang, Players));
-          }}
-        >
-          {base.buttons[1]}
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          type="button"
-          className="btn"
-          onClick={() => console.log('Cancel')}
-        >
-          {base.buttons[2]}
-        </button>
-      </Link>
+
+      <hr />
+      <div className="btn-group">
+        <Link to="/desk">
+          <button
+            type="button"
+            className="start-btn btn"
+            onClick={() => {
+              const Players = createPlayers(bots);
+              setGame(createGame(currLang, Players));
+            }}
+          >
+            {base.buttons[1]}
+          </button>
+        </Link>
+        <Link to="/">
+          <button
+            type="button"
+            className="btn"
+            onClick={() => console.log('Cancel')}
+          >
+            {base.buttons[2]}
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import './scss/gameSettings.scss';
+// import './scss/gameSettings.scss';
+import RulesPage from './components/pages/RulesPage';
 import AboutPage from './components/pages/AboutPage';
 import DeskPage from './components/pages/DeskPage';
 import MainPage from './components/pages/MainPage';
@@ -23,6 +24,7 @@ function App(): JSX.Element {
         />
         <Route path="/settings" element={<Settings game={game} setGame={setGame} />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/rules" element={<RulesPage />} />
         <Route
           path="/desk"
           element={(
