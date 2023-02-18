@@ -55,18 +55,20 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
       <div className="wrap-players">
         <div className="bot-settings">
           <div className="choose-level">
-            <button type="button" onClick={() => setModal(true)}>
+            <button
+              className="btn"
+              type="button"
+              onClick={() => setModal(true)}
+            >
               {base.level[0]}
             </button>
           </div>
           <p className="game-level">{botLevel}</p>
           <form
-            onSubmit={(e: React.FormEvent<HTMLFormElement>) =>
-              handleSubmit(e, base.botNames)
-            }
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+              handleSubmit(e, base.botNames);
+            }}
           >
-            {/* <h2>Bad Kittings</h2> */}
-            <p className="game-level">{botLevel}</p>
             <div className="add-bot">
               <button type="submit" className="btn">
                 {base.buttons[0]}

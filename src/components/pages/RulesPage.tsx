@@ -133,7 +133,7 @@ export default function RulesPage(): JSX.Element {
           <div className="guide-row">
             <p>
               Вы решили сыграть карту заглянуть в будущее.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/ru/future1.png" alt="future1" />
             </p>
             <div className="arrow-right-down" />
           </div>
@@ -143,7 +143,7 @@ export default function RulesPage(): JSX.Element {
             <p>
               Просматривая три верхние карты, Вы обранужили, что карта, которую
               Вам предостоит взять - это Взрывной Котенок.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/ru/bang1.png" alt="future1" />
             </p>
           </div>
 
@@ -151,7 +151,7 @@ export default function RulesPage(): JSX.Element {
             <p>
               Вы решаете атаковать Вашего соперника, тем самым закончить свой
               ход, а его принудить взять две карты.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/ru/attack2.png" alt="future1" />
             </p>
             <div className="arrow-right-down" />
           </div>
@@ -161,7 +161,7 @@ export default function RulesPage(): JSX.Element {
             <p>
               Соперник оказался не прост. Он ипользует НЕТ карту, что отменяет
               Вашу атаку, так что это все еще Ваш ход.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/ru/no3.png" alt="future1" />
             </p>
           </div>
 
@@ -170,7 +170,7 @@ export default function RulesPage(): JSX.Element {
               Тянуть Взрывного Котенка не хочется, поэтому Вы решаете сыграть
               карту ПЕРЕМЕШАТЬ, тем самым перемешиваете колоду случайным
               образом.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/ru/mix3.png" alt="future1" />
             </p>
             <div className="arrow-right-down" />
           </div>
@@ -179,7 +179,6 @@ export default function RulesPage(): JSX.Element {
             <p>
               Из перемешанной колоды Вы тяните карту и надеетесь, что это не
               Взрывной Котенок. Удачи.
-              <img src="/cards/future1.png" alt="future1" />
             </p>
           </div>
 
@@ -539,7 +538,7 @@ export default function RulesPage(): JSX.Element {
           <div className="guide-row">
             <p>
               You decide to play a card to look into the future.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/en/future1.jpeg" alt="future1" />
             </p>
             <div className="arrow-right-down" />
           </div>
@@ -549,7 +548,7 @@ export default function RulesPage(): JSX.Element {
             <p>
               Looking through the top three cards, you have discovered that the
               card you have to draw is the Explosive Kitten.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/en/bang1.jpeg" alt="future1" />
             </p>
           </div>
 
@@ -557,7 +556,7 @@ export default function RulesPage(): JSX.Element {
             <p>
               You decide to attack your opponent, thereby ending your turn, and
               forcing him to draw two cards.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/en/attack2.png" alt="future1" />
             </p>
             <div className="arrow-right-down" />
           </div>
@@ -567,7 +566,7 @@ export default function RulesPage(): JSX.Element {
             <p>
               The opponent was not easy. He uses a NO card, which cancels your
               attack, so it`&apos;`s still your turn.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/en/no1.jpeg" alt="future1" />
             </p>
           </div>
 
@@ -575,7 +574,7 @@ export default function RulesPage(): JSX.Element {
             <p>
               You don`&apos;`t want to draw the Explosive Kitten, so you decide
               to play the SHUFFLE card, thereby shuffling the deck randomly.
-              <img src="/cards/future1.png" alt="future1" />
+              <img src="/cards/en/mix1.jpeg" alt="future1" />
             </p>
             <div className="arrow-right-down" />
           </div>
@@ -584,7 +583,6 @@ export default function RulesPage(): JSX.Element {
             <p>
               From the shuffled deck, you draw a card and hope it`&apos;`s not
               an Explosive Kitten. Good luck.
-              <img src="/cards/future1.png" alt="future1" />
             </p>
           </div>
 
@@ -804,7 +802,7 @@ export default function RulesPage(): JSX.Element {
 
             <div className="card">
               <div className="card-header">
-                <p className="header-tittle">Пять разных</p>
+                <p className="header-tittle">five different</p>
               </div>
               <div className="card-desc">
                 <p>
@@ -824,7 +822,7 @@ export default function RulesPage(): JSX.Element {
     </>
   );
 
-  console.log(rulesEN);
+  console.log(rulesRU);
 
-  return <div className="rules">{rulesRU}</div>;
+  return <div className="rules">{rulesEN}</div>;
 }
