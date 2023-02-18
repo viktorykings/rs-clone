@@ -1,3 +1,4 @@
+import IBot from './IBot';
 import ICard from './ICard';
 import IHistory from './IHistory';
 import IPlayer from './IPlayer';
@@ -34,10 +35,8 @@ interface IGame {
     returnToDeck: boolean,
     showCardVisible: boolean,
     endGame: boolean,
+    bot: IBot,
   }
-}
-export interface Setter extends IGame {
-  setGame: React.Dispatch<React.SetStateAction<IGame>>;
 }
 
 export default IGame;

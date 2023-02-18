@@ -3,41 +3,72 @@
 $main-red: #970d14;
 $highlights: #fbff12;
 $text-color: #fff;
+
 .main-page-bg {
-  background-image: url(../assets/bg.jpg);
-  background-size: 100% 100%;
-  width: 100%;
-  min-height: 660px;
-  font-family: 'Gloria Hallelujah', cursive;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .container {
+  @mixin pageBackgroung {
+    background-image: url(../assets/bg.jpg);
+    background-size: 100% 100%;
+    width: 100%;
+    min-height: 660px;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @mixin pageContainer {
     box-sizing: border-box;
     width: 500px;
     height: 300px;
-
+    padding: 50px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: $main-red;
     border: 1px solid $text-color;
     border-radius: 10px;
-    button {
-      height: 50px;
-      width: 300px;
-      cursor: pointer;
-      border-radius: 10px;
-      border: 1px solid $main-red;
-      transition: all 1s ease;
-      font-size: 20px;
-      &:hover {
-        background-color: transparent;
-        border: 1px solid $text-color;
-        color: $text-color;
+  }
+  .main-page-bg {
+    @include pageBackgroung;
+    .container {
+      @include pageContainer;
+      button {
+        height: 50px;
+        width: 300px;
+        cursor: pointer;
+        border-radius: 10px;
+        border: 1px solid $main-red;
+        transition: all 1s ease;
+        font-size: 20px;
+        &:hover {
+          background-color: transparent;
+          border: 1px solid $text-color;
+          color: $text-color;
+        }
       }
+    }
+  }
+}
+.settings-page-bg {
+  a {
+    text-decoration: none;
+  }
+  @include pageBackgroung;
+  .container {
+    @include pageContainer;
+    .back-btn {
+      height: 30px;
+      width: 30px;
+      font-size: 30px;
+      line-height: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .lang {
+      display: flex;
+      justify-content: space-around;
     }
   }
 }

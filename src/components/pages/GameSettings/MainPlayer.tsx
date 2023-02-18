@@ -8,6 +8,7 @@ export default function MainPlayer({
   avatar,
   openModalChangeName,
   openModalChangeAvatar,
+  localLang,
 }: IMainPlayerSettings) {
   const viewTemplate = (
     <div className="human-player">
@@ -26,7 +27,7 @@ export default function MainPlayer({
             openModalChangeName();
           }}
         >
-          Редактировать имя
+          {localLang[0]}
         </button>
         <button
           type="button"
@@ -35,7 +36,7 @@ export default function MainPlayer({
             openModalChangeAvatar();
           }}
         >
-          Выбрать Аватар
+          {localLang[1]}
         </button>
       </div>
     </div>

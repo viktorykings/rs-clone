@@ -7,12 +7,14 @@ interface IModalChangeAvatar {
   curAvatar: string;
   onChangeAvatar: () => void;
   updateAvatar: (value: string) => void;
+  localLang: string[];
 }
 export default function ModalChangeAvatar({
   title,
   curAvatar,
   onChangeAvatar,
   updateAvatar,
+  localLang,
 }: IModalChangeAvatar) {
   const [urlAv, setUrAv] = useState(curAvatar);
   const updateUrlAv = (url: string) => {
@@ -37,7 +39,11 @@ export default function ModalChangeAvatar({
               }}
             />
             <div className="wrap-carousel">
-              <Carousel curAvatar={curAvatar} updateUrlAv={updateUrlAv} />
+              <Carousel
+                curAvatar={curAvatar}
+                updateUrlAv={updateUrlAv}
+                localLang={localLang}
+              />
             </div>
           </div>
           <div className="btn-group">
@@ -50,7 +56,7 @@ export default function ModalChangeAvatar({
                 onChangeAvatar();
               }}
             >
-              Готово
+              {localLang[3]}
             </button>
             <button
               type="button"
@@ -60,7 +66,7 @@ export default function ModalChangeAvatar({
                 onChangeAvatar();
               }}
             >
-              Отмена
+              {localLang[4]}
             </button>
           </div>
         </div>

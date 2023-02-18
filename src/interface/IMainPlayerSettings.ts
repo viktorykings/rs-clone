@@ -5,4 +5,5 @@ export default interface IMainPlayerSettings {
   avatar: string;
   openModalChangeName: () => void;
   openModalChangeAvatar: () => void;
+  localLang: string[];
 }

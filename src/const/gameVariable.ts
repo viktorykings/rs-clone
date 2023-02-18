@@ -1,6 +1,6 @@
-export const playerWaitTurn = 12;
+export const playerWaitTurn = 60;
 
-export const waitEndMove = 2;
+export const waitEndMove = 3;
 
 export const botWaitTurn = 10;
 

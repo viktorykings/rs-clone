@@ -3,6 +3,7 @@ import IGame from '../../../interface/IGame';
 import IPlayer from '../../../interface/IPlayer';
 import modalChoicePlayer from '../../../controller/game-event/modalChoicePlayer';
 import modalChoiseCard from '../../../controller/game-event/modalChoiceCard';
+import findIndexPlayerTern from '../../../controller/game-event/subevent/findIndexPlayerTern';
 // import combo2ChoisePlayer from '../../../controller/game-event/subevent/combo2ChoisePlayer';
 
 export const clearNameCombo = (player: IPlayer): void => {
@@ -43,9 +44,12 @@ export const handleCombo5 = (
   setter: React.Dispatch<React.SetStateAction<IGame>>,
   setterPlayers: React.Dispatch<React.SetStateAction<IPlayer[]>>,
 ) => {
-  combo5GiveCard(myGame, index);
-  setter(myGame);
-  setterPlayers([...myGame.players]);
+  const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  if (!myGame.players[inPl].isBot) {
+    combo5GiveCard(myGame, index);
+    setter(myGame);
+    setterPlayers([...myGame.players]);
+  }
 };
 
 export const clickDoubleCombo = (player: IPlayer): IPlayer => {

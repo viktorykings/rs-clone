@@ -7,6 +7,7 @@ export default function ModalBot({
   updateLevel,
   setGameLevel,
   onSetLevel,
+  localLang,
 }: IModalBotProps) {
   function toggleClass(target: EventTarget) {
     const levelItems = document.querySelectorAll('.levels-item');
@@ -22,38 +23,38 @@ export default function ModalBot({
           <div
             className="levels-item easy"
             onClick={(e) => {
-              updateLevel('easy');
+              updateLevel(localLang[0]);
               toggleClass(e.target);
               setGameLevel('easy');
             }}
-            onKeyPress={() => updateLevel('easy')}
+            onKeyPress={() => updateLevel(localLang[0])}
             role="presentation"
           >
-            <p className="levels-desc">Леко</p>
+            <p className="levels-desc">{localLang[0]}</p>
           </div>
           <div
             className="levels-item normal"
             onClick={(e) => {
-              updateLevel('normal');
+              updateLevel(localLang[1]);
               toggleClass(e.target);
               setGameLevel('normal');
             }}
-            onKeyPress={() => updateLevel('normal')}
+            onKeyPress={() => updateLevel(localLang[1])}
             role="presentation"
           >
-            <p className="levels-desc">Нормально</p>
+            <p className="levels-desc">{localLang[1]}</p>
           </div>
           <div
             className="levels-item hard"
             onClick={(e) => {
-              updateLevel('hard');
+              updateLevel(localLang[2]);
               toggleClass(e.target);
               setGameLevel('hard');
             }}
-            onKeyPress={() => updateLevel('hard')}
+            onKeyPress={() => updateLevel(localLang[2])}
             role="presentation"
           >
-            <p className="levels-desc">Сложно</p>
+            <p className="levels-desc">{localLang[2]}</p>
           </div>
         </div>
         <div className="btn-group">

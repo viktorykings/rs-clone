@@ -15,6 +15,7 @@ import audiourl from '../../../assets/sounds/button-click.mp3';
 export default function Carousel({
   curAvatar,
   updateUrlAv,
+  localLang,
 }: ICarouselSettings) {
   const audio = new Audio(audiourl);
   const buttonClick = () => {
@@ -70,7 +71,7 @@ export default function Carousel({
             buttonClick();
           }}
         >
-          Назад
+          {localLang[1]}
         </button>
         <button
           className="btn"
@@ -80,7 +81,7 @@ export default function Carousel({
             buttonClick();
           }}
         >
-          Вперёд
+          {localLang[2]}
         </button>
       </div>
       <div className="wrap-avatar-list">

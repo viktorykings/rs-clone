@@ -5,4 +5,5 @@ export default interface IBotProps {
   level: string;
   deletePlayer: (name: string) => void;
   brdrColor: string;
+  localLang: string;
 }

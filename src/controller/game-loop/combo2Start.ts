@@ -1,7 +1,10 @@
+import langs from '../../const/localization';
 import IGame from '../../interface/IGame';
 import combo2ChoisePlayer from '../game-event/subevent/combo2ChoisePlayer';
 
 function combo2Start(game: IGame): IGame {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage;
   let myGame = { ...game };
   myGame.gameState.functionState = 'waitCombo2';
 
@@ -13,8 +16,8 @@ function combo2Start(game: IGame): IGame {
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalPlayers = mPlayers;
   myGame.gameState.modalDeck = [];
-  myGame.gameState.modalTitle = 'Выберите игрока, у которого задерете карту!';
-  myGame.gameState.message = '';
+  myGame.gameState.modalTitle = `${base.modalTitles.comboStart[0]}`;
+  myGame.gameState.message = `${myGame.gameState.playerTurn} ${base.gameMsg.combos[5]}`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   if (mPlayers.length === 1) {
     [myGame.gameState.choicePlayer] = mPlayers;

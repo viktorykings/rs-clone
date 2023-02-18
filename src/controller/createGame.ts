@@ -6,11 +6,18 @@ import TStateGame from '../interface/IStateGame';
 import createDeckFirst from './createDeckFirst';
 import TFunctionState from '../interface/TFunctionState';
 import { playerWaitTurn } from '../const/gameVariable';
+// import MiddleBot from './game-loop/bots/middleBot';
+import langs from '../const/localization';
+import HardBot from './game-loop/bots/hardBot';
 
-function createGame(players: IPlayer [] = []): IGame {
-  const settings: ISettings = { countPlayer: players.length, level: 'easy' };
+function createGame(language: string, players: IPlayer [] = []): IGame {
+  const settings: ISettings = {
+    countPlayer: players.length,
+    level: 'easy',
+    lang: language,
+  };
 
-  const { deskDeck, playersDeck } = createDeckFirst(players);
+  const { deskDeck, playersDeck } = createDeckFirst(players, settings.lang);
 
   const reboundDeck: ICard [] = [];
 
@@ -20,17 +27,24 @@ function createGame(players: IPlayer [] = []): IGame {
 
   const functionState: TFunctionState = 'waitPlayerTurn';
 
+  let playerTurn = '';
+  if (players.length > 0) playerTurn = players[0].name;
+
+  const bot = new HardBot();
+  const currLang = settings.lang;
+  const base = langs[currLang].startGame;
+
   const gameState = {
-    playerTurn: 'player1',
+    playerTurn,
     stateGame,
     functionState,
     functionEtap: 0,
     timerId: null,
-    timeLeft: 30,
+    timeLeft: playerWaitTurn,
     timeNeed: playerWaitTurn,
     typeTern: null,
     playerWaitAnswer: [],
-    message: 'Ваш ход.',
+    message: `${base}`,
     history: [],
     modalVisible: false,
     modalPlayers: [],
@@ -43,6 +57,7 @@ function createGame(players: IPlayer [] = []): IGame {
     returnToDeck: false,
     showCardVisible: true,
     endGame: false,
+    bot,
   };
 
   return {
