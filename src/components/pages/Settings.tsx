@@ -28,7 +28,14 @@ export default function Settings({ game, setGame }: Setter): JSX.Element {
   return (
     <div className="settings-page-bg">
       <div className="container">
-        <Link to="/"><button type="button" className="back-btn">x</button></Link>
+        <Link to="/"><button type="button" className="back-btn">{'<-'}</button></Link>
+        <div className="sound">
+          <p>{langs[currLang].settings.sound}</p>
+          <label className="switch" htmlFor="switch">
+            <input type="checkbox" id="switch" />
+            <span className="slider round" />
+          </label>
+        </div>
         <div className="lang">
           <p>{langs[currLang].settings.language}</p>
           <select name="lang" id="lang" onChange={() => changeLang()}>

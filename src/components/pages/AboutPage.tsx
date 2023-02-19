@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import vika from '../../assets/team/vika.png';
 import eugene from '../../assets/team/eugene.jpg';
 import andrei from '../../assets/team/andrei.jpg';
@@ -14,6 +15,7 @@ export default function AboutPage(): JSX.Element {
       <div className="wrap-team">
         <div className="team-desc">
           <h3>НАША КОМАНДА</h3>
+          <Link to="/"><button type="button" className="back-btn">{'<-'}</button></Link>
         </div>
         <div className="team-list">
           <div className="row">

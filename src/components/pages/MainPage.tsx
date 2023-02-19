@@ -20,7 +20,7 @@ export default function MainPage({ settings }: Main): JSX.Element {
           <button type="button">{langs[currLang].main.settings}</button>
         </Link>
         <Link to="rules">
-          <button type="button">Правила</button>
+          <button type="button">{langs[currLang].main.rules}</button>
         </Link>
         <Link to="about">
           <button type="button">{langs[currLang].main.about}</button>
