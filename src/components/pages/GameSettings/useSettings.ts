@@ -13,8 +13,6 @@ import {
 // import IGame from '../../../interface/IGame';
 // import { IGameSettings } from './GameSettings';
 
-// const { log } = console;
-
 const { getRandomBotName, getRandomBotAvatar } = utils();
 
 export default function useSettings() {

@@ -62,8 +62,9 @@ export default function Carousel({
 
   return (
     <>
-      <div className="btn-groupe">
+      <div className="btn-group">
         <button
+          className="btn"
           type="button"
           onClick={() => {
             handlePrevious();
@@ -73,6 +74,7 @@ export default function Carousel({
           {localLang[1]}
         </button>
         <button
+          className="btn"
           type="button"
           onClick={() => {
             handleNext();

@@ -1,0 +1,120 @@
+.wrap-team {
+  display: flex;
+  background-color: #770000;
+}
+.team-desc {
+  margin: auto 0;
+  h3 {
+    color: darkorange;
+
+    letter-spacing: 0.1em;
+    text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c,
+      0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424,
+      0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c,
+      0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414,
+      0 15px 0 #121212, 0 22px 30px rgba(0, 0, 0, 0.9);
+    writing-mode: vertical-rl;
+    transform: rotate(-180deg);
+    font-size: 5rem;
+  }
+}
+.team-list {
+  width: 100%;
+}
+.left {
+  margin-left: auto;
+}
+.right {
+  margin-right: auto;
+}
+.row {
+  display: flex;
+  gap: 1rem;
+  padding: 10px;
+  height: 27vh;
+  margin: 1rem;
+  border: 6px solid orange;
+  border-radius: 20px;
+  p {
+    flex-grow: 1;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    font-size: 2rem;
+    font-weight: bold;
+    color: orange;
+    span {
+      font-size: 6rem;
+    }
+  }
+
+  .row-item {
+    aspect-ratio: 2/3;
+
+    border-radius: 12px;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+.item-container {
+  .green {
+    color: green;
+  }
+  .white {
+    color: white;
+  }
+  .pink {
+    color: deeppink;
+  }
+  position: relative;
+
+  & > .front {
+    position: absolute;
+    transform: perspective(600px) rotateY(0deg);
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    transition: transform 0.5s linear 0s;
+
+    .item-name {
+      margin-top: 6px;
+    }
+  }
+
+  & > .back {
+    position: absolute;
+    transform: perspective(600px) rotateY(180deg);
+    backface-visibility: hidden;
+    background: rgb(0, 0, 0, 0.5);
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: transform 0.5s linear 0s;
+
+    p {
+      font-size: 14px;
+      font-weight: normal;
+      color: white;
+      margin: 5px;
+      text-align: left;
+    }
+  }
+
+  &:hover .front {
+    transform: perspective(600px) rotateY(-180deg);
+    cursor: pointer;
+  }
+
+  &:hover .back {
+    transform: perspective(600px) rotateY(0deg);
+    cursor: pointer;
+  }
+}

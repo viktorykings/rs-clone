@@ -57,8 +57,8 @@ export default function ModalBot({
             <p className="levels-desc">{localLang[2]}</p>
           </div>
         </div>
-        <div className="btn-groupe">
-          <button type="button" onClick={() => onSetLevel()}>
+        <div className="btn-group">
+          <button className="btn" type="button" onClick={() => onSetLevel()}>
             OK
           </button>
         </div>

@@ -5,7 +5,7 @@ import langs from '../../const/localization';
 import ISettings from '../../interface/ISettings';
 
 interface Main {
-  settings: ISettings,
+  settings: ISettings;
 }
 
 export default function MainPage({ settings }: Main): JSX.Element {
@@ -13,9 +13,18 @@ export default function MainPage({ settings }: Main): JSX.Element {
   return (
     <div className="main-page-bg">
       <div className="container">
-        <Link to="gamesettings"><button type="button">{langs[currLang].main.start}</button></Link>
-        <Link to="settings"><button type="button">{langs[currLang].main.settings}</button></Link>
-        <Link to="about"><button type="button">{langs[currLang].main.about}</button></Link>
+        <Link to="gamesettings">
+          <button type="button">{langs[currLang].main.start}</button>
+        </Link>
+        <Link to="settings">
+          <button type="button">{langs[currLang].main.settings}</button>
+        </Link>
+        <Link to="rules">
+          <button type="button">Правила</button>
+        </Link>
+        <Link to="about">
+          <button type="button">{langs[currLang].main.about}</button>
+        </Link>
       </div>
     </div>
   );
