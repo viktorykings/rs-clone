@@ -87,7 +87,7 @@ export default function DeskPage({
   return (
     <main className="desk">
       <div className="other-players">
-        {game.players.slice(1, game.players.length).map((el) => <Player key={el.name} name={el.name} className={game.gameState.playerTurn === el.name ? 'activePlayer' : ''} />)}
+        {game.players.slice(1, game.players.length).map((el) => <Player key={el.name} name={el.name} link={el.link} className={game.gameState.playerTurn === el.name ? 'activePlayer' : ''} />)}
       </div>
       <div className="game">
         <div className="game-info">
@@ -155,7 +155,7 @@ export default function DeskPage({
       </div>
       <div className="main-player">
         <div className="main-player-container">
-          <Player name="main" className={game.gameState.playerTurn === game.players[0].name ? 'activePlayer' : ''} />
+          <Player name="main" link={game.players[0].link} className={game.gameState.playerTurn === game.players[0].name ? 'activePlayer' : ''} />
           <div className="control-buttons">
             <button
               type="button"

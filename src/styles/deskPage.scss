@@ -194,9 +194,9 @@ button{
   flex-direction: row-reverse;
   justify-content: flex-end;
   height: 80px;
-  width: 150px;
+  width: 195px;
   background-color: #fff;
-  border-radius: 45px;
+  border-radius: 45px 10px 10px 45px;
   border: 3px solid $main-red;
 
   img{
@@ -217,10 +217,11 @@ button{
 
 .main-player{
   height: 185px;
+  width: 1260px;
   .main-player-container{
     display: flex;
     flex-direction: column;
-    width: 160px;
+    width: 200px;
     flex-shrink: 0;
     .control-buttons{
         margin: 5px 0 0 0;

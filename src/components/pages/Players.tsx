@@ -6,6 +6,7 @@ interface Iplayer {
   // id: number,
   name: string,
   className: string,
+  link: string,
   // deck: ICard[],
   // isBot: boolean,
   // url?:string
@@ -13,7 +14,7 @@ interface Iplayer {
 // const cardBack = 'cards/back.png';
 
 export default function Player({
-  name, className,
+  name, className, link,
   // deck, isBot,
 }: Iplayer): JSX.Element {
   return (
@@ -22,7 +23,7 @@ export default function Player({
         <p>{name}</p>
         {/* <button type="button">Take card!</button> */}
       </div>
-      <img src="" alt="player1" />
+      <img src={link} alt={name} />
       {/* {isBot
         ? (
           <div className="bots-animated-cards">
