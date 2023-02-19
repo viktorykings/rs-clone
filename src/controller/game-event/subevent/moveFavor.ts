@@ -13,7 +13,9 @@ function moveFavor(game: IGame): IGame {
   const mPlayers = myGame.players.filter(
     (pl) => pl.name !== myGame.gameState.playerTurn && pl.active,
   );
-  myGame.gameState.modalVisible = true;
+  const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  myGame.gameState.modalVisible = !myGame.players[inPl].isBot;
+  // myGame.gameState.modalVisible = true;
   myGame.gameState.modalCardVisible = false;
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalPlayers = mPlayers;
@@ -21,7 +23,7 @@ function moveFavor(game: IGame): IGame {
   myGame.gameState.modalTitle = `${base.modalTitles.favour}`;
   myGame.gameState.message = `${myGame.gameState.playerTurn} ${base.gameMsg.combos[5]}`;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
-  const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  // const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   myGame.players[inPl] = startStateDeck(myGame.players[inPl], 'waitEndMove', false);
   if (mPlayers.length === 1) {
     // [myGame.gameState.choicePlayer] = mPlayers;
