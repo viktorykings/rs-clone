@@ -1,6 +1,7 @@
 import langs from '../../const/localization';
 import IGame from '../../interface/IGame';
 import combo2ChoisePlayer from '../game-event/subevent/combo2ChoisePlayer';
+import findIndexPlayerTern from '../game-event/subevent/findIndexPlayerTern';
 
 function combo2Start(game: IGame): IGame {
   const currLang = game.settings.lang;
@@ -11,7 +12,9 @@ function combo2Start(game: IGame): IGame {
   const mPlayers = myGame.players.filter(
     (pl) => pl.name !== myGame.gameState.playerTurn && pl.active,
   );
-  myGame.gameState.modalVisible = true;
+  const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  myGame.gameState.modalVisible = !myGame.players[iPl].isBot;
+  // myGame.gameState.modalVisible = true;
   myGame.gameState.modalCardVisible = false;
   myGame.gameState.choicePlayer = null;
   myGame.gameState.modalPlayers = mPlayers;

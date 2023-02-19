@@ -14,6 +14,7 @@ export const clearNameCombo = (player: IPlayer): void => {
   });
 };
 export const checkModalVisible = (game: IGame) => game.gameState.modalVisible;
+
 export const checkFunctionStateCombo5 = (game: IGame) => {
   const state = game.gameState.functionState;
   return state === 'waitCombo5';
