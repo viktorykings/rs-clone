@@ -15,7 +15,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 1280px;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,6 +214,21 @@ button{
     animation: 2s botTakeCard ease;
   }
 }
+.activePlayer{
+  border: 3px solid $highlights;
+  box-shadow: 0 0 20px $highlights;
+  background-color: $highlights;
+  height: 80px;
+  width: 195px;
+  border-radius: 45px 11px 11px 45px;
+  .player{
+    border: none;
+  }
+}
+.exploded{
+  background-color: #7c7c7c;
+  border: 2px solid rgb(44, 44, 44);
+}
 
 .main-player{
   height: 185px;
@@ -306,6 +321,10 @@ button{
 .activePlayer{
   border: 2px solid $highlights;
   box-shadow: 0 0 10px $highlights;
+}
+.exploded{
+  background-color: #7c7c7c;
+  border: 3px solid rgb(58, 58, 58);
 }
 .take-card-modal-active{
   display: block;
