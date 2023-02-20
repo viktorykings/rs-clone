@@ -24,8 +24,12 @@ import img10 from '../../assets/rules/img1.png';
 import img12 from '../../assets/rules/12.png';
 import img13 from '../../assets/rules/13.png';
 
-export default function RulesPage(): JSX.Element {
-  const rulesRU: JSX.Element = (
+interface Ilang {
+  currLang: string,
+}
+
+export default function RulesPage({ currLang }: Ilang): JSX.Element {
+  const ruRules: JSX.Element = (
     <>
       <h1>Правила</h1>
       <Link to="/">
@@ -416,7 +420,7 @@ export default function RulesPage(): JSX.Element {
     </>
   );
 
-  const rulesEN: JSX.Element = (
+  const enRules: JSX.Element = (
     <>
       <h1>Rules</h1>
       <Link to="/">
@@ -822,7 +826,12 @@ export default function RulesPage(): JSX.Element {
     </>
   );
 
-  console.log(rulesRU);
-
-  return <div className="rules">{rulesEN}</div>;
+  console.log(ruRules);
+  const retVal = function (lang: string) {
+    if (lang === 'ru') {
+      return ruRules;
+    }
+    return enRules;
+  };
+  return <div className="rules">{retVal(currLang)}</div>;
 }

@@ -2,8 +2,33 @@
   display: flex;
   background-color: #770000;
 }
+a {
+  text-decoration: none;
+}
 .team-desc {
-  margin: auto 0;
+  // margin: auto 0;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  .back-btn {
+    height: 30px;
+    width: 50px;
+    font-size: 30px;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: darkorange;
+    background: transparent;
+    border: 2px solid darkorange;
+    border-radius: 5px;
+    &:hover{
+      background: rgba( 255, 255, 255, 0.5);
+    }
+  }
   h3 {
     color: darkorange;
 

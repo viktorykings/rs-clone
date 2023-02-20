@@ -2,8 +2,10 @@ import { ILocalization } from '../interface/ILocalization';
 
 const langs: ILocalization = {
   ru: {
-    main: { start: 'Начать игру', settings: 'Настройки', about: 'О нас' },
-    settings: { language: 'Изменить язык' },
+    main: {
+      start: 'Начать игру', settings: 'Настройки', about: 'О нас', rules: 'Правила',
+    },
+    settings: { language: 'Изменить язык', sound: 'Звук' },
     deskPage: {
       buttons: {
         neutButtons: ['Первой', 'Второй', 'Третьей', 'Последней', 'Случайно'],
@@ -38,7 +40,7 @@ const langs: ILocalization = {
     startGame: 'Ваш ход!',
     gameSettings: {
       bot: 'Удалить',
-      player: ['Изменить имя', 'Выбрать картинку'],
+      player: ['Изменить имя', 'Выбрать картинку', 'Хороший котик'],
       level: ['Выбрать уровень сложности', 'Легкий'],
       buttons: ['Добавить котёнка', 'Начать игру', 'Отмена'],
       modal: {
@@ -50,8 +52,10 @@ const langs: ILocalization = {
     },
   },
   en: {
-    main: { start: 'Start game', settings: 'Settings', about: 'About' },
-    settings: { language: 'Change language' },
+    main: {
+      start: 'Start game', settings: 'Settings', about: 'About', rules: 'Rules',
+    },
+    settings: { language: 'Change language', sound: 'Sound' },
     deskPage: {
       buttons: {
         neutButtons: ['First', 'Second', 'Third', 'Last', 'Random'],
@@ -86,7 +90,7 @@ const langs: ILocalization = {
     startGame: 'Your turn!',
     gameSettings: {
       bot: 'Delete',
-      player: ['Edit name', 'Choose avatar'],
+      player: ['Edit name', 'Choose avatar', 'Good Kitten'],
       level: ['Choose game level', 'Easy'],
       buttons: ['Add kitten', 'Start game', 'Cancel'],
       modal: {

@@ -10,7 +10,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100vh;
+  min-height: 100vh;
+  width: 1280px;
   position: relative;
   background-image: linear-gradient(
     140deg,
@@ -93,10 +94,10 @@
   text-align: center;
 }
 
-.start-btn {
-}
-.back-btn {
-}
+// .start-btn {
+// }
+// .back-btn {
+// }
 .add-bot {
   display: flex;
   justify-content: center;

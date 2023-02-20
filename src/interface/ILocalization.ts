@@ -10,16 +10,22 @@ interface Pages {
   endGameModal: EndGameModal,
   startGame: string,
   gameSettings: GameSettings,
+  // aboutPage: AboutPage,
 }
 
 interface MainPage {
   start: string,
   settings: string,
   about: string,
+  rules: string,
 }
 interface SettingsPage {
   language: string,
+  sound: string,
 }
+// interface AboutPage {
+//   ourTeam: string,
+// }
 interface EndGameModal {
   buttons: string[],
 }

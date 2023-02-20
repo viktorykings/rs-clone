@@ -1,6 +1,7 @@
 import langs from '../../../const/localization';
 import IGame from '../../../interface/IGame';
 import createCard from '../../createCard';
+import findIndexPlayerTern from './findIndexPlayerTern';
 
 function combo3ChoisePlayer(game: IGame, playerName: string): IGame {
   const currLang = game.settings.lang;
@@ -8,7 +9,10 @@ function combo3ChoisePlayer(game: IGame, playerName: string): IGame {
   const myGame = { ...game };
   myGame.gameState.functionState = 'waitPlayerCombo3';
   myGame.gameState.choicePlayer = myGame.players.find((pl) => pl.name === playerName) ?? null;
-  myGame.gameState.modalVisible = true;
+  const iPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
+  myGame.gameState.modalVisible = !myGame.players[iPl].isBot;
+
+  // myGame.gameState.modalVisible = true;
   myGame.gameState.modalCardVisible = true;
   myGame.gameState.modalPlayers = [];
   myGame.gameState.modalDeck = [];

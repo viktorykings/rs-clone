@@ -115,7 +115,7 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
               localLang={base.modal.avatar}
             />
           )}
-          <h2>Хороший котик</h2>
+          <h2>{base.player[2]}</h2>
           <hr />
           <MainPlayer
             name={mainPlayer.name}
@@ -147,7 +147,7 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
           <button
             type="button"
             className="btn"
-            onClick={() => console.log('Cancel')}
+            // onClick={() => console.log('Cancel')}
           >
             {base.buttons[2]}
           </button>

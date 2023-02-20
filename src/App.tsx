@@ -24,7 +24,7 @@ function App(): JSX.Element {
         />
         <Route path="/settings" element={<Settings game={game} setGame={setGame} />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/rules" element={<RulesPage />} />
+        <Route path="/rules" element={<RulesPage currLang={game.settings.lang} />} />
         <Route
           path="/desk"
           element={(

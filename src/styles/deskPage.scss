@@ -10,13 +10,15 @@ $text-color: #fff;
   border-radius: 5px;
 }
 body {
-  margin: 0;
   font-family: 'Gloria Hallelujah', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 1280px;
-  height: auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   background-color: $main-red;
 }
@@ -31,14 +33,16 @@ button{
   box-sizing: border-box;
   width: 100%;
   min-height: 660px;
-  max-height: 920px;
+  height: 100vh;
+  // max-height: 920px;
   background-image: url(../assets/desk.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   padding: 5px;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 .other-players,
 .main-player{
@@ -190,9 +194,9 @@ button{
   flex-direction: row-reverse;
   justify-content: flex-end;
   height: 80px;
-  width: 150px;
+  width: 195px;
   background-color: #fff;
-  border-radius: 45px;
+  border-radius: 45px 10px 10px 45px;
   border: 3px solid $main-red;
 
   img{
@@ -201,6 +205,7 @@ button{
     height: 80px;
     width: 80px;
     display: inline-block;
+    margin: 0 5px 0 0;
   }
   .bots-animated-cards{
     display: flex;
@@ -210,13 +215,29 @@ button{
     animation: 2s botTakeCard ease;
   }
 }
+.activePlayer{
+  border: 3px solid $highlights;
+  box-shadow: 0 0 20px $highlights;
+  background-color: $highlights;
+  height: 80px;
+  width: 195px;
+  border-radius: 45px 11px 11px 45px;
+  .player{
+    border: none;
+  }
+}
+.exploded{
+  background-color: #7c7c7c;
+  border: 2px solid rgb(44, 44, 44);
+}
 
 .main-player{
   height: 185px;
+  width: 1260px;
   .main-player-container{
     display: flex;
     flex-direction: column;
-    width: 160px;
+    width: 200px;
     flex-shrink: 0;
     .control-buttons{
         margin: 5px 0 0 0;
@@ -302,6 +323,10 @@ button{
   border: 2px solid $highlights;
   box-shadow: 0 0 10px $highlights;
 }
+.exploded{
+  background-color: #7c7c7c;
+  border: 3px solid rgb(58, 58, 58);
+}
 .take-card-modal-active{
   display: block;
   position: absolute;
@@ -312,6 +337,7 @@ button{
   background-color: $main-red;
   color: $text-color;
   border-radius: 30px;
+  text-align: center;
   .players{
     display: flex;
     justify-content: center;
@@ -350,6 +376,11 @@ button{
 }
 .modal-bg-active{
   background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .modal-bg{
   background-color: transparent;
@@ -432,7 +463,7 @@ button{
 }
 .end-game-bg-active{
   animation: 1s explosion ease;
-  background: url(../assets/bg.jpg);
+  background: url(../assets/bg.jpg) $main-red no-repeat;
   background-size: contain;
   width: 100%;
   height: 100%;

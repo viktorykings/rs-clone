@@ -77,7 +77,7 @@ export default function DeskPage({
     return game.gameState.returnToDeck && (!game.players[indPl].isBot);
   };
   if (game.players.length === 0) {
-    console.log('tttttt');
+    // console.log('tttttt');
     return (
       <main className="desk">
         <p>{ourMessage}</p>
@@ -87,7 +87,16 @@ export default function DeskPage({
   return (
     <main className="desk">
       <div className="other-players">
-        {game.players.slice(1, game.players.length).map((el) => <Player key={el.name} name={el.name} className={game.gameState.playerTurn === el.name ? 'activePlayer' : ''} />)}
+        {game.players.slice(1, game.players.length).map((el, id) => (
+          <div className={game.gameState.playerTurn === el.name ? 'activePlayer' : ''}>
+            <Player
+              key={el.name}
+              name={el.name}
+              link={el.link}
+              className={game.players[id + 1].active ? '' : 'exploded'}
+            />
+          </div>
+        ))}
       </div>
       <div className="game">
         <div className="game-info">
@@ -129,7 +138,13 @@ export default function DeskPage({
           {// eslint-disable-next-line no-restricted-globals
           game.showCards.length === 0
             ? <div className="play-cards-place" />
-            : game.showCards.map((card) => <img src={card.link} alt="card" key={card.id.toString()} className="animated-move" />)
+            : game.showCards.map((card) => (
+              <img
+                src={game.gameState.showCardVisible ? card.link : cardBack}
+                alt="card"
+                key={card.id.toString()}
+                className="animated-move"
+              />))
           }
         </div>
         <div className={checkFunctionStateCombo5(game) ? 'rebound-deck-active' : 'rebound-deck'}>
@@ -155,7 +170,13 @@ export default function DeskPage({
       </div>
       <div className="main-player">
         <div className="main-player-container">
-          <Player name="main" className={game.gameState.playerTurn === game.players[0].name ? 'activePlayer' : ''} />
+          <div className={game.gameState.playerTurn === game.players[0].name ? 'activePlayer' : ''}>
+            <Player
+              name={game.players[0].name}
+              link={game.players[0].link}
+              className={game.players[0].active ? '' : 'exploded'}
+            />
+          </div>
           <div className="control-buttons">
             <button
               type="button"
