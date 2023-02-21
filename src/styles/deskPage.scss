@@ -8,6 +8,22 @@ $text-color: #fff;
   height: 240px;
   width: 160px;
   border-radius: 5px;
+  @media(max-width: 992px){
+    height: 220px;
+    width: 140px;
+  }
+    @media(max-width: 768px) and (orientation: portrait){
+    height: 200px;
+    width: 135px;
+  }
+}
+@mixin playersCards{
+  width: 180px;
+  margin: 5px;
+  //   @media(max-width: 768px){
+  //   height: 2-0px;
+  //   width: 120px;
+  // }
 }
 body {
   font-family: 'Gloria Hallelujah', cursive;
@@ -298,8 +314,7 @@ button{
       flex-direction: row-reverse;
       transition: all 0.5s ease 0s;
       img{
-        width: 180px;
-        margin: 5px;
+        @include playersCards;
         border-radius: 5px;
         transition: all 0.5s ease-in-out 0s;
         border: none;
@@ -516,4 +531,121 @@ button{
 }
 .end-game-bg{
   display: none;
+}
+
+@media (max-width: 992px) {
+  .main-player{
+    height: 185px;
+    width: 990px;
+    .main-player-container{
+      width: 160px;
+      flex-shrink: 0;
+      .control-buttons{
+          .combo-visible{
+            button{
+              width: 50px;
+            }
+          }
+      }
+    }
+      .slider-controls:hover{
+        opacity: 1;
+        border: 2px solid $highlights;
+      }
+      .main-player-cards{
+        width: 760px;
+      }
+
+  }
+  .activePlayer,
+  .player{
+    width: 155px;
+    .player{
+      width: 155px;
+    }
+  }
+
+  .game{
+    .game-info{
+      height: 120px;
+      width: 130px;
+      .game-info-cat{
+        img{
+          height: 120px;
+          width: 120px;
+        }
+      }
+      .game-info-messages{
+        height: 100px;
+      }
+    }
+
+    .play-cards{
+      width: 435px;
+    }
+    .rebound-deck{
+      width: 223px;
+      height: 240px;
+      transform: rotate(135deg) translate(-30%, -40%);
+    }
+  }
+}
+@media (max-width: 768px) and (orientation: portrait){
+  .main-player{
+    height: 285px;
+    width: 768px;
+    .main-player-container{
+      width: 145px;
+      flex-shrink: 0;
+      .control-buttons{
+          .combo-visible{
+            flex-direction: column;
+            button{
+              width: 50px;
+            }
+          }
+      }
+    }
+      .slider-controls:hover{
+        opacity: 1;
+        border: 2px solid $highlights;
+      }
+      .main-player-cards{
+        width: 570px;
+      }
+
+  }
+  .activePlayer,
+  .player{
+    width: 140px;
+    .player{
+      width: 140px;
+    }
+  }
+
+  .game{
+    .game-info{
+      height: 120px;
+      width: 130px;
+      .game-info-cat{
+        img{
+          height: 120px;
+          width: 120px;
+        }
+      }
+      .game-info-messages{
+        height: 100px;
+      }
+    }
+
+    .play-cards{
+      width: 280px;
+      height: 440px;
+    }
+    .rebound-deck{
+      width: 223px;
+      height: 240px;
+      transform: rotate(135deg) translate(-30%, -40%);
+    }
+  }
 }
