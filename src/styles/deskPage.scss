@@ -25,6 +25,56 @@ $text-color: #fff;
   //   width: 120px;
   // }
 }
+@mixin Player{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  height: 80px;
+  width: 195px;
+  background-color: #fff;
+  border-radius: 45px 10px 10px 45px;
+  border: 3px solid $main-red;
+
+  @media (max-width: 1280px){
+    width: 155px;
+    p{
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+  }
+  @media (max-width: 768px) {
+      width: 80px;
+      height: 120px;
+      border-radius: 45px 45px 10px 10px;
+      flex-direction: column-reverse;
+      p{
+        line-height: 1.2;
+      }
+  }
+}
+@mixin ActivePlayer{
+  border: 3px solid $highlights;
+  box-shadow: 0 0 20px $highlights;
+  background-color: $highlights;
+  height: 80px;
+  width: 195px;
+  border-radius: 45px 11px 11px 45px;
+  .player{
+    border: none;
+  }
+  @media (max-width: 1280px){
+    width: 155px;
+  }
+    @media (max-width: 768px) {
+      width: 80px;
+      height: 120px;
+      border-radius: 45px 45px 10px 10px;
+      flex-direction: column-reverse;
+      p{
+        line-height: 1.2;
+      }
+  }
+}
 body {
   font-family: 'Gloria Hallelujah', cursive;
   -webkit-font-smoothing: antialiased;
@@ -205,15 +255,9 @@ button{
     }
   }
 }
+
 .player{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  height: 80px;
-  width: 195px;
-  background-color: #fff;
-  border-radius: 45px 10px 10px 45px;
-  border: 3px solid $main-red;
+  @include Player;
 
   img{
     background-color: green;
@@ -232,15 +276,7 @@ button{
   }
 }
 .activePlayer{
-  border: 3px solid $highlights;
-  box-shadow: 0 0 20px $highlights;
-  background-color: $highlights;
-  height: 80px;
-  width: 195px;
-  border-radius: 45px 11px 11px 45px;
-  .player{
-    border: none;
-  }
+  @include ActivePlayer;
 }
 .exploded{
   background-color: #7c7c7c;
@@ -533,7 +569,7 @@ button{
   display: none;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1280px) {
   .main-player{
     height: 185px;
     width: 990px;
@@ -557,13 +593,14 @@ button{
       }
 
   }
-  .activePlayer,
-  .player{
-    width: 155px;
-    .player{
-      width: 155px;
-    }
-  }
+  // .activePlayer,
+  // .player{
+  //   width: 155px;
+  //   p{
+  //     font-size: 13px;
+  //     overflow-wrap: anywhere;
+  //   }
+  // }
 
   .game{
     .game-info{
@@ -590,10 +627,15 @@ button{
     }
   }
 }
-@media (max-width: 768px) and (orientation: portrait){
+@media (max-width: 992px) {
   .main-player{
     height: 285px;
     width: 768px;
+    margin: 70px 0 0 0;
+    .activePlayer,
+    .player{
+      width: 140px;
+    }
     .main-player-container{
       width: 145px;
       flex-shrink: 0;
@@ -601,7 +643,7 @@ button{
           .combo-visible{
             flex-direction: column;
             button{
-              width: 50px;
+              height: 40px;
             }
           }
       }
@@ -615,13 +657,86 @@ button{
       }
 
   }
-  .activePlayer,
-  .player{
-    width: 140px;
-    .player{
-      width: 140px;
+
+
+  .game{
+    .game-info{
+      height: 120px;
+      width: 130px;
+      .game-info-cat{
+        img{
+          height: 120px;
+          width: 120px;
+        }
+      }
+      .game-info-messages{
+        height: 100px;
+      }
+    }
+
+    .play-cards{
+      width: 280px;
+      height: 440px;
+    }
+    .rebound-deck{
+      width: 223px;
+      height: 240px;
+      transform: rotate(135deg) translate(-30%, -40%);
     }
   }
+}
+
+@media (max-width: 768px) {
+  .desk{
+    width: 576px;
+  }
+    // .player{
+    //   width: 80px;
+    //   height: 120px;
+    //   border-radius: 45px 45px 10px 10px;
+    //   flex-direction: column-reverse;
+    //   p{
+    //     line-height: 1.2;
+    //   }
+    // }
+    .main-player{
+      width: 576px;
+      .player{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        height: 80px;
+        width: 135px;
+        background-color: #fff;
+        border-radius: 45px 10px 10px 45px;
+        border: 3px solid $main-red;
+      }
+      .activePlayer{
+        height: 85px;
+        width: 140px;
+        border-radius: 45px 11px 11px 45px;
+      }
+
+    .main-player-container{
+      width: 145px;
+      flex-shrink: 0;
+      .control-buttons{
+        .combo-visible{
+          flex-direction: column;
+        }
+      }
+    }
+
+      .slider-controls:hover{
+        opacity: 1;
+        border: 2px solid $highlights;
+      }
+      .main-player-cards{
+        width: 570px;
+      }
+
+  }
+
 
   .game{
     .game-info{
