@@ -67,7 +67,7 @@ interface GameEvents {
   favour: string,
   attack: string,
   mix: string,
-  no: string,
+  no: string[],
   skip: string[],
   takeCard: string[],
 }

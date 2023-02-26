@@ -4,8 +4,11 @@ import { playerWaitTurn, botWaitAnswer } from '../../const/gameVariable';
 import findIndexPlayerTern from '../game-event/subevent/findIndexPlayerTern';
 import startStateDeck from '../statePlayerDeck/startStateDeck';
 import endNot from '../game-event/subevent/endNot';
+import langs from '../../const/localization';
 
 function waitNotToNot(game: IGame, setGame: React.Dispatch<React.SetStateAction<IGame>>): void {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.gameMsg.no;
   let myGame = { ...game };
 
   const indPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
@@ -15,7 +18,7 @@ function waitNotToNot(game: IGame, setGame: React.Dispatch<React.SetStateAction<
   myGame.gameState.playerTurn = nextPl.name;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   nextPl = startStateDeck(nextPl, 'waitAnserTurn', true);
-  myGame.gameState.message = `${myGame.players[indPl].name} думает походить ли 'Нет' на 'Нет'.`;
+  myGame.gameState.message = `${myGame.players[indPl].name} ${base[2]}`;
 
   if (nextPl.name === myGame.gameState.playerWaitAnswer[0].name) {
     myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer[1].name;
