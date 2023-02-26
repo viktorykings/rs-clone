@@ -7,6 +7,13 @@ function gameLoop(
 ): void {
   console.log('call main loop');
   console.log(game.gameState.functionState);
+  // console.log(window.location.pathname);
+  if (window.location.pathname !== '/desk' && game.gameState.pause === false) {
+    const myGame = { ...game };
+    console.log(myGame);
+    myGame.gameState.pause = true;
+    setGame(myGame);
+  }
   if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
 
   if (game.players.length > 0) localStorage.setItem('myGame', JSON.stringify(game));
