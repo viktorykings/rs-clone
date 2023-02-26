@@ -68,6 +68,14 @@ function mainGameLoop(
     }
   }
 
+  if (myGame.gameState.functionState === 'waitAnserTurn') {
+    myGame.gameState.message = `${myGame.players[inPl].name} думает походить ли 'Нет'.`;
+  }
+
+  if (myGame.gameState.functionState === 'waitNotToNot') {
+    myGame.gameState.message = `${myGame.players[inPl].name} думает походить ли 'Нет' на 'Нет'.`;
+  }
+
   if (myGame.gameState.functionState === 'waitAnserTurn'
     && myGame.gameState.timeLeft === 4
     && myGame.players[inPl].isBot) {

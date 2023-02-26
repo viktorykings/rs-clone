@@ -31,7 +31,7 @@ function createGame(language: string, players: IPlayer [] = []): IGame {
   const functionState: TFunctionState = 'waitPlayerTurn';
 
   let playerTurn = '';
-  if (players.length > 0) playerTurn = players[players.length - 1].name;
+  if (players.length > 0) playerTurn = players[0].name;
 
   let bot: IBot = new HardBot();
   if (players.length > 0) {
