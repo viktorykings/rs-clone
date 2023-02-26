@@ -35,15 +35,11 @@ function takeCardDeskDeck(game: IGame): IGame {
         myGame.gameState.functionState,
         true,
       );
-      /* myGame.players[iPl].buttons.dobleEnabled = false;
-      myGame.players[iPl].buttons.tripleEnabled = false;
-      myGame.players[iPl].buttons.fiveEnabled = false; */
       myGame.gameState.timeLeft = getPause(
         myGame.players[iPl].isBot,
         myGame.gameState.functionState,
       );
       if (myGame.gameState.functionState === 'waitTakeCardDeskDeck') myGame.gameState.timeLeft = 3;
-      // myGame.gameState.timeNeed = waitEndMove;
       addHistory(myGame, 'takeCardDeskDeck', card, true);
     } else {
       myGame.gameState.stateGame = 'explosion';
