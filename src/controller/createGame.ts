@@ -58,7 +58,7 @@ function createGame(language: string, players: IPlayer [] = []): IGame {
     showCardVisible: true,
     endGame: false,
     bot,
-    pause: true,
+    pause: false,
   };
 
   return {
