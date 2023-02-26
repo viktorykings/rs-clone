@@ -22,6 +22,7 @@ function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction
   myGame.gameState.playerTurn = nextPl.name;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   nextPl = startStateDeck(nextPl, 'waitAnserTurn', true);
+  myGame.gameState.message = `${myGame.players[indPl].name} думает походить ли 'Нет'.`;
 
   if (nextPl.name === myGame.gameState.playerWaitAnswer[0].name) {
     myGame.gameState.playerWaitAnswer.splice(0, 1);

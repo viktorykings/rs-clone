@@ -15,6 +15,7 @@ function waitNotToNot(game: IGame, setGame: React.Dispatch<React.SetStateAction<
   myGame.gameState.playerTurn = nextPl.name;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   nextPl = startStateDeck(nextPl, 'waitAnserTurn', true);
+  myGame.gameState.message = `${myGame.players[indPl].name} думает походить ли 'Нет' на 'Нет'.`;
 
   if (nextPl.name === myGame.gameState.playerWaitAnswer[0].name) {
     myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer[1].name;
