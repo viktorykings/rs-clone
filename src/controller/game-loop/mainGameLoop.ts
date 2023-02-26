@@ -34,7 +34,7 @@ function mainGameLoop(
   game: IGame,
   setGame: React.Dispatch<React.SetStateAction<IGame>>,
 ): void {
-  console.log(game.gameState.timeLeft);
+  // console.log(game.gameState.timeLeft);
   let myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const funcState = myGame.gameState.functionState;

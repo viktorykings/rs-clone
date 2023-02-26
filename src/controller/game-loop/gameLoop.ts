@@ -5,9 +5,9 @@ function gameLoop(
   game: IGame,
   setGame: React.Dispatch<React.SetStateAction<IGame>>,
 ): void {
-  console.log('call main loop');
-  console.log(game.gameState.functionState);
-  console.log(window.location.hostname);
+  // console.log('call main loop');
+  // console.log(game.gameState.functionState);
+  // console.log(window.location.hostname);
   if (game.players.length > 0) localStorage.setItem('myGame', JSON.stringify(game));
 
   if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
