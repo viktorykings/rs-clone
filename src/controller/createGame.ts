@@ -9,6 +9,9 @@ import { playerWaitTurn } from '../const/gameVariable';
 // import MiddleBot from './game-loop/bots/middleBot';
 import langs from '../const/localization';
 import HardBot from './game-loop/bots/hardBot';
+import EasyBot from './game-loop/bots/easyBot';
+import MiddleBot from './game-loop/bots/middleBot';
+import IBot from '../interface/IBot';
 
 function createGame(language: string, players: IPlayer [] = []): IGame {
   const settings: ISettings = {
@@ -30,7 +33,12 @@ function createGame(language: string, players: IPlayer [] = []): IGame {
   let playerTurn = '';
   if (players.length > 0) playerTurn = players[0].name;
 
-  const bot = new HardBot();
+  let bot: IBot = new HardBot();
+  if (players.length > 0) {
+    if (players[players.length - 1].levelBot === 'easy') bot = new EasyBot();
+    if (players[players.length - 1].levelBot === 'normal') bot = new MiddleBot();
+  }
+
   const currLang = settings.lang;
   const base = langs[currLang].startGame;
 
@@ -58,6 +66,7 @@ function createGame(language: string, players: IPlayer [] = []): IGame {
     showCardVisible: true,
     endGame: false,
     bot,
+    pause: false,
   };
 
   return {

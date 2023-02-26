@@ -36,6 +36,7 @@ interface IGame {
     showCardVisible: boolean,
     endGame: boolean,
     bot: IBot,
+    pause: boolean,
   }
 }
 

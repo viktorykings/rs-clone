@@ -7,12 +7,21 @@ function gameLoop(
 ): void {
   console.log('call main loop');
   console.log(game.gameState.functionState);
-  console.log(window.location.hostname);
-  if (game.players.length > 0) localStorage.setItem('myGame', JSON.stringify(game));
-
+  // console.log(window.location.pathname);
+  if (window.location.pathname !== '/desk' && game.gameState.pause === false) {
+    const myGame = { ...game };
+    console.log(myGame);
+    myGame.gameState.pause = true;
+    setGame(myGame);
+  }
   if (game.gameState.timerId !== null) clearInterval(game.gameState.timerId);
 
-  if (game.players.length > 0 && (game.gameState.functionState !== 'lose' && game.gameState.functionState !== 'win')) {
+  if (game.players.length > 0) localStorage.setItem('myGame', JSON.stringify(game));
+
+  if (game.gameState.pause !== true
+    && game.players.length > 0
+    && game.gameState.functionState !== 'lose'
+    && game.gameState.functionState !== 'win') {
     const myGame = { ...game };
     myGame.gameState.timerId = setInterval(() => { mainGameLoop(myGame, setGame); }, 1000);
   }
