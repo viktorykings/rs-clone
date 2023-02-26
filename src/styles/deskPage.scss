@@ -8,6 +8,72 @@ $text-color: #fff;
   height: 240px;
   width: 160px;
   border-radius: 5px;
+  @media(max-width: 992px){
+    height: 220px;
+    width: 140px;
+  }
+    @media(max-width: 768px) and (orientation: portrait){
+    height: 200px;
+    width: 135px;
+  }
+}
+@mixin playersCards{
+  width: 180px;
+  margin: 5px;
+  //   @media(max-width: 768px){
+  //   height: 2-0px;
+  //   width: 120px;
+  // }
+}
+@mixin Player{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  height: 80px;
+  width: 195px;
+  background-color: #fff;
+  border-radius: 45px 10px 10px 45px;
+  border: 3px solid $main-red;
+
+  @media (max-width: 1280px){
+    width: 155px;
+    p{
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+  }
+  @media (max-width: 768px) {
+      width: 80px;
+      height: 120px;
+      border-radius: 45px 45px 10px 10px;
+      flex-direction: column-reverse;
+      p{
+        line-height: 1.2;
+      }
+  }
+}
+@mixin ActivePlayer{
+  border: 3px solid $highlights;
+  box-shadow: 0 0 20px $highlights;
+  background-color: $highlights;
+  height: 80px;
+  width: 195px;
+  border-radius: 45px 11px 11px 45px;
+  .player{
+    border: none;
+  }
+  @media (max-width: 1280px){
+    width: 155px;
+  }
+    @media (max-width: 768px) {
+      width: 80px;
+      height: 120px;
+      border-radius: 45px 45px 10px 10px;
+      flex-direction: column-reverse;
+      p{
+        line-height: 1.2;
+      }
+  }
 }
 body {
   font-family: 'Gloria Hallelujah', cursive;
@@ -32,7 +98,7 @@ button{
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  min-height: 660px;
+  // min-height: 660px;
   height: 100vh;
   // max-height: 920px;
   background-image: url(../assets/desk.jpg);
@@ -48,15 +114,17 @@ button{
 .main-player{
   display: flex;
   justify-content: space-between;
-  min-height: 150px;
+  // min-height: 100px;
   flex-shrink: 0;
+  margin: 0 0 20px 0;
 }
 .game{
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
   min-height: 240px;
-  max-height: 415px;
+  max-height: 300px;
+  width: 1160px;
 
   .game-info{
     height: 120px;
@@ -72,7 +140,7 @@ button{
     }
     .game-info-messages{
       background-color: $text-color;
-      height: 80px;
+      height: 100px;
       width: 120px;
       border-radius: 20px;
       position: relative;
@@ -113,6 +181,7 @@ button{
   }
   .deck{
     position: relative;
+    margin: 0 5px;
     .return-to-deck{
       display: none;
     }
@@ -133,6 +202,10 @@ button{
     }
   }
   .play-cards{
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+    // overflow: hidden;
     img{
       margin: 0 2px;
     }
@@ -143,15 +216,19 @@ button{
     flex: 1;
   }
   .rebound-deck{
+    position: absolute;
+    right: 0;
     box-sizing: border-box;
     width: 223px;
     height: 240px;
-    transform: rotate(135deg) translate(-20%, -40%);
+    transform: rotate(135deg) translate(-30%, -40%);
     transition: all 0.5s ease-in-out;
     .rebound-deck-controls{
       display: none;
     }
     &-active{
+      position: absolute;
+      right: 0;
       width: 230px;
       height: 240px;
       cursor: pointer;
@@ -165,6 +242,9 @@ button{
       transition: all 0.5s ease-in-out;
       .rebound-deck-controls{
         display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
         height: 40px;
         width: 32px;
         font-size: 30px;
@@ -189,15 +269,9 @@ button{
     }
   }
 }
+
 .player{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  height: 80px;
-  width: 195px;
-  background-color: #fff;
-  border-radius: 45px 10px 10px 45px;
-  border: 3px solid $main-red;
+  @include Player;
 
   img{
     background-color: green;
@@ -216,15 +290,7 @@ button{
   }
 }
 .activePlayer{
-  border: 3px solid $highlights;
-  box-shadow: 0 0 20px $highlights;
-  background-color: $highlights;
-  height: 80px;
-  width: 195px;
-  border-radius: 45px 11px 11px 45px;
-  .player{
-    border: none;
-  }
+  @include ActivePlayer;
 }
 .exploded{
   background-color: #7c7c7c;
@@ -234,6 +300,7 @@ button{
 .main-player{
   height: 185px;
   width: 1260px;
+  margin: 70px 0 0 0;
   .main-player-container{
     display: flex;
     flex-direction: column;
@@ -298,8 +365,7 @@ button{
       flex-direction: row-reverse;
       transition: all 0.5s ease 0s;
       img{
-        width: 180px;
-        margin: 5px;
+        @include playersCards;
         border-radius: 5px;
         transition: all 0.5s ease-in-out 0s;
         border: none;
@@ -338,11 +404,12 @@ button{
   color: $text-color;
   border-radius: 30px;
   text-align: center;
+  z-index: 2;
   .players{
     display: flex;
     justify-content: center;
     height: 50px;
-    width: 700px;
+    width: 90%;
     margin: 0 auto;
     button{
       height: 50px;
@@ -359,7 +426,7 @@ button{
   }
   .players-cards-active{
     margin: 0 auto;
-    width: 720px;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     img{
@@ -381,6 +448,7 @@ button{
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
 }
 .modal-bg{
   background-color: transparent;
@@ -470,6 +538,7 @@ button{
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 2;
   .end-game{
     box-sizing: border-box;
     height: 400px;
@@ -516,4 +585,319 @@ button{
 }
 .end-game-bg{
   display: none;
+}
+
+@media (max-width: 1280px) {
+  .main-player{
+    height: 185px;
+    width: 990px;
+    .main-player-container{
+      width: 160px;
+      flex-shrink: 0;
+      .control-buttons{
+          .combo-visible{
+            button{
+              width: 50px;
+            }
+          }
+      }
+    }
+      .slider-controls:hover{
+        opacity: 1;
+        border: 2px solid $highlights;
+      }
+      .main-player-cards{
+        width: 760px;
+      }
+
+  }
+
+  .game{
+    width: 940px;
+    .game-info{
+      height: 120px;
+      width: 130px;
+      .game-info-cat{
+        img{
+          height: 120px;
+          width: 120px;
+        }
+      }
+    }
+
+    // .play-cards{
+    //   width: 435px;
+    // }
+    .rebound-deck{
+      width: 223px;
+      height: 240px;
+      transform: rotate(135deg) translate(-50%, -50%);
+    }
+  }
+  .take-card-modal-active{
+    left: 100px;
+  }
+  .end-game-bg-active{
+    .end-game{
+      height: 300px;
+      width: 400px;
+      left: 300px;
+
+      h2{
+        font-size: 30px;
+      }
+      .end-game-buttons{
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        button{
+          width: 260px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 992px) {
+  .main-player{
+    height: 285px;
+    width: 768px;
+    margin: 70px 0 0 0;
+    .activePlayer,
+    .player{
+      width: 140px;
+    }
+    .activePlayer{
+      .player{
+        border: none;
+      }
+    }
+    .main-player-container{
+      width: 145px;
+      flex-shrink: 0;
+      // .control-buttons{
+      //     .combo-visible{
+      //       // flex-direction: column;
+      //       // button{
+      //       //   height: 40px;
+      //       // }
+      //     }
+      // }
+    }
+      .slider-controls:hover{
+        opacity: 1;
+        border: 2px solid $highlights;
+      }
+      .main-player-cards{
+        width: 565px;
+      }
+
+  }
+  .game{
+    width: 760px;
+    .game-info{
+      height: 120px;
+      width: 130px;
+      .game-info-cat{
+        img{
+          height: 120px;
+          width: 120px;
+        }
+      }
+    }
+
+    // .play-cards{
+    //   width: 280px;
+    //   height: 440px;
+    // }
+    .rebound-deck{
+      width: 223px;
+      height: 240px;
+      transform: rotate(135deg) translate(-30%, -40%);
+    }
+  }
+  .take-card-modal-active{
+    left: 90px;
+    width: 600px;
+  }
+  .end-game-bg-active{
+    .end-game {
+      height: 250px;
+      width: 300px;
+      left: 240px;
+      h2{
+        font-size: 20px;
+      }
+      .end-game-buttons{
+        button{
+          width: 200px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .desk{
+    width: 576px;
+  }
+    // .player{
+    //   width: 80px;
+    //   height: 120px;
+    //   border-radius: 45px 45px 10px 10px;
+    //   flex-direction: column-reverse;
+    //   p{
+    //     line-height: 1.2;
+    //   }
+    // }
+    .main-player{
+      width: 576px;
+      .player{
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        height: 80px;
+        width: 135px;
+        background-color: #fff;
+        border-radius: 45px 10px 10px 45px;
+        border: 3px solid $main-red;
+      }
+      .activePlayer{
+        height: 80px;
+        width: 135px;
+        border-radius: 45px 11px 11px 45px;
+      }
+
+    .main-player-container{
+      width: 145px;
+      flex-shrink: 0;
+      // .control-buttons{
+      //   // .combo-visible{
+      //   //   flex-direction: column;
+      //   // }
+      // }
+    }
+
+      .slider-controls:hover{
+        opacity: 1;
+        border: 2px solid $highlights;
+      }
+      .main-player-cards{
+        width: 380px;
+      }
+
+  }
+  .game{
+    .game-info{
+      height: 120px;
+      width: 130px;
+      .game-info-cat{
+        img{
+          height: 120px;
+          width: 120px;
+        }
+      }
+    }
+    .rebound-deck{
+      width: 223px;
+      height: 240px;
+      transform: rotate(135deg) translate(-30%, -40%);
+    }
+  }
+  .take-card-modal-active{
+    left: 40px;
+    width: 500px;
+    height: 450px;
+  }
+  .end-game-bg-active{
+    background-image: url(../assets/bg/bg1.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .end-game {
+      left: 138px;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .desk{
+    width: 420px;
+  }
+    .main-player{
+      width: 420px;
+      // .player{
+      //   display: flex;
+      //   flex-direction: row-reverse;
+      //   justify-content: flex-end;
+      //   height: 80px;
+      //   width: 135px;
+      //   background-color: #fff;
+      //   border-radius: 45px 10px 10px 45px;
+      //   border: 3px solid $main-red;
+      // }
+      // .activePlayer{
+      //   height: 85px;
+      //   width: 140px;
+      //   border-radius: 45px 11px 11px 45px;
+      // }
+
+    // .main-player-container{
+    //   width: 145px;
+    //   flex-shrink: 0;
+    //   .control-buttons{
+    //     .combo-visible{
+    //       flex-direction: column;
+    //     }
+    //   }
+    // }
+
+      // .slider-controls:hover{
+      //   opacity: 1;
+      //   border: 2px solid $highlights;
+      // }
+      .main-player-cards{
+        width: 200px;
+      }
+
+  }
+  .game{
+    width: 410px;
+    justify-content: flex-start;
+    .game-info{
+      height: 120px;
+      width: 110px;
+      .game-info-cat{
+        img{
+          height: 100px;
+          width: 100px;
+        }
+      }
+      .game-info-messages{
+        width: 100px;
+      }
+    }
+    .play-cards{
+      position: absolute;
+      right: 10px;
+      img{
+        position: absolute;
+        right: 10px;
+      }
+    }
+    .rebound-deck{
+      width: 223px;
+      height: 240px;
+      transform: rotate(135deg) translate(-50%, -50%);
+    }
+  }
+  .take-card-modal-active{
+    left: 0;
+    width: 420px;
+    height: 450px;
+  }
+  .end-game-bg-active{
+    .end-game {
+      left: 60px;
+    }
+  }
 }
