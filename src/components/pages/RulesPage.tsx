@@ -23,12 +23,15 @@ import iIcons from '../../assets/icons/icons.png';
 import img10 from '../../assets/rules/img1.png';
 import img12 from '../../assets/rules/12.png';
 import img13 from '../../assets/rules/13.png';
+import IGame from '../../interface/IGame';
 
 interface Ilang {
-  currLang: string,
+  // currLang: string,
+  currLang: IGame,
 }
 
 export default function RulesPage({ currLang }: Ilang): JSX.Element {
+  console.log(currLang.settings.lang);
   const ruRules: JSX.Element = (
     <>
       <h1>Правила</h1>
@@ -833,5 +836,5 @@ export default function RulesPage({ currLang }: Ilang): JSX.Element {
     }
     return enRules;
   };
-  return <div className="rules">{retVal(currLang)}</div>;
+  return <div className="rules">{retVal(currLang.settings.lang)}</div>;
 }

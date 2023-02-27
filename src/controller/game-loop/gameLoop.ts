@@ -20,8 +20,8 @@ function gameLoop(
 
   if (game.gameState.pause !== true
     && game.players.length > 0
-    && game.gameState.functionState !== 'lose'
-    && game.gameState.functionState !== 'win') {
+    && game.gameState.endGame !== true
+  ) {
     const myGame = { ...game };
     myGame.gameState.timerId = setInterval(() => { mainGameLoop(myGame, setGame); }, 1000);
   }

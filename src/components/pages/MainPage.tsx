@@ -10,6 +10,7 @@ interface Main {
 
 export default function MainPage({ settings }: Main): JSX.Element {
   const currLang = settings.lang;
+  console.log(currLang);
   return (
     <div className="main-page-bg">
       <div className="container">

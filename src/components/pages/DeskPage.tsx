@@ -8,6 +8,7 @@ import Player from './Players';
 import endMove from '../../controller/game-event/endMove';
 import { Setter } from '../../interface/IGameProp';
 import infoCat from '../../assets/info-cat.png';
+import pause from '../../assets/pause.svg';
 import {
   checkModalVisible,
   checkFunctionStateCombo5,
@@ -18,14 +19,21 @@ import {
   usedTripleCombo,
   handleChooseCard,
 } from './handlers/comboHandlers';
-import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveHandlers';
+import {
+  handleMove,
+  handleMoveNeut,
+  handleTakeDeskCard,
+  pauseGame,
+} from './handlers/moveHandlers';
 import EndGameModal from './EndGameModal';
 import findIndexPlayerTern from '../../controller/game-event/subevent/findIndexPlayerTern';
 import langs from '../../const/localization';
 import loadGame from '../../controller/loadGame';
+import PauseModal from './PauseModal';
 
 const cardBack = 'cards/ru/back.png';
 const emptyCardsPlace = 'cards/ru/empty.png';
+// const pause = '../../assets/pause.svg';
 
 export default function DeskPage({
   // deskDeck, settings, players, reboundDeck, showCards, gameState,
@@ -41,6 +49,7 @@ export default function DeskPage({
       }
     }
   }, [game, setGame]);
+  console.log(game);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
@@ -130,9 +139,14 @@ export default function DeskPage({
           <div className="game-info-messages">
             <p>{ourMessage}</p>
           </div>
-          <p className="game-info-timer">
-            {game.gameState.timeLeft}
-          </p>
+          <div className="game-info-controls">
+            <p className="game-info-timer">
+              {game.gameState.timeLeft}
+            </p>
+            <button className="pause" type="button" onClick={() => pauseGame(game, true, setGame)}>
+              <img src={pause} alt="Pause" />
+            </button>
+          </div>
         </div>
         <div className="deck">
           <img
@@ -285,6 +299,7 @@ export default function DeskPage({
         </div>
       </div>
       <EndGameModal show={game.gameState.endGame} game={game} />
+      <PauseModal game={game} setGame={setGame} />
     </main>
   );
 }

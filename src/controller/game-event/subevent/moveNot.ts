@@ -26,7 +26,7 @@ function moveNot(game: IGame, idCard: number): IGame {
   myGame.gameState.playerTurn = myGame.gameState.playerWaitAnswer[0].name;
   myGame.gameState.playerWaitAnswer.splice(0, 1);
   myGame.gameState.timeNeed = waitEndMove; */
-  myGame.gameState.message = `${myGame.players[iPl].name} ${base}`;
+  myGame.gameState.message = `${myGame.players[iPl].name} ${base[0]}`;
   // myGame.gameState.timeLeft = 3; // myGame.gameState.timeNeed;
   return myGame;
 }

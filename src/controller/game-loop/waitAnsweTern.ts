@@ -11,8 +11,11 @@ import combo2Start from './combo2Start';
 import combo3Start from './combo3Start';
 import combo5Start from './combo5Start';
 import startStateDeck from '../statePlayerDeck/startStateDeck';
+import langs from '../../const/localization';
 
 function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction<IGame>>): void {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.gameMsg.no;
   let myGame = { ...game };
 
   const indPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
@@ -22,7 +25,7 @@ function waitAnserTurn(game: IGame, setGame: React.Dispatch<React.SetStateAction
   myGame.gameState.playerTurn = nextPl.name;
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   nextPl = startStateDeck(nextPl, 'waitAnserTurn', true);
-  myGame.gameState.message = `${myGame.players[indPl].name} думает походить ли 'Нет'.`;
+  myGame.gameState.message = `${myGame.players[indPl].name} ${base[1]}`;
 
   if (nextPl.name === myGame.gameState.playerWaitAnswer[0].name) {
     myGame.gameState.playerWaitAnswer.splice(0, 1);
