@@ -5,6 +5,18 @@
 a {
   text-decoration: none;
 }
+.logo {
+  display: block;
+  font-size: 1rem;
+
+  transform: rotate(-90deg);
+  color: #fff;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: rotate(0deg);
+  }
+}
 .team-desc {
   // margin: auto 0;
   display: flex;
@@ -25,8 +37,8 @@ a {
     background: transparent;
     border: 2px solid darkorange;
     border-radius: 5px;
-    &:hover{
-      background: rgba( 255, 255, 255, 0.5);
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
     }
   }
   h3 {
@@ -40,11 +52,11 @@ a {
       0 15px 0 #121212, 0 22px 30px rgba(0, 0, 0, 0.9);
     writing-mode: vertical-rl;
     transform: rotate(-180deg);
-    font-size: 5rem;
+    font-size: 4.5rem;
   }
 }
 .team-list {
-  width: 100%;
+  flex: 1 0 auto;
 }
 .left {
   margin-left: auto;
@@ -114,6 +126,10 @@ a {
   }
 
   & > .back {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     position: absolute;
     transform: perspective(600px) rotateY(180deg);
     backface-visibility: hidden;
@@ -125,11 +141,21 @@ a {
     transition: transform 0.5s linear 0s;
 
     p {
-      font-size: 14px;
+      font-size: 1.5rem;
       font-weight: normal;
       color: white;
       margin: 5px;
       text-align: left;
+
+      a {
+        color: white;
+        transition: all 0.3s ease-in-out;
+      }
+      a:hover {
+        background-color: darkorange;
+        transform: rotate(-10deg);
+        font-size: 1.6rem;
+      }
     }
   }
 
@@ -141,5 +167,48 @@ a {
   &:hover .back {
     transform: perspective(600px) rotateY(0deg);
     cursor: pointer;
+  }
+}
+
+@media (max-width: 1280px) {
+  .team-desc h3 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .wrap-team {
+    width: 992px;
+  }
+  .row p span {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap-team {
+    width: 768px;
+  }
+  .row p span {
+    font-size: 3rem;
+  }
+  .row-item:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .wrap-team {
+    width: 576px;
+  }
+  .row {
+    justify-content: space-around;
+  }
+  .row p span {
+    font-size: 2rem;
+  }
+  .row p.right,
+  .row p.left {
+    display: none;
   }
 }

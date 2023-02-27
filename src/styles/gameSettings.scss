@@ -12,6 +12,7 @@
   justify-content: space-around;
   min-height: 100vh;
   width: 1280px;
+  box-sizing: border-box;
   position: relative;
   background-image: linear-gradient(
     140deg,
@@ -38,7 +39,7 @@
     hsl(38deg 100% 49%) 100%,
     hsl(39deg 100% 50%) 100%
   );
-  padding: 0 20px;
+  padding: 20px;
   margin: 0 auto;
   button,
   input,
@@ -84,6 +85,11 @@
       color: #fff;
       text-decoration: none;
     }
+
+    &:disabled {
+      background-image: none;
+      background-color: gray;
+    }
   }
   a {
     text-decoration: none;
@@ -93,7 +99,11 @@
   color: orange;
   text-align: center;
 }
-
+.bot-settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 // .start-btn {
 // }
 // .back-btn {
@@ -104,6 +114,7 @@
   gap: 20px;
 }
 .list {
+  width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
@@ -173,7 +184,7 @@
     }
   }
 }
-.bot-place{
+.bot-place {
   background-color: rgba(255, 255, 255, 0.3);
   height: 170px;
   width: 170px;
@@ -210,6 +221,7 @@
   font-size: 60px;
   font-weight: bold;
   color: black;
+  overflow: hidden;
   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
@@ -268,6 +280,11 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
+  margin-bottom: 2rem;
+
+  .levels-desc {
+    transform: translateY(24px);
+  }
 
   .levels-item {
     display: flex;
@@ -275,7 +292,6 @@
     flex-direction: column-reverse;
     width: 200px;
     height: 300px;
-    background-color: #555;
     background-repeat: no-repeat;
     background-size: contain;
     background-position-x: center;
@@ -412,5 +428,105 @@
 .controls {
   button {
     margin: 0 10px;
+  }
+}
+
+@media (max-width: 1280px) {
+}
+@media (max-width: 992px) {
+  .settings {
+    width: 992px;
+  }
+  .bot-settings {
+    width: 50%;
+  }
+  .player-settings {
+    width: 50%;
+  }
+  .list .list-item {
+    width: 100px;
+    height: 100px;
+  }
+  .bot + .btn-group .btn {
+    padding: 15px 25px;
+  }
+  .bot + .btn-group .btn {
+    width: 50px;
+    height: 50px;
+  }
+  .human-avatar {
+    width: 250px;
+    height: 250px;
+  }
+  .list {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .modal {
+    padding: 20px;
+  }
+  .levels .levels-item {
+    height: 216px;
+    width: 143px;
+  }
+}
+@media (max-width: 768px) {
+  .settings {
+    width: 768px;
+  }
+  .settings .btn {
+    font-size: 0.7rem;
+  }
+  .list {
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(4, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .settings {
+    width: 576px;
+  }
+  .settings .btn {
+    font-size: 0.7rem;
+  }
+  .human-player-name {
+    font-size: 3rem;
+    line-height: 150px;
+    height: 150px;
+  }
+  .human-avatar {
+    width: 200px;
+    height: 200px;
+  }
+  .bot + .btn-group {
+    right: -60px;
+  }
+  .human-player {
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .bot-place {
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+  }
+  .levels .levels-item {
+    height: 155px;
+  }
+  .wrap-avatar {
+    .avatar {
+      min-width: 100px;
+      background-position: center;
+    }
+    .btn-group {
+      .btn {
+        padding: 10px;
+      }
+    }
   }
 }
