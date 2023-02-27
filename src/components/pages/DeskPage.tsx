@@ -76,13 +76,11 @@ export default function DeskPage({
   };
   const showPrevCard = () => {
     if (translateVal < 0) {
-      // console.log(cardWidth * playerState[0].deck.length - cardWidth);
       setTranslateVal(translateVal + cardWidth);
     }
   };
   const showNextCard = () => {
     if (Math.abs(translateVal) < cardWidth * playerState[0].deck.length - cardWidth * sliderLen()) {
-      // console.log(cardWidth * playerState[0].deck.length - cardWidth * sliderLen());
       setTranslateVal(translateVal - cardWidth);
     }
   };
@@ -101,7 +99,6 @@ export default function DeskPage({
     return game.gameState.returnToDeck && (!game.players[indPl].isBot);
   };
   if (game.players.length === 0) {
-    // console.log('tttttt');
     return (
       <main className="desk">
         <p>{ourMessage}</p>

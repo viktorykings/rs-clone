@@ -5,12 +5,12 @@ function gameLoop(
   game: IGame,
   setGame: React.Dispatch<React.SetStateAction<IGame>>,
 ): void {
-  console.log('call main loop');
-  console.log(game.gameState.functionState);
+  // console.log('call main loop');
+  // console.log(game.gameState.functionState);
   // console.log(window.location.pathname);
   if (window.location.pathname !== '/desk' && game.gameState.pause === false) {
     const myGame = { ...game };
-    console.log(myGame);
+    // console.log(myGame);
     myGame.gameState.pause = true;
     setGame(myGame);
   }
