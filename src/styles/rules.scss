@@ -177,6 +177,7 @@
   }
   .move-example {
     width: 50%;
+    box-sizing: border-box;
     background-image: url(../assets/bg/bg2.svg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -239,5 +240,38 @@
   .header-tittle {
     color: aqua;
     font-weight: bold;
+  }
+}
+
+@media (max-width: 768px) {
+  .rules {
+    width: 768px;
+    box-sizing: border-box;
+  }
+
+  .rules-content {
+    display: block;
+    .column {
+      width: 100%;
+    }
+  }
+  .guide {
+    display: block;
+
+    .move-example {
+      width: 100%;
+    }
+    .type-cards {
+      width: 100%;
+    }
+  }
+  .combo .wrap-card {
+    display: block;
+  }
+}
+@media (max-width: 576px) {
+  .rules {
+    width: 576px;
+    box-sizing: border-box;
   }
 }
