@@ -11,7 +11,7 @@ interface Pages {
   startGame: string,
   gameSettings: GameSettings,
   pauseModal: string,
-  // aboutPage: AboutPage,
+  aboutPage: AboutPage,
 }
 
 interface MainPage {
@@ -23,10 +23,13 @@ interface MainPage {
 interface SettingsPage {
   language: string,
   sound: string,
+  buttons: string[],
 }
-// interface AboutPage {
-//   ourTeam: string,
-// }
+interface AboutPage {
+  ourTeam: string,
+  about: string[],
+  names: string[],
+}
 interface EndGameModal {
   buttons: string[],
 }

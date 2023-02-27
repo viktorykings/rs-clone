@@ -49,34 +49,24 @@ export default function DeskPage({
       }
     }
   }, [game, setGame]);
-  console.log(game);
   const [translateVal, setTranslateVal] = useState(0);
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
   const cardWidth = 190;
-  // const sliderLen = 5;
   const reboundCardWidth = 160;
   const currLang = game.settings.lang;
   const base = langs[currLang].deskPage;
   const neutBtnName = base.buttons.neutButtons;
   const comboBtnName = base.buttons.comboButtons;
-  // const shownPlCards = useRef(null);
-  // const handleResize = () => {
-  //   if(shownPlCards.current) {
-  //   console.log(shownPlCards.current.offsetWidth);
-  //   }
-  // }
+
   const sliderLen = () => {
     if (window.innerWidth > 1280) {
-      console.log(5);
       return 5;
     }
     if (window.innerWidth > 992) {
-      console.log(4);
       return 4;
     }
     if (window.innerWidth > 768) {
-      console.log(3);
       return 3;
     }
     if (window.innerWidth > 576) {
@@ -86,13 +76,11 @@ export default function DeskPage({
   };
   const showPrevCard = () => {
     if (translateVal < 0) {
-      console.log(cardWidth * playerState[0].deck.length - cardWidth);
       setTranslateVal(translateVal + cardWidth);
     }
   };
   const showNextCard = () => {
     if (Math.abs(translateVal) < cardWidth * playerState[0].deck.length - cardWidth * sliderLen()) {
-      console.log(cardWidth * playerState[0].deck.length - cardWidth * sliderLen());
       setTranslateVal(translateVal - cardWidth);
     }
   };
@@ -111,7 +99,6 @@ export default function DeskPage({
     return game.gameState.returnToDeck && (!game.players[indPl].isBot);
   };
   if (game.players.length === 0) {
-    // console.log('tttttt');
     return (
       <main className="desk">
         <p>{ourMessage}</p>

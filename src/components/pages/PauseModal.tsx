@@ -14,7 +14,6 @@ export default function EndGameModal({ game, setGame }: IPause): JSX.Element {
   const currLang = game.settings.lang;
   const isPaused = game.gameState.pause;
   const base = langs[currLang];
-  console.log(isPaused);
   return (
     <div className={isPaused === true ? 'pause-modal-active' : 'pause-modal'}>
       {/* <div className="pause-modal"> */}

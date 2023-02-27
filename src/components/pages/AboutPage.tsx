@@ -3,12 +3,20 @@ import { Link } from 'react-router-dom';
 import vika from '../../assets/team/vika.png';
 import eugene from '../../assets/team/eugene.jpg';
 import andrei from '../../assets/team/andrei.jpg';
+import langs from '../../const/localization';
+import IGame from '../../interface/IGame';
 
-export default function AboutPage(): JSX.Element {
+interface About {
+  game: IGame,
+}
+
+export default function AboutPage({ game }: About): JSX.Element {
+  const currLang = game.settings.lang;
+  const base = langs[currLang].aboutPage;
   return (
     <div className="wrap-team">
       <div className="team-desc">
-        <h3>НАША КОМАНДА</h3>
+        <h3>{base.ourTeam}</h3>
         <a href="https://rs.school/js/" className="logo">
           <img
             src="https://rs.school/images/rs_school_js.svg"
@@ -27,11 +35,11 @@ export default function AboutPage(): JSX.Element {
         <div className="row">
           <p className="right">
             {/* These are */}
-            Эти
+            {base.about[0]}
             <br />
             <span>
               {/* BAD */}
-              Плохие
+              {base.about[1]}
             </span>
           </p>
           <div
@@ -43,7 +51,7 @@ export default function AboutPage(): JSX.Element {
               className="front"
               style={{ backgroundImage: `url(${andrei})` }}
             >
-              <p className="item-name white">Андрей</p>
+              <p className="item-name white">{base.names[0]}</p>
             </div>
             <div className="back">
               <p>Back-End</p>
@@ -60,7 +68,7 @@ export default function AboutPage(): JSX.Element {
         <div className="row">
           <div className="row-item item-container">
             <div className="front" style={{ backgroundImage: `url(${vika})` }}>
-              <p className="item-name green">Вика</p>
+              <p className="item-name green">{base.names[1]}</p>
             </div>
             <div className="back">
               <p>Team Lead</p>
@@ -80,22 +88,22 @@ export default function AboutPage(): JSX.Element {
           />
           <p className="left">
             {/* These are */}
-            Эти
+            {base.about[0]}
             <br />
             <span>
               {/* GOOD */}
-              Хорошие
+              {base.about[2]}
             </span>
           </p>
         </div>
         <div className="row">
           <p className="right">
             {/* These Always */}
-            Эти всегда
+            {base.about[3]}
             <br />
             <span>
               {/* HELP */}
-              Помогут
+              {base.about[4]}
             </span>
           </p>
           <div
@@ -107,7 +115,7 @@ export default function AboutPage(): JSX.Element {
               className="front"
               style={{ backgroundImage: `url(${eugene})` }}
             >
-              <p className="item-name pink">Евгений</p>
+              <p className="item-name pink">{base.names[2]}</p>
             </div>
             <div className="back">
               <p>Front-End</p>
