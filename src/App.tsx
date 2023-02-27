@@ -20,7 +20,6 @@ function App(): JSX.Element {
   // const audio = new Audio();
   // audio.src = './assets/sounds/sound.mp3';
   // audio.play();
-  console.log(game.settings.lang);
   return (
     <BrowserRouter>
       <Routes>
@@ -40,7 +39,7 @@ function App(): JSX.Element {
             />
           )}
         />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/about" element={<AboutPage game={game} />} />
         <Route path="/rules" element={<RulesPage currLang={game} />} />
         <Route
           path="/desk"

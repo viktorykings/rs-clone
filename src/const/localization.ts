@@ -52,6 +52,11 @@ const langs: ILocalization = {
       },
       botNames: ['Адский кот', 'Толстяк', 'Пушистый донжуан', 'Чупакабра', 'Игривый дваждылюб', 'Рыжий убийца', 'Рыбовладелец', 'Мистер кот', 'Босс мяуфии'],
     },
+    aboutPage: {
+      ourTeam: 'Наша команда',
+      about: ['Эти', 'плохие', 'хорошие', 'Эти всегда', 'помогут'],
+      names: ['Андрей', 'Виктория', 'Евгений'],
+    },
   },
   en: {
     main: {
@@ -103,6 +108,11 @@ const langs: ILocalization = {
         level: ['Easy', 'Normal', 'Hard', 'Choose level'],
       },
       botNames: ['Diablo Gato', 'Puss in Boots', 'Fluffy don Huan', 'Chonk', 'The Furry Lover', 'Ginger Hit Man', 'Mr. Cat', 'Meow boss', 'Chupacabra'],
+    },
+    aboutPage: {
+      ourTeam: 'Our Team',
+      about: ['These are', 'Bad', 'Good', 'These always', 'Help'],
+      names: ['Andrei', 'Viktoria', 'Eugene'],
     },
   },
 };

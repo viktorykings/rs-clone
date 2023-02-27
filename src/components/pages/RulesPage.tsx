@@ -31,7 +31,6 @@ interface Ilang {
 }
 
 export default function RulesPage({ currLang }: Ilang): JSX.Element {
-  console.log(currLang.settings.lang);
   const ruRules: JSX.Element = (
     <>
       <h1>Правила</h1>
@@ -829,7 +828,6 @@ export default function RulesPage({ currLang }: Ilang): JSX.Element {
     </>
   );
 
-  console.log(ruRules);
   const retVal = function (lang: string) {
     if (lang === 'ru') {
       return ruRules;
