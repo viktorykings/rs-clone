@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Bot from './Bot';
 import MainPlayer from './MainPlayer';
@@ -39,6 +39,8 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
   const currLang = game.settings.lang;
   const base = langs[currLang].gameSettings;
 
+  const [btnState, setBtnState] = useState(true);
+
   return (
     <div className="settings">
       {modal && (
@@ -51,7 +53,6 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
           localLang={base.modal.level}
         />
       )}
-
       <div className="wrap-players">
         <div className="bot-settings">
           <div className="choose-level">
@@ -67,6 +68,7 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
           <form
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               handleSubmit(e, base.botNames);
+              setBtnState(false);
             }}
           >
             <div className="add-bot">
@@ -128,12 +130,13 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
           />
         </div>
       </div>
-
       <hr />
+
       <div className="btn-group">
         <Link to="/desk">
           <button
             type="button"
+            disabled={btnState}
             className="start-btn btn"
             onClick={() => {
               const Players = createPlayers(bots);

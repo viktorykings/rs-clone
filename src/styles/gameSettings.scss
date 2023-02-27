@@ -85,6 +85,11 @@
       color: #fff;
       text-decoration: none;
     }
+
+    &:disabled {
+      background-image: none;
+      background-color: gray;
+    }
   }
   a {
     text-decoration: none;
