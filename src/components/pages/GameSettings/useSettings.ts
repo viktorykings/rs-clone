@@ -19,7 +19,7 @@ export default function useSettings() {
   const [modal, setModal] = useState(false);
   const [modalChangeAvatar, setModalChangeAvatar] = useState(false);
   const [modalChangeName, setModalChangeName] = useState(false);
-  const [botLevel, setBotLevel] = useState('easy');
+  const [botLevel, setBotLevel] = useState('лёгкий');
 
   const updateBotLevel = (value: string) => {
     setBotLevel(value);
@@ -44,6 +44,7 @@ export default function useSettings() {
     });
 
     setBots(editedBots);
+    console.log(editedBots);
   };
 
   const deleteBot = useCallback(
@@ -86,7 +87,7 @@ export default function useSettings() {
   }
 
   // Add New Bot
-  function handleSubmit(e: React.FormEvent, langArr: string[]) {
+  function handleSubmit(e: React.FormEvent, langArr: string[], lvl: string) {
     e.preventDefault();
     if (bots.length >= 4) {
       return;
@@ -98,7 +99,7 @@ export default function useSettings() {
       name: newBotName,
       isBot: true,
       link: newLink,
-      levelBot: 'easy',
+      levelBot: lvl,
     };
     setBots([...bots, newBot]);
   }

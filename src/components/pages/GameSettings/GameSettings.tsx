@@ -41,6 +41,31 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
 
   const [btnState, setBtnState] = useState(true);
 
+  function lvlToEn(lvl: string) {
+    let result = '';
+    switch (lvl) {
+      case 'Easy':
+      case 'Лёгкий':
+        result = 'easy';
+        break;
+
+      case 'Normal':
+      case 'Средний':
+        result = 'normal';
+        break;
+
+      case 'Hard':
+      case 'Сложный':
+        result = 'hard';
+        break;
+
+      default:
+        result = 'easy';
+    }
+
+    return result;
+  }
+
   return (
     <div className="settings">
       {modal && (
@@ -59,15 +84,17 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
             <button
               className="btn"
               type="button"
-              onClick={() => setModal(true)}
+              onClick={() => {
+                setModal(true);
+              }}
             >
               {base.level[0]}
             </button>
           </div>
-          <p className="game-level">{botLevel}</p>
+          <p className="game-level">{base.modal.level[0]}</p>
           <form
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-              handleSubmit(e, base.botNames);
+              handleSubmit(e, base.botNames, lvlToEn(botLevel));
               setBtnState(false);
             }}
           >
@@ -141,17 +168,14 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
             onClick={() => {
               const Players = createPlayers(bots);
               setGame(createGame(currLang, Players));
+              // console.log(Players);
             }}
           >
             {base.buttons[1]}
           </button>
         </Link>
         <Link to="/">
-          <button
-            type="button"
-            className="btn"
-            // onClick={() => console.log('Cancel')}
-          >
+          <button type="button" className="btn">
             {base.buttons[2]}
           </button>
         </Link>
