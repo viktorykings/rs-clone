@@ -11,6 +11,7 @@ function moveLook(game: IGame): IGame {
   myGame.gameState.showCardVisible = !myGame.players[iPl].isBot;
   myGame.players[iPl].visibleCards = [1, 2, 3];
   myGame.gameState.timeLeft = getPause(myGame.players[iPl].isBot, myGame.gameState.functionState);
+  myGame.gameState.message = `${myGame.players[iPl].name} посмотрел 3 карты.`;
   return myGame;
 }
 

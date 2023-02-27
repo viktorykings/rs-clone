@@ -17,7 +17,7 @@ function explosion(game: IGame): IGame {
     const countActive = myGame.players.reduce((sum, pl) => sum + (pl.active === true ? 1 : 0), 0);
     if (countActive === 1) {
       myGame.gameState.functionState = 'win';
-      myGame.gameState.endGame = true;
+      myGame.gameState.timeLeft = 2;
     } else {
       myGame.reboundDeck.push(...myGame.showCards.splice(0));
       myGame.gameState.stateGame = 'tern';
