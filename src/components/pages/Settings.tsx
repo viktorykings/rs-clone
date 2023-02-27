@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useSound from 'use-sound';
 import langs from '../../const/localization';
 import { Setter } from '../../interface/IGameProp';
-import boopSfx from '../../assets/sounds/sound.mp3';
-
-// interface ISettings extends Setter {
-//   // playAudio: boolean,
-//   // setPlayAudio: React.Dispatch<React.SetStateAction<boolean>>;
-// }
 
 export default function Settings({
   game,
@@ -18,7 +11,6 @@ export default function Settings({
 }: Setter): JSX.Element {
   // const currLang = game.settings.lang;
   const [currLang, setCurrLang] = useState(game.settings.lang);
-  const [play, { stop }] = useSound(boopSfx);
   const changeLang = () => {
     if (currLang === 'en') {
       // eslint-disable-next-line no-param-reassign
@@ -32,24 +24,37 @@ export default function Settings({
       setCurrLang('en');
       setGame(game);
     }
-    console.log(currLang, game.settings);
+    // console.log(currLang, game.settings);
   };
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(game.settings.sound);
+  // const playing = game.settings.sound;
   const toggleAudio = function (isPlay: boolean) {
     // eslint-disable-next-line no-param-reassign
     isPlay = !isPlay;
     setPlaying(isPlay);
-    console.log(isPlay);
     return isPlay;
   };
+  const aud = '/sound.mp3';
+  const audio = new Audio();
+  audio.src = aud;
+  audio.volume = 0.65;
+  audio.loop = true;
+  const play = () => audio.play();
+  const pause = () => audio.pause();
+
   const handlePlay = (isPlay: boolean) => {
-    toggleAudio(isPlay);
-    if (toggleAudio(isPlay)) {
-      console.log('playAud');
-      return play();
+    const pl = toggleAudio(isPlay);
+    console.log(pl);
+    if (pl) {
+      // console.log('playAud');
+      play();
+      // console.log(audio.paused);
+    } else {
+      pause();
+      // console.lEog(audio.paused);
     }
-    return stop();
   };
+
   return (
     <div className="settings-page-bg">
       <div className="container">
@@ -66,7 +71,7 @@ export default function Settings({
             />
             <span className="slider round" />
           </label>
-          {/* <button onClick={() => play()} type="button">Boop!</button> */}
+          {/* <button onClick={() => audio.play()} type="button">Boop!</button> */}
         </div>
         <div className="lang">
           <p>{langs[currLang].settings.language}</p>
