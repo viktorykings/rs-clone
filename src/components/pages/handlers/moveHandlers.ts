@@ -42,7 +42,6 @@ export const pauseGame = (
   isPause: boolean,
   setter: React.Dispatch<React.SetStateAction<IGame>>,
 ) => {
-  gamePause(game, isPause);
-  setter(game);
+  setter(gamePause(game, isPause));
   console.log(game.gameState.pause);
 };
