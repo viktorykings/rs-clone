@@ -6,7 +6,6 @@ function endMoveLook(game: IGame): IGame {
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   myGame.gameState.functionState = 'waitPlayerTurn';
   myGame.gameState.showCardVisible = true;
-  console.log(myGame);
   return myGame;
 }
 
