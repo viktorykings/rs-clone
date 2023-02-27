@@ -28,6 +28,7 @@ const langs: ILocalization = {
         no: ["походил картой 'Нет'!", "думает походить ли 'Нет'.", "думает походить ли 'Нет' на 'Нет'."],
         skip: ['Игроку', 'осталось взять одну карту.', 'передает ход.'],
         takeCard: ['взял 1 карту.', "вытянул 'Взрывного котенка'!", 'не нужно брать карты!', 'взял еще 1 карту.'],
+        future: 'посмотрел 3 карты.'
       },
       modalTitles: {
         combo: 'Выберите карту!',
@@ -78,6 +79,7 @@ const langs: ILocalization = {
         no: ["moved card 'Nope'!", "is thinking if move 'Nope'.", "is Thinking if move 'Nope' to 'Nope'"],
         skip: ['Player', 'haveone card to take.', 'passes the move.'],
         takeCard: ['took 1 card.', "took 'Exploding Kitten'!", 'shouldn\'t take cards!', 'took 1 more card'],
+        future: 'seen 3 cards.'
       },
       modalTitles: {
         combo: 'Choose a card!',

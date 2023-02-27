@@ -70,6 +70,7 @@ interface GameEvents {
   no: string[],
   skip: string[],
   takeCard: string[],
+  future: string,
 }
 interface Move{
   move: string,
