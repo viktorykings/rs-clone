@@ -23,6 +23,7 @@ interface MainPage {
 interface SettingsPage {
   language: string,
   sound: string,
+  buttons: string[],
 }
 interface AboutPage {
   ourTeam: string,

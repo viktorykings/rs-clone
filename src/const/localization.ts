@@ -5,7 +5,7 @@ const langs: ILocalization = {
     main: {
       start: 'Начать игру', settings: 'Настройки', about: 'О нас', rules: 'Правила',
     },
-    settings: { language: 'Изменить язык', sound: 'Звук' },
+    settings: { language: 'Изменить язык', sound: 'Звук', buttons: ['Вкл', 'Выкл'] },
     deskPage: {
       buttons: {
         neutButtons: ['Первой', 'Второй', 'Третьей', 'Последней', 'Случайно'],
@@ -62,7 +62,7 @@ const langs: ILocalization = {
     main: {
       start: 'Start game', settings: 'Settings', about: 'About', rules: 'Rules',
     },
-    settings: { language: 'Change language', sound: 'Sound' },
+    settings: { language: 'Change language', sound: 'Sound', buttons: ['On', 'Off'] },
     deskPage: {
       buttons: {
         neutButtons: ['First', 'Second', 'Third', 'Last', 'Random'],
