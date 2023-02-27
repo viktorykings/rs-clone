@@ -1,3 +1,4 @@
+import gamePause from '../../../controller/game-event/gamePause';
 import makeMove from '../../../controller/game-event/makeMove';
 import onTakeCard from '../../../controller/game-event/onTakeCard';
 import endMoveNeutralize from '../../../controller/game-event/subevent/endMoveNeutralize';
@@ -35,4 +36,13 @@ export const handleTakeDeskCard = (
   // takeCardDeskDeck(game);
   onTakeCard(game);
   setter(game);
+};
+export const pauseGame = (
+  game: IGame,
+  isPause: boolean,
+  setter: React.Dispatch<React.SetStateAction<IGame>>,
+) => {
+  gamePause(game, isPause);
+  setter(game);
+  console.log(game.gameState.pause);
 };
