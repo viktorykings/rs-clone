@@ -10,6 +10,7 @@ interface Pages {
   endGameModal: EndGameModal,
   startGame: string,
   gameSettings: GameSettings,
+  pauseModal: string,
   // aboutPage: AboutPage,
 }
 

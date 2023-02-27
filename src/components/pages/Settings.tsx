@@ -17,14 +17,15 @@ export default function Settings({
       game.settings.lang = 'ru';
       setCurrLang('ru');
       setGame(game);
+      console.log(currLang, game.settings);
     }
     if (currLang === 'ru') {
       // eslint-disable-next-line no-param-reassign
       game.settings.lang = 'en';
       setCurrLang('en');
       setGame(game);
+      console.log(currLang, game.settings);
     }
-    // console.log(currLang, game.settings);
   };
   const [playing, setPlaying] = useState(game.settings.sound);
   // const playing = game.settings.sound;
