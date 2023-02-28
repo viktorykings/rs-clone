@@ -28,7 +28,7 @@ function endMoveNeutralize(game: IGame, ind: number): IGame {
   myGame.players[iPl].buttons.dobleVisible = false;
   myGame.players[iPl].buttons.tripleVisible = false;
   myGame.players[iPl].buttons.fiveVisible = false;
-  console.log('neut', myGame);
+
   return myGame;
 }
 

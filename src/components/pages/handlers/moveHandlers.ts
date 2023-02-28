@@ -26,7 +26,6 @@ export const handleMoveNeut = (
 ) => {
   endMoveNeutralize(game, ind);
   setter(game);
-  // console.log(game.deskDeck);
 };
 
 export const handleTakeDeskCard = (
@@ -43,5 +42,5 @@ export const pauseGame = (
   setter: React.Dispatch<React.SetStateAction<IGame>>,
 ) => {
   setter(gamePause(game, isPause));
-  console.log(game.gameState.pause);
+
 };

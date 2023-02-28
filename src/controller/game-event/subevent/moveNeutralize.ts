@@ -17,7 +17,7 @@ function moveNeutralize(game: IGame, idCard: number): IGame {
   myGame.gameState.timeNeed = getPause(myGame.players[iPl].isBot, 'endNeutralize');
   myGame.gameState.timeLeft = myGame.gameState.timeNeed;
   myGame.gameState.returnToDeck = true;
-  console.log('moveneut', myGame);
+
   return myGame;
 }
 

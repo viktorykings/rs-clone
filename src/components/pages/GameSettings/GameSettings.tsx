@@ -17,8 +17,8 @@ export interface IGameSettings {
 
 export default function GameSettings({ game, setGame }: IGameSettings) {
   const {
-    botLevel,
-    updateBotLevel,
+    // botLevel,
+    // updateBotLevel,
     bots,
     mainPlayer,
     updateNameMainPlayer,
@@ -40,6 +40,11 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
   const base = langs[currLang].gameSettings;
 
   const [btnState, setBtnState] = useState(true);
+  const [botLevel, setBotLevel] = useState(base.modal.level[0]);
+
+  const updateBotLevel = (value: string) => {
+    setBotLevel(value);
+  };
 
   function lvlToEn(lvl: string) {
     let result = '';
@@ -91,7 +96,7 @@ export default function GameSettings({ game, setGame }: IGameSettings) {
               {base.level[0]}
             </button>
           </div>
-          <p className="game-level">{base.modal.level[0]}</p>
+          <p className="game-level">{botLevel}</p>
           <form
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               handleSubmit(e, base.botNames, lvlToEn(botLevel));

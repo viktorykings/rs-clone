@@ -19,11 +19,6 @@ export default function useSettings() {
   const [modal, setModal] = useState(false);
   const [modalChangeAvatar, setModalChangeAvatar] = useState(false);
   const [modalChangeName, setModalChangeName] = useState(false);
-  const [botLevel, setBotLevel] = useState('лёгкий');
-
-  const updateBotLevel = (value: string) => {
-    setBotLevel(value);
-  };
 
   const [bots, setBots] = useState<IPlayerSettings[]>([]);
   const [mainPlayer, setMainPlayer] = useState(defaultMainPlayer);
@@ -44,7 +39,6 @@ export default function useSettings() {
     });
 
     setBots(editedBots);
-    console.log(editedBots);
   };
 
   const deleteBot = useCallback(
@@ -119,8 +113,8 @@ export default function useSettings() {
   }
 
   return {
-    botLevel,
-    updateBotLevel,
+    // botLevel,
+    // updateBotLevel,
     bots,
     setBots,
     mainPlayer,
