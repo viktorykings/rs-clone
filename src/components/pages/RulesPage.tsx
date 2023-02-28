@@ -23,9 +23,11 @@ import iIcons from '../../assets/icons/icons.png';
 import img10 from '../../assets/rules/img1.png';
 import img12 from '../../assets/rules/12.png';
 import img13 from '../../assets/rules/13.png';
+import IGame from '../../interface/IGame';
 
 interface Ilang {
-  currLang: string,
+  // currLang: string,
+  currLang: IGame,
 }
 
 export default function RulesPage({ currLang }: Ilang): JSX.Element {
@@ -826,12 +828,11 @@ export default function RulesPage({ currLang }: Ilang): JSX.Element {
     </>
   );
 
-  console.log(ruRules);
   const retVal = function (lang: string) {
     if (lang === 'ru') {
       return ruRules;
     }
     return enRules;
   };
-  return <div className="rules">{retVal(currLang)}</div>;
+  return <div className="rules">{retVal(currLang.settings.lang)}</div>;
 }

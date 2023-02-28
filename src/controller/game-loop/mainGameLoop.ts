@@ -29,12 +29,15 @@ import endMoveNeutralize from '../game-event/subevent/endMoveNeutralize';
 import waitNotToNot from './waitNotToNot';
 import endWaitEndNotToNot from './subevent/endWaitEndNotToNot';
 import moveNotToNot from '../game-event/subevent/moveNotToNot';
+import langs from '../../const/localization';
 
 function mainGameLoop(
   game: IGame,
   setGame: React.Dispatch<React.SetStateAction<IGame>>,
 ): void {
   // console.log(game.gameState.timeLeft);
+  const currLang = game.settings.lang;
+  const base = langs[currLang].deskPage.gameMsg.no;
   let myGame = { ...game };
   const inPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
   const funcState = myGame.gameState.functionState;
@@ -69,11 +72,11 @@ function mainGameLoop(
   }
 
   if (myGame.gameState.functionState === 'waitAnserTurn') {
-    myGame.gameState.message = `${myGame.players[inPl].name} думает походить ли 'Нет'.`;
+    myGame.gameState.message = `${myGame.players[inPl].name} ${base[1]}`;
   }
 
   if (myGame.gameState.functionState === 'waitNotToNot') {
-    myGame.gameState.message = `${myGame.players[inPl].name} думает походить ли 'Нет' на 'Нет'.`;
+    myGame.gameState.message = `${myGame.players[inPl].name} ${base[2]}`;
   }
 
   if (myGame.gameState.functionState === 'waitAnserTurn'

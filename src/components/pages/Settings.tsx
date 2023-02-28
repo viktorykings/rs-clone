@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import langs from '../../const/localization';
 import { Setter } from '../../interface/IGameProp';
 
-// interface Main {
-//   settings: ISettings,
-// }
-
-export default function Settings({ game, setGame }: Setter): JSX.Element {
+export default function Settings({
+  game,
+  setGame,
+  // playAudio,
+  // setPlayAudio,
+}: Setter): JSX.Element {
   // const currLang = game.settings.lang;
   const [currLang, setCurrLang] = useState(game.settings.lang);
   const changeLang = () => {
@@ -23,18 +24,34 @@ export default function Settings({ game, setGame }: Setter): JSX.Element {
       setCurrLang('en');
       setGame(game);
     }
-    console.log(currLang, game.settings);
   };
+  const base = langs[currLang].settings;
+
+  const aud = '/sound.mp3';
+  const audio = new Audio();
+  audio.src = aud;
+  audio.volume = 0.65;
+  audio.loop = true;
+
   return (
     <div className="settings-page-bg">
       <div className="container">
         <Link to="/"><button type="button" className="back-btn">{'<-'}</button></Link>
         <div className="sound">
           <p>{langs[currLang].settings.sound}</p>
-          <label className="switch" htmlFor="switch">
-            <input type="checkbox" id="switch" />
+          <button type="button" onClick={() => audio.play()}>{base.buttons[0]}</button>
+          <button type="button" onClick={() => audio.pause()}>{base.buttons[1]}</button>
+          {/* <label className="switch" htmlFor="switch">
+            <input
+              type="checkbox"
+              id="switch"
+              checked={playing}
+              onChange={() => handlePlay(playing)}
+              // onChange={() => play()}
+            />
             <span className="slider round" />
-          </label>
+          </label> */}
+          {/* <button onClick={() => audio.play()} type="button">Boop!</button> */}
         </div>
         <div className="lang">
           <p>{langs[currLang].settings.language}</p>

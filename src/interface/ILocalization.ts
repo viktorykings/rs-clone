@@ -10,7 +10,8 @@ interface Pages {
   endGameModal: EndGameModal,
   startGame: string,
   gameSettings: GameSettings,
-  // aboutPage: AboutPage,
+  pauseModal: string,
+  aboutPage: AboutPage,
 }
 
 interface MainPage {
@@ -22,10 +23,13 @@ interface MainPage {
 interface SettingsPage {
   language: string,
   sound: string,
+  buttons: string[],
 }
-// interface AboutPage {
-//   ourTeam: string,
-// }
+interface AboutPage {
+  ourTeam: string,
+  about: string[],
+  names: string[],
+}
 interface EndGameModal {
   buttons: string[],
 }
@@ -67,9 +71,10 @@ interface GameEvents {
   favour: string,
   attack: string,
   mix: string,
-  no: string,
+  no: string[],
   skip: string[],
   takeCard: string[],
+  future: string,
 }
 interface Move{
   move: string,

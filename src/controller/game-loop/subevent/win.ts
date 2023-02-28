@@ -9,6 +9,7 @@ function win(
   const base = langs[currLang].endGameModal.buttons;
   const myGame = { ...game };
   myGame.gameState.message = `${base[2]}`;
+  myGame.gameState.endGame = true;
   setGame(myGame);
 }
 

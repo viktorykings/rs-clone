@@ -14,12 +14,12 @@ function addHistory(
     card,
     result,
   });
-  console.log({
-    playerName: game.gameState.playerTurn,
-    event,
-    card,
-    result,
-  });
+  // console.log({
+  //   playerName: game.gameState.playerTurn,
+  //   event,
+  //   card,
+  //   result,
+  // });
 }
 
 export default addHistory;

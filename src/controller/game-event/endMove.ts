@@ -32,7 +32,7 @@ function endMove(game: IGame): IGame {
     addHistory(myGame, 'endMove', [], true);
 
     myGame.gameState.playerTurn = findNextActivePlayer(myGame).name;
-    console.log('next player', myGame.gameState.playerTurn);
+    // console.log('next player', myGame.gameState.playerTurn);
     const nIndPl = findIndexPlayerTern(myGame.players, myGame.gameState.playerTurn);
     myGame.gameState.functionState = 'waitPlayerTurn';
     myGame.players[nIndPl] = startStateDeck(

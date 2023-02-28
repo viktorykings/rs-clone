@@ -8,6 +8,7 @@ import Player from './Players';
 import endMove from '../../controller/game-event/endMove';
 import { Setter } from '../../interface/IGameProp';
 import infoCat from '../../assets/info-cat.png';
+import pause from '../../assets/pause.svg';
 import {
   checkModalVisible,
   checkFunctionStateCombo5,
@@ -18,14 +19,21 @@ import {
   usedTripleCombo,
   handleChooseCard,
 } from './handlers/comboHandlers';
-import { handleMove, handleMoveNeut, handleTakeDeskCard } from './handlers/moveHandlers';
+import {
+  handleMove,
+  handleMoveNeut,
+  handleTakeDeskCard,
+  pauseGame,
+} from './handlers/moveHandlers';
 import EndGameModal from './EndGameModal';
 import findIndexPlayerTern from '../../controller/game-event/subevent/findIndexPlayerTern';
 import langs from '../../const/localization';
 import loadGame from '../../controller/loadGame';
+import PauseModal from './PauseModal';
 
 const cardBack = 'cards/ru/back.png';
 const emptyCardsPlace = 'cards/ru/empty.png';
+// const pause = '../../assets/pause.svg';
 
 export default function DeskPage({
   // deskDeck, settings, players, reboundDeck, showCards, gameState,
@@ -45,29 +53,20 @@ export default function DeskPage({
   const [translateRebound, setTranslateRebound] = useState(0);
   const ourMessage = game.gameState.message;
   const cardWidth = 190;
-  // const sliderLen = 5;
   const reboundCardWidth = 160;
   const currLang = game.settings.lang;
   const base = langs[currLang].deskPage;
   const neutBtnName = base.buttons.neutButtons;
   const comboBtnName = base.buttons.comboButtons;
-  // const shownPlCards = useRef(null);
-  // const handleResize = () => {
-  //   if(shownPlCards.current) {
-  //   console.log(shownPlCards.current.offsetWidth);
-  //   }
-  // }
+
   const sliderLen = () => {
     if (window.innerWidth > 1280) {
-      console.log(5);
       return 5;
     }
     if (window.innerWidth > 992) {
-      console.log(4);
       return 4;
     }
     if (window.innerWidth > 768) {
-      console.log(3);
       return 3;
     }
     if (window.innerWidth > 576) {
@@ -77,13 +76,11 @@ export default function DeskPage({
   };
   const showPrevCard = () => {
     if (translateVal < 0) {
-      console.log(cardWidth * playerState[0].deck.length - cardWidth);
       setTranslateVal(translateVal + cardWidth);
     }
   };
   const showNextCard = () => {
     if (Math.abs(translateVal) < cardWidth * playerState[0].deck.length - cardWidth * sliderLen()) {
-      console.log(cardWidth * playerState[0].deck.length - cardWidth * sliderLen());
       setTranslateVal(translateVal - cardWidth);
     }
   };
@@ -102,7 +99,6 @@ export default function DeskPage({
     return game.gameState.returnToDeck && (!game.players[indPl].isBot);
   };
   if (game.players.length === 0) {
-    // console.log('tttttt');
     return (
       <main className="desk">
         <p>{ourMessage}</p>
@@ -130,9 +126,14 @@ export default function DeskPage({
           <div className="game-info-messages">
             <p>{ourMessage}</p>
           </div>
-          <p className="game-info-timer">
-            {game.gameState.timeLeft}
-          </p>
+          <div className="game-info-controls">
+            <p className="game-info-timer">
+              {game.gameState.timeLeft}
+            </p>
+            <button className="pause" type="button" onClick={() => pauseGame(game, true, setGame)}>
+              <img src={pause} alt="Pause" />
+            </button>
+          </div>
         </div>
         <div className="deck">
           <img
@@ -285,6 +286,7 @@ export default function DeskPage({
         </div>
       </div>
       <EndGameModal show={game.gameState.endGame} game={game} />
+      <PauseModal game={game} setGame={setGame} />
     </main>
   );
 }

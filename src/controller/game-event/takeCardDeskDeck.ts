@@ -57,7 +57,7 @@ function takeCardDeskDeck(game: IGame): IGame {
           myGame.gameState.functionState,
         );
       } else {
-        console.log(myGame);
+        // console.log(myGame);
       }
       addHistory(myGame, 'takeCardDeskDeck', card, true);
     }
