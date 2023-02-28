@@ -39,7 +39,6 @@ export default function useSettings() {
     });
 
     setBots(editedBots);
-    console.log(editedBots);
   };
 
   const deleteBot = useCallback(
