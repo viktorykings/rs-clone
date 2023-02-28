@@ -55,9 +55,9 @@ export default function Settings({
         </div>
         <div className="lang">
           <p>{langs[currLang].settings.language}</p>
-          <select name="lang" id="lang" onChange={() => changeLang()}>
-            <option value="ru" selected={currLang === 'ru'}>Русский</option>
-            <option value="en" selected={currLang === 'en'}>English</option>
+          <select name="lang" id="lang" onChange={() => changeLang()} value={currLang}>
+            <option value="ru">Русский</option>
+            <option value="en">English</option>
           </select>
         </div>
       </div>
